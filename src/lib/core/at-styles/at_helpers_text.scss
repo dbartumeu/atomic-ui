@@ -1,0 +1,110 @@
+/**
+  Text Helpers
+ */
+
+// Text Alignment
+.text-center,
+.at-text-center,
+.at-tc {
+  text-align: center;
+}
+
+.text-left,
+.at-text-left,
+.at-tl {
+  text-align: left;
+}
+
+.text-right,
+.at-text-right,
+.at-tr {
+  text-align: right;
+}
+
+// Text size (font-size)
+// Multiples of 2, Max: 20px, start 10px
+@for $i from 5 through 10 {
+  .at-text-size-#{$i *2},
+  .at-tz-#{$i*2} {
+    font-size: #{($i*2) + 'px'};
+  }
+}
+
+// Text size (font-size)
+// Multiples of 5, Max: 100px, start 25px
+@for $i from 5 through 20 {
+  .at-text-size-#{$i * 5},
+  .at-tz-#{$i * 5} {
+    font-size: #{($i * 5) + 'px'};
+  }
+}
+
+// font size 50%
+.text-xs,
+.at-text-xs,
+.at-tz-xs {
+  font-size: 50%;
+}
+
+// font size 70%
+.text-sm,
+.at-text-sm,
+.at-tz-sm {
+  font-size: 70%;
+}
+
+// font size 80%
+.text-mat,
+.at-text-mat,
+.at-tz-mat {
+  font-size: 80%;
+}
+
+// font size 110%
+.text-lg,
+.at-text-lg,
+.at-tz-lg {
+  font-size: 110%;
+}
+
+// font size 120%
+.text-xl,
+.at-text-xl,
+.at-tz-xl {
+  font-size: 120%;
+}
+
+// font size 130%
+.text-xxl,
+.at-text-xxl,
+.at-tz-xxl {
+  font-size: 130%;
+}
+
+// Text weight (font-weight)
+// Multiples of 100, Max: 900, start 100
+@for $i from 1 through 9 {
+  .at-text-weight-#{$i *100},
+  .at-tw-#{$i*100} {
+    font-weight: #{($i*100)};
+  }
+}
+
+// Text Transformations
+.text-upper,
+.at-text-upper,
+.at-tuc {
+  text-transform: uppercase;
+}
+
+.text-lower,
+.at-text-lower,
+.at-tlc {
+  text-transform: lowercase;
+}
+
+.text-caps,
+.at-text-caps,
+.at-tcp {
+  text-transform: capitalize;
+}

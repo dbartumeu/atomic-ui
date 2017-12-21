@@ -1,0 +1,32 @@
+<div class="at-sidenav-container" fxLayout="column">
+    <div>
+        <div class="at-ph-10 at-pb-30"
+             fxLayout="column"
+             fxLayoutAlign="center center"
+             [style.padding-top]="'12px'">
+            <img class="at-wp-80" src="/assets/img/at-primary-light-icon.svg">
+            <h2 class="at-sidenav-fade-in-on-hover at-m-0 mat-fg-grey-700 mat-display-1">Project Name</h2>
+        </div>
+    </div>
+
+    <at-scrollbar [name]="'avSidenavScrollbar'" class="at-sidenav-scrollbar-container" fxLayout="column">
+        <mat-nav-list fxLayout="column" class="at-sidenav-list sidenav-toplevel">
+            <at-sidenav-item *ngFor="let atSidenavItem of atSidenavItems" [item]="atSidenavItem"></at-sidenav-item>
+        </mat-nav-list>
+    </at-scrollbar>
+
+    <mat-toolbar class="at-sidenav-footer at-toolbar">
+        <div fxFlex fxLayout="row" fxLayoutAlign="start center">
+            <h4 class="at-mb-0 at-sidenav-fade-in-on-hover" fxFlex>Sidebar Footer</h4>
+            <span fxFlex><!-- fill space --></span>
+            <div fxHide="true" fxHide.gt-sm="false" fxFlexAlign="center">
+                <button mat-icon-button (click)="toggleSidenavCollapsed()">
+                    <mat-icon class="icon-sidenav-toggle"
+                             [class.rotate]="isSidenavCollapsed()">chevron_left
+                    </mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-toolbar>
+
+</div>

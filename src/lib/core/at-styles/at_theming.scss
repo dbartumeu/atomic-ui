@@ -1,0 +1,1359 @@
+//@import '../common/styles/variables';
+//@import '../common/styles/elevation';
+//@import '../common/styles/theme-functions';
+
+// Loading support for light and dark colors
+@mixin at-theme-backgrounds($theme) {
+  $background: map-get($theme, background);
+  $is-dark-theme: map-get($theme, is-dark);
+  $primary: map-get($theme, primary);
+
+  .at-bg {
+    background-color: map-get($background, background);
+  }
+
+  .at-bg-accent {
+    @if $is-dark-theme {
+      background-color: map-get($background, card);
+    } @else {
+      background-color: map-get($background, app-bar);
+    }
+  }
+
+  .at-fg-primary, .mat-fg-primary {
+    color: map-get($primary, 500) !important;
+  }
+}
+
+// Sidenav support for primary, accent and warn colors
+@mixin at-sidenav-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+
+  .at-sidenav {
+    overflow-x: hidden;
+    &.at-sidenav-primary {
+      background-color: map-get($primary, 400);
+
+      &.at-sidenav-pattern-1 {
+        background: url("/assets/img/backgrounds/patterns/01.png") center 0px repeat;
+      }
+
+      &.at-sidenav-pattern-2 {
+        background: url("/assets/img/backgrounds/patterns/02.png") center -500px no-repeat;
+      }
+
+      &.at-sidenav-pattern-3 {
+        background: url("/assets/img/backgrounds/patterns/03.png") center 0px no-repeat;
+        background-size: cover;
+      }
+    }
+
+  }
+}
+
+// Sidenav Item support for primary, accent and warn colors
+@mixin at-sidenav-item-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, accent);
+
+  .at-sidenav {
+    .at-sidenav-button.active {
+      color: map-get($accent, 400) !important;
+    }
+    &.at-sidenav-primary {
+      .at-sidenav-button.active {
+        color: #fefefe !important;
+      }
+    }
+
+  }
+}
+
+// Loading support for light and dark colors
+@mixin at-loading-theme($theme) {
+  $background: map-get($theme, background);
+  .at-loading-wrapper {
+    &.at-overlay .at-loading {
+      background: rgba(map-get($background, background), 0.8);
+    }
+  }
+}
+
+// Notifications support for light and dark colors
+@mixin at-notification-count-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .at-notification-count {
+    @include mat-elevation(1);
+    &.mat-warn {
+      background-color: mat-color($warn);
+      color: mat-color($warn, default-contrast);
+    }
+    &.mat-primary {
+      background-color: mat-color($primary);
+      color: mat-color($primary, default-contrast);
+    }
+    &.mat-accent {
+      background-color: mat-color($accent);
+      color: mat-color($accent, default-contrast);
+    }
+    &.mat-light {
+      background-color: whitesmoke;
+      color: #777;
+    }
+    &.mat-dark {
+      background-color: rgba(0, 0, 0, 0.64);
+      color: whitesmoke;
+    }
+  }
+}
+
+// Colors support for light and dark colors
+@mixin at-colors-theme($theme) {
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  .mat-bg {
+    background-color: map-get($background, base) !important;
+  }
+
+  .mat-fg {
+    color: map-get($foreground, base) !important;
+  }
+}
+
+// Chips support for light and dark colors
+@mixin at-chips-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  // chips
+  at-chips {
+    // chip
+    .mat-basic-chip {
+      background: mat-color($background, status-bar);
+      color: mat-color($foreground, text);
+      &:focus:not(.at-chip-disabled) {
+        mat-icon:hover {
+          color: mat-color($foreground, icon);
+        }
+        &.mat-primary {
+          background: mat-color($primary);
+          &, mat-icon {
+            color: mat-color($primary, default-contrast);
+          }
+        }
+        &.mat-accent {
+          background: mat-color($accent);
+          &, mat-icon {
+            color: mat-color($accent, default-contrast);
+          }
+        }
+        &.mat-warn {
+          background: mat-color($warn);
+          &, mat-icon {
+            color: mat-color($warn, default-contrast);
+          }
+        }
+      }
+      mat-icon.at-chip-removal {
+        color: mat-color($foreground, hint-text);
+        &:hover {
+          color: mat-color($foreground, icon);
+        }
+      }
+    }
+    &.mat-primary {
+      .mat-input-underline .mat-input-ripple {
+        background-color: mat-color($primary);
+      }
+    }
+    &.mat-accent {
+      .mat-input-underline .mat-input-ripple {
+        background-color: mat-color($accent);
+      }
+    }
+    &.mat-warn {
+      .mat-input-underline .mat-input-ripple {
+        background-color: mat-color($warn);
+      }
+    }
+  }
+}
+
+// Paging support for light and dark colors
+@mixin at-paging-bar-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  at-paging-bar {
+    &, & mat-select .mat-select-value {
+      color: mat-color($foreground, secondary-text);
+    }
+  }
+}
+
+// Steps support for light and dark colors
+@mixin at-steps-theme($theme) {
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  at-steps {
+    .at-steps-header {
+      //@include mat-elevation(1);
+    }
+    .at-step-content,
+    .at-step-summary,
+    .at-step-actions {
+      margin: 16px;
+    }
+    // steps
+    .at-horizontal-line {
+      border-bottom-color: mat-color($foreground, divider);
+    }
+    .at-vertical-line {
+      border-left-color: mat-color($foreground, divider);
+    }
+    // header
+    .at-step-header {
+      &:focus:not(.mat-disabled),
+      &:hover:not(.mat-disabled) {
+        background: mat-color($background, 'hover');
+      }
+      .at-step-label-wrapper {
+        .mat-caption {
+          color: mat-color($foreground, secondary-text);
+        }
+        &.mat-inactive {
+          &, & * {
+            color: mat-color($foreground, disabled);
+          }
+        }
+        &.mat-warn {
+          &, & * {
+            color: mat-color($warn);
+          }
+        }
+      }
+      .mat-complete {
+        color: mat-color($accent);
+      }
+    }
+    .at-circle {
+      color: mat-color($background, card);
+      &.mat-active {
+        background-color: mat-color($accent);
+      }
+      &.mat-inactive {
+        background-color: mat-color($foreground, disabled);
+      }
+      & mat-icon {
+        fill: mat-color($foreground, text);
+      }
+    }
+    .at-triangle {
+      color: mat-color($warn);
+    }
+    .at-edit-icon {
+      color: mat-color($foreground, icon);
+    }
+  }
+}
+
+// Data Table support for light and dark colors
+@mixin at-data-table-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  table[at-data-table] {
+    .at-data-table-row {
+      border-bottom-color: mat-color($foreground, divider);
+    }
+    .mat-checkbox-cell,
+    .mat-checkbox-column {
+      color: mat-color($foreground, secondary-text);
+      mat-pseudo-checkbox.mat-pseudo-checkbox-checked {
+        color: mat-color($accent, 500);
+      }
+    }
+    .at-data-table-cell {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.010em;
+      line-height: 20px;
+      mat-input-container {
+        .mat-input-underline {
+          display: none;
+        }
+      }
+    }
+    .at-data-table-column {
+      font-size: 12px;
+      color: mat-color($foreground, secondary-text);
+      * {
+        vertical-align: middle;
+      }
+      mat-icon {
+        &.at-data-table-sort-icon {
+          color: mat-color($foreground, disabled);
+        }
+      }
+      &.mat-active,
+      &.mat-active mat-icon {
+        color: mat-color($foreground, base);
+      }
+    }
+    &.mat-selectable tbody > tr.at-data-table-row {
+      &:not([disabled]):not(.at-selected):focus {
+        background-color: mat-color($background, 'hover');
+      }
+      &.at-selected {
+        background-color: mat-color($accent, 0.12);
+      }
+    }
+    &.mat-clickable tbody > tr.at-data-table-row {
+      &:not([disabled]) {
+        &:hover {
+          background-color: mat-color($background, 'hover');
+        }
+        &:active {
+          background-color: mat-color($accent, 0.12);
+        }
+      }
+    }
+  }
+  .mat-selected-title {
+    background-color: mat-color($accent, 0.12);
+    color: mat-color($accent);
+  }
+}
+
+// Ngx-charts support for light and dark colors
+@mixin at-ngx-charts-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  /**
+   * Backgrounds
+   */
+  $color-bg-darkest: #13141b;
+  $color-bg-darker: #1b1e27;
+  $color-bg-dark: #232837;
+  $color-bg-med: #2f3646;
+  $color-bg-light: #455066;
+  $color-bg-lighter: #5b6882;
+
+  /**
+   * Text
+   */
+  $color-text-dark: #72809b;
+  $color-text-med-dark: #919db5;
+  $color-text-med: #a8b2c7;
+  $color-text-med-light: #d9dce1;
+  $color-text-light: #f0f1f6;
+  $color-text-lighter: #fff;
+
+  .ngx-charts {
+
+    text {
+      fill: mat-color($foreground, secondary-text);
+    }
+
+    .tooltip-anchor {
+      fill: mat-color($foreground, text);
+    }
+
+    .gridline-path {
+      stroke: mat-color($foreground, divider);
+    }
+
+    .refline-path {
+      stroke: mat-color($foreground, disabled);
+    }
+
+    .reference-area {
+      fill: mat-color($foreground, text);
+    }
+
+    .grid-panel {
+      &.odd {
+        rect {
+          fill: rgba(255, 255, 255, 0.05);
+        }
+      }
+    }
+
+    .force-directed-graph {
+      .edge {
+        stroke: mat-color($foreground, secondary-text);
+      }
+    }
+
+    .number-card {
+      p {
+        fill: mat-color($foreground, secondary-text);
+      }
+    }
+
+    .gauge {
+      .background-arc {
+        path {
+          fill: mat-color($foreground, slider-off);
+        }
+      }
+
+      .gauge-tick {
+        path {
+          stroke: mat-color($foreground, secondary-text);
+        }
+        text {
+          fill: mat-color($foreground, text);
+        }
+      }
+    }
+
+    .linear-gauge {
+      .background-bar {
+        path {
+          fill: $color-bg-med;
+        }
+      }
+
+      .units {
+        fill: mat-color($foreground, secondary-text);
+      }
+    }
+
+    .timeline {
+      .brush-background {
+        fill: rgba(255, 255, 255, 0.05);
+      }
+
+      .brush {
+        .selection {
+          fill: rgba(255, 255, 255, 0.1);
+          stroke: mat-color($foreground, secondary-text);
+        }
+      }
+    }
+
+    .polar-chart .polar-chart-background {
+      fill: rgb(30, 34, 46);
+    }
+
+  }
+
+  .chart-legend {
+    .legend-labels {
+      background: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .legend-item {
+      &:hover {
+        color: mat-color($foreground, text) !important;
+      }
+    }
+
+    .legend-label {
+      &:hover {
+        color: mat-color($foreground, text) !important;
+      }
+
+      .active {
+        .legend-label-text {
+          color: mat-color($foreground, text) !important;
+        }
+      }
+    }
+
+    .scale-legend-label {
+      color: mat-color($foreground, secondary-text) !important;
+    }
+  }
+
+  .advanced-pie-legend {
+    color: mat-color($foreground, secondary-text);
+
+    .legend-item {
+      &:hover {
+        color: mat-color($foreground, secondary-text) !important;
+      }
+    }
+  }
+
+  .number-card .number-card-label {
+    font-size: 0.8em;
+    color: mat-color($foreground, secondary-text);
+  }
+
+}
+
+// Calendar support for light and dark colors
+@mixin at-calendar-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .cal-month-view {
+
+    .cal-header {
+
+      &.cal-cell-row {
+        background-color: transparent;
+      }
+      .cal-cell {
+        background-color: transparent;
+        font-weight: 500;
+        text-align: right;
+        margin-right: 15px;
+        margin-bottom: 10px;
+      }
+    }
+
+    .cal-days {
+      //border: none;
+      border-top: 1px solid;
+      border-color: map-get($foreground, divider);
+
+      .cal-cell-row {
+        //border-bottom: none;
+        border-color: map-get($foreground, divider);
+
+        &:hover {
+          background-color: transparent !important;
+        }
+      }
+    }
+
+    .cal-day-cell {
+      transition: all ease 0.3s;
+      background-color: transparent !important;
+
+      &:not(:last-child) {
+        border-color: map-get($foreground, divider);
+      }
+      &:hover {
+        //@include mat-elevation(1);
+        background-color: map-get($background, focused-button) !important;
+      }
+
+      &.cal-has-events.cal-open {
+        background-color: map-get($background, raised-button) !important;
+      }
+
+      &.cal-open {
+        //@include mat-elevation(3);
+
+        .cal-day-number {
+          font-weight: 600;
+          //border: 2px solid;
+        }
+      }
+
+      .cal-day-number {
+        color: map-get($foreground, base);
+      }
+
+      &.cal-today {
+        .cal-day-number {
+          color: map-get($primary, 400) !important;
+          opacity: 1;
+        }
+
+        background-color: transparent !important;
+      }
+
+      &.cal-weekend {
+        .cal-day-number {
+          color: map-get($warn, 500);
+          opacity: 0.4;
+        }
+      }
+
+      &.cal-out-month {
+        .cal-day-number {
+          opacity: 0.1;
+        }
+      }
+    }
+
+    .cal-cell-top {
+      height: 170px;
+      position: relative;
+      //margin: auto;
+      //margin-top: 10px;
+      min-height: 80px;
+    }
+
+    .cal-open-day-events {
+      background: transparent;
+      box-shadow: none;
+
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+
+      > div {
+        padding: 0 16px;
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+
+        border-bottom: 1px solid;
+        border-color: map-get($foreground, divider);
+
+        transition: box-shadow 300ms ease;
+
+        &:hover {
+          background-color: map-get($background, focused-button) !important;;
+        }
+
+        .cal-event {
+          top: 0;
+          margin: 0;
+        }
+
+        mwl-calendar-event-title {
+          flex: 1;
+
+          .cal-event-title {
+            display: block;
+            padding: 21px 24px;
+            line-height: 1;
+            text-decoration: none;
+            color: map-get($foreground, base);
+          }
+        }
+
+        mwl-calendar-event-actions {
+          .cal-event-actions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .cal-event-action {
+              color: map-get($primary, 500);
+              display: block;
+              line-height: 1;
+              padding: 8px;
+            }
+          }
+        }
+
+      }
+    }
+
+    .cal-day-badge {
+      background-color: transparent;
+      color: map-get($accent, 500);
+    }
+
+    .cal-events {
+      //margin: auto;
+      margin-bottom: 5px;
+    }
+  }
+
+  .cal-week-view {
+
+    .cal-day-headers {
+      border: 1px solid map_get($foreground, divider);
+      .cal-header:not(:last-child) {
+        border-right: 1px solid map_get($foreground, divider);
+      }
+    }
+
+    .cal-header {
+
+      &.cal-today {
+        background-color: transparent;
+        > span {
+          color: map_get($primary, 500);
+          opacity: 1 !important;
+        }
+      }
+
+      &.cal-weekend span {
+        color: map_get($warn, 500);
+      }
+
+      &:hover {
+        background-color: transparent !important;
+      }
+      &.cal-cell-row {
+        background-color: transparent;
+      }
+      .cal-cell {
+        background-color: transparent;
+      }
+      > b {
+        font-weight: 500;
+      }
+
+    }
+
+    .cal-event {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      mwl-calendar-event-title {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1;
+        order: 0;
+
+        .cal-event-title {
+          display: block;
+          //padding: 21px 24px;
+          line-height: 1;
+          text-decoration: none;
+          color: black;
+        }
+      }
+
+      mwl-calendar-event-actions {
+        order: 1;
+
+        .cal-event-actions {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          .cal-event-action {
+            color: map-get($primary, 500);
+            display: block;
+            line-height: 1;
+            padding: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .cal-day-view {
+    .cal-hour-rows {
+      border: solid 1px map-get($foreground, divider) !important;
+      overflow-x: auto;
+    }
+
+    .cal-hour {
+      background-color: transparent !important;
+    }
+    .cal-hour-segment {
+      border-bottom: thin dashed map-get($foreground, divider) !important;
+      &:hover {
+        background-color: map-get($background, focused-button) !important;
+      }
+
+    }
+
+    .cal-time {
+      font-weight: 500;
+    }
+
+    .cal-event {
+      display: flex;
+      flex-direction: row;
+
+      mwl-calendar-event-title {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        flex: 1;
+        order: 0;
+
+        .cal-event-title {
+          display: block;
+          height: 26px;
+          line-height: 26px;
+          text-decoration: none;
+          color: black;
+        }
+      }
+
+      mwl-calendar-event-actions {
+        order: 1;
+
+        .cal-event-actions {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          .cal-event-action {
+            color: map-get($primary, 500);
+            display: block;
+            line-height: 1;
+            padding: 4px;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+// Border support for light and dark colors
+@mixin at-border-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  $border-style: 1px solid map-get($foreground, divider);
+
+  .at-border,
+  .at-b {
+    border: $border-style;
+  }
+
+  .at-border-top,
+  .at-bt {
+    border-top: $border-style;
+  }
+
+  .at-border-right,
+  .at-br {
+    border-right: $border-style;
+  }
+
+  .at-border-bottom,
+  .at-bb {
+    border-bottom: $border-style;
+  }
+
+  .at-border-left,
+  .at-bl {
+    border-left: $border-style;
+  }
+
+  .at-border-horizontal,
+  .at-bh {
+    border-left: $border-style;
+    border-right: $border-style;
+  }
+
+  .at-border-vertical,
+  .at-bv {
+    border-top: $border-style;
+    border-bottom: $border-style;
+  }
+}
+
+// ngx-datatable support for light and dark colors
+@mixin at-ngx-datatable-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  .ngx-datatable.material {
+    background: transparent;
+    box-shadow: none;
+
+    .mat-link {
+      text-decoration: none;
+      font-weight: 500;
+      color: map-get($primary, 500);
+    }
+
+    &.striped .datatable-row-odd {
+      background: #eee;
+    }
+    &.single-selection .datatable-body-row.active, &.multi-selection .datatable-body-row.active, &.multi-click-selection .datatable-body-row.active {
+      background-color: map_get($primary, 500);
+      color: #FFF;
+      .mat-link{
+        color: whitesmoke;
+      }
+      .datatable-row-group {
+        background-color: map_get($primary, 500);
+        color: #FFF;
+      }
+      .datatable-body-cell{
+        color: #FFF;
+      }
+    }
+    &.single-selection .datatable-body-row.active:hover, &.multi-selection .datatable-body-row.active:hover, &.multi-click-selection .datatable-body-row.active:hover {
+      background-color: map_get($primary, 500);
+      color: #FFF;
+      .datatable-row-group {
+        background-color: map_get($primary, 500);
+        color: #FFF;
+      }
+    }
+    &.single-selection .datatable-body-row.active:focus, &.multi-selection .datatable-body-row.active:focus, &.multi-click-selection .datatable-body-row.active:focus {
+      background-color: map_get($primary, 500);
+      color: #FFF;
+      .datatable-row-group {
+        background-color: map_get($primary, 500);
+        color: #FFF;
+      }
+    }
+    &:not(.cell-selection) .datatable-body-row {
+      &:hover {
+        background-color: map_get($background, focused-button);
+        transition-property: background;
+        transition-duration: .3s;
+        transition-timing-function: linear;
+        .datatable-row-group {
+          background-color: map_get($background, focused-button);
+          transition-property: background;
+          transition-duration: .3s;
+          transition-timing-function: linear;
+        }
+      }
+      &:focus {
+        background-color: map_get($background, focused-button);
+        .datatable-row-group {
+          background-color: map_get($background, focused-button);
+        }
+      }
+    }
+    &.cell-selection .datatable-body-cell {
+      &:hover {
+        background-color: map_get($background, raised-button);
+        transition-property: background;
+        transition-duration: .3s;
+        transition-timing-function: linear;
+        .datatable-row-group {
+          background-color: map_get($background, raised-button);
+          transition-property: background;
+          transition-duration: .3s;
+          transition-timing-function: linear;
+        }
+      }
+      &:focus {
+        background-color: map_get($background, raised-button);
+        .datatable-row-group {
+          background-color: map_get($background, raised-button);
+        }
+      }
+      &.active {
+        background-color: map_get($primary, 500);
+        color: #FFF;
+        .datatable-row-group {
+          background-color: map_get($primary, 500);
+          color: #FFF;
+        }
+        &:hover {
+          background-color: map_get($primary, 500);
+          color: #FFF;
+          .datatable-row-group {
+            background-color: map_get($primary, 500);
+            color: #FFF;
+          }
+        }
+        &:focus {
+          background-color: map_get($primary, 500);
+          color: #FFF;
+          .datatable-row-group {
+            background-color: map_get($primary, 500);
+            color: #FFF;
+          }
+        }
+      }
+    }
+    .empty-row {
+      height: 50px;
+      text-align: left;
+      padding: .5rem 1.2rem;
+      vertical-align: top;
+      border-top: 0;
+    }
+    .loading-row {
+      text-align: left;
+      padding: .5rem 1.2rem;
+      vertical-align: top;
+      border-top: 0;
+    }
+    .datatable-header .datatable-row-left, .datatable-body .datatable-row-left {
+      background-color: #FFF;
+      background-position: 100% 0;
+      background-repeat: repeat-y;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQIHWPSkNeSBmJhTQVtbiDNCgASagIIuJX8OgAAAABJRU5ErkJggg==);
+    }
+    .datatable-header .datatable-row-right, .datatable-body .datatable-row-right {
+      background-position: 0 0;
+      background-color: #fff;
+      background-repeat: repeat-y;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABCAYAAAD5PA/NAAAAFklEQVQI12PQkNdi1VTQ5gbSwkAsDQARLAIGtOSFUAAAAABJRU5ErkJggg==);
+    }
+    .datatable-header {
+      border-bottom: 1px solid map_get($foreground, divider);
+      .datatable-header-cell {
+        text-align: left;
+        padding: .9rem 1.2rem;
+        font-weight: 500;
+        color: map_get($foreground, base);
+        vertical-align: bottom;
+        font-size: 14px;
+        .datatable-header-cell-wrapper {
+          position: relative;
+        }
+        &.longpress .draggable::after {
+          transition: transform 400ms ease, opacity 400ms ease;
+          opacity: .5;
+          transform: scale(1);
+        }
+        .draggable::after {
+          content: " ";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          margin: -30px 0 0 -30px;
+          height: 60px;
+          width: 60px;
+          background: map_get($background, raised-button);
+          border-radius: 100%;
+          opacity: 1;
+          filter: none;
+          transform: scale(0);
+          z-index: 9999;
+          pointer-events: none;
+        }
+        &.dragging .resize-handle {
+          border-right: none;
+        }
+      }
+      .resize-handle {
+        border-right: solid 1px map_get($foreground, divider);
+      }
+    }
+    .datatable-body {
+      .datatable-row-detail {
+        background: map_get($background, disabled-button);
+        padding: 10px;
+      }
+      .datatable-group-header {
+        background: #f5f5f5;
+        border-bottom: solid 1px #D9D8D9;
+        border-top: solid 1px #D9D8D9;
+      }
+      .datatable-body-row {
+        .datatable-body-cell, .datatable-body-group-cell {
+          text-align: left;
+          padding: .9rem 1.2rem;
+          vertical-align: top;
+          border-top: 0;
+          color: map_get($foreground, base);
+          transition: width 0.3s ease;
+          font-size: 14px;
+          font-weight: 400;
+        }
+      }
+      .progress-linear {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 5px;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        .container {
+          display: block;
+          position: relative;
+          overflow: hidden;
+          width: 100%;
+          height: 5px;
+          -webkit-transform: translate(0, 0) scale(1, 1);
+          transform: translate(0, 0) scale(1, 1);
+          background-color: map_get($primary, 100);
+          .bar {
+            transition: all .2s linear;
+            -webkit-animation: query 0.8s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+            animation: query 0.8s infinite cubic-bezier(0.39, 0.575, 0.565, 1);
+            transition: -webkit-transform .2s linear;
+            transition: transform .2s linear;
+            background-color: map_get($primary, 500);
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            height: 5px;
+          }
+        }
+      }
+    }
+    .datatable-footer {
+      border-top: 1px solid map_get($foreground, divider);
+      font-size: 12px;
+      font-weight: 400;
+      color: map_get($foreground, base);
+      .page-count {
+        line-height: 50px;
+        height: 50px;
+        padding: 0 1.2rem;
+      }
+      .datatable-pager {
+        margin: 0 10px;
+        li {
+          vertical-align: middle;
+          &.disabled a {
+            color: map_get($foreground, disabled) !important;
+            background-color: transparent !important;
+          }
+          &.active a {
+            color: map_get($primary, 500);
+            background-color: transparent;
+            font-weight: bold;
+          }
+        }
+        a {
+          height: 22px;
+          min-width: 24px;
+          line-height: 22px;
+          padding: 0 6px;
+          border-radius: 3px;
+          margin: 6px 3px;
+          text-align: center;
+          vertical-align: top;
+          color: map_get($foreground, base);
+          text-decoration: none;
+          vertical-align: bottom;
+          &:hover {
+            color: map_get($foreground, base);
+            background-color: transparent;
+          }
+        }
+        .datatable-icon-left, .datatable-icon-skip, .datatable-icon-right, .datatable-icon-prev {
+          font-size: 20px;
+          line-height: 20px;
+          padding: 0 3px;
+        }
+      }
+    }
+  }
+}
+
+// Border support for light and dark colors
+@mixin at-highlight-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
+
+  .highlight {
+
+    @if $is-dark-theme {
+
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        background: #333;
+        color: white;
+      }
+
+      .hljs-name,
+      .hljs-strong {
+        font-weight: bold;
+      }
+
+      .hljs-code,
+      .hljs-emphasis {
+        font-style: italic;
+      }
+
+      .hljs-tag {
+        color: #62c8f3;
+      }
+
+      .hljs-variable,
+      .hljs-template-variable,
+      .hljs-selector-id,
+      .hljs-selector-class {
+        color: #ade5fc;
+      }
+
+      .hljs-string,
+      .hljs-bullet {
+        color: #a2fca2;
+      }
+
+      .hljs-type,
+      .hljs-title,
+      .hljs-section,
+      .hljs-attribute,
+      .hljs-quote,
+      .hljs-built_in,
+      .hljs-builtin-name {
+        color: #ffa;
+      }
+
+      .hljs-number,
+      .hljs-symbol,
+      .hljs-bullet {
+        color: #d36363;
+      }
+
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-literal {
+        color: #fcc28c;
+      }
+
+      .hljs-comment,
+      .hljs-deletion,
+      .hljs-code {
+        color: #888;
+      }
+
+      .hljs-regexp,
+      .hljs-link {
+        color: #c6b4f0;
+      }
+
+      .hljs-meta {
+        color: #fc9b9b;
+      }
+
+      .hljs-deletion {
+        background-color: #fc9b9b;
+        color: #333;
+      }
+
+      .hljs-addition {
+        background-color: #a2fca2;
+        color: #333;
+      }
+
+      .hljs a {
+        color: inherit;
+      }
+
+      .hljs a:focus,
+      .hljs a:hover {
+        color: inherit;
+        text-decoration: underline;
+      }
+
+    } @else {
+      /*
+
+      Google Code style (c) Aahan Krish <geekpanth3r@gmail.com>
+
+      */
+
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        padding: 0.5em;
+        background: white;
+        color: black;
+      }
+
+      .hljs-comment,
+      .hljs-quote {
+        color: #800;
+      }
+
+      .hljs-keyword,
+      .hljs-selector-tag,
+      .hljs-section,
+      .hljs-title,
+      .hljs-name {
+        color: #008;
+      }
+
+      .hljs-variable,
+      .hljs-template-variable {
+        color: #660;
+      }
+
+      .hljs-string,
+      .hljs-selector-attr,
+      .hljs-selector-pseudo,
+      .hljs-regexp {
+        color: #080;
+      }
+
+      .hljs-literal,
+      .hljs-symbol,
+      .hljs-bullet,
+      .hljs-meta,
+      .hljs-number,
+      .hljs-link {
+        color: #066;
+      }
+
+      .hljs-title,
+      .hljs-doctag,
+      .hljs-type,
+      .hljs-attr,
+      .hljs-built_in,
+      .hljs-builtin-name,
+      .hljs-params {
+        color: #606;
+      }
+
+      .hljs-attribute,
+      .hljs-subst {
+        color: #000;
+      }
+
+      .hljs-formula {
+        background-color: #eee;
+        font-style: italic;
+      }
+
+      .hljs-selector-id,
+      .hljs-selector-class {
+        color: #9B703F
+      }
+
+      .hljs-addition {
+        background-color: #baeeba;
+      }
+
+      .hljs-deletion {
+        background-color: #ffc8bd;
+      }
+
+      .hljs-doctag,
+      .hljs-strong {
+        font-weight: bold;
+      }
+
+      .hljs-emphasis {
+        font-style: italic;
+      }
+
+    }
+  }
+}

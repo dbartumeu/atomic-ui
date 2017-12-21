@@ -1,0 +1,78 @@
+// Height and width helpers
+// Multiples of 5, Max: 500
+@for $i from 0 through 100 {
+
+  .at-height-#{$i * 5},
+  .at-h-#{$i * 5} {
+    height: #{($i * 5) + 'px'} !important;
+    min-height: #{($i * 5) + 'px'} !important;
+    max-height: #{($i * 5) + 'px'} !important;
+  }
+
+  .at-width-#{$i * 5},
+  .at-w-#{$i * 5} {
+    width: #{($i * 5) + 'px'} !important;
+    min-width: #{($i * 5) + 'px'} !important;
+    max-width: #{($i * 5) + 'px'} !important;
+  }
+}
+
+// Height and width helpers in percent
+// Multiples of 5, Max: 100, including 33.3333
+@for $i from 0 through 20 {
+  .at-height-percent-#{$i * 5},
+  .at-hp-#{$i * 5} {
+    height: #{($i * 5) + '%'} !important;
+    max-height: #{($i * 5) + '%'} !important;
+  }
+
+  .at-width-percent-#{$i * 5},
+  .at-wp-#{$i * 5} {
+    width: #{($i * 5) + '%'} !important;
+    max-width: #{($i * 5) + '%'} !important;
+  }
+}
+
+.at-height-percent-33,
+.at-hp-33 {
+  height: 33.3333% !important;
+  max-height: 33.3333% !important;
+}
+
+.at-width-percent-33,
+.at-wp-33 {
+  width: 33.3333% !important;
+  max-width: 33.3333% !important;
+}
+
+// Height and width helpers
+// Multiples of 8, Max: 800, Excluding 0 and multiples of 5
+@for $i from 1 through 100 {
+
+  @if (($i * 8) % 5 != 0) {
+
+    .at-height-#{$i * 8},
+    .at-h-#{$i * 8} {
+      height: #{($i * 8) + 'px'} !important;
+      min-height: #{($i * 8) + 'px'} !important;
+      max-height: #{($i * 8) + 'px'} !important;
+    }
+
+    .at-width-#{$i * 8},
+    .at-w-#{$i * 8} {
+      width: #{($i * 8) + 'px'} !important;
+      min-width: #{($i * 8) + 'px'} !important;
+      max-width: #{($i * 8) + 'px'} !important;
+    }
+  }
+}
+
+// Height and width helpers
+// Force auto
+.at-height-auto, .at-ha {
+  height: auto !important;
+}
+
+.at-width-auto, .at-ha {
+  width: auto !important;
+}

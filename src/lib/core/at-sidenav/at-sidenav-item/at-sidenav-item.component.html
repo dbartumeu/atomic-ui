@@ -1,0 +1,51 @@
+<div *ngIf="item.isRouteString(); then routeNavItem else functionNavItem"></div>
+
+<ng-template #functionNavItem>
+    <a class="at-sidenav-button" [ngClass]="item.customClass"
+       *ngIf="!item.hasChildren() && item.renderItem"
+       mat-list-item mat-ripple (click)="item.route()">
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span class="sidenav-item-name at-sidenav-fade-in-on-hover">{{ item.name }}</span>
+        <span fxFlex><!-- fill space --></span>
+        <span class="at-sidenav-item-badge at-sidenav-fade-in-on-hover" *ngIf="item.badge"
+              [style.background-color]="item.badgeColor">{{ item.badge }}</span>
+    </a>
+</ng-template>
+
+
+<ng-template #routeNavItem>
+    <a class="at-sidenav-button" [ngClass]="item.customClass"
+       *ngIf="!item.hasChildren() && item.renderItem"
+       mat-list-item mat-ripple
+       [routerLink]="[item.route]" routerLinkActive="active">
+
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span class="sidenav-item-name at-sidenav-fade-in-on-hover">{{ item.name }}</span>
+        <span fxFlex><!-- fill space --></span>
+        <span class="at-sidenav-item-badge at-sidenav-fade-in-on-hover" *ngIf="item.badge"
+              [style.background-color]="item.badgeColor">{{ item.badge }}</span>
+    </a>
+</ng-template>
+
+<!--Dropdown item-->
+<a class="at-sidenav-button"
+   *ngIf="item.hasChildren() && item.renderItem" mat-list-item mat-ripple
+   (click)="toggleAtSidenavItem()" [ngClass]="item.customClass">
+
+    <mat-icon>{{ item.icon }}</mat-icon>
+    <span class="sidenav-item-name at-sidenav-fade-in-on-hover">{{ item.name }}</span>
+    <span fxFlex><!-- fill space --></span>
+    <span class="at-sidenav-item-badge at-sidenav-fade-in-on-hover" *ngIf="item.badge"
+          [style.background-color]="item.badgeColor"
+          style="margin-right: 12px;">{{ item.badge }}</span>
+    <mat-icon *ngIf="item.hasChildren()" class="at-sidenav-item-dropdown-indicator at-sidenav-fade-in-on-hover">
+        expand_more
+    </mat-icon>
+</a>
+
+<mat-nav-list *ngIf="renderSubNav(item.children)" class="at-sidenav-list sidenav-list-nested"
+             fxLayout="column">
+    <ng-container *ngFor="let child of item.children">
+        <at-sidenav-item *ngIf="renderItem(child)" [item]="child"></at-sidenav-item>
+    </ng-container>
+</mat-nav-list>

@@ -1,0 +1,17 @@
+<at-layout #dashboardLayout
+           [layoutType]="'simple'"
+           scrollOn="container">
+
+    <div at-layout-header [height]="100">
+        <div class="at-padding-horizontal-40">
+            <h1 class="at-mb-5" fxLayout="row" fxLayoutAlign="start space-around">
+                <span fxFlex>Blank Component</span>
+            </h1>
+            <h4 class="at-mb-5">Blank Component Description</h4>
+        </div>
+    </div>
+    <div at-layout-content [ngClass.gt-sm]="'at-p-40'" class="at-hp-100">
+        The content
+    </div>
+
+</at-layout>

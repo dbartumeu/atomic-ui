@@ -1,0 +1,47 @@
+// Border helpers
+$border-style: 1px solid rgba(0, 0, 0, 0.12);
+
+.at-border,
+.at-b {
+  border: $border-style;
+}
+
+.at-border-top,
+.at-bt {
+  border-top: $border-style;
+}
+
+.at-border-right,
+.at-br {
+  border-right: $border-style;
+}
+
+.at-border-bottom,
+.at-bb {
+  border-bottom: $border-style;
+}
+
+.at-border-left,
+.at-bl {
+  border-left: $border-style;
+}
+
+.at-border-horizontal,
+.at-bh {
+  border-left: $border-style;
+  border-right: $border-style;
+}
+
+.at-border-vertical,
+.at-bv {
+  border-top: $border-style;
+  border-bottom: $border-style;
+}
+
+// Border-radius helpers
+@for $i from 1 through 16 {
+  .at-border-radius-#{$i},
+  .at-brad-#{$i} {
+    border-radius: #{$i + 'px'}
+  }
+}

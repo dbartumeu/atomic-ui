@@ -1,0 +1,11 @@
+<at-layout #layoutMain
+           [layoutType]="'main'">
+    <ng-template at-layout-toolbar>
+        <app-toolbar [layoutRef]="layoutMain"></app-toolbar>
+    </ng-template>
+    <div at-layout-content>
+        <router-outlet></router-outlet>
+    </div>
+</at-layout>
+
+

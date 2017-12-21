@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+@import '~@angular/material/_theming';
+
+@include mat-core();
+@import 'lib/core/at-styles/at_index';
+@import "lib/core/at-styles/at_theming";
+
+// Define the default theme.
+$default-primary: mat-palette($mat-indigo);
+$default-accent: mat-palette($mat-pink, A200, A100, A400);
+$default-theme: mat-light-theme($default-primary, $default-accent);
+
+// Include the default theme styles.
+@include angular-material-theme($default-theme);
+
+// This design depends on the selection of the material colors palette
+.at-sidenav-button.active {
+  color: map-get($default-primary, 400) !important;
+}
+
+// Define Atiator's light theme.
+$av-light-primary: mat-palette($mat-light-blue);
+$av-light-accent: mat-palette($mat-pink, A200, A100, A400);
+$av-light-theme: mat-light-theme($av-light-primary, $av-light-accent);
+
+// Define Atiator's dark theme.
+$av-dark-primary: mat-palette($mat-pink);
+$av-dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$av-dark-warn: mat-palette($mat-deep-orange);
+$av-dark-theme: mat-dark-theme($av-dark-primary, $av-dark-accent, $av-dark-warn);
+
+// Define theme Classes
+.at-theme-light {
+  @include angular-material-theme($av-light-theme);
+  @include at-theme-backgrounds($av-light-theme);
+  @include at-sidenav-theme($av-light-theme); //theming sidenav
+  @include at-sidenav-item-theme($av-light-theme);
+  @include at-loading-theme($av-light-theme);
+  @include at-notification-count-theme($av-light-theme);
+  @include at-colors-theme($av-light-theme);
+  @include at-chips-theme($av-light-theme);
+  @include at-steps-theme($av-light-theme);
+  @include at-data-table-theme($av-light-theme);
+  @include at-border-theme($av-light-theme);
+
+  //Supported 3rd party
+  @include at-ngx-charts-theme($av-light-theme);
+  @include at-calendar-theme($av-light-theme);
+  @include at-ngx-datatable-theme($av-light-theme);
+  @include at-highlight-theme($av-light-theme);
+}
+
+.at-theme-dark {
+  @include angular-material-theme($av-dark-theme);
+  @include at-theme-backgrounds($av-dark-theme);
+  @include at-sidenav-theme($av-dark-theme); //theming sidenav
+  @include at-sidenav-item-theme($av-dark-theme);
+  @include at-loading-theme($av-dark-theme);
+  @include at-notification-count-theme($av-dark-theme);
+  @include at-colors-theme($av-dark-theme);
+  @include at-chips-theme($av-dark-theme);
+  @include at-steps-theme($av-dark-theme);
+  @include at-data-table-theme($av-dark-theme);
+  @include at-border-theme($av-dark-theme);
+
+  //Supported 3rd party
+  @include at-ngx-charts-theme($av-dark-theme);
+  @include at-calendar-theme($av-dark-theme);
+  @include at-ngx-datatable-theme($av-dark-theme);
+  @include at-highlight-theme($av-dark-theme);
+}
+
+
+
+

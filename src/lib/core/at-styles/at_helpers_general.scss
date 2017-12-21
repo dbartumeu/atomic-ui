@@ -1,0 +1,79 @@
+// hide overflow
+.at-overflow-hidden, .at-oh {
+  overflow: hidden;
+}
+
+// normal overflow
+.at-overflow-auto, .at-oa {
+  overflow: auto;
+}
+
+// overflow x
+.at-overflow-x, .at-ox {
+  overflow-x: auto;
+}
+
+// overflow y
+.at-overflow-y, .at-oy {
+  overflow-y: auto;
+}
+
+// display block
+.at-display-block, .at-d-b {
+  display: block;
+}
+
+// display inline block
+.at-inline-block, .at-d-ib {
+  display: inline-block;
+}
+
+// display inline
+.at-display-inline, .at-d-i {
+  display: inline;
+}
+
+// relative positioning
+.at-relative {
+  position: relative;
+}
+
+// fixed positioning
+.at-fixed {
+  position: fixed;
+}
+
+// fixed positioning
+.at-absolute {
+  position: absolute;
+}
+
+// z-index helpers
+// Start on 1, Max: 10
+@for $i from 0 through 10 {
+  .at-z-index-#{$i},
+  .at-z-#{$i} {
+    z-index: #{$i} !important;
+  }
+}
+
+// show/hide on hover helpers
+.at-show-elms-on-hover {
+  .at-show-on-hover {
+    display: none;
+  }
+
+  &:hover {
+    .at-show-on-hover {
+      display: unset;
+    }
+  }
+}
+
+.at-hide-elms-on-hover {
+  &:hover {
+    .at-hide-on-hover {
+      display: none;
+    }
+  }
+}

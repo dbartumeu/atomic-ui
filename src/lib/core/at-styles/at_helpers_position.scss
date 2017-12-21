@@ -1,0 +1,180 @@
+// Padding helpers
+// Multiples of 5, max:100
+@for $i from 0 through 20 {
+
+  .at-padding-#{$i * 5},
+  .at-p-#{$i * 5} {
+    padding: #{($i * 5) + 'px'} !important;
+  }
+
+  .at-padding-top-#{$i * 5},
+  .at-pt-#{$i * 5} {
+    padding-top: #{($i * 5) + 'px'};
+  }
+
+  .at-padding-right-#{$i * 5},
+  .at-pr-#{$i * 5} {
+    padding-right: #{($i * 5) + 'px'};
+  }
+
+  .at-padding-bottom-#{$i * 5},
+  .at-pb-#{$i * 5} {
+    padding-bottom: #{($i * 5) + 'px'};
+  }
+
+  .at-padding-left-#{$i * 5},
+  .at-pl-#{$i * 5} {
+    padding-left: #{($i * 5) + 'px'};
+  }
+
+  .at-padding-horizontal-#{$i * 5},
+  .at-ph-#{$i * 5} {
+    padding-left: #{($i * 5) + 'px'};
+    padding-right: #{($i * 5) + 'px'};
+  }
+
+  .at-padding-vertical-#{$i * 5},
+  .at-pv-#{$i * 5} {
+    padding-top: #{($i * 5) + 'px'};
+    padding-bottom: #{($i * 5) + 'px'};
+  }
+}
+
+// Multiples of 8, Max: 96, Excluding 0 and multiples of 5
+@for $i from 1 through 12 {
+  @if (($i * 8) % 5 != 0) {
+
+    .at-padding-#{$i * 8},
+    .at-p-#{$i * 8} {
+      padding: #{($i * 8) + 'px'};
+    }
+
+    .at-padding-top-#{$i * 8},
+    .at-pt-#{$i * 8} {
+      padding-top: #{($i * 8) + 'px'};
+    }
+
+    .at-padding-right-#{$i * 8},
+    .at-pr-#{$i * 8} {
+      padding-right: #{($i * 8) + 'px'};
+    }
+
+    .at-padding-bottom-#{$i * 8},
+    .at-pb-#{$i * 8} {
+      padding-bottom: #{($i * 8) + 'px'};
+    }
+
+    .at-padding-left-#{$i * 8},
+    .at-pl-#{$i * 8} {
+      padding-left: #{($i * 8) + 'px'};
+    }
+
+    .at-padding-horizontal-#{$i * 8},
+    .at-ph-#{$i * 8} {
+      padding-left: #{($i * 8) + 'px'};
+      padding-right: #{($i * 8) + 'px'};
+    }
+
+    .at-padding-vertical-#{$i * 8},
+    .at-pv-#{$i * 8} {
+      padding-top: #{($i * 8) + 'px'};
+      padding-bottom: #{($i * 8) + 'px'};
+    }
+  }
+}
+
+.at-no-padding,
+.at-no-p {
+  padding: 0 !important;
+}
+
+// Margin helpers
+// Multiples of 5, max:100
+@for $i from 0 through 20 {
+
+  .at-margin-#{$i * 5},
+  .at-m-#{$i * 5} {
+    margin: #{($i * 5) + 'px'} !important;
+  }
+
+  .at-margin-top-#{$i * 5},
+  .at-mt-#{$i * 5} {
+    margin-top: #{($i * 5) + 'px'} !important;
+  }
+
+  .at-margin-right-#{$i * 5},
+  .at-mr-#{$i * 5} {
+    margin-right: #{($i * 5) + 'px'} !important;
+  }
+
+  .at-margin-bottom-#{$i * 5},
+  .at-mb-#{$i * 5} {
+    margin-bottom: #{($i * 5) + 'px'} !important;
+  }
+
+  .at-margin-left-#{$i * 5},
+  .at-ml-#{$i * 5} {
+    margin-left: #{($i * 5) + 'px'} !important;
+  }
+
+  .at-margin-horizontal-#{$i * 5},
+  .at-mh-#{$i * 5} {
+    margin-left: #{($i * 5) + 'px'} !important;
+    margin-right: #{($i * 5) + 'px'} !important;
+  }
+
+  .at-margin-vertical-#{$i * 5},
+  .at-mv-#{$i * 5} {
+    margin-top: #{($i * 5) + 'px'} !important;
+    margin-bottom: #{($i * 5) + 'px'} !important;
+  }
+}
+
+// Multiples of 8, Max: 96, Excluding 0 and multiples of 5
+@for $i from 1 through 12 {
+
+  @if (($i * 8) % 5 != 0) {
+
+    .at-margin-#{$i * 8},
+    .at-m-#{$i * 8} {
+      margin: #{($i * 8) + 'px'};
+    }
+
+    .at-margin-top-#{$i * 8},
+    .at-mt-#{$i * 8} {
+      margin-top: #{($i * 8) + 'px'};
+    }
+
+    .at-margin-right-#{$i * 8},
+    .at-mr-#{$i * 8} {
+      margin-right: #{($i * 8) + 'px'};
+    }
+
+    .at-margin-bottom-#{$i * 8},
+    .at-mb-#{$i * 8} {
+      margin-bottom: #{($i * 8) + 'px'};
+    }
+
+    .at-margin-left-#{$i * 8},
+    .at-ml-#{$i * 8} {
+      margin-left: #{($i * 8) + 'px'};
+    }
+
+    .at-margin-horizontal-#{$i * 8},
+    .at-mh-#{$i * 8} {
+      margin-left: #{($i * 8) + 'px'};
+      margin-right: #{($i * 8) + 'px'};
+    }
+
+    .at-margin-vertical-#{$i * 8},
+    .at-mv-#{$i * 8} {
+      margin-top: #{($i * 8) + 'px'};
+      margin-bottom: #{($i * 8) + 'px'};
+    }
+  }
+}
+
+.at-no-margin,
+.at-no-m {
+  margin: 0 !important;
+}

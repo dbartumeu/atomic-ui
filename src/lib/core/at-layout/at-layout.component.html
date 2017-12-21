@@ -1,0 +1,201 @@
+<ng-template #headerTpl>
+    <ng-content select="[at-layout-header]"></ng-content>
+</ng-template>
+
+<ng-template #contentTpl>
+    <ng-content select="[at-layout-content]"></ng-content>
+</ng-template>
+
+<ng-template #sideBarLeftTpl>
+    <ng-content select="[at-layout-sidebar-left]"></ng-content>
+</ng-template>
+
+<ng-template #sideBarRightTpl>
+    <ng-content select="[at-layout-sidebar-right]"></ng-content>
+</ng-template>
+
+<div *ngIf="layoutType === 'main'" class="at-main-container" fxLayout="column">
+    <ng-container *ngIf="layoutToolbar.position === 'outside'">
+        <ng-template [cdkPortalHost]="layoutToolbar"></ng-template>
+    </ng-container>
+    <mat-sidenav-container fxFlex>
+
+        <mat-sidenav *ngIf="layoutSideNav && layoutSideNav.collapsible" #sideNav
+                    class="at-sidenav {{'at-sidenav-' + layoutSideNav.size}} {{'at-' + layoutSideNav.pattern}} {{layoutSideNav.elevation === 'no-elevation' ? '' : ('mat-elevation-' + layoutSideNav.elevation)}}"
+                    align="start"
+                    avSidenavCollapsible
+                    [mode]="mode ? mode : (isSmallScreen ? 'over' : 'side')"
+                    [opened]="snOpened"
+                    (close)="onCloseSideNav($event)">
+            <ng-template [cdkPortalHost]="layoutSideNav"></ng-template>
+        </mat-sidenav>
+
+        <mat-sidenav *ngIf="layoutSideNav && !layoutSideNav.collapsible" #sideNav
+                    class="at-sidenav {{'at-sidenav-' + layoutSideNav.size}} {{'at-' + layoutSideNav.pattern}} {{layoutSideNav.elevation === 'no-elevation' ? '' : ('mat-elevation-' + layoutSideNav.elevation)}}"
+                    align="start"
+                    [mode]="mode ? mode : (isSmallScreen ? 'over' : 'side')"
+                    [opened]="snOpened"
+                    (close)="onCloseSideNav($event)">
+            <ng-template [cdkPortalHost]="layoutSideNav"></ng-template>
+        </mat-sidenav>
+
+        <mat-sidenav *ngIf="layoutSidePanel" #sidePanel
+                    align="end"
+                    mode="drawer"
+                    [style.max-width]="layoutSidePanel.width"
+                    [style.min-width]="layoutSidePanel.width"
+                    [opened]="spOpened"
+                    (close)="onCloseSidePanel($event)"
+                    class="at-sidepanel mat-elevation-z5">
+            <ng-template [cdkPortalHost]="layoutSidePanel"></ng-template>
+        </mat-sidenav>
+
+        <div class="at-main-container" fxLayout="column">
+            <ng-container *ngIf="layoutToolbar.position === 'inside'">
+                <ng-template [cdkPortalHost]="layoutToolbar"></ng-template>
+            </ng-container>
+            <div fxFlex fxLayout="column" [style.height]="'100%'" [style.overflow]="'auto'">
+                <!--<ng-template [cdkPortalHost]="layoutContent"></ng-template>-->
+                <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+            </div>
+        </div>
+    </mat-sidenav-container>
+</div>
+
+<ng-container *ngIf="layoutType !== 'main'">
+    <div *ngIf="(layoutHeader ? (layoutHeader.componentRef ? (layoutHeader.componentRef.lId == lId) : true) : false) && scrollOn == 'content'"
+         class="{{'mat-bg-' + layoutHeader.color}} {{'at-' + layoutHeader.pattern}} at-absolute at-z-0 at-wp-100"
+         [style.height]="layoutType == 'cardOver'? (layoutHeader.height + 70) + 'px' : layoutHeader.height + 'px'"></div>
+
+    <mat-sidenav-container style="background-color:transparent;">
+
+        <mat-sidenav *ngIf="layoutSideBarLeft ?
+                           (layoutSideBarLeft.componentRef ? (layoutSideBarLeft.componentRef.lId == lId) : true) : false"
+                    [mode]="lIsString(layoutSideBarLeft.mode) ?
+                            layoutSideBarLeft.mode : (isSmallScreen ? 'over' : 'side')"
+                    [opened]="lIsBoolean(layoutSideBarLeft.opened) ? layoutSideBarLeft.opened : lsOpened"
+                    [style.max-width]="layoutSideBarLeft.width"
+                    [style.min-width]="layoutSideBarLeft.width"
+                    [atMediaToggle]="layoutSideBarLeft.mediaQuery"
+                    [mediaClasses]="layoutSideBarLeft.mediaClasses"
+                    layout="column"
+                    layout-fill
+                    (close)="onCloseLeftSidenav($event)">
+
+            <at-scrollbar #sidenavLeftContainer
+                          [render]="!atUtil.isMobile() && layoutSideBarLeft.showAtScrollbar"
+                          fxLayout="column"
+                          [style.height]="'100%'"
+                          [style.overflow]="'auto'">
+                <!--<ng-template [cdkPortalHost]="layoutSideBarLeft"></ng-template>-->
+                <ng-container *ngTemplateOutlet="sideBarLeftTpl"></ng-container>
+            </at-scrollbar>
+        </mat-sidenav>
+
+        <ng-container *ngIf="scrollOn === 'container'">
+            <at-scrollbar [render]="!atUtil.isMobile() && layoutContent && layoutContent.showAtScrollbar"
+                          fxLayout="column"
+                          class="at-oa at-hp-100">
+
+                <div fxLayout="column"
+                     [style.height]="scrollOn == 'container' ? 'auto' : '100%'">
+
+                    <!--LayoutHeader-->
+                    <div *ngIf="layoutHeader ?
+                                (layoutHeader.componentRef ? (layoutHeader.componentRef.lId == lId) : true) : false"
+                         fxFlex="{{layoutType == 'cardOver' ? (layoutHeader.height + 70) + 'px' : layoutHeader.height + 'px'}}"
+                         class="{{'mat-bg-' + layoutHeader.color}} {{'at-' + layoutHeader.pattern}} at-z-0 at-wp-100"
+                         [style.height]="layoutType == 'cardOver'? (layoutHeader.height + 70) + 'px' : layoutHeader.height + 'px'"></div>
+
+                    <div class="at-layout-header-container" *ngIf="layoutHeader ?
+                                (layoutHeader.componentRef ? (layoutHeader.componentRef.lId == lId) : true) : false"
+                         fxFlex="{{layoutHeader.height + 'px'}}"
+                         class="at-z-2"
+                         [style.margin-top]="layoutType == 'cardOver'? '-' + (layoutHeader.height + 70) + 'px' : '-' + layoutHeader.height + 'px'">
+                        <div class="at-z-2">
+                            <!--<ng-template [cdkPortalHost]="layoutHeader"></ng-template>-->
+                            <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+                        </div>
+                    </div>
+                    <!--/LayoutHeader-->
+
+                    <mat-card *ngIf="layoutType=='cardOver'"
+                             fxFlex fxFlexAlign="start center"
+                             class="at-p-0 at-z-4"
+                             [class.at-mh-40]="!layoutContent.containerStyle && !isSmallScreen"
+                             [ngStyle]="layoutContent.containerStyle">
+                        <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+                    </mat-card>
+
+                    <div fxFlex *ngIf="layoutType=='basic'">
+                        <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+                    </div>
+
+                </div>
+
+            </at-scrollbar>
+        </ng-container>
+
+        <ng-container *ngIf="scrollOn=='content'">
+            <div fxLayout="column" [style.height]="'100%'">
+
+                <!--LayoutHeader-->
+                <div class="at-layout-header-container" *ngIf="layoutHeader ?
+                            (layoutHeader.componentRef ? (layoutHeader.componentRef.lId == lId) : true) : false"
+                     fxFlex="{{layoutHeader.height + 'px'}}"
+                     [style.height]="layoutHeader.height +'px'">
+                    <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+                </div>
+                <!--/LayoutHeader-->
+
+                <mat-card *ngIf="layoutType=='cardOver'"
+                         class="at-p-0" fxFlex fxFlexAlign="start center"
+                         [style.height]="'80%'"
+                         [class.at-margin-horizontal-40]="!layoutContent.containerStyle &&  (isSmallScreen || (!layoutSideBarRight && !layoutSideBarLeft))"
+                         [class.at-mr-40]="!layoutContent.containerStyle && layoutSideBarLeft"
+                         [class.at-ml-40]="!layoutContent.containerStyle &&  layoutSideBarRight"
+                         [ngStyle]="layoutContent.containerStyle">
+                    <at-scrollbar [render]=" !atUtil.isMobile() && layoutContent && layoutContent.showAtScrollbar"
+                                  fxLayout="column"
+                                  class="at-hp-100 at-oa">
+                        <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+                    </at-scrollbar>
+                </mat-card>
+
+                <at-scrollbar *ngIf="layoutType=='basic'"
+                              [render]="!atUtil.isMobile() && layoutContent && layoutContent.showAtScrollbar"
+                              fxLayout="column"
+                              class="at-hp-100 at-oa">
+                    <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+                </at-scrollbar>
+
+
+            </div>
+        </ng-container>
+
+        <mat-sidenav *ngIf="layoutSideBarRight ?
+                           (layoutSideBarRight.componentRef ? (layoutSideBarRight.componentRef.lId == lId) : true) : false"
+                    align="end"
+                    [atMediaToggle]="layoutSideBarRight.mediaQuery"
+                    [mode]="lIsString(layoutSideBarRight.mode) ?
+                            layoutSideBarRight.mode : (isSmallScreen ? 'over' : 'side')"
+                    [opened]="lIsBoolean(layoutSideBarRight.opened) ? layoutSideBarRight.opened : rsOpened"
+                    [style.max-width]="layoutSideBarRight.width"
+                    [style.min-width]="layoutSideBarRight.width"
+                    [mediaClasses]="layoutSideBarRight.mediaClasses"
+                    layout="column"
+                    layout-fill
+                    (close)="onCloseRigthSidenav($event)">
+            <at-scrollbar [render]="!atUtil.isMobile() && layoutSideBarRight.showAtScrollbar"
+                          #sidenavRightContainer
+                          fxLayout="column"
+                          [style.height]="'100%'"
+                          [style.overflow]="'auto'">
+                <!--<ng-template [cdkPortalHost]="layoutSideBarRight"></ng-template>-->
+                <ng-container *ngTemplateOutlet="sideBarRightTpl"></ng-container>
+            </at-scrollbar>
+
+        </mat-sidenav>
+    </mat-sidenav-container>
+</ng-container>
+

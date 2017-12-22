@@ -1,9 +1,7 @@
 import {Subscription} from 'rxjs';
 import {Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit} from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
-import {AtSidenavService} from '@atomic/core';
-import {AtSidenavItem} from '@atomic/core';
-import {AtScrollbarService} from '@atomic/core';
+import {AtSidenavService, AtScrollbarService, AtSidenavItem} from '@atomic/core';
 
 @Component({
     selector: 'app-sidenav',
@@ -27,14 +25,11 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(private avSidenavService: AtSidenavService,
                 private avScrollbarService: AtScrollbarService,
                 public router: Router) {
-
         if (this.avSidenavService.getAtSidenavItems().length === 0) {
 
             avSidenavService.buildMenuByRoutes(router.config);
 
         }
-
-
     }
 
     /**
@@ -54,7 +49,7 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
      * When the user hover the sidenav it shows again items names and descriptions.
      */
     toggleSidenavCollapsed() {
-        this.backdrop = <HTMLElement>document.getElementsByClassName('mat-sidenav-backdrop')[0];
+        this.backdrop = <HTMLElement>document.getElementsByClassName('mat-drawer-backdrop')[0];
         this.backdrop.style.display = '';
         this.avSidenavService.isSidenavCollapsed = !this.avSidenavService.isSidenavCollapsed;
         this.avSidenavService.toggleSidenavChanged(true);
@@ -75,19 +70,13 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
         this.atSidenavItemsChange = this.avSidenavService.atSidenavItemsChange
             .subscribe((atSidenavItems: AtSidenavItem[]) => {
                 this.atSidenavItems = this.avSidenavService.sortAtSidenavItems(atSidenavItems, 'position');
-
-                // If you want show the breadcrumb trail just import the breadcrumb module and uncomment the code below
-
-                // setTimeout(() => {
-                //     this.initAtBreadcrumb(this.avSidenavService.flattenTree());
-                // })
             });
 
 
         // Every time route changes it's necessary open the correct AtSidenavItem parent
         this.routerEventsChange = this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                this.openAtsidenavItem(event.url)
+                this.openAtsidenavItem(event.url);
             }
         });
     }

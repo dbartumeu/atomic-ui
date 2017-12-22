@@ -1,8 +1,6 @@
 @import "at_vars";
 
 .at-sidenav {
-  width: $avSidenav_width;
-  max-width: $avSidenav_width;
   overflow-x: hidden;
   //z-index: $avSidenav_z-index !important;
 
@@ -60,63 +58,6 @@
   }
 }
 
-// Dark theme Pattern
-.at-theme-dark {
-  .at-sidenav {
-    &.at-pattern-1 {
-      background: #636363 url("/assets/img/backgrounds/patterns/01.png") center 0px repeat;
-      //background-size: cover;
-    }
-
-    &.at-pattern-2 {
-      background: #000 url("/assets/img/backgrounds/patterns/02.png") center repeat;
-      background-size: cover;
-    }
-
-    &.at-pattern-3 {
-      background: #333 url("/assets/img/backgrounds/patterns/03.png") center repeat;
-      background-size: cover;
-    }
-
-    &.at-pattern-4 {
-      background: #3c3c3c url("/assets/img/backgrounds/patterns/04.png") center no-repeat;
-    }
-
-    .at-sidenav-header-user-wrapper {
-      background: url("/assets/img/backgrounds/material/07.jpg") center no-repeat;
-      background-size: cover;
-    }
-  }
-}
-
-// Light theme Pattern
-.at-theme-light {
-  .at-sidenav {
-    &.at-pattern-1 {
-      background: #fff url("/assets/img/backgrounds/patterns/01.png") center repeat;
-    }
-
-    &.at-pattern-2 {
-      background: #fff url("/assets/img/backgrounds/patterns/02.png") center repeat;
-    }
-
-    &.at-pattern-3 {
-      background: #f4f4f4 url("/assets/img/backgrounds/patterns/03.png") center repeat;
-      background-size: cover;
-    }
-
-    &.at-pattern-4 {
-      background: #ffffff url("/assets/img/backgrounds/patterns/04.png") center repeat;
-      background-size: cover;
-    }
-
-    .at-sidenav-header-user-wrapper {
-      background: url("/assets/img/backgrounds/material/06.jpg") center no-repeat;
-      background-size: cover;
-    }
-  }
-}
-
 @media screen and (min-width: 960px) {
   .mat-drawer-backdrop {
     .at-sidenav.at-sidenav-collapsible:not(.collapsed) ~ & {
@@ -124,23 +65,10 @@
     }
   }
 
-  .mat-sidenav-container {
-
-    .at-sidenav:not(.at-sidenav-collapsible) ~ & {
-      margin-left: $avSidenav_width !important;
-      overflow: hidden;
-      transition: all .4s cubic-bezier(.25, .8, .25, 1);
-      transition-property: transform, max-width, margin-left, margin-right !important;
-    }
-    .at-sidenav:not(.at-sidenav-collapsible).at-sidenav-default ~ & {
-      margin-left: $avSidenav_width !important;
-    }
-    .at-sidenav:not(.at-sidenav-collapsible).at-sidenav-medium ~ & {
-      margin-left: $avSidenavMedium_width !important;
-    }
-    .at-sidenav:not(.at-sidenav-collapsible).at-sidenav-large ~ & {
-      margin-left: $avSidenavLarge_width !important;
-    }
+  .mat-sidenav-content {
+    transition: all .4s cubic-bezier(.25, .8, .25, 1);
+    -webkit-transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition-property: transform, max-width, margin-left, margin-right !important;
 
     .at-sidenav .at-sidenav-collapsible ~ & {
       margin-left: $avSidenavIcon_max-width !important;
@@ -152,12 +80,13 @@
   }
 
   .at-sidenav {
+    -webkit-transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 
     &.collapsed {
       &.at-sidenav-collapsible {
-        transition: max-width 0.4s cubic-bezier(.25, .8, .25, 1);
-        max-width: $avSidenavIcon_max-width;
-        min-width: $avSidenavIcon_max-width;
+        max-width: $avSidenavIcon_max-width !important;
+        min-width: $avSidenavIcon_max-width !important;
       }
       .at-sidenav-fade-in-on-hover {
         display: none;
@@ -167,19 +96,6 @@
     }
 
     &:not(.collapsed) {
-      &.at-sidenav-collapsible {
-        transition: max-width 0.4s cubic-bezier(.25, .8, .25, 1);
-        max-width: $avSidenav_width;
-        &.at-sidenav-default {
-          max-width: $avSidenav_width;
-        }
-        &.at-sidenav-medium {
-          max-width: $avSidenavMedium_width;
-        }
-        &.at-sidenav-large {
-          max-width: $avSidenavLarge_width;
-        }
-      }
       .at-sidenav-fade-in-on-hover {
         display: block;
         //noinspection CssInvalidPropertyValue

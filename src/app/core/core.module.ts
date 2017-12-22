@@ -6,7 +6,6 @@ import {ToolbarModule} from './toolbar/toolbar.module';
 import {SidenavModule} from './sidenav/sidenav.module';
 import {CoreComponent} from './core.component';
 import {AtCommonModule, AtLayoutModule} from '@atomic/core';
-import {MdIconsService} from './shared/md-icons';
 
 @NgModule({
     imports: [
@@ -26,9 +25,7 @@ import {MdIconsService} from './shared/md-icons';
     declarations: [
         CoreComponent,
     ],
-    providers: [
-        MdIconsService
-    ],
+    providers: [],
 })
 export class CoreModule {
 }

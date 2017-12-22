@@ -17,6 +17,8 @@ import {CommonModule} from '@angular/common';
 import {AtUtilService} from '../at-common/services/util.service';
 import {PortalModule} from '@angular/cdk/portal';
 import {MatSidenavModule, MatCardModule, MatIconModule, MatToolbarModule} from '@angular/material';
+import {AtLayoutHeaderComponent} from './at-layout-header/at-layout-header.component';
+import {AtLayoutBasicComponent} from './at-layout-basic/at-layout-basic.component';
 
 
 export {AtLayoutComponent};
@@ -43,7 +45,9 @@ export {AtLayoutComponent};
         AtLayoutSidePanelDirective,
         AtLayoutSideBarLeftDirective,
         AtLayoutSideBarRightDirective,
-        AtLayoutContentDirective
+        AtLayoutContentDirective,
+        AtLayoutHeaderComponent,
+        AtLayoutBasicComponent
     ],
     exports: [
         AtLayoutComponent,
@@ -53,7 +57,9 @@ export {AtLayoutComponent};
         AtLayoutSidePanelDirective,
         AtLayoutSideBarLeftDirective,
         AtLayoutSideBarRightDirective,
-        AtLayoutContentDirective
+        AtLayoutContentDirective,
+        AtLayoutHeaderComponent,
+        AtLayoutBasicComponent
     ],
     providers: [
         AtUtilService

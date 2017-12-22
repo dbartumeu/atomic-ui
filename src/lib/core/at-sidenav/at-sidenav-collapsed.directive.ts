@@ -28,7 +28,7 @@ export class AtSidenavCollapsibleDirective implements OnInit, OnDestroy {
     onMouseEnter() {
         if (this.isAtSidenavCollapsed && !this.isMobile) {
             this.collapsed = false;
-            this.backdrop = <HTMLElement>document.getElementsByClassName('mat-sidenav-backdrop')[0];
+            this.backdrop = <HTMLElement>document.getElementsByClassName('mat-drawer-backdrop')[0];
             this.backdrop.style.display = 'none';
             this.avSidenavService.toggleSidenavChanged(this.collapsed);
             this.avSidenavService.setCurrentlyOpen(this.currentlyOpen);
@@ -39,7 +39,7 @@ export class AtSidenavCollapsibleDirective implements OnInit, OnDestroy {
     onMouseLeave() {
         if (this.isAtSidenavCollapsed && !this.isMobile) {
             this.collapsed = true;
-            this.backdrop = <HTMLElement>document.getElementsByClassName('mat-sidenav-backdrop')[0];
+            this.backdrop = <HTMLElement>document.getElementsByClassName('mat-drawer-backdrop')[0];
             this.backdrop.style.display = '';
             this.avSidenavService.toggleSidenavChanged(this.collapsed);
             this.currentlyOpen = this.avSidenavService.currentlyOpen;

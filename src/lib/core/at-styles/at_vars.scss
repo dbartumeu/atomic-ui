@@ -11,7 +11,6 @@ $avSidenavLarge_width: 350px;
 
 $avSidenav_z-index: 10;
 
-
 $avSidenavListItem_padding-left-right: 24px;
 $avSidenavListItemIcon_width-height: 18px;
 $avSidenavIcon_max-width: ($avSidenavListItem_padding-left-right * 2) + $avSidenavListItemIcon_width-height + 2;
@@ -30,7 +29,6 @@ $z-index__mat-sidenav-content: 5;
 $z-index__main-toolbar: 4;
 $height__main-toolbar: 64px;
 
-
 // Sidepanel
 $avSidepanel_z-index: 50;
 
@@ -41,8 +39,6 @@ $contrastsMap: (
         'light': rgba(255, 255, 255, 0.87),
         'strong-light': rgb(255, 255, 255)
 );
-
-
 
 $materialColorsMap: (
         'red': (

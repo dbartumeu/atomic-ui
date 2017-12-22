@@ -40,6 +40,8 @@ export {ICanDisableRipple, mixinDisableRipple} from './behaviors/disable-ripple.
  */
 import {AtMediaReplayService} from './services/mediareplay/media-replay.service';
 import {AtUtilService} from './services/util.service';
+import {AtIconService} from './services/at-icon.service';
+import {AtColorService} from './services/at-color.service';
 
 
 export {AtMediaReplayService};
@@ -63,7 +65,9 @@ export {AtMediaReplayService};
     ],
     providers: [
         AtMediaReplayService,
-        AtUtilService
+        AtUtilService,
+        AtIconService,
+        AtColorService
     ],
 })
 export class AtCommonModule {

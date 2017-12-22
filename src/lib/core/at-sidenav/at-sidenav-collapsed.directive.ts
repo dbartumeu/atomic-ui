@@ -6,9 +6,8 @@ import {AtMediaReplayService} from '../at-common/services/mediareplay/media-repl
 import {AtSidenavService} from './at-sidenav.service';
 import {AtSidenavItem} from './at-sidenav-item/at-sidenav-item.model';
 
-
 @Directive({
-    selector: '[avSidenavCollapsible]'
+    selector: '[atSidenavCollapsible]',
 })
 export class AtSidenavCollapsibleDirective implements OnInit, OnDestroy {
 
@@ -16,12 +15,6 @@ export class AtSidenavCollapsibleDirective implements OnInit, OnDestroy {
     isMobile: boolean = false;
     currentlyOpen: AtSidenavItem[];
     backdrop: HTMLElement;
-
-    constructor(private avSidenavService: AtSidenavService,
-                private atMediaReplayService: AtMediaReplayService,
-                @Inject(DOCUMENT) private document: Document) {
-
-    }
 
     @HostBinding('class.at-sidenav-collapsible')
     get isAtSidenavCollapsed(): boolean {
@@ -54,13 +47,19 @@ export class AtSidenavCollapsibleDirective implements OnInit, OnDestroy {
         }
     }
 
-    ngOnInit() {
+    constructor(private avSidenavService: AtSidenavService,
+                private atMediaReplayService: AtMediaReplayService,
+                @Inject(DOCUMENT) private document: Document) {
+
+    }
+
+    ngOnInit(): void {
         this.atMediaChange = this.atMediaReplayService.atMediaChange.subscribe((change: MediaChange) => {
-            this.isMobile = (change.mqAlias == 'xs') || (change.mqAlias == 'sm');
+            this.isMobile = (change.mqAlias === 'xs') || (change.mqAlias === 'sm');
         });
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.atMediaChange.unsubscribe();
     }
 }

@@ -118,13 +118,13 @@
 }
 
 @media screen and (min-width: 960px) {
-  .mat-sidenav-backdrop {
+  .mat-drawer-backdrop {
     .at-sidenav.at-sidenav-collapsible:not(.collapsed) ~ & {
       display: none !important;
     }
   }
 
-  .mat-sidenav-content {
+  .mat-sidenav-container {
 
     .at-sidenav:not(.at-sidenav-collapsible) ~ & {
       margin-left: $avSidenav_width !important;

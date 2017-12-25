@@ -1,0 +1,25 @@
+<div fxLayout="column" fxFlexFill>
+    <div>
+        <ng-content select="at-layout-header"></ng-content>
+    </div>
+
+    <mat-card [style.width]="cardWidth"
+              [style.margin-top]="cardOffsetTop + 'px'"
+              [style.margin-bottom]="cardOffsetBottom + 'px'"
+              [style.padding]="'0'"
+              style="margin-right: auto; margin-left: auto"
+              [class.at-oa]="scrollOn === 'content'"
+              [class.at-hp-100]="scrollOn ==='content'">
+        <at-scrollbar [render]="showAtScrollbar"
+                      [class.at-oa]="scrollOn === 'content'"
+                      [class.at-hp-100]="scrollOn ==='content'">
+            <ng-content></ng-content>
+        </at-scrollbar>
+    </mat-card>
+
+
+    <div>
+        <ng-content select="at-layout-footer"></ng-content>
+    </div>
+
+</div>

@@ -8,7 +8,7 @@ import {
     AtLayoutSideBarRightDirective,
     AtLayoutSideNavDirective,
     AtLayoutSidePanelDirective,
-    AtLayoutToolbarDirective
+    AtLayoutToolbarDirective,
 } from './at-layout.component';
 import {AtMediaModule} from '../at-media/at-media.module';
 import {AtSidenavModule} from '../at-sidenav/at-sidenav.module';
@@ -19,7 +19,8 @@ import {PortalModule} from '@angular/cdk/portal';
 import {MatSidenavModule, MatCardModule, MatIconModule, MatToolbarModule} from '@angular/material';
 import {AtLayoutHeaderComponent} from './at-layout-header/at-layout-header.component';
 import {AtLayoutBasicComponent} from './at-layout-basic/at-layout-basic.component';
-
+import {AtLayoutCardOverComponent} from './at-layout-card-over/at-layout-card-over.component';
+import {AtLayoutFooterComponent} from "./at-layout-footer/at-layout-footer.component";
 
 export {AtLayoutComponent};
 
@@ -35,7 +36,7 @@ export {AtLayoutComponent};
         AtMediaModule,
         PortalModule,
         AtScrollbarModule,
-        AtSidenavModule
+        AtSidenavModule,
     ],
     declarations: [
         AtLayoutComponent,
@@ -47,7 +48,9 @@ export {AtLayoutComponent};
         AtLayoutSideBarRightDirective,
         AtLayoutContentDirective,
         AtLayoutHeaderComponent,
-        AtLayoutBasicComponent
+        AtLayoutFooterComponent,
+        AtLayoutBasicComponent,
+        AtLayoutCardOverComponent,
     ],
     exports: [
         AtLayoutComponent,
@@ -59,11 +62,14 @@ export {AtLayoutComponent};
         AtLayoutSideBarRightDirective,
         AtLayoutContentDirective,
         AtLayoutHeaderComponent,
-        AtLayoutBasicComponent
+        AtLayoutFooterComponent,
+        AtLayoutBasicComponent,
+        AtLayoutCardOverComponent,
     ],
     providers: [
-        AtUtilService
+        AtUtilService,
     ],
 })
+
 export class AtLayoutModule {
 }

@@ -1,0 +1,16 @@
+<div fxLayout="column" fxFlexFill>
+    <div>
+        <ng-content select="at-layout-header"></ng-content>
+    </div>
+
+    <at-scrollbar [render]="showAtScrollbar"
+                  [class.at-oa]="scrollOn === 'content'"
+                  [class.at-hp-100]="scrollOn ==='content'">
+        <ng-content></ng-content>
+    </at-scrollbar>
+
+    <div>
+        <ng-content select="at-layout-footer"></ng-content>
+    </div>
+
+</div>

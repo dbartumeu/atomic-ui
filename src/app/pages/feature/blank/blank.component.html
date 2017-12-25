@@ -1,24 +1,82 @@
 <!--<at-layout #dashboardLayout-->
-           <!--[layoutType]="'simple'"-->
-           <!--scrollOn="container">-->
+<!--[layoutType]="'simple'"-->
+<!--scrollOn="container">-->
 
-    <!--<div at-layout-header [height]="100">-->
-        <!--<div class="at-padding-horizontal-40">-->
-            <!--<h1 class="at-mb-5" fxLayout="row" fxLayoutAlign="start space-around">-->
-                <!--<span fxFlex>Blank Component</span>-->
-            <!--</h1>-->
-            <!--<h4 class="at-mb-5">Blank Component Description</h4>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<div at-layout-content [ngClass.gt-sm]="'at-p-40'" class="at-hp-100">-->
-        <!--The contentsavsva-->
-        <!---->
-    <!--</div>-->
+<!--<div at-layout-header [height]="100">-->
+<!--<div class="at-padding-horizontal-40">-->
+<!--<h1 class="at-mb-5" fxLayout="row" fxLayoutAlign="start space-around">-->
+<!--<span fxFlex>Blank Component</span>-->
+<!--</h1>-->
+<!--<h4 class="at-mb-5">Blank Component Description</h4>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div at-layout-content [ngClass.gt-sm]="'at-p-40'" class="at-hp-100">-->
+<!--The contentsavsva-->
+<!---->
+<!--</div>-->
 
 <!--</at-layout>-->
 
-<at-layout-basic>
-    <at-layout-header>
-        testing header
+
+<at-layout-card-over
+        scrollOn="content"
+        [showAtScrollbar]="true"
+        cardWidth="75%">
+    <at-layout-header color="yellow-800"
+                      height="200px"
+                      pattern="1">
+        <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
+            testing header
+        </div>
     </at-layout-header>
-</at-layout-basic>
+    <div class="at-p-40">
+        the content
+        <at-layout-basic>
+            <at-layout-header color="green-800" height="100px">
+                <div class="at-p-40 at-hp-100">
+                    nesting header
+                </div>
+            </at-layout-header>
+            <div class="at-p-40">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+            </div>
+            <at-layout-footer color="pink-800">
+                <div class="at-p-20">
+                    nesting Footer
+                </div>
+            </at-layout-footer>
+        </at-layout-basic>
+    </div>
+    <at-layout-footer color="red-800">
+        <div class="at-p-20">
+            Footer
+        </div>
+    </at-layout-footer>
+</at-layout-card-over>

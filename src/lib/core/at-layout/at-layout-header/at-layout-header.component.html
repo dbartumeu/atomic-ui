@@ -1,4 +1,11 @@
-<div [ngClass]="[color, pattern]"
-     [style.height]="height">
-    <ng-content></ng-content>
+<div [style.height]="height">
+    <div class="at-z-10">
+        <ng-content></ng-content>
+    </div>
+    <div [ngClass]=" [color, pattern , 'at-absolute', 'at-z-0','at-wp-100']"
+         style="left:0; top:60px"
+         [style.height]="_computedHeight+'px'"></div>
+
+
 </div>
+

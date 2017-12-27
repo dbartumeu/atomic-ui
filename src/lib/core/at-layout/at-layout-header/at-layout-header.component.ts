@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Input, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
     selector: 'at-layout-header',
@@ -7,11 +7,16 @@ import {ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewEncap
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
 })
-export class AtLayoutHeaderComponent implements OnInit {
+export class AtLayoutHeaderComponent implements OnInit, AfterViewInit {
 
     private _color: string;
     private _height: string = 'auto';
     private _pattern: string;
+
+    /**
+     * @internal use only
+     */
+    _computedHeight: number;
 
     @Input()
     set color(c: string) {
@@ -47,7 +52,7 @@ export class AtLayoutHeaderComponent implements OnInit {
         return '';
     }
 
-    constructor(public elRef: ElementRef) {
+    constructor(public elRef: ElementRef, private changeDetectorRef: ChangeDetectorRef) {
         // console.log(elRef.parentNode);
     }
 
@@ -65,7 +70,15 @@ export class AtLayoutHeaderComponent implements OnInit {
             throw new Error('AtLayoutHeader: Please use at-layout-header component inside a layout component');
         }
 
-        console.log(this.elRef.nativeElement.parentNode.parentNode.parentNode.nodeName);
+        console.log(this.elRef.nativeElement.parentNode, this.elRef.nativeElement.parentNode.getBoundingClientRect().height);
+    }
+
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this._computedHeight = this.elRef.nativeElement.parentNode.getBoundingClientRect().height;
+            this.changeDetectorRef.detectChanges();
+            console.log(this._computedHeight)
+        });
     }
 
 }

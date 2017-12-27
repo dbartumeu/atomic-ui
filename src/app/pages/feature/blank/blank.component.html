@@ -17,11 +17,11 @@
 
 <!--</at-layout>-->
 
-<at-layout-sidenav
+<at-layout-sidebar #layoutSidebarRef
         scrollOn="content"
         [showAtScrollbar]="true">
-    <at-layout-sidenav-left test="testing if its working">
-        <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100 mat-bg-green-800">
+    <at-layout-sidebar-left test="testing if its working">
+        <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
             <div class="at-pv-20">
                 header
             </div>
@@ -29,9 +29,20 @@
         <div>
             content
         </div>
-    </at-layout-sidenav-left>
+    </at-layout-sidebar-left>
 
-    <at-layout-card-over cardAlign="left" cardWidth="95%" scrollOn="content">
+    <at-layout-sidebar-right test="testing if its working">
+        <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
+            <div class="at-pv-20">
+                header
+            </div>
+        </div>
+        <div>
+            content
+        </div>
+    </at-layout-sidebar-right>
+
+    <at-layout-card-over cardAlign="center" cardWidth="95%" scrollOn="content">
         <at-layout-header color="green-800" height="auto">
             <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
                 <div class="at-pv-20">
@@ -41,6 +52,8 @@
 
         </at-layout-header>
         <div class="at-p-40">
+            <button mat-button (click)="layoutSidebarRef.toggleSideBarLeft()">toggle left</button>
+            <button mat-button (click)="layoutSidebarRef.toggleSideBarRight()">toggle left</button>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                 labore
@@ -93,7 +106,7 @@
         </at-layout-footer>
     </at-layout-card-over>
 
-</at-layout-sidenav>
+</at-layout-sidebar>
 
 
 <!--<at-layout-card-over-->

@@ -14,7 +14,8 @@ export class AtLayoutCardOverComponent {
 
     @Input() scrollOn: 'content' | 'container' = 'container';
     @Input() showAtScrollbar: boolean = true;
-    @Input() cardWidth: string = 'auto';
+    @Input() cardWidth: string = '75%';
+    @Input() cardAlign: 'left' | 'center' | 'right' = 'center';
 
     // @Input() cardOffset: number = 60;
 

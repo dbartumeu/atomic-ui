@@ -1,5 +1,5 @@
 import { Injectable, NgZone, SkipSelf, Optional, Provider } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { fromEvent } from 'rxjs/observable/fromEvent';
@@ -10,13 +10,9 @@ export class AtMediaService {
     private _resizing: boolean = false;
     private _globalSubscription: Subscription;
     private _queryMap: Map<string, string> = new Map<string, string>();
-    private _querySources: {[key: string]: Subject<boolean>} = {};
+    private _querySources: { [key: string]: BehaviorSubject<boolean>} = {};
     private _queryObservables: {[key: string]: Observable<boolean>} = {};
 
-    /**
-     * AtMediaService notes
-     * @param _ngZone
-     */
     constructor(private _ngZone: NgZone) {
         this._queryMap.set('xs', '(max-width: 599px)');
         this._queryMap.set('gt-xs', '(min-width: 600px)');
@@ -81,7 +77,7 @@ export class AtMediaService {
             query = this._queryMap.get(query.toLowerCase());
         }
         if (!this._querySources[query]) {
-            this._querySources[query] = new Subject<boolean>();
+            this._querySources[query] = new BehaviorSubject<boolean>(matchMedia(query).matches);
             this._queryObservables[query] = this._querySources[query].asObservable();
         }
         return this._queryObservables[query];
@@ -117,4 +113,4 @@ export const MEDIA_PROVIDER: Provider = {
     provide: AtMediaService,
     deps: [[new Optional(), new SkipSelf(), AtMediaService], NgZone],
     useFactory: MEDIA_PROVIDER_FACTORY,
-};
+}

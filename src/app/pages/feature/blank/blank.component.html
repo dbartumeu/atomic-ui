@@ -17,66 +17,144 @@
 
 <!--</at-layout>-->
 
-
-<at-layout-card-over
+<at-layout-sidenav
         scrollOn="content"
-        [showAtScrollbar]="true"
-        cardWidth="75%">
-    <at-layout-header color="yellow-800"
-                      height="200px"
-                      pattern="1">
-        <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
-            testing header
-        </div>
-    </at-layout-header>
-    <div class="at-p-40">
-        the content
-        <at-layout-basic>
-            <at-layout-header color="green-800" height="100px">
-                <div class="at-p-40 at-hp-100">
-                    nesting header
-                </div>
-            </at-layout-header>
-            <div class="at-p-40">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+        [showAtScrollbar]="true">
+    <at-layout-sidenav-left test="testing if its working">
+        <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100 mat-bg-green-800">
+            <div class="at-pv-20">
+                header
             </div>
-            <at-layout-footer color="pink-800">
-                <div class="at-p-20">
-                    nesting Footer
-                </div>
-            </at-layout-footer>
-        </at-layout-basic>
-    </div>
-    <at-layout-footer color="red-800">
-        <div class="at-p-20">
-            Footer
         </div>
-    </at-layout-footer>
-</at-layout-card-over>
+        <div>
+            content
+        </div>
+    </at-layout-sidenav-left>
+
+    <at-layout-card-over cardAlign="left" cardWidth="95%" scrollOn="content">
+        <at-layout-header color="green-800" height="auto">
+            <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
+                <div class="at-pv-20">
+                    header
+                </div>
+            </div>
+
+        </at-layout-header>
+        <div class="at-p-40">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore
+                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in
+                culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore
+                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in
+                culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore
+                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in
+                culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore
+                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in
+                culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+        <at-layout-footer color="pink-800">
+            <div class="at-p-20">
+                nesting Footer
+            </div>
+        </at-layout-footer>
+    </at-layout-card-over>
+
+</at-layout-sidenav>
+
+
+<!--<at-layout-card-over-->
+<!--scrollOn="content"-->
+<!--[showAtScrollbar]="true"-->
+<!--cardWidth="75%">-->
+<!--<at-layout-header color="yellow-800"-->
+<!--height="200px"-->
+<!--pattern="1">-->
+<!--<div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">-->
+<!--testing header-->
+<!--</div>-->
+<!--</at-layout-header>-->
+<!--<div class="at-p-40">-->
+<!--the content-->
+<!--<at-layout-basic>-->
+<!--<at-layout-header color="green-800" height="100px">-->
+<!--<div class="at-p-40 at-hp-100">-->
+<!--nesting header-->
+<!--</div>-->
+<!--</at-layout-header>-->
+<!--<div class="at-p-40">-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore-->
+<!--et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut-->
+<!--aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+<!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in-->
+<!--culpa qui officia deserunt mollit anim id est laborum.-->
+<!--</p>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore-->
+<!--et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut-->
+<!--aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+<!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in-->
+<!--culpa qui officia deserunt mollit anim id est laborum.-->
+<!--</p>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore-->
+<!--et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut-->
+<!--aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+<!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in-->
+<!--culpa qui officia deserunt mollit anim id est laborum.-->
+<!--</p>-->
+<!--<p>-->
+<!--Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore-->
+<!--et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut-->
+<!--aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse-->
+<!--cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in-->
+<!--culpa qui officia deserunt mollit anim id est laborum.-->
+<!--</p>-->
+<!--</div>-->
+<!--<at-layout-footer color="pink-800">-->
+<!--<div class="at-p-20">-->
+<!--nesting Footer-->
+<!--</div>-->
+<!--</at-layout-footer>-->
+<!--</at-layout-basic>-->
+<!--</div>-->
+<!--<at-layout-footer color="red-800">-->
+<!--<div class="at-p-20">-->
+<!--Footer-->
+<!--</div>-->
+<!--</at-layout-footer>-->
+<!--</at-layout-card-over>-->

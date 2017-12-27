@@ -21,6 +21,8 @@ import {AtLayoutHeaderComponent} from './at-layout-header/at-layout-header.compo
 import {AtLayoutBasicComponent} from './at-layout-basic/at-layout-basic.component';
 import {AtLayoutCardOverComponent} from './at-layout-card-over/at-layout-card-over.component';
 import {AtLayoutFooterComponent} from "./at-layout-footer/at-layout-footer.component";
+import {AtLayoutSidenavComponent} from "./at-layout-sidenav/at-layout-sidenav.component";
+import {AtLayoutSidenavLeftComponent} from "./at-layout-sidenav-left/at-layout-sidenav-left.component";
 
 export {AtLayoutComponent};
 
@@ -51,6 +53,8 @@ export {AtLayoutComponent};
         AtLayoutFooterComponent,
         AtLayoutBasicComponent,
         AtLayoutCardOverComponent,
+        AtLayoutSidenavComponent,
+        AtLayoutSidenavLeftComponent,
     ],
     exports: [
         AtLayoutComponent,
@@ -65,6 +69,8 @@ export {AtLayoutComponent};
         AtLayoutFooterComponent,
         AtLayoutBasicComponent,
         AtLayoutCardOverComponent,
+        AtLayoutSidenavComponent,
+        AtLayoutSidenavLeftComponent,
     ],
     providers: [
         AtUtilService,

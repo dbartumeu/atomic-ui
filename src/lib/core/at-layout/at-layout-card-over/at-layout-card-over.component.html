@@ -7,7 +7,8 @@
               [style.margin-top]="cardOffsetTop + 'px'"
               [style.margin-bottom]="cardOffsetBottom + 'px'"
               [style.padding]="'0'"
-              style="margin-right: auto; margin-left: auto"
+              [style.margin-right]="cardAlign == 'center' || cardAlign == 'left' ? 'auto' : ''"
+              [style.margin-left]="cardAlign == 'center' || cardAlign == 'right' ? 'auto' : ''"
               [class.at-oa]="scrollOn === 'content'"
               [class.at-hp-100]="scrollOn ==='content'">
         <at-scrollbar [render]="showAtScrollbar"

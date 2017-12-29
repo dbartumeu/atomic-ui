@@ -19,13 +19,13 @@ import {PortalModule} from '@angular/cdk/portal';
 import {MatSidenavModule, MatCardModule, MatIconModule, MatToolbarModule} from '@angular/material';
 import {AtLayoutBasicComponent} from './at-layout-basic/at-layout-basic.component';
 import {AtLayoutCardOverComponent} from './at-layout-card-over/at-layout-card-over.component';
-import {AtLayoutFooterComponent} from "./at-layout-footer/at-layout-footer.component";
 import {
     AtLayoutSideBarComponent,
+    AtLayoutHeaderComponent,
     AtLayoutSideBarLeftComponent,
-    AtLayoutSideBarRightComponent,
     AtLayoutContentComponent,
-    AtLayoutHeaderComponent
+    AtLayoutSideBarRightComponent,
+    AtLayoutFooterComponent,
 } from "./at-layout-sidebar/at-layout-sidebar.component";
 
 export {AtLayoutComponent};

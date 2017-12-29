@@ -18,9 +18,9 @@
 <!--</at-layout>-->
 
 <at-layout-sidebar #layoutSidebarRef
-                   [layoutType]="'basic'"
+                   [layoutType]="'cardOver'"
                    scrollOn="content"
-                   [showAtScrollbar]="false">
+                   [showAtScrollbar]="true">
 
 
     <!--<at-layout-sidebar-right test="testing if its working">-->
@@ -42,12 +42,13 @@
         </div>
     </at-layout-header>
 
+
     <at-layout-content class="at-hp-100">
+
         <at-layout-sidebar #layoutSidebarRef
-                           layoutType="basic"
+                           layoutType="cardOver"
                            scrollOn="content"
-                           [showAtScrollbar]="true"
-                           class="at-hp-100">
+                           [showAtScrollbar]="true">
             <at-layout-sidebar-left>
                 <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
                     <div class="at-pv-20">
@@ -100,6 +101,9 @@
                 </div>
             </at-layout-content>
 
+            <at-layout-footer color="blue-500" position="outside">
+                <div class="at-p-10"> the footer</div>
+            </at-layout-footer>
 
         </at-layout-sidebar>
     </at-layout-content>

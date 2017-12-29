@@ -4,7 +4,7 @@ import {
     ChangeDetectorRef,
     Component, ElementRef,
     EventEmitter,
-    forwardRef,
+    forwardRef, HostBinding,
     Inject,
     Input,
     NgZone, OnDestroy,
@@ -26,6 +26,9 @@ import {isBoolean} from "util";
 export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
 
     private querySubscription: Subscription;
+
+    private _cardOffsetTop: number = -60;
+    private _cardOffsetBottom: number = 20;
 
     /**
      * @internal use Only
@@ -70,6 +73,12 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
     layoutHeader: AtLayoutHeaderComponent;
 
     /**
+     * @internal use Only
+     * @type {boolean}
+     */
+    layoutFooter: AtLayoutFooterComponent;
+
+    /**
      * layoutType?: "basic" | "cardOver"
      * Sets the type of the Layout component. Defaults to "basic"
      * @type {string}
@@ -93,6 +102,52 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
     @Input() showAtScrollbar: boolean = true;
 
     /**
+     * cardWidth?:
+     * The width of the card. Defaults to 75%
+     * @type {string}
+     */
+    @Input() cardWidth: string = '75%';
+
+    /**
+     * cardAlign?:
+     * The card alignment. Defaults to 'center'
+     * @type {'left' | 'center' | 'right'}
+     */
+    @Input() cardAlign: 'left' | 'center' | 'right' = 'center';
+
+    /**
+     * cardOffsetTop?:
+     * The card aligment. Defaults to 60
+     * @type {number}
+     */
+    @Input()
+    set cardOffsetTop(cot: number) {
+        if (cot) {
+            this._cardOffsetTop = cot * -1;
+        }
+    }
+
+    get cardOffsetTop(): number {
+        return this._cardOffsetTop;
+    }
+
+    /**
+     * cardOffsetBottom?:
+     * The card aligment. Defaults to 20
+     * @type {number}
+     */
+    @Input()
+    set cardOffsetBottom(cob: number) {
+        if (cob) {
+            this._cardOffsetBottom = cob * -1;
+        }
+    }
+
+    get cardOffsetBottom(): number {
+        return this._cardOffsetBottom;
+    }
+
+    /**
      * Emit false when sidebar left is closed
      * @type {EventEmitter<any>}
      */
@@ -104,6 +159,8 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
      */
     @Output() onCloseSideBarRight: EventEmitter<boolean> = new EventEmitter();
 
+    @HostBinding('class.at-hp-100') scrollOnContent: boolean = false;
+
     constructor(private mediaService: AtMediaService,
                 private ngZone: NgZone,
                 private changeDetectorRef: ChangeDetectorRef) {
@@ -111,8 +168,8 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-
         // console.log(this.sideNav)
+        this.scrollOnContent = this.scrollOn === 'content';
 
         this.querySubscription =
             this.mediaService.registerQuery('gt-sm').subscribe((matches: boolean) => {
@@ -169,10 +226,16 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
         }
     }
 
+    /**
+     * @internal use only
+     */
     forceDetection(): void {
         this.changeDetectorRef.detectChanges();
     }
 
+    /**
+     * @internal use only
+     */
     ngOnDestroy(): void {
         this.querySubscription.unsubscribe();
     }
@@ -241,8 +304,7 @@ export class AtLayoutHeaderComponent implements AfterViewInit {
 
     constructor(@Inject(forwardRef(() => AtLayoutSideBarComponent))
                 private _parent: AtLayoutSideBarComponent,
-                public elRef: ElementRef,
-                public changeDetector: ChangeDetectorRef) {
+                public elRef: ElementRef) {
         this._parent.layoutHeader = this;
     }
 
@@ -382,4 +444,65 @@ export class AtLayoutSideBarRightComponent implements OnInit {
     ngOnInit(): void {
         this._parent.layoutSideBarRight = this;
     }
+}
+
+@Component({
+    selector: 'at-layout-footer',
+    template: `
+        <div [style.height]="height" [ngClass]="[color]"
+             [class.transparent]="position === 'cover' && _parent.scrollOn=='content'">
+            <ng-content></ng-content>
+        </div>`,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutFooterComponent',
+})
+export class AtLayoutFooterComponent implements AfterViewInit {
+
+    private _color: string;
+    private _height: string = 'auto';
+
+    /**
+     * @internal use only
+     */
+    _computedHeight: number;
+
+    @Input()
+    set color(c: string) {
+        this._color = c;
+    }
+
+    get color(): string {
+        if (this._color) {
+            return 'mat-bg-' + this._color;
+        }
+
+        return '';
+    }
+
+    @Input()
+    set height(h: string) {
+        this._height = h;
+    }
+
+    get height(): string {
+        return this._height;
+    }
+
+    @Input() position: 'inside' | 'cover' | 'outside';
+
+    constructor(@Inject(forwardRef(() => AtLayoutSideBarComponent))
+                private _parent: AtLayoutSideBarComponent,
+                public elRef: ElementRef) {
+        this._parent.layoutFooter = this;
+    }
+
+    ngAfterViewInit(): void {
+        setTimeout(() => {
+            this._computedHeight = this.elRef.nativeElement.parentNode.getBoundingClientRect().height;
+            // this.changeDetector.detectChanges();
+            this._parent.forceDetection();
+        });
+    }
+
 }

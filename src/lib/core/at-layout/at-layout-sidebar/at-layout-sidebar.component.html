@@ -1,57 +1,119 @@
-<mat-sidenav-container style="background-color:transparent;">
+<ng-template #headerTpl>
+    <ng-content select="at-layout-header"></ng-content>
+</ng-template>
 
-    <mat-sidenav *ngIf="layoutSideBarLeft"
-                 [mode]="layoutSideBarLeft.mode ?
+<ng-template #contentTpl>
+    <ng-content select="at-layout-content"></ng-content>
+</ng-template>
+
+<ng-template #sideBarLeftTpl>
+    <ng-content select="at-layout-sidebar-left"></ng-content>
+</ng-template>
+
+<ng-template #sideBarRightTpl>
+    <ng-content select="at-layout-sidebar-right"></ng-content>
+</ng-template>
+
+<ng-template #footerTpl>
+    <ng-content select="at-layout-footer"></ng-content>
+</ng-template>
+
+<ng-container [ngSwitch]="layoutType">
+    <ng-container *ngSwitchCase="'basic'">
+
+        <at-scrollbar *ngIf="!layoutSideBarLeft && !layoutSideBarRight"
+                      [render]="showAtScrollbar && scrollOn === 'container'"
+                      [class.at-oa]="scrollOn === 'container'"
+                      [class.at-hp-100]="scrollOn ==='container'"
+                      fxLayout="column" fxFlexFill>
+            <div>
+                <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+            </div>
+
+            <at-scrollbar [render]="showAtScrollbar"
+                          [class.at-oa]="scrollOn === 'content'"
+                          [class.at-hp-100]="scrollOn ==='content'">
+                <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+            </at-scrollbar>
+
+            <div>
+                <ng-content select="at-layout-footer"></ng-content>
+            </div>
+        </at-scrollbar>
+
+        <div *ngIf="(layoutSideBarLeft || layoutSideBarRight)
+                    && layoutHeader.position == 'cover' && scrollOn == 'content'"
+             class="at-absolute"
+             [style.height]="layoutHeader._computedHeight +'px'"
+             [ngClass]="[layoutHeader.color, layoutHeader.pattern, 'at-absolute', 'at-z-0', 'at-wp-100']"></div>
+
+        <mat-sidenav-container *ngIf="layoutSideBarLeft || layoutSideBarRight"
+                               style="background-color:transparent;">
+
+
+            <mat-sidenav *ngIf="layoutSideBarLeft"
+                         [mode]="layoutSideBarLeft.mode ?
                             layoutSideBarLeft.mode : (isSmallScreen ? 'over' : 'side')"
-                 [opened]="layoutSideBarLeft.opened ? layoutSideBarLeft.opened : lsOpened"
-                 [style.max-width]="layoutSideBarLeft.width"
-                 [style.min-width]="layoutSideBarLeft.width"
-                 [atMediaToggle]="layoutSideBarLeft.mediaQuery"
-                 [mediaClasses]="layoutSideBarLeft.mediaClasses"
-                 layout="column"
-                 layout-fill
-                 (close)="closeLeftSidenav($event)">
+                         [opened]="layoutSideBarLeft.opened ? layoutSideBarLeft.opened : lsOpened"
+                         [style.max-width]="layoutSideBarLeft.width"
+                         [style.min-width]="layoutSideBarLeft.width"
+                         [atMediaToggle]="layoutSideBarLeft.mediaQuery"
+                         [mediaClasses]="layoutSideBarLeft.mediaClasses"
+                         layout="column"
+                         layout-fill
+                         (close)="closeLeftSidenav($event)">
 
-        <at-scrollbar #sidenavLeftContainer
-                      [render]="layoutSideBarLeft.showAtScrollbar"
-                      fxLayout="column"
-                      [style.height]="'100%'"
-                      [style.overflow]="'auto'">
-            <ng-content select="at-layout-sidebar-left"></ng-content>
-        </at-scrollbar>
-    </mat-sidenav>
+                <at-scrollbar #sidenavLeftContainer
+                              [render]="layoutSideBarLeft.showAtScrollbar"
+                              fxLayout="column"
+                              [style.height]="'100%'"
+                              [style.overflow]="'auto'">
+                    <ng-container *ngTemplateOutlet="sideBarLeftTpl"></ng-container>
+                </at-scrollbar>
+            </mat-sidenav>
 
-    <mat-sidenav *ngIf="layoutSideBarRight"
-                 align="end"
-                 [mode]="layoutSideBarRight.mode ?
+            <mat-sidenav *ngIf="layoutSideBarRight"
+                         align="end"
+                         [mode]="layoutSideBarRight.mode ?
                             layoutSideBarRight.mode : (isSmallScreen ? 'over' : 'side')"
-                 [opened]="layoutSideBarRight.opened ? layoutSideBarLeft.opened : rsOpened"
-                 [style.max-width]="layoutSideBarRight.width"
-                 [style.min-width]="layoutSideBarRight.width"
-                 [atMediaToggle]="layoutSideBarRight.mediaQuery"
-                 [mediaClasses]="layoutSideBarRight.mediaClasses"
-                 layout="column"
-                 layout-fill
-                 (close)="closeRightSidenav($event)">
+                         [opened]="layoutSideBarRight.opened ? layoutSideBarLeft.opened : rsOpened"
+                         [style.max-width]="layoutSideBarRight.width"
+                         [style.min-width]="layoutSideBarRight.width"
+                         [atMediaToggle]="layoutSideBarRight.mediaQuery"
+                         [mediaClasses]="layoutSideBarRight.mediaClasses"
+                         layout="column"
+                         layout-fill
+                         (close)="closeRightSidenav($event)">
 
-        <at-scrollbar #sidenavLeftContainer
-                      [render]="layoutSideBarRight.showAtScrollbar"
-                      fxLayout="column"
-                      [style.height]="'100%'"
-                      [style.overflow]="'auto'">
-            <ng-content select="at-layout-sidebar-right"></ng-content>
-        </at-scrollbar>
-    </mat-sidenav>
+                <at-scrollbar #sidenavLeftContainer
+                              [render]="layoutSideBarRight.showAtScrollbar"
+                              fxLayout="column"
+                              [style.height]="'100%'"
+                              [style.overflow]="'auto'">
+                    <ng-container *ngTemplateOutlet="sideBarRightTpl"></ng-container>
+                </at-scrollbar>
+            </mat-sidenav>
 
-    <at-scrollbar *ngIf="scrollOn === 'container'" [render]="showAtScrollbar"
-                  [class.at-oa]="scrollOn === 'container'"
-                  [class.at-hp-100]="scrollOn ==='container'">
-        <ng-content></ng-content>
-    </at-scrollbar>
+            <at-scrollbar [render]="showAtScrollbar && scrollOn === 'container'"
+                          [class.at-oa]="scrollOn === 'container'"
+                          [class.at-hp-100]="scrollOn ==='container'"
+                          fxLayout="column" fxFlexFill>
+                <div>
+                    <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+                </div>
 
-    <div fxFlexFill *ngIf="scrollOn === 'content'">
-        <ng-content></ng-content>
-    </div>
+                <at-scrollbar [render]="showAtScrollbar && scrollOn === 'content'"
+                              [class.at-oa]="scrollOn === 'content'"
+                              [class.at-hp-100]="scrollOn ==='content'">
+                    <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+                </at-scrollbar>
 
+                <div>
+                    <ng-content select="at-layout-footer"></ng-content>
+                </div>
+            </at-scrollbar>
 
-</mat-sidenav-container>
+        </mat-sidenav-container>
+
+    </ng-container>
+</ng-container>

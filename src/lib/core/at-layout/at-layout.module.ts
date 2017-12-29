@@ -17,11 +17,16 @@ import {CommonModule} from '@angular/common';
 import {AtUtilService} from '../at-common/services/util.service';
 import {PortalModule} from '@angular/cdk/portal';
 import {MatSidenavModule, MatCardModule, MatIconModule, MatToolbarModule} from '@angular/material';
-import {AtLayoutHeaderComponent} from './at-layout-header/at-layout-header.component';
 import {AtLayoutBasicComponent} from './at-layout-basic/at-layout-basic.component';
 import {AtLayoutCardOverComponent} from './at-layout-card-over/at-layout-card-over.component';
 import {AtLayoutFooterComponent} from "./at-layout-footer/at-layout-footer.component";
-import {AtLayoutSideBarComponent, AtLayoutSideBarLeftComponent, AtLayoutSideBarRightComponent} from "./at-layout-sidebar/at-layout-sidebar.component";
+import {
+    AtLayoutSideBarComponent,
+    AtLayoutSideBarLeftComponent,
+    AtLayoutSideBarRightComponent,
+    AtLayoutContentComponent,
+    AtLayoutHeaderComponent
+} from "./at-layout-sidebar/at-layout-sidebar.component";
 
 export {AtLayoutComponent};
 
@@ -48,11 +53,14 @@ export {AtLayoutComponent};
         AtLayoutSideBarLeftDirective,
         AtLayoutSideBarRightDirective,
         AtLayoutContentDirective,
+
         AtLayoutHeaderComponent,
         AtLayoutFooterComponent,
         AtLayoutBasicComponent,
         AtLayoutCardOverComponent,
+
         AtLayoutSideBarComponent,
+        AtLayoutContentComponent,
         AtLayoutSideBarLeftComponent,
         AtLayoutSideBarRightComponent
     ],
@@ -65,13 +73,16 @@ export {AtLayoutComponent};
         AtLayoutSideBarLeftDirective,
         AtLayoutSideBarRightDirective,
         AtLayoutContentDirective,
+
         AtLayoutHeaderComponent,
         AtLayoutFooterComponent,
         AtLayoutBasicComponent,
         AtLayoutCardOverComponent,
+
         AtLayoutSideBarComponent,
+        AtLayoutContentComponent,
         AtLayoutSideBarLeftComponent,
-        AtLayoutSideBarRightComponent
+        AtLayoutSideBarRightComponent,
     ],
     providers: [
         AtUtilService,

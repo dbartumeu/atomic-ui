@@ -18,93 +18,92 @@
 <!--</at-layout>-->
 
 <at-layout-sidebar #layoutSidebarRef
-        scrollOn="content"
-        [showAtScrollbar]="true">
-    <at-layout-sidebar-left test="testing if its working">
-        <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
-            <div class="at-pv-20">
-                header
-            </div>
-        </div>
-        <div>
-            content
-        </div>
-    </at-layout-sidebar-left>
+                   [layoutType]="'basic'"
+                   scrollOn="content"
+                   [showAtScrollbar]="false">
 
-    <at-layout-sidebar-right test="testing if its working">
-        <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
-            <div class="at-pv-20">
-                header
-            </div>
-        </div>
-        <div>
-            content
-        </div>
-    </at-layout-sidebar-right>
 
-    <at-layout-card-over cardAlign="center" cardWidth="95%" scrollOn="content">
-        <at-layout-header color="green-800" height="auto">
-            <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
-                <div class="at-pv-20">
-                    header
+    <!--<at-layout-sidebar-right test="testing if its working">-->
+    <!--<div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">-->
+    <!--<div class="at-pv-20">-->
+    <!--header-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--content-->
+    <!--</div>-->
+    <!--</at-layout-sidebar-right>-->
+
+    <at-layout-header color="yellow-800"
+                      height="200px"
+                      pattern="1">
+        <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
+            testing header
+        </div>
+    </at-layout-header>
+
+    <at-layout-content class="at-hp-100">
+        <at-layout-sidebar #layoutSidebarRef
+                           layoutType="basic"
+                           scrollOn="content"
+                           [showAtScrollbar]="true"
+                           class="at-hp-100">
+            <at-layout-sidebar-left>
+                <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
+                    <div class="at-pv-20">
+                        header
+                    </div>
                 </div>
-            </div>
+                <div>
+                    content
+                </div>
+            </at-layout-sidebar-left>
 
-        </at-layout-header>
-        <div class="at-p-40">
-            <button mat-button (click)="layoutSidebarRef.toggleSideBarLeft()">toggle left</button>
-            <button mat-button (click)="layoutSidebarRef.toggleSideBarRight()">toggle left</button>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                in
-                culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-        </div>
-        <at-layout-footer color="pink-800">
-            <div class="at-p-20">
-                nesting Footer
-            </div>
-        </at-layout-footer>
-    </at-layout-card-over>
+            <at-layout-header color="red-800"
+                              height="200px"
+                              pattern="1"
+                              position="cover">
+                <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
+                    nesting header
+                </div>
+            </at-layout-header>
+
+            <at-layout-content>
+                <div class="at-p-40">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </at-layout-content>
+
+
+        </at-layout-sidebar>
+    </at-layout-content>
+
 
 </at-layout-sidebar>
 

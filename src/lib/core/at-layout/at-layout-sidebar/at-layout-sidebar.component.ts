@@ -1,6 +1,16 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, forwardRef, Inject, Input, NgZone, OnInit, Output,
-    ViewEncapsulation
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component, ElementRef,
+    EventEmitter,
+    forwardRef,
+    Inject,
+    Input,
+    NgZone, OnDestroy,
+    OnInit,
+    Output,
+    ViewEncapsulation,
 } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
 import {AtMediaService} from '../../at-media/at-media.service';
@@ -13,7 +23,7 @@ import {isBoolean} from "util";
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
 })
-export class AtLayoutSideBarComponent {
+export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
 
     private querySubscription: Subscription;
 
@@ -53,7 +63,26 @@ export class AtLayoutSideBarComponent {
      */
     layoutSideBarRight: AtLayoutSideBarRightComponent;
 
+    /**
+     * @internal use Only
+     * @type {boolean}
+     */
+    layoutHeader: AtLayoutHeaderComponent;
 
+    /**
+     * layoutType?: "basic" | "cardOver"
+     * Sets the type of the Layout component. Defaults to "basic"
+     * @type {string}
+     */
+    @Input() layoutType: 'main' | 'basic' | 'cardOver' = 'basic';
+
+    /**
+     * scrollOn?: "content" | "container"
+     * Sets where the scroll will be positioned inside the Layout component.
+     * If scrollOn = "content" the header is fixed
+     * and the scroll is placed above the header. Defaults to "container" header and content can be scrolled.
+     * @type {string}
+     */
     @Input() scrollOn: 'content' | 'container' = 'container';
 
     /**
@@ -67,13 +96,13 @@ export class AtLayoutSideBarComponent {
      * Emit false when sidebar left is closed
      * @type {EventEmitter<any>}
      */
-    @Output() onCloseSideBarLeft = new EventEmitter();
+    @Output() onCloseSideBarLeft: EventEmitter<boolean> = new EventEmitter();
 
     /**
      * Emit false when sidebar right is closed
      * @type {EventEmitter<any>}
      */
-    @Output() onCloseSideBarRight = new EventEmitter();
+    @Output() onCloseSideBarRight: EventEmitter<boolean> = new EventEmitter();
 
     constructor(private mediaService: AtMediaService,
                 private ngZone: NgZone,
@@ -81,7 +110,7 @@ export class AtLayoutSideBarComponent {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
 
         // console.log(this.sideNav)
 
@@ -100,13 +129,12 @@ export class AtLayoutSideBarComponent {
                     }
                 });
             });
-
     }
 
     /**
      * Open / Close sidebar Left
      */
-    public toggleSideBarLeft() {
+    public toggleSideBarLeft(): void {
         this.lsOpened = !this.lsOpened;
         this.changeDetectorRef.markForCheck();
     }
@@ -114,7 +142,7 @@ export class AtLayoutSideBarComponent {
     /**
      * Open / Close sidebar Right
      */
-    public toggleSideBarRight() {
+    public toggleSideBarRight(): void {
         this.rsOpened = !this.rsOpened;
         this.changeDetectorRef.markForCheck();
     }
@@ -122,7 +150,7 @@ export class AtLayoutSideBarComponent {
     /**
      * @internal use only
      */
-    closeLeftSidenav() {
+    closeLeftSidenav(): void {
         if (isBoolean(this.layoutSideBarLeft.opened)) {
             this.onCloseSideBarLeft.emit(false);
         } else {
@@ -133,7 +161,7 @@ export class AtLayoutSideBarComponent {
     /**
      * @internal use only
      */
-    closeRightSidenav() {
+    closeRightSidenav(): void {
         if (isBoolean(this.layoutSideBarRight.opened)) {
             this.onCloseSideBarRight.emit(false);
         } else {
@@ -141,6 +169,101 @@ export class AtLayoutSideBarComponent {
         }
     }
 
+    forceDetection(): void {
+        this.changeDetectorRef.detectChanges();
+    }
+
+    ngOnDestroy(): void {
+        this.querySubscription.unsubscribe();
+    }
+
+}
+
+@Component({
+    selector: 'at-layout-header',
+    template: `
+        <div [style.height]="height" [ngClass]="[color, pattern]"
+             [class.transparent]="position === 'cover' && _parent.scrollOn=='content'">
+            <div>
+                <ng-content></ng-content>
+            </div>
+        </div>`,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutHeaderComponent',
+})
+export class AtLayoutHeaderComponent implements AfterViewInit {
+
+    private _color: string;
+    private _height: string = 'auto';
+    private _pattern: string;
+
+    /**
+     * @internal use only
+     */
+    _computedHeight: number;
+
+    @Input()
+    set color(c: string) {
+        this._color = c;
+    }
+
+    get color(): string {
+        if (this._color) {
+            return 'mat-bg-' + this._color;
+        }
+
+        return '';
+    }
+
+    @Input()
+    set height(h: string) {
+        this._height = h;
+    }
+
+    get height(): string {
+        return this._height;
+    }
+
+    @Input()
+    set pattern(p: string) {
+        this._pattern = p;
+    }
+
+    get pattern(): string {
+        if (this._pattern) {
+            return 'at-pattern-' + this._pattern;
+        }
+        return '';
+    }
+
+    @Input() position: 'inside' | 'cover' | 'outside';
+
+    constructor(@Inject(forwardRef(() => AtLayoutSideBarComponent))
+                private _parent: AtLayoutSideBarComponent,
+                public elRef: ElementRef,
+                public changeDetector: ChangeDetectorRef) {
+        this._parent.layoutHeader = this;
+    }
+
+    ngAfterViewInit(): void {
+        setTimeout(() => {
+            this._computedHeight = this.elRef.nativeElement.parentNode.getBoundingClientRect().height;
+            // this.changeDetector.detectChanges();
+            this._parent.forceDetection();
+        });
+    }
+
+}
+
+@Component({
+    selector: 'at-layout-content',
+    template: '<ng-content></ng-content>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutContentComponent',
+})
+export class AtLayoutContentComponent {
 }
 
 @Component({
@@ -148,7 +271,7 @@ export class AtLayoutSideBarComponent {
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    exportAs: 'AtLayoutSideBarLeftComponent'
+    exportAs: 'AtLayoutSideBarLeftComponent',
 })
 export class AtLayoutSideBarLeftComponent implements OnInit {
     /**
@@ -197,7 +320,7 @@ export class AtLayoutSideBarLeftComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this._parent.layoutSideBarLeft = this;
     }
 }
@@ -207,7 +330,7 @@ export class AtLayoutSideBarLeftComponent implements OnInit {
     template: '<ng-content></ng-content>',
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    exportAs: 'AtLayoutSideBarRightComponent'
+    exportAs: 'AtLayoutSideBarRightComponent',
 })
 export class AtLayoutSideBarRightComponent implements OnInit {
     /**
@@ -256,7 +379,7 @@ export class AtLayoutSideBarRightComponent implements OnInit {
 
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this._parent.layoutSideBarRight = this;
     }
 }

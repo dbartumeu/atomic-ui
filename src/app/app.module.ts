@@ -9,6 +9,7 @@ import {FeatureModule} from './pages/feature/feature.module';
 import {AtScrollbarModule} from '@atomic/core';
 import {CoreModule} from "./core/core.module";
 import {FrameworkModule} from './pages/framework/framework.module';
+import {ExampleModule} from './examples/example.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {FrameworkModule} from './pages/framework/framework.module';
         AtScrollbarModule.forRoot(),
         CoreModule,
         FeatureModule,
-        FrameworkModule
+        FrameworkModule,
+        ExampleModule
     ],
     exports: [],
     providers: [],

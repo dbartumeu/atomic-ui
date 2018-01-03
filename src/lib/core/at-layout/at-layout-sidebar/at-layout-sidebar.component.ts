@@ -369,7 +369,10 @@ export class AtLayoutHeaderComponent implements AfterViewInit {
 
     ngAfterViewInit(): void {
         setTimeout(() => {
-            this._computedHeight = this.elRef.nativeElement.parentNode.getBoundingClientRect().height;
+            if(this.elRef.nativeElement.parentNode){
+                this._computedHeight = this.elRef.nativeElement.parentNode.getBoundingClientRect().height;
+            }
+
             // this.changeDetector.detectChanges();
             this._parent.forceDetection();
         });

@@ -6,6 +6,8 @@
 @import 'lib/core/at-styles/at_index';
 @import "lib/core/at-styles/at_theming";
 
+@import '~@covalent/markdown/markdown-theme';
+
 // Define the default theme.
 $default-primary: mat-palette($mat-indigo);
 $default-accent: mat-palette($mat-pink, A200, A100, A400);
@@ -49,6 +51,7 @@ $at-dark-theme: mat-dark-theme($at-dark-primary, $at-dark-accent, $at-dark-warn)
   @include at-calendar-theme($at-light-theme);
   @include at-ngx-datatable-theme($at-light-theme);
   @include at-highlight-theme($at-light-theme);
+  @include at-markdown-theme($at-light-theme);
 }
 
 .at-theme-dark {

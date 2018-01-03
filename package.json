@@ -35,6 +35,8 @@
     "@angular/platform-browser": "^5.1.2",
     "@angular/platform-browser-dynamic": "^5.1.2",
     "@angular/router": "^5.1.2",
+    "@covalent/highlight": "^1.0.0-rc.1",
+    "@covalent/markdown": "^1.0.0-rc.1",
     "@types/lodash": "^4.14.91",
     "angular-sortablejs": "^2.4.1",
     "classlist.js": "^1.1.20150312",

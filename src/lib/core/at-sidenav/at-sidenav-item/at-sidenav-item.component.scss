@@ -54,7 +54,6 @@ mat-nav-list a.at-sidenav-button {
 
 .sidenav-toplevel {
 
-  // Every at-at-sidenav-button in this at-sidenav
   .at-sidenav-button {
     position: relative;
     cursor: pointer;
@@ -71,7 +70,10 @@ mat-nav-list a.at-sidenav-button {
     }
 
     > .sidenav-list-nested > .at-sidenav-item { // Level 1 aka 1st Dropdown
-      background: rgba(0, 0, 0, 0.10);
+      &:not(.at-sidenav-list-non-collapsible) {
+        background: rgba(0, 0, 0, 0.10);
+      }
+
       > .at-sidenav-button {
         &:hover {
           background: rgba(255, 255, 255, 0.05);
@@ -203,7 +205,10 @@ mat-nav-list a.at-sidenav-button {
       }
 
       > .sidenav-list-nested > .at-sidenav-item { // Level 1 aka 1st Dropdown
-        background: rgba(0, 0, 0, 0.05);
+        &:not(.at-sidenav-list-non-collapsible) {
+          background: rgba(0, 0, 0, 0.05);
+        }
+        //background: rgba(0, 0, 0, 0.05);
         > .at-sidenav-button {
           &:hover {
             background: rgba(0, 0, 0, 0.025);

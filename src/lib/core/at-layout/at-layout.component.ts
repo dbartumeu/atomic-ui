@@ -1,15 +1,19 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy, ChangeDetectorRef,
-    Component, ContentChild, Directive, ElementRef, EventEmitter, Input, NgZone,
+    Component, ContentChild, Directive, ElementRef, EventEmitter, Inject, Input, NgZone,
     OnDestroy, OnInit, Output, TemplateRef, ViewChild, ViewContainerRef
 } from '@angular/core';
 import {AtMediaService} from '../at-media/at-media.service';
 import {Subscription} from 'rxjs/Subscription';
 import {TemplatePortalDirective} from '@angular/cdk/portal';
 import {isBoolean, isString} from 'util';
-import * as _ from 'lodash'
+import * as _ from 'lodash';
 import {AtUtilService} from '../at-common/services/util.service';
+import {AtSidenavCollapsibleDirective} from '../at-sidenav/at-sidenav-collapsed.directive';
+import {DOCUMENT} from '@angular/common';
+import {AtMediaReplayService} from '../at-common/services/mediareplay/media-replay.service';
+import {AtSidenavService} from '../at-sidenav/at-sidenav.service';
 
 @Directive({
     selector: '[at-layout-toolbar]ng-template',
@@ -451,6 +455,8 @@ export class AtLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
 
         // console.log(this.sideNav)
 
+        // this.atsc.ngOnInit();
+
         this.querySubscription =
             this.mediaService.registerQuery('gt-sm').subscribe((matches: boolean) => {
                 this.ngZone.run(() => {
@@ -494,7 +500,7 @@ export class AtLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
      * @internal use only
      */
     lIsBoolean(value) {
-        return isBoolean(value)
+        return isBoolean(value);
     }
 
     /**

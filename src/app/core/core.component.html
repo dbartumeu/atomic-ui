@@ -1,15 +1,26 @@
-<at-layout #layoutMain
-           [layoutType]="'main'">
-    <ng-template at-layout-toolbar>
+<at-layout-sidebar #layoutMain
+                   [layoutType]="'basic'"
+                   scrollOn="content"
+                   [showAtScrollbar]="false">
+    <at-layout-header position="outside" color="light-blue-500">
         <app-toolbar [layoutRef]="layoutMain"></app-toolbar>
-    </ng-template>
-    <ng-template at-layout-sidenav
-                 [collapsible]="true">
-        <app-sidenav class="at-wp-100"></app-sidenav>
-    </ng-template>
-    <div at-layout-content>
-        <router-outlet></router-outlet>
-    </div>
-</at-layout>
+    </at-layout-header>
+
+    <at-layout-content>
+        <at-layout-sidebar #layoutMain
+                           style="max-width: 1100px; margin-left: auto; margin-right: auto"
+                           [layoutType]="'main'"
+                           scrollOn="content"
+                           [showAtScrollbar]="false">
+            <at-layout-sidenav width="260px" elevation="10">
+                <app-sidenav class="at-wp-100 at-pattern-1"></app-sidenav>
+            </at-layout-sidenav>
+            <at-layout-content>
+                <router-outlet></router-outlet>
+            </at-layout-content>
+        </at-layout-sidebar>
+    </at-layout-content>
+</at-layout-sidebar>
+
 
 

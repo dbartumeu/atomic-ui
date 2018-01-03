@@ -17,11 +17,10 @@ import {CommonModule} from '@angular/common';
 import {AtUtilService} from '../at-common/services/util.service';
 import {PortalModule} from '@angular/cdk/portal';
 import {MatSidenavModule, MatCardModule, MatIconModule, MatToolbarModule} from '@angular/material';
-import {AtLayoutBasicComponent} from './at-layout-basic/at-layout-basic.component';
-import {AtLayoutCardOverComponent} from './at-layout-card-over/at-layout-card-over.component';
 import {
     AtLayoutSideBarComponent,
     AtLayoutHeaderComponent,
+    AtLayoutSideNavComponent,
     AtLayoutSideBarLeftComponent,
     AtLayoutContentComponent,
     AtLayoutSideBarRightComponent,
@@ -56,13 +55,11 @@ export {AtLayoutComponent};
 
         AtLayoutHeaderComponent,
         AtLayoutFooterComponent,
-        AtLayoutBasicComponent,
-        AtLayoutCardOverComponent,
-
         AtLayoutSideBarComponent,
         AtLayoutContentComponent,
         AtLayoutSideBarLeftComponent,
-        AtLayoutSideBarRightComponent
+        AtLayoutSideBarRightComponent,
+        AtLayoutSideNavComponent
     ],
     exports: [
         AtLayoutComponent,
@@ -76,13 +73,11 @@ export {AtLayoutComponent};
 
         AtLayoutHeaderComponent,
         AtLayoutFooterComponent,
-        AtLayoutBasicComponent,
-        AtLayoutCardOverComponent,
-
         AtLayoutSideBarComponent,
         AtLayoutContentComponent,
         AtLayoutSideBarLeftComponent,
         AtLayoutSideBarRightComponent,
+        AtLayoutSideNavComponent
     ],
     providers: [
         AtUtilService,

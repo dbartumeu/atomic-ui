@@ -6,6 +6,14 @@
     <ng-content select="at-layout-content"></ng-content>
 </ng-template>
 
+<ng-template #sideNavTpl>
+    <ng-content select="at-layout-sidenav"></ng-content>
+</ng-template>
+
+<ng-template #sidePanelTpl>
+    <ng-content select="at-layout-sidepanel"></ng-content>
+</ng-template>
+
 <ng-template #sideBarLeftTpl>
     <ng-content select="at-layout-sidebar-left"></ng-content>
 </ng-template>
@@ -18,7 +26,7 @@
     <ng-content select="at-layout-footer"></ng-content>
 </ng-template>
 
-<ng-container *ngIf="layoutType == 'basic' || 'cardOver'">
+<ng-container *ngIf="layoutType == 'basic' || layoutType == 'cardOver'">
 
     <at-scrollbar *ngIf="!layoutSideBarLeft && !layoutSideBarRight"
                   [render]="showAtScrollbar && scrollOn === 'container'"
@@ -29,7 +37,8 @@
             <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
         </div>
 
-        <at-scrollbar *ngIf="layoutType == 'basic'" [render]="showAtScrollbar"
+        <at-scrollbar *ngIf="layoutType == 'basic'"
+                      [render]="showAtScrollbar && scrollOn === 'content'"
                       [class.at-oa]="scrollOn === 'content'"
                       [class.at-hp-100]="scrollOn ==='content'">
             <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
@@ -165,54 +174,38 @@
 </ng-container>
 
 <ng-container *ngIf="layoutType == 'main'">
-
-    <div *ngIf="layoutHeader.position == 'outside'">
+    <div *ngIf="layoutHeader && layoutHeader.position == 'outside'">
         <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
     </div>
 
-    <mat-sidenav-container style="background-color:transparent;">
-
-        <mat-sidenav *ngIf="layoutSideBarLeft"
-                     [mode]="layoutSideBarLeft.mode ?
-                            layoutSideBarLeft.mode : (isSmallScreen ? 'over' : 'side')"
-                     [opened]="layoutSideBarLeft.opened ? layoutSideBarLeft.opened : lsOpened"
-                     [style.max-width]="layoutSideBarLeft.width"
-                     [style.min-width]="layoutSideBarLeft.width"
-                     [atMediaToggle]="layoutSideBarLeft.mediaQuery"
-                     [mediaClasses]="layoutSideBarLeft.mediaClasses"
+    <mat-sidenav-container>
+        <mat-sidenav *ngIf="layoutSideNav"
+                     [mode]="layoutSideNav.mode ? layoutSideNav.mode : (isSmallScreen ? 'over' : 'side')"
+                     [ngClass]="['at-sidenav', layoutSideNav.elevation]"
+                     align="start"
+                     atSidenavCollapsible
+                     [opened]="layoutSideNav.opened ? layoutSideNav.opened : snOpened"
+                     [style.max-width]="layoutSideNav.width"
+                     [style.min-width]="layoutSideNav.width"
+                     [atMediaToggle]="layoutSideNav.mediaQuery"
+                     [mediaClasses]="layoutSideNav.mediaClasses"
                      layout="column"
                      layout-fill
-                     (close)="closeLeftSidenav($event)">
-
-            <at-scrollbar #sidenavLeftContainer
-                          [render]="layoutSideBarLeft.showAtScrollbar"
-                          fxLayout="column"
-                          [style.height]="'100%'"
-                          [style.overflow]="'auto'">
-                <ng-container *ngTemplateOutlet="sideBarLeftTpl"></ng-container>
-            </at-scrollbar>
+                     (close)="closeSideNav($event)">
+            <ng-container *ngTemplateOutlet="sideNavTpl"></ng-container>
         </mat-sidenav>
 
-        <mat-sidenav *ngIf="layoutSideBarRight"
+        <mat-sidenav *ngIf="layoutSidePanel"
                      align="end"
-                     [mode]="layoutSideBarRight.mode ?
-                            layoutSideBarRight.mode : (isSmallScreen ? 'over' : 'side')"
-                     [opened]="layoutSideBarRight.opened ? layoutSideBarLeft.opened : rsOpened"
-                     [style.max-width]="layoutSideBarRight.width"
-                     [style.min-width]="layoutSideBarRight.width"
-                     [atMediaToggle]="layoutSideBarRight.mediaQuery"
-                     [mediaClasses]="layoutSideBarRight.mediaClasses"
+                     mode="drawer"
+                     class="at-sidepanel mat-elevation-z5"
+                     [style.max-width]="layoutSidePanel.width"
+                     [style.min-width]="layoutSidePanel.width"
+                     [opened]="spOpened"
                      layout="column"
                      layout-fill
-                     (close)="closeRightSidenav($event)">
-
-            <at-scrollbar #sidenavLeftContainer
-                          [render]="layoutSideBarRight.showAtScrollbar"
-                          fxLayout="column"
-                          [style.height]="'100%'"
-                          [style.overflow]="'auto'">
-                <ng-container *ngTemplateOutlet="sideBarRightTpl"></ng-container>
-            </at-scrollbar>
+                     (close)="closeSidePanel($event)">
+            <ng-container *ngTemplateOutlet="sidePanelTpl"></ng-container>
         </mat-sidenav>
 
         <at-scrollbar [render]="showAtScrollbar && scrollOn === 'container'"
@@ -220,18 +213,17 @@
                       [class.at-hp-100]="scrollOn ==='container'"
                       fxLayout="column" fxFlexFill>
 
-            <div *ngIf="layoutHeader.position !== 'outside'">
+            <div *ngIf="layoutHeader && layoutHeader.position !== 'outside'">
                 <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
             </div>
 
-            <at-scrollbar *ngIf="layoutType == 'basic'"
-                          [render]="showAtScrollbar && scrollOn === 'content'"
+            <at-scrollbar [render]="showAtScrollbar && scrollOn === 'content'"
                           [class.at-oa]="scrollOn === 'content'"
                           [class.at-hp-100]="scrollOn ==='content'">
                 <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
             </at-scrollbar>
 
-            <div *ngIf="layoutFooter.position !== 'outside'">
+            <div *ngIf="layoutFooter && layoutFooter.position !== 'outside'">
                 <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
             </div>
 
@@ -239,7 +231,7 @@
 
     </mat-sidenav-container>
 
-    <div *ngIf="layoutFooter.position == 'outside'">
+    <div *ngIf="layoutFooter && layoutFooter.position == 'outside'">
         <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
     </div>
 </ng-container>

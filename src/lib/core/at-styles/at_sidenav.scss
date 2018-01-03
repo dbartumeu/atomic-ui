@@ -2,22 +2,6 @@
 
 .at-sidenav {
   overflow-x: hidden;
-  //z-index: $avSidenav_z-index !important;
-
-  &.at-sidenav-default {
-    width: $avSidenav_width;
-    max-width: $avSidenav_width;
-  }
-
-  &.at-sidenav-medium {
-    width: $avSidenavMedium_width;
-    max-width: $avSidenavMedium_width;
-  }
-
-  &.at-sidenav-large {
-    width: $avSidenavLarge_width;
-    max-width: $avSidenavLarge_width;
-  }
 
   .at-sidenav-container,
   .at-sidenav-scrollbar-container {
@@ -38,13 +22,6 @@
     transition: transform .25s;
     &.rotate {
       transform: rotate(-180deg);
-    }
-  }
-
-  .at-sidenav-footer {
-    h1, h2, h3, h4, h4, h5, h6 {
-      font-weight: 400;
-      font-size: 14px;
     }
   }
 

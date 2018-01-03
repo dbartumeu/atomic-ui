@@ -48,7 +48,7 @@ export class AtSidenavService {
     constructor(private atPermsService: AtPermissionsService) {
         atPermsService.permsChanges.subscribe((perms) => {
             this.applyPerms(perms);
-        })
+        });
     }
 
     /**
@@ -146,10 +146,10 @@ export class AtSidenavService {
                             badgeColor: childRoute.data.atSidenavItem.badgeColor || null,
                             customClass: childRoute.data.atSidenavItem.customClass || null,
                             renderItem: childRoute.data.atSidenavItem.renderItem || true,
+                            collapsible: childRoute.data.atSidenavItem.collapsible,
                         }
                     );
                     this.addChild(parent, newAtsidenavChild, false);
-
                 } else {
                     const newAtsidenavItem = new AtSidenavItem(
                         {
@@ -162,6 +162,7 @@ export class AtSidenavService {
                             badgeColor: childRoute.data.atSidenavItem.badgeColor || null,
                             customClass: childRoute.data.atSidenavItem.customClass || null,
                             renderItem: childRoute.data.atSidenavItem.renderItem || true,
+                            collapsible: childRoute.data.atSidenavItem.collapsible,
                         }
                     );
                     this.addItem(newAtsidenavItem, false);
@@ -196,7 +197,8 @@ export class AtSidenavService {
             badge: atSidenavItem.badge || null,
             badgeColor: atSidenavItem.badgeColor || null,
             customClass: atSidenavItem.customClass || null,
-            renderItem: typeof atSidenavItem.renderItem === 'undefined' ? true : atSidenavItem.renderItem
+            renderItem: typeof atSidenavItem.renderItem === 'undefined' ? true : atSidenavItem.renderItem,
+            collapsible: typeof atSidenavItem.collapsible === 'undefined' ? true : atSidenavItem.collapsible
         });
 
         this.atSidenavItems.push(newAtSidenavItem);
@@ -235,7 +237,8 @@ export class AtSidenavService {
             badge: child.badge || null,
             badgeColor: child.badgeColor || null,
             customClass: child.customClass || null,
-            renderItem: typeof child.renderItem === 'undefined' ? true : child.renderItem
+            renderItem: typeof child.renderItem === 'undefined' ? true : child.renderItem,
+            collapsible: typeof child.collapsible === 'undefined' ? true : child.collapsible
         });
 
         parent.children.push(newAtSidenavChild);
@@ -285,7 +288,7 @@ export class AtSidenavService {
      * @returns {AtSidenavItem[]}
      */
     public getAtSidenavItems(): AtSidenavItem[] {
-        return this.atSidenavItems
+        return this.atSidenavItems;
     }
 
     /**
@@ -378,7 +381,7 @@ export class AtSidenavService {
             let closeRoute = '';
             collection.forEach(item => {
                 if (route.includes(item.route)) {
-                    tmpResult.push(item)
+                    tmpResult.push(item);
                 }
             });
 

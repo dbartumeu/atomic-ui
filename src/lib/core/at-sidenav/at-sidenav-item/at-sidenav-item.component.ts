@@ -59,8 +59,15 @@ export class AtSidenavItemComponent implements OnInit {
             return true;
         }
 
-        if (item.parent && this.sidenavService.isOpen(item.parent)) {
-            return true;
+        if (item.parent) {
+            if (item.parent.collapsible === false) {
+                return true;
+            }
+
+            if (this.sidenavService.isOpen(item.parent)) {
+                return true;
+            }
+
         }
 
         return false;
@@ -76,12 +83,10 @@ export class AtSidenavItemComponent implements OnInit {
 
         if (item.hasChildren() && this.sidenavService.isOpen(item) && this.renderSubNav(item.children)) {
             count += item.children.length;
-            console.log('sidenavItem: ', item.name)
 
             item.children.forEach((child) => {
-                console.log('sidenavItemChild: ', child.name)
                 count += this.getOpenChildrenCount(child);
-            })
+            });
         }
 
         return count;

@@ -26,9 +26,7 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
                 private avScrollbarService: AtScrollbarService,
                 public router: Router) {
         if (this.avSidenavService.getAtSidenavItems().length === 0) {
-
             avSidenavService.buildMenuByRoutes(router.config);
-
         }
     }
 

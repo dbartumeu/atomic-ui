@@ -11,7 +11,7 @@ export class AtSidenavItem {
     customClass: string;
     renderItem = true;
     pathPrefix: string;
-
+    collapsible: boolean;
 
     constructor(atSidenavItem: any = null) {
         if (atSidenavItem) {
@@ -27,6 +27,7 @@ export class AtSidenavItem {
             this.customClass = atSidenavItem.customClass;
             this.renderItem = atSidenavItem.renderItem;
             this.pathPrefix = atSidenavItem.pathPrefix || '';
+            this.collapsible = atSidenavItem.collapsible;
         }
     }
 

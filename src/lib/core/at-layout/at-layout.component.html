@@ -1,25 +1,25 @@
-<ng-template #headerTpl>
-    <ng-content select="[at-layout-header]"></ng-content>
-</ng-template>
+<!--<ng-template #headerTpl>-->
+    <!--<ng-content select="[at-layout-header]"></ng-content>-->
+<!--</ng-template>-->
 
-<ng-template #contentTpl>
-    <ng-content select="[at-layout-content]"></ng-content>
-</ng-template>
+<!--<ng-template #contentTpl>-->
+    <!--<ng-content select="[at-layout-content]"></ng-content>-->
+<!--</ng-template>-->
 
-<ng-template #sideBarLeftTpl>
-    <ng-content select="[at-layout-sidebar-left]"></ng-content>
-</ng-template>
+<!--<ng-template #sideBarLeftTpl>-->
+    <!--<ng-content select="[at-layout-sidebar-left]"></ng-content>-->
+<!--</ng-template>-->
 
-<ng-template #sideBarRightTpl>
-    <ng-content select="[at-layout-sidebar-right]"></ng-content>
-</ng-template>
+<!--<ng-template #sideBarRightTpl>-->
+    <!--<ng-content select="[at-layout-sidebar-right]"></ng-content>-->
+<!--</ng-template>-->
 
 <div *ngIf="layoutType === 'main'" class="at-main-container" fxLayout="column">
     <ng-container *ngIf="layoutToolbar.position === 'outside'">
         <ng-template [cdkPortalHost]="layoutToolbar"></ng-template>
     </ng-container>
     <mat-sidenav-container>
-        <mat-sidenav *ngIf="layoutSideNav && layoutSideNav.collapsible" #sideNav
+        <mat-sidenav *ngIf="layoutSideNav" #sideNav
                      class="at-sidenav at-w-280"
                      align="start"
                      atSidenavCollapsible
@@ -31,16 +31,16 @@
             <ng-template [cdkPortalHost]="layoutSideNav"></ng-template>
         </mat-sidenav>
 
-        <mat-sidenav *ngIf="layoutSideNav && !layoutSideNav.collapsible" #sideNav
-                     class="at-sidenav"
-                     align="start"
-                     [mode]="mode ? mode : (isSmallScreen ? 'over' : 'side')"
-                     [opened]="snOpened"
-                     layout="column"
-                     layout-fill
-                     (close)="onCloseSideNav($event)">
-            <ng-template [cdkPortalHost]="layoutSideNav"></ng-template>
-        </mat-sidenav>
+        <!--<mat-sidenav *ngIf="layoutSideNav && !layoutSideNav.collapsible" #sideNav-->
+                     <!--class="at-sidenav"-->
+                     <!--align="start"-->
+                     <!--[mode]="mode ? mode : (isSmallScreen ? 'over' : 'side')"-->
+                     <!--[opened]="snOpened"-->
+                     <!--layout="column"-->
+                     <!--layout-fill-->
+                     <!--(close)="onCloseSideNav($event)">-->
+            <!--<ng-template [cdkPortalHost]="layoutSideNav"></ng-template>-->
+        <!--</mat-sidenav>-->
 
         <mat-sidenav *ngIf="layoutSidePanel" #sidePanel
                      align="end"

@@ -58,6 +58,18 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
      * @internal use Only
      * @type {boolean}
      */
+    snOpened = true;
+
+    /**
+     * @internal use Only
+     * @type {boolean}
+     */
+    spOpened = false;
+
+    /**
+     * @internal use Only
+     * @type {boolean}
+     */
     layoutSideBarLeft: AtLayoutSideBarLeftComponent;
 
     /**
@@ -65,6 +77,12 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
      * @type {boolean}
      */
     layoutSideBarRight: AtLayoutSideBarRightComponent;
+
+    /**
+     * @internal use Only
+     * @type {boolean}
+     */
+    layoutSideNav: AtLayoutSideNavComponent;
 
     /**
      * @internal use Only
@@ -159,7 +177,13 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
      */
     @Output() onCloseSideBarRight: EventEmitter<boolean> = new EventEmitter();
 
-    @HostBinding('class.at-hp-100') scrollOnContent: boolean = false;
+    /**
+     * Emit false when sideNav is closed
+     * @type {EventEmitter<any>}
+     */
+    @Output() onCloseSideNav: EventEmitter<boolean> = new EventEmitter();
+
+    @HostBinding('class.at-hp-100') scrollOnContent: boolean = true;
 
     constructor(private mediaService: AtMediaService,
                 private ngZone: NgZone,
@@ -169,7 +193,7 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // console.log(this.sideNav)
-        this.scrollOnContent = this.scrollOn === 'content';
+        // this.scrollOnContent = this.scrollOn === 'content';
 
         this.querySubscription =
             this.mediaService.registerQuery('gt-sm').subscribe((matches: boolean) => {
@@ -181,6 +205,7 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
 
                         this.lsOpened = !this.isSmallScreen;
                         this.rsOpened = !this.isSmallScreen;
+                        this.snOpened = !this.isSmallScreen;
 
                         this.changeDetectorRef.markForCheck();
                     }
@@ -205,6 +230,22 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
     }
 
     /**
+     * Open / Close sidenav
+     */
+    public toggleSideNav() {
+        this.snOpened = !this.snOpened;
+        this.changeDetectorRef.markForCheck();
+    }
+
+    /**
+     * Open / Close sidepanel
+     */
+    public toggleSidePanel() {
+        this.spOpened = !this.spOpened;
+        this.changeDetectorRef.markForCheck();
+    }
+
+    /**
      * @internal use only
      */
     closeLeftSidenav(): void {
@@ -224,6 +265,24 @@ export class AtLayoutSideBarComponent implements OnInit, OnDestroy {
         } else {
             this.rsOpened = false;
         }
+    }
+
+    /**
+     * @internal use only
+     */
+    closeSideNav() {
+        if (isBoolean(this.layoutSideNav.opened)) {
+            this.onCloseSideNav.emit(false);
+        } else {
+            this.snOpened = false;
+        }
+    }
+
+    /**
+     * @internal use only
+     */
+    closeSidePanel() {
+        this.spOpened = false;
     }
 
     /**
@@ -300,7 +359,7 @@ export class AtLayoutHeaderComponent implements AfterViewInit {
         return '';
     }
 
-    @Input() position: 'inside' | 'cover' | 'outside';
+    @Input() position: 'inside' | 'cover' | 'outside' = 'inside';
 
     constructor(@Inject(forwardRef(() => AtLayoutSideBarComponent))
                 private _parent: AtLayoutSideBarComponent,
@@ -447,6 +506,78 @@ export class AtLayoutSideBarRightComponent implements OnInit {
 }
 
 @Component({
+    selector: 'at-layout-sidenav',
+    template: '<ng-content></ng-content>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutSidenavComponent',
+})
+export class AtLayoutSideNavComponent implements OnInit {
+
+    private _elevation: string;
+    /**
+     * Sets sidebar width. Defaults to "200px"
+     * @type {string}
+     */
+    @Input() width?: string = '280px';
+
+    /**
+     * mode?: "side" | "cover"
+     * Sets sidebar mode. Defaults to ""
+     * @type {string}
+     */
+    @Input() mode?: string;
+
+    /**
+     * opened?:
+     * Sets the sidebar opened property. Defaults to true
+     * @type {boolean}
+     */
+    @Input() opened?: boolean;
+
+    /**
+     * mediaQuery?:
+     * A media query string. Defaults to "gt-sm"
+     * @type {string}
+     */
+    @Input() mediaQuery?: string = 'gt-sm';
+
+    /**
+     * mediaClasses?:
+     * A set of classes to apply based on mediaQuery. Defaults to ['at-sidenav-no-background']
+     * @type {string[]}
+     */
+    @Input() mediaClasses?: string[] = [];
+
+    @Input()
+    set elevation(e: string) {
+        const eNumber = parseInt(e);
+        if (eNumber && (eNumber >= 0 && eNumber <= 24)) {
+            this._elevation = e;
+        } else {
+            throw new Error('AtLayoutSideNavComponent: Elevation index must be between 0 and 24');
+        }
+    }
+
+    get elevation(): string {
+        if (this._elevation) {
+            return 'mat-elevation-z' + this._elevation;
+        }
+
+        return '';
+    }
+
+    constructor(@Inject(forwardRef(() => AtLayoutSideBarComponent))
+                private _parent: AtLayoutSideBarComponent) {
+
+    }
+
+    ngOnInit(): void {
+        this._parent.layoutSideNav = this;
+    }
+}
+
+@Component({
     selector: 'at-layout-footer',
     template: `
         <div [style.height]="height" [ngClass]="[color]"
@@ -489,7 +620,7 @@ export class AtLayoutFooterComponent implements AfterViewInit {
         return this._height;
     }
 
-    @Input() position: 'inside' | 'cover' | 'outside';
+    @Input() position: 'inside' | 'cover' | 'outside' = 'inside';
 
     constructor(@Inject(forwardRef(() => AtLayoutSideBarComponent))
                 private _parent: AtLayoutSideBarComponent,

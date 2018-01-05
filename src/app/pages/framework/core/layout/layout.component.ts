@@ -15,9 +15,12 @@ export class LayoutComponent implements OnInit {
 
     overview: string;
     api: string;
+
     coreUrl = 'https://raw.githubusercontent.com/dbartumeu/atomic/master/src/lib/core';
     module = 'at-layout';
 
+    overviewRendered = false;
+    apiRendered = false;
 
     constructor(public http: HttpClient) {
         this.getData('at-layout', 'README');
@@ -31,16 +34,33 @@ export class LayoutComponent implements OnInit {
 
     selectedTabChange(e) {
         console.log(e);
+        if(e.index == 1 && !this.apiRendered){
+            setTimeout(() => {
+                hljs.initHighlighting();
+                this.apiRendered = true;
+            }, 1000);
+        }
     }
+
 
     getData(module, doc) {
         const url = this.coreUrl + '/' + module + '/' + doc + '.md';
         this.http.get(url, {responseType: 'text'}).subscribe(
             data => {
-                this.api = data;
-                setTimeout(() => {
-                    hljs.initHighlighting();
-                }, 2000);
+                if (doc === 'README') {
+                    this.overview = data;
+                    if (!this.overviewRendered) {
+                        setTimeout(() => {
+                            hljs.initHighlighting();
+                            this.overviewRendered = true;
+                        }, 2000);
+                    }
+                }
+
+                if (doc === 'API') {
+                    this.api = data;
+                }
+
             },
             err => console.error(err)
         );

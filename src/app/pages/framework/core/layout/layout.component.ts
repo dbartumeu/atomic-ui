@@ -15,22 +15,27 @@ export class LayoutComponent implements OnInit {
 
     overview: string;
     api: string;
-    url = 'https://raw.githubusercontent.com/Teradata/covalent/v1.0.0-beta.4/src/platform/core/layout/README.md';
+    coreUrl = 'https://raw.githubusercontent.com/dbartumeu/atomic/master/src/lib/core';
+    module = 'at-layout';
+
 
     constructor(public http: HttpClient) {
-        this.getData();
+        this.getData('at-layout', 'README');
+        this.getData('at-layout', 'API');
     }
 
     ngOnInit() {
 
     }
 
+
     selectedTabChange(e) {
         console.log(e);
     }
 
-    getData() {
-        this.http.get(this.url, {responseType: 'text'}).subscribe(
+    getData(module, doc) {
+        const url = this.coreUrl + '/' + module + '/' + doc + '.md';
+        this.http.get(url, {responseType: 'text'}).subscribe(
             data => {
                 this.api = data;
                 setTimeout(() => {

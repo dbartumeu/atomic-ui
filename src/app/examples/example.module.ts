@@ -11,7 +11,7 @@ export interface LiveExample {
 
 export const EXAMPLE_COMPONENTS = {
     'layout-basic': {
-        title: 'Renders a basic layout',
+        title: 'Basic Layout',
         component: LayoutBasicComponent,
         additionalFiles: null,
         selectorName: 'layout-basic'

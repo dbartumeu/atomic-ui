@@ -1,3 +1,26 @@
-<div>
-    <ng-template [portalHost]="selectedPortal"></ng-template>
-</div>
+<mat-card class="at-no-p">
+    <mat-toolbar>
+        <h2>{{exampleData.title}}</h2>
+        <span fxFlex></span>
+        <button mat-icon-button (click)="showSourceCode = !showSourceCode">
+            <mat-icon>code</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div *ngIf="showSourceCode">
+        <mat-tab-group class="at-h-300">
+            <mat-tab label="HTML">
+                <td-highlight lang="html" [content]="htmlCode"></td-highlight>
+            </mat-tab>
+            <mat-tab label="TS">
+                <td-highlight lang="typescript" [content]="tsCode"></td-highlight>
+            </mat-tab>
+            <mat-tab label="CSS">
+                <td-highlight lang="sass" [content]="scssCode"></td-highlight>
+            </mat-tab>
+        </mat-tab-group>
+        <mat-divider></mat-divider>
+    </div>
+    <div class="at-p-40" style="max-height: 500px; overflow: auto">
+        <ng-template [portalHost]="selectedPortal"></ng-template>
+    </div>
+</mat-card>

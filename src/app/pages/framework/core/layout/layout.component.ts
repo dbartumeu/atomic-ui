@@ -1,5 +1,9 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import {HttpClient} from '@angular/common/http';
 import * as hljs from 'highlight.js/lib';
+
 
 @Component({
     selector: 'app-blank',
@@ -10,29 +14,24 @@ import * as hljs from 'highlight.js/lib';
 export class LayoutComponent implements OnInit {
 
     overview: string;
+    url = 'https://raw.githubusercontent.com/Teradata/covalent/v1.0.0-beta.4/src/platform/core/layout/README.md';
 
-    constructor() {
-        this.fetch();
+    constructor(public http: HttpClient) {
+        this.getData();
     }
 
     ngOnInit() {
 
     }
 
-    fetch() {
-        const req = new XMLHttpRequest();
-        req.open('GET', `https://raw.githubusercontent.com/Teradata/covalent/v1.0.0-beta.4/src/platform/core/layout/README.md`);
-
-        req.onload = () => {
-            this.overview = req.response;
-
-            setTimeout(() => {
+    getData() {
+        this.http.get(this.url, {responseType: 'text'}).subscribe(
+            data => {
+                this.overview = data;
                 hljs.initHighlighting();
-            }, 3000);
-
-        };
-
-        req.send();
+            },
+            err => console.error(err)
+        );
     }
 
 

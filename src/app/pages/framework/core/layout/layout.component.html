@@ -1,7 +1,7 @@
 <at-layout-sidebar #layoutSidebarRef
                    [layoutType]="'basic'"
                    scrollOn="content"
-                   [showAtScrollbar]="true">
+                   [showAtScrollbar]="false">
 
     <at-layout-header color="light-blue-700">
         <div class="at-p-40 at-hp-100">
@@ -10,7 +10,7 @@
     </at-layout-header>
 
     <at-layout-content>
-        <mat-tab-group class="at-hp-100 at-wp-75 at-p-40" style="margin-left: auto; margin-right: auto">
+        <mat-tab-group class="at-wp-75 at-p-40" style="margin-left: auto; margin-right: auto">
             <mat-tab label="OVERVIEW">
 
                 <div class="at-p-40">
@@ -74,9 +74,7 @@
             </mat-tab>
             <mat-tab label="EXAMPLES">
                 <div class="at-p-40">
-                    <mat-card>
-                        <example-viewer example="layout-basic"></example-viewer>
-                    </mat-card>
+                    <example-viewer example="layout-basic"></example-viewer>
                 </div>
 
             </mat-tab>

@@ -2,20 +2,26 @@
     <mat-toolbar>
         <h2>{{exampleData.title}}</h2>
         <span fxFlex></span>
-        <button mat-icon-button (click)="showSourceCode = !showSourceCode">
+        <button mat-icon-button (click)="toggleCodeViewer()">
             <mat-icon>code</mat-icon>
         </button>
     </mat-toolbar>
     <div *ngIf="showSourceCode">
         <mat-tab-group class="at-h-300">
             <mat-tab label="HTML">
-                <td-highlight lang="html" [content]="htmlCode"></td-highlight>
+                <td-highlight lang="html">
+                    {{htmlCode}}
+                </td-highlight>
             </mat-tab>
             <mat-tab label="TS">
-                <td-highlight lang="typescript" [content]="tsCode"></td-highlight>
+                <td-highlight lang="typescript">
+                    {{tsCode}}
+                </td-highlight>
             </mat-tab>
             <mat-tab label="CSS">
-                <td-highlight lang="scss" [content]="scssCode"></td-highlight>
+                <td-highlight lang="css">
+                    {{scssCode}}
+                </td-highlight>
             </mat-tab>
         </mat-tab-group>
         <mat-divider></mat-divider>

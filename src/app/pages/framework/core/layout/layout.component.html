@@ -3,14 +3,16 @@
                    scrollOn="content"
                    [showAtScrollbar]="false">
 
-    <at-layout-header color="light-blue-700">
+    <at-layout-header color="light-blue-600">
         <div class="at-p-40 at-hp-100">
             <h2 class="at-no-m mat-display-1">Atomic Layout</h2>
         </div>
     </at-layout-header>
 
     <at-layout-content>
-        <mat-tab-group class="at-wp-75 at-p-40" style="margin-left: auto; margin-right: auto">
+
+        <mat-tab-group class="at-wp-75 at-p-40" style="margin-left: auto; margin-right: auto"
+                       (selectedTabChange)="selectedTabChange($event)">
             <mat-tab label="OVERVIEW">
 
                 <div class="at-p-40">
@@ -69,7 +71,7 @@
             </mat-tab>
             <mat-tab label="API">
                 <div class="at-p-40">
-                    <td-markdown [content]="overview"></td-markdown>
+                    <td-markdown [content]="api"></td-markdown>
                 </div>
             </mat-tab>
             <mat-tab label="EXAMPLES">

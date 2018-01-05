@@ -14,6 +14,7 @@ import * as hljs from 'highlight.js/lib';
 export class LayoutComponent implements OnInit {
 
     overview: string;
+    api: string;
     url = 'https://raw.githubusercontent.com/Teradata/covalent/v1.0.0-beta.4/src/platform/core/layout/README.md';
 
     constructor(public http: HttpClient) {
@@ -24,11 +25,17 @@ export class LayoutComponent implements OnInit {
 
     }
 
+    selectedTabChange(e) {
+        console.log(e);
+    }
+
     getData() {
         this.http.get(this.url, {responseType: 'text'}).subscribe(
             data => {
-                this.overview = data;
-                hljs.initHighlighting();
+                this.api = data;
+                setTimeout(() => {
+                    hljs.initHighlighting();
+                }, 2000);
             },
             err => console.error(err)
         );

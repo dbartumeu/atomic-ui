@@ -50,6 +50,10 @@ export class ExampleViewerComponent {
     constructor(public http: HttpClient) {
     }
 
+    toggleCodeViewer() {
+        this.showSourceCode = !this.showSourceCode;
+    }
+
     getData(name, ext) {
         const url = this.baseUrl + '/' + name + '/' + name + '.component.' + ext;
         this.http.get(url, {responseType: 'text'}).subscribe(

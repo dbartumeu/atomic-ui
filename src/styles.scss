@@ -22,7 +22,7 @@ $default-theme: mat-light-theme($default-primary, $default-accent);
 }
 
 // Define Atomic's light theme.
-$at-light-primary: mat-palette($mat-light-blue);
+$at-light-primary: mat-palette($mat-light-blue,700);
 $at-light-accent: mat-palette($mat-pink, A200, A100, A400);
 $at-light-theme: mat-light-theme($at-light-primary, $at-light-accent);
 

@@ -10,6 +10,7 @@ import {AtScrollbarModule} from '@atomic/core';
 import {CoreModule} from "./core/core.module";
 import {FrameworkModule} from './pages/framework/framework.module';
 import {ExampleModule} from './examples/example.module';
+import {HljsService} from './shared/hljs/hljs.service';
 
 
 @NgModule({
@@ -21,14 +22,16 @@ import {ExampleModule} from './examples/example.module';
         BrowserAnimationsModule,
         FormsModule,
         RoutingModule,
-        AtScrollbarModule.forRoot(),
+        AtScrollbarModule,
         CoreModule,
         FeatureModule,
         FrameworkModule,
         ExampleModule
     ],
     exports: [],
-    providers: [],
+    providers: [
+        HljsService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

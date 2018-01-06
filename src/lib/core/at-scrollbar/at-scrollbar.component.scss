@@ -1,87 +1,77 @@
-[data-scrollbar], [scrollbar], scrollbar {
+at-scrollbar {
   display: block;
-  position: relative
+  position: relative;
+  height: 100%;
+  overflow: hidden !important;
 }
 
-[data-scrollbar] .scroll-content,
-[scrollbar] .scroll-content,
-scrollbar .scroll-content {
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0)
+.at-scrollbar-container {
+  position: relative;
+  overflow: hidden !important;
+  width: 100%;
+  height: 100%;
 }
 
-[data-scrollbar].sticky .scrollbar-track,
-[scrollbar].sticky .scrollbar-track,
-scrollbar.sticky .scrollbar-track {
-  background: hsla(0, 0%, 87%, .75)
-}
-
-[data-scrollbar] .scrollbar-track,
-[scrollbar] .scrollbar-track,
-scrollbar .scrollbar-track {
-  position: absolute;
+.at-scrollbar-autohide > .at-scrollbar {
   opacity: 0;
+  transition: opacity 120ms ease-out;
+}
+
+.at-scrollbar-autohide:hover > .at-scrollbar,
+.at-scrollbar-autohide:active > .at-scrollbar,
+.at-scrollbar-autohide:focus > .at-scrollbar {
+  opacity: 1;
+  transition: opacity 340ms ease-out;
+}
+
+.at-scrollbar {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
   z-index: 1;
-  transition: opacity .5s ease-out, background .5s ease-out;
-  background: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none
+  border-radius: 3px;
 }
 
-[data-scrollbar] .scrollbar-track.show,
-[data-scrollbar] .scrollbar-track:hover,
-[scrollbar] .scrollbar-track.show,
-[scrollbar] .scrollbar-track:hover,
-scrollbar .scrollbar-track.show,
-scrollbar .scrollbar-track:hover {
-
-  opacity: 1
+.-vertical {
+  width: 6px;
+  top: 2px;
+  .at-scrollbar-thumb {
+    width: 100%;
+  }
 }
 
-[data-scrollbar] .scrollbar-track:hover,
-[scrollbar] .scrollbar-track:hover,
-scrollbar .scrollbar-track:hover {
-  background: hsla(0, 0%, 87%, .75)
+.-horizontal {
+  height: 6px;
+  left: 2px;
+  .at-scrollbar-thumb {
+    height: 100%;
+  }
 }
 
-[data-scrollbar] .scrollbar-track-x,
-[scrollbar] .scrollbar-track-x,
-scrollbar .scrollbar-track-x {
-  bottom: 0;
-  left: 0;
+.at-scrollbar-disabled {
+  display: none;
+}
+
+.at-scrollbar-thumb {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+  border-radius: inherit;
+  background-color: rgba(0, 0, 0, .2);
+  transform: translate3d(0, 0, 0);
+
+  &:hover,
+  &:active {
+    background-color: rgba(0, 0, 0, .3);
+  }
+}
+
+.at-scrollbar-view {
   width: 100%;
-  height: 8px
-}
-
-[data-scrollbar] .scrollbar-track-y,
-[scrollbar] .scrollbar-track-y,
-scrollbar .scrollbar-track-y {
-  top: 0;
-  right: 0;
-  width: 8px;
-  height: 100%
-}
-
-[data-scrollbar] .scrollbar-thumb,
-[scrollbar] .scrollbar-thumb,
-scrollbar .scrollbar-thumb {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  background: rgba(0, 0, 0, .5);
-  border-radius: 4px
-}
-
-[data-scrollbar] .overscroll-glow,
-[scrollbar] .overscroll-glow,
-scrollbar .overscroll-glow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%
+  height: 100%;
+  overflow: scroll;
+  transform: translate3d(0, 0, 0);
+  -webkit-overflow-scrolliat: touch;
 }

@@ -2,8 +2,8 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import {HttpClient} from '@angular/common/http';
-import * as hljs from 'highlight.js/lib';
-
+import {HljsService} from '../../../../shared/hljs/hljs.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
     selector: 'app-blank',
@@ -22,38 +22,46 @@ export class LayoutComponent implements OnInit {
     overviewRendered = false;
     apiRendered = false;
 
-    constructor(public http: HttpClient) {
-        this.getData('at-layout', 'README');
-        this.getData('at-layout', 'API');
+    myControl: FormControl = new FormControl();
+
+    options = [
+        'One',
+        'Two',
+        'Three'
+    ];
+
+    constructor(public http: HttpClient,
+                private hljs: HljsService) {
     }
 
     ngOnInit() {
+        console.log('Oninit');
+        this.overviewRendered = false;
+        this.apiRendered = false;
+
+        this.getData('at-layout', 'README');
+        this.getData('at-layout', 'API');
 
     }
 
-
     selectedTabChange(e) {
-        console.log(e);
-        if(e.index == 1 && !this.apiRendered){
-            setTimeout(() => {
-                hljs.initHighlighting();
-                this.apiRendered = true;
-            }, 1000);
+        if (e.index == 1 && !this.apiRendered) {
+            this.hljs.init(1000);
+            this.apiRendered = true;
         }
     }
 
-
     getData(module, doc) {
+        console.log(this.overviewRendered);
+        console.log(this.apiRendered);
         const url = this.coreUrl + '/' + module + '/' + doc + '.md';
         this.http.get(url, {responseType: 'text'}).subscribe(
             data => {
                 if (doc === 'README') {
                     this.overview = data;
                     if (!this.overviewRendered) {
-                        setTimeout(() => {
-                            hljs.initHighlighting();
-                            this.overviewRendered = true;
-                        }, 2000);
+                        this.hljs.init(1000);
+                        this.overviewRendered = true;
                     }
                 }
 

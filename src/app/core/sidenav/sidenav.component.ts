@@ -1,14 +1,13 @@
 import {Subscription} from 'rxjs';
 import {Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit} from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
-import {AtSidenavService, AtScrollbarService, AtSidenavItem} from '@atomic/core';
+import {AtSidenavService, AtSidenavItem} from '@atomic/core';
 
 @Component({
     selector: 'app-sidenav',
     templateUrl: './sidenav.component.html',
     styleUrls: ['./sidenav.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    providers: [AtScrollbarService]
+    encapsulation: ViewEncapsulation.None
 })
 export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
 
@@ -23,7 +22,6 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
     // Todo Change all Setup to core component
 
     constructor(private avSidenavService: AtSidenavService,
-                private avScrollbarService: AtScrollbarService,
                 public router: Router) {
         if (this.avSidenavService.getAtSidenavItems().length === 0) {
             avSidenavService.buildMenuByRoutes(router.config);
@@ -81,10 +79,10 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngAfterViewInit() {
         // force scrollbar sync when sidenav items are toggled
-        this.avSidenavCurrentlyOpenChange = this.avSidenavService.avSidenavCurrentlyOpenChange.subscribe(() => {
-            let sb = this.avScrollbarService.getInstance('avSidenavScrollbar');
-            sb.update(true);
-        });
+        // this.avSidenavCurrentlyOpenChange = this.avSidenavService.avSidenavCurrentlyOpenChange.subscribe(() => {
+        //     // let sb = this.avScrollbarService.getInstance('avSidenavScrollbar');
+        //     // sb.update(true);
+        // });
     }
 
     ngOnDestroy() {

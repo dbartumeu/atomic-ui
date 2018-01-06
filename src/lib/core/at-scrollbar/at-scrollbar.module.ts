@@ -1,12 +1,13 @@
-import {ModuleWithProviders, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {AtScrollbarComponent} from './at-scrollbar.component';
-import {AtScrollbarsConfig, AtScrollbarService, IAtScrollbarsConfig} from './at-scrollbar.service';
-import {AtCommonModule} from '../at-common/at-common.module';
-export {AtScrollbarsConfig, AtScrollbarService}
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+
 
 @NgModule({
     imports: [
-        AtCommonModule
+        CommonModule,
+        ScrollDispatchModule
     ],
     declarations: [
         AtScrollbarComponent
@@ -17,10 +18,4 @@ export {AtScrollbarsConfig, AtScrollbarService}
     providers: [],
 })
 export class AtScrollbarModule {
-    static forRoot(config?: IAtScrollbarsConfig): ModuleWithProviders {
-        return {
-            ngModule: AtScrollbarModule,
-            providers: [AtScrollbarService, {provide: 'config', useValue: config}],
-        };
-    }
 }

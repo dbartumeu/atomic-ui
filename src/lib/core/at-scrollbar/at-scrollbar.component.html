@@ -1,1 +1,19 @@
-<ng-content></ng-content>
+<ng-template #contentTpl>
+    <ng-content></ng-content>
+</ng-template>
+<div *ngIf="render" class="at-scrollbar-container" [class.at-scrollbar-autohide]="autoHide">
+    <div #barX class="at-scrollbar -horizontal" [class.at-scrollbar-disabled]="!trackX">
+        <div #thumbX class="at-scrollbar-thumb"></div>
+    </div>
+
+    <div #barY class="at-scrollbar -vertical" [class.at-scrollbar-disabled]="!trackY">
+        <div #thumbY class="at-scrollbar-thumb"></div>
+    </div>
+
+    <div #view cdk-scrollable class="at-scrollbar-view {{viewClass}}">
+        <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+    </div>
+</div>
+<ng-container *ngIf="!render">
+    <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+</ng-container>

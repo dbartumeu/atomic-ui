@@ -26,6 +26,7 @@ import {
     AtLayoutSideBarRightComponent,
     AtLayoutFooterComponent,
 } from "./at-layout-sidebar/at-layout-sidebar.component";
+import {ScrollDispatchModule} from '@angular/cdk/scrolling';
 
 export {AtLayoutComponent};
 
@@ -42,6 +43,7 @@ export {AtLayoutComponent};
         PortalModule,
         AtScrollbarModule,
         AtSidenavModule,
+        ScrollDispatchModule
     ],
     declarations: [
         AtLayoutComponent,

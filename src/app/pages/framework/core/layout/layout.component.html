@@ -1,7 +1,7 @@
 <at-layout-sidebar #layoutSidebarRef
                    [layoutType]="'basic'"
                    scrollOn="content"
-                   [showAtScrollbar]="false">
+                   [showAtScrollbar]="true">
 
     <at-layout-header color="light-blue-600">
         <div class="at-p-40 at-hp-100">
@@ -21,6 +21,17 @@
             </mat-tab>
             <mat-tab label="API">
                 <div class="at-p-40">
+                    <form class="example-form">
+                        <mat-form-field class="example-full-width">
+                            <input type="text" placeholder="Pick one" aria-label="Number" matInput
+                                   [formControl]="myControl" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let option of options" [value]="option">
+                                    {{ option }}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </form>
                     <td-markdown [content]="api"></td-markdown>
                 </div>
             </mat-tab>

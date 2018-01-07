@@ -1,351 +1,36 @@
 import {
     AfterViewInit,
-    ChangeDetectionStrategy, ChangeDetectorRef,
-    Component, ContentChild, Directive, ElementRef, EventEmitter, Inject, Input, NgZone,
-    OnDestroy, OnInit, Output, TemplateRef, ViewChild, ViewContainerRef
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component, ElementRef,
+    EventEmitter,
+    forwardRef, HostBinding,
+    Inject,
+    Input,
+    NgZone, OnDestroy,
+    OnInit,
+    Output,
+    ViewEncapsulation,
 } from '@angular/core';
-import {AtMediaService} from '../at-media/at-media.service';
-import {Subscription} from 'rxjs/Subscription';
-import {TemplatePortalDirective} from '@angular/cdk/portal';
-import {isBoolean, isString} from 'util';
-import * as _ from 'lodash';
-import {AtUtilService} from '../at-common/services/util.service';
-import {AtSidenavCollapsibleDirective} from '../at-sidenav/at-sidenav-collapsed.directive';
-import {DOCUMENT} from '@angular/common';
-import {AtMediaReplayService} from '../at-common/services/mediareplay/media-replay.service';
-import {AtSidenavService} from '../at-sidenav/at-sidenav.service';
-
-@Directive({
-    selector: '[at-layout-toolbar]ng-template',
-})
-export class AtLayoutToolbarDirective extends TemplatePortalDirective {
-    /**
-     * position?: "inside" | "outside"
-     * Set the toolbar position. If position = "inside" the toolbar is placed inside the sidenav container. Defaults to 'inside'
-     * @type {string}
-     */
-    @Input() position: 'inside' | 'outside' = 'inside';
-
-    constructor(templateRef: TemplateRef<any>, viewContainerRef: ViewContainerRef) {
-        super(templateRef, viewContainerRef);
-    }
-}
-
-@Directive({
-    selector: '[at-layout-sidenav]ng-template',
-})
-export class AtLayoutSideNavDirective extends TemplatePortalDirective {
-    /**
-     * size?: "default" | "medium" | "large"
-     * Sets the sidenav size. Defaults to 'default'
-     * @type {string}
-     */
-    @Input() size: 'default' | 'medium' | 'large' = 'default';
-
-    /**
-     * pattern?: "no-pattern" | "pattern-1" | "pattern-2" | "pattern-3" | "pattern-4"
-     * Sets the sidenav pattern. Defaults to 'no-pattern'
-     * @type {string}
-     */
-    @Input() pattern: 'no-pattern' | 'pattern-1' | 'pattern-2' | 'pattern-3' | 'pattern-4' = 'no-pattern';
-
-    /**
-     * elevation?: "no-elevation" | "z1" | "z2" | "z3" | "z4" | "z5" | "z6" | "z7"
-     * Sets the sidenav elevation. Defaults to 'no-elevation'
-     * @type {string}
-     */
-    @Input() elevation: 'no-elevation' | 'z1' | 'z2' | 'z3' | 'z4' | 'z5' | 'z6' | 'z7' = 'no-elevation';
-
-    /**
-     * collapsible?: true | false
-     * Sets collapsible feature. Defaults to true
-     * @type {boolean}
-     */
-    @Input() collapsible: true;
-
-    /**
-     * mode?: "" | "over" | "side"
-     * Sets the sidenav mode. If mode = "" the mode is handled by AtLayout ("over" on small screens "side" on all others). Defaults to ""
-     * @type {string}
-     */
-    @Input() mode: '' | 'over' | 'side' = '';
-
-    constructor(templateRef: TemplateRef<any>, viewContainerRef: ViewContainerRef) {
-        super(templateRef, viewContainerRef);
-    }
-}
-
-@Directive({
-    selector: '[at-layout-sidepanel]ng-template',
-})
-export class AtLayoutSidePanelDirective extends TemplatePortalDirective {
-
-    /**
-     * width?: string
-     * Sets the sidenav width. Defaults to "200px"
-     */
-    @Input() width?: string = '200px';
-
-    constructor(templateRef: TemplateRef<any>, viewContainerRef: ViewContainerRef) {
-        super(templateRef, viewContainerRef);
-    }
-}
-
-@Directive({
-    selector: '[at-layout-sidebar-left]',
-})
-export class AtLayoutSideBarLeftDirective {
-    /**
-     * Sets sidebar width. Defaults to "200px"
-     * @type {string}
-     */
-    @Input() width?: string = '200px';
-
-    /**
-     * mode?: "side" | "cover"
-     * Sets sidebar mode. Defaults to ""
-     * @type {string}
-     */
-    @Input() mode?: string;
-
-    /**
-     * opened?:
-     * Sets the sidebar opened property. Defaults to true
-     * @type {boolean}
-     */
-    @Input() opened?: boolean;
-
-    /**
-     * mediaQuery?:
-     * A media query string. Defaults to "gt-sm"
-     * @type {string}
-     */
-    @Input() mediaQuery?: string = 'gt-sm';
-
-    /**
-     * mediaClasses?:
-     * A set of classes to apply based on mediaQuery. Defaults to ['at-sidenav-no-background']
-     * @type {string[]}
-     */
-    @Input() mediaClasses?: string[] = ['at-sidenav-no-background'];
-
-    /**
-     * showAtScrollbar?:
-     * Show AtScrollbar instead browser scrollbar. Defaults to true
-     * @type {boolean}
-     */
-    @Input() showAtScrollbar?: boolean = true;
-
-    /**
-     * Emit false when sidebar is closed
-     * @type {EventEmitter<any>}
-     */
-    @Output() onClose = new EventEmitter();
-
-    /**
-     * componentRef?:
-     * Get the reference of the component to attach AtLayoutSideBarLeftDirective. Defaults to undefined
-     * @type {AtLayoutComponent}
-     */
-    @Input() componentRef: AtLayoutComponent;
-
-    constructor(public element: ElementRef) {
-    }
-}
-
-@Directive({
-    selector: '[at-layout-sidebar-right]',
-})
-export class AtLayoutSideBarRightDirective {
-    /**
-     * Sets sidebar width. Defaults to "200px"
-     * @type {string}
-     */
-    @Input() width?: string = '200px';
-
-    /**
-     * mode?: "side" | "cover"
-     * Sets sidebar mode. Defaults to ""
-     * @type {string}
-     */
-    @Input() mode?: string;
-
-    /**
-     * opened?:
-     * Sets the sidebar opened property. Defaults to true
-     * @type {boolean}
-     */
-    @Input() opened?: boolean;
-
-    /**
-     * mediaQuery?:
-     * A media query string. Defaults to "gt-sm"
-     * @type {string}
-     */
-    @Input() mediaQuery?: string = 'gt-sm';
-
-    /**
-     * mediaClasses?:
-     * A set of classes to apply based on mediaQuery. Defaults to ['at-sidenav-no-background']
-     * @type {string[]}
-     */
-    @Input() mediaClasses?: string[] = ['at-sidenav-no-background'];
-
-    /**
-     * showAtScrollbar?:
-     * Show AtScrollbar instead browser scrollbar. Defaults to true
-     * @type {boolean}
-     */
-    @Input() showAtScrollbar?: boolean = true;
-
-
-    /**
-     * Emit false when sidebar is closed
-     * @type {EventEmitter<any>}
-     */
-    @Output() onClose = new EventEmitter();
-
-    /**
-     * componentRef?:
-     * Get the reference of the component to attach AtLayoutHeaderDirective. Defaults to undefined
-     * @type {AtLayoutComponent}
-     */
-    @Input() componentRef: AtLayoutComponent;
-
-    constructor() {
-
-    }
-}
-
-@Directive({
-    selector: '[at-layout-header]',
-})
-export class AtLayoutHeaderDirective {
-
-    /**
-     * height?:
-     * Sets the header height in px. Defaults to 130
-     * @type {number}
-     */
-    @Input() height: number = 130;
-
-    /**
-     * color?: "transparent" | "red-50" | "red-100" | ... | "red-900" | "pink-50" | "pink-100" | ... | "pink-900" |
-     * "purple-50" | "purple-100" ... | "purple-900" | "deep-purple-50" | "deep-purple-100" ... | "deep-purple-900" |
-     * "indigo-50" | "indigo-100" | ... | "indigo-900" | "blue-50" | "blue-100" | ... | "blue-900" |
-     * "teal-50" | "teal-100" | ... | "teal-900" | "green-50" | "green-100" | ... | "green-900" |
-     * "light-green-50" | "light-green-100" | ... | "light-green-900" | "lime-50" | "lime-100" | ... | "lime-900" |
-     * "yellow-50" | "yellow-100" | ... | "yellow-900" | "amber-50" | "amber-100" | ... | "amber-900" |
-     * "orange-50" | "orange-100" | ... | "orange-900" | "deep-orange-50" | "deep-orange-100" | ... | "deep-orange-900" |
-     * "brown-50" | "brown-100" | ... | "brown-900" | "grey-50" | "grey-100" | ... | "grey-900" |
-     * "blue-grey-50" | "blue-grey-100" | ... | "blue-grey-900"
-     * Sets the background color of the header. Defaults to "transparent"
-     * @type {string}
-     */
-    @Input() color: string = 'transparent';
-
-    /**
-     * pattern?: "pattern-1" | "pattern-2" | "pattern-3" | "pattern-4" | "pattern-5"
-     * Sets the background pattern of the header. Defaults to ""
-     * @type {string}
-     */
-    @Input() pattern: string = '';
-
-    /**
-     * componentRef?:
-     * Get the reference of the component to attach AtLayoutHeaderDirective. Defaults to undefined
-     * @type {AtLayoutComponent}
-     */
-    @Input() componentRef: AtLayoutComponent;
-
-    constructor() {
-    }
-}
-
-@Directive({
-    selector: '[at-layout-content]',
-})
-export class AtLayoutContentDirective {
-
-    /**
-     * showAtScrollbar?:
-     * Show AtScrollbar instead browser scrollbar. Defaults to true
-     * @type {boolean}
-     */
-    @Input() showAtScrollbar?: boolean = true;
-
-    /**
-     * containerStyle?:object
-     * Apply style to a content wrapper in json format
-     */
-    @Input() containerStyle?: object | null = null;
-
-    constructor(public element: ElementRef) {
-    }
-}
+import { Subscription } from 'rxjs/Subscription';
+import { isBoolean } from 'util';
+import { AtMediaService } from '../at-media/at-media.service';
 
 @Component({
     selector: 'at-layout',
     templateUrl: './at-layout.component.html',
     styleUrls: ['./at-layout.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
 })
-export class AtLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AtLayoutComponent implements OnInit, OnDestroy {
 
     private querySubscription: Subscription;
 
+    private _cardOffsetTop: number = -60;
+    private _cardOffsetBottom: number = 20;
 
-    /**
-     * @internal use Only
-     */
-    @ContentChild(AtLayoutToolbarDirective) layoutToolbar: AtLayoutToolbarDirective;
-
-    /**
-     * @internal use Only
-     */
-    @ContentChild(AtLayoutSideNavDirective) layoutSideNav: AtLayoutSideNavDirective;
-
-    /**
-     * @internal use Only
-     */
-    @ContentChild(AtLayoutSidePanelDirective) layoutSidePanel: AtLayoutSidePanelDirective;
-
-
-    /**
-     * @internal use Only
-     */
-    @ContentChild(AtLayoutHeaderDirective) layoutHeader: AtLayoutHeaderDirective;
-
-
-    /**
-     * @internal use Only
-     */
-    @ContentChild(AtLayoutSideBarLeftDirective) layoutSideBarLeft: AtLayoutSideBarLeftDirective;
-
-    /**
-     * @internal use Only
-     */
-    @ContentChild(AtLayoutSideBarRightDirective) layoutSideBarRight: AtLayoutSideBarRightDirective;
-
-    /**
-     * @internal use Only
-     */
-    @ContentChild(AtLayoutContentDirective) layoutContent: AtLayoutContentDirective;
-
-    /**
-     * layoutType?: "basic" | "cardOver"
-     * Sets the type of the Layout component. Defaults to "basic"
-     * @type {string}
-     */
-    @Input() layoutType: 'main' | 'basic' | 'cardOver' = 'basic';
-
-    /**
-     * scrollOn?: "content" | "container"
-     * Sets where the scroll will be positioned inside the Layout component. If scrollOn = "content" the header is fixed
-     * and the scroll is placed above the header. Defaults to "container" header and content can be scrolled.
-     * @type {string}
-     */
-    @Input() scrollOn: 'content' | 'container' = 'container';
+    private wasSmallScreen: boolean;
 
     /**
      * @internal use Only
@@ -357,105 +42,154 @@ export class AtLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
      * @internal use Only
      * @type {boolean}
      */
-    private wasSmallScreen: boolean;
+    rsOpened: boolean = true;
 
     /**
      * @internal use Only
      * @type {boolean}
      */
-    rsOpened = true;
+    lsOpened: boolean = true;
 
     /**
      * @internal use Only
      * @type {boolean}
      */
-    lsOpened = true;
+    snOpened: boolean = true;
 
     /**
      * @internal use Only
      * @type {boolean}
      */
-    snOpened = true;
+    spOpened: boolean = false;
 
     /**
      * @internal use Only
      * @type {boolean}
      */
-    spOpened = false;
+    layoutSideBarLeft: AtLayoutSideBarLeftComponent;
 
     /**
      * @internal use Only
+     * @type {boolean}
+     */
+    layoutSideBarRight: AtLayoutSideBarRightComponent;
+
+    /**
+     * @internal use Only
+     * @type {boolean}
+     */
+    layoutSideNav: AtLayoutSideNavComponent;
+
+    /**
+     * @internal use Only
+     * @type {boolean}
+     */
+    layoutHeader: AtLayoutHeaderComponent;
+
+    /**
+     * @internal use Only
+     * @type {boolean}
+     */
+    layoutFooter: AtLayoutFooterComponent;
+
+    /**
+     * layoutType?: "basic" | "cardOver"
+     * Sets the type of the Layout component. Defaults to "basic"
      * @type {string}
      */
-    lId = _.uniqueId('layout-');
+    @Input() layoutType: 'main' | 'basic' | 'cardOver' = 'basic';
 
-    constructor(public atUtil: AtUtilService,
-                private mediaService: AtMediaService,
+    /**
+     * scrollOn?: "content" | "container"
+     * Sets where the scroll will be positioned inside the Layout component.
+     * If scrollOn = "content" the header is fixed
+     * and the scroll is placed above the header. Defaults to "container" header and content can be scrolled.
+     * @type {string}
+     */
+    @Input() scrollOn: 'content' | 'container' = 'container';
+
+    /**
+     * showAtScrollbar?:
+     * Show AtScrollbar instead browser scrollbar. Defaults to true
+     * @type {boolean}
+     */
+    @Input() showAtScrollbar: boolean = true;
+
+    /**
+     * cardWidth?:
+     * The width of the card. Defaults to 75%
+     * @type {string}
+     */
+    @Input() cardWidth: string = '75%';
+
+    /**
+     * cardAlign?:
+     * The card alignment. Defaults to 'center'
+     * @type {'left' | 'center' | 'right'}
+     */
+    @Input() cardAlign: 'left' | 'center' | 'right' = 'center';
+
+    /**
+     * cardOffsetTop?:
+     * The card aligment. Defaults to 60
+     * @type {number}
+     */
+    @Input()
+    set cardOffsetTop(cot: number) {
+        if (cot) {
+            this._cardOffsetTop = cot * -1;
+        }
+    }
+
+    get cardOffsetTop(): number {
+        return this._cardOffsetTop;
+    }
+
+    /**
+     * cardOffsetBottom?:
+     * The card aligment. Defaults to 20
+     * @type {number}
+     */
+    @Input()
+    set cardOffsetBottom(cob: number) {
+        if (cob) {
+            this._cardOffsetBottom = cob * -1;
+        }
+    }
+
+    get cardOffsetBottom(): number {
+        return this._cardOffsetBottom;
+    }
+
+    /**
+     * Emit false when sidebar left is closed
+     * @type {EventEmitter<any>}
+     */
+    @Output() onCloseSideBarLeft: EventEmitter<boolean> = new EventEmitter();
+
+    /**
+     * Emit false when sidebar right is closed
+     * @type {EventEmitter<any>}
+     */
+    @Output() onCloseSideBarRight: EventEmitter<boolean> = new EventEmitter();
+
+    /**
+     * Emit false when sideNav is closed
+     * @type {EventEmitter<any>}
+     */
+    @Output() onCloseSideNav: EventEmitter<boolean> = new EventEmitter();
+
+    @HostBinding('class.at-hp-100') scrollOnContent: boolean = true;
+
+    constructor(private mediaService: AtMediaService,
                 private ngZone: NgZone,
-                private element: ElementRef,
                 private changeDetectorRef: ChangeDetectorRef) {
 
-        if (this.layoutType === 'main') {
-            if (this.layoutHeader) {
-                throw Error(`Invalid Template: You can not use at-layout-header template in main layout`);
-            }
-        } else {
-            if (this.layoutToolbar) {
-                throw Error('Invalid Template: You can not use at-layout-toolbar template in ' + this.layoutType + ' layout');
-            }
-
-            if (this.layoutSideNav) {
-                throw Error('Invalid Template: You can not use at-layout-side-nav template in ' + this.layoutType + ' layout');
-            }
-
-            if (this.layoutSidePanel) {
-                throw Error('Invalid Template: You can not use at-layout-side-panel template in ' + this.layoutType + ' layout');
-            }
-
-            element.nativeElement.parentElement.className = 'at-layout-container';
-            element.nativeElement.id = this.lId;
-        }
-
-
     }
 
-    /**
-     * Open / Close sidenav
-     */
-    public toggleSideNav() {
-        this.snOpened = !this.snOpened;
-        this.changeDetectorRef.markForCheck();
-    }
-
-    /**
-     * Open / Close sidepanel
-     */
-    public toggleSidePanel() {
-        this.spOpened = !this.spOpened;
-        this.changeDetectorRef.markForCheck();
-    }
-
-    /**
-     * Open / Close sidebar Left
-     */
-    public toggleSideBarLeft() {
-        this.lsOpened = !this.lsOpened;
-        this.changeDetectorRef.markForCheck();
-    }
-
-    /**
-     * Open / Close sidebar Right
-     */
-    public toggleSideBarRight() {
-        this.rsOpened = !this.rsOpened;
-        this.changeDetectorRef.markForCheck();
-    }
-
-    ngOnInit() {
-
+    ngOnInit(): void {
         // console.log(this.sideNav)
-
-        // this.atsc.ngOnInit();
+        // this.scrollOnContent = this.scrollOn === 'content';
 
         this.querySubscription =
             this.mediaService.registerQuery('gt-sm').subscribe((matches: boolean) => {
@@ -465,64 +199,54 @@ export class AtLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
                     if (this.isSmallScreen !== this.wasSmallScreen) {
                         this.wasSmallScreen = this.isSmallScreen;
 
-                        this.snOpened = !this.isSmallScreen;
                         this.lsOpened = !this.isSmallScreen;
                         this.rsOpened = !this.isSmallScreen;
+                        this.snOpened = !this.isSmallScreen;
 
                         this.changeDetectorRef.markForCheck();
                     }
                 });
             });
-
     }
 
-    ngAfterViewInit() {
-        // console.log(this.sideNav)
-
+    /**
+     * Open / Close sidebar Left
+     */
+    public toggleSideBarLeft(): void {
+        this.lsOpened = !this.lsOpened;
+        this.changeDetectorRef.markForCheck();
     }
 
-    ngOnDestroy(): void {
-        this.querySubscription.unsubscribe();
+    /**
+     * Open / Close sidebar Right
+     */
+    public toggleSideBarRight(): void {
+        this.rsOpened = !this.rsOpened;
+        this.changeDetectorRef.markForCheck();
     }
 
-    updateView() {
+    /**
+     * Open / Close sidenav
+     */
+    public toggleSideNav(): void {
+        this.snOpened = !this.snOpened;
+        this.changeDetectorRef.markForCheck();
+    }
+
+    /**
+     * Open / Close sidepanel
+     */
+    public toggleSidePanel(): void {
+        this.spOpened = !this.spOpened;
         this.changeDetectorRef.markForCheck();
     }
 
     /**
      * @internal use only
      */
-    lIsString(value) {
-        return isString(value);
-    }
-
-    /**
-     * @internal use only
-     */
-    lIsBoolean(value) {
-        return isBoolean(value);
-    }
-
-    /**
-     * @internal use only
-     */
-    onCloseSideNav() {
-        this.snOpened = false;
-    }
-
-    /**
-     * @internal use only
-     */
-    onCloseSidePanel() {
-        this.spOpened = false;
-    }
-
-    /**
-     * @internal use only
-     */
-    onCloseLeftSidenav() {
+    closeLeftSidenav(): void {
         if (isBoolean(this.layoutSideBarLeft.opened)) {
-            this.layoutSideBarLeft.onClose.emit(false);
+            this.onCloseSideBarLeft.emit(false);
         } else {
             this.lsOpened = false;
         }
@@ -531,11 +255,384 @@ export class AtLayoutComponent implements OnInit, OnDestroy, AfterViewInit {
     /**
      * @internal use only
      */
-    onCloseRigthSidenav() {
+    closeRightSidenav(): void {
         if (isBoolean(this.layoutSideBarRight.opened)) {
-            this.layoutSideBarRight.onClose.emit(false);
+            this.onCloseSideBarRight.emit(false);
         } else {
             this.rsOpened = false;
         }
     }
+
+    /**
+     * @internal use only
+     */
+    closeSideNav(): void {
+        if (isBoolean(this.layoutSideNav.opened)) {
+            this.onCloseSideNav.emit(false);
+        } else {
+            this.snOpened = false;
+        }
+    }
+
+    /**
+     * @internal use only
+     */
+    closeSidePanel(): void {
+        this.spOpened = false;
+    }
+
+    /**
+     * @internal use only
+     */
+    forceDetection(): void {
+        this.changeDetectorRef.detectChanges();
+    }
+
+    /**
+     * @internal use only
+     */
+    ngOnDestroy(): void {
+        this.querySubscription.unsubscribe();
+    }
+
+}
+
+@Component({
+    selector: 'at-layout-header',
+    template: `
+        <div [style.height]="height" [ngClass]="[color, pattern]"
+             [class.transparent]="position === 'cover' && _parent.scrollOn=='content'">
+            <div>
+                <ng-content></ng-content>
+            </div>
+        </div>`,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutHeaderComponent',
+})
+export class AtLayoutHeaderComponent implements AfterViewInit {
+
+    private _color: string;
+    private _height: string = 'auto';
+    private _pattern: string;
+
+    /**
+     * @internal use only
+     */
+    _computedHeight: number;
+
+    @Input()
+    set color(c: string) {
+        this._color = c;
+    }
+
+    get color(): string {
+        if (this._color) {
+            return 'mat-bg-' + this._color;
+        }
+
+        return '';
+    }
+
+    @Input()
+    set height(h: string) {
+        this._height = h;
+    }
+
+    get height(): string {
+        return this._height;
+    }
+
+    @Input()
+    set pattern(p: string) {
+        this._pattern = p;
+    }
+
+    get pattern(): string {
+        if (this._pattern) {
+            return 'at-pattern-' + this._pattern;
+        }
+        return '';
+    }
+
+    @Input() position: 'inside' | 'cover' | 'outside' = 'inside';
+
+    constructor(@Inject(forwardRef(() => AtLayoutComponent))
+                private _parent: AtLayoutComponent,
+                public elRef: ElementRef) {
+        this._parent.layoutHeader = this;
+    }
+
+    ngAfterViewInit(): void {
+        setTimeout(() => {
+            if (this.elRef.nativeElement.parentNode) {
+                this._computedHeight = this.elRef.nativeElement.parentNode.getBoundingClientRect().height;
+            }
+
+            // this.changeDetector.detectChanges();
+            this._parent.forceDetection();
+        });
+    }
+
+}
+
+@Component({
+    selector: 'at-layout-content',
+    template: '<ng-content></ng-content>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutContentComponent',
+})
+export class AtLayoutContentComponent {
+}
+
+@Component({
+    selector: 'at-layout-sidebar-left',
+    template: '<ng-content></ng-content>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutSideBarLeftComponent',
+})
+export class AtLayoutSideBarLeftComponent implements OnInit {
+    /**
+     * Sets sidebar width. Defaults to "200px"
+     * @type {string}
+     */
+    @Input() width?: string = '200px';
+
+    /**
+     * mode?: "side" | "cover"
+     * Sets sidebar mode. Defaults to ""
+     * @type {string}
+     */
+    @Input() mode?: string;
+
+    /**
+     * opened?:
+     * Sets the sidebar opened property. Defaults to true
+     * @type {boolean}
+     */
+    @Input() opened?: boolean;
+
+    /**
+     * mediaQuery?:
+     * A media query string. Defaults to "gt-sm"
+     * @type {string}
+     */
+    @Input() mediaQuery?: string = 'gt-sm';
+
+    /**
+     * mediaClasses?:
+     * A set of classes to apply based on mediaQuery. Defaults to ['at-sidenav-no-background']
+     * @type {string[]}
+     */
+    @Input() mediaClasses?: string[] = ['at-sidenav-no-background'];
+
+    /**
+     * showAtScrollbar?:
+     * Show AtScrollbar instead browser scrollbar. Defaults to true
+     * @type {boolean}
+     */
+    @Input() showAtScrollbar?: boolean = true;
+
+    constructor(@Inject(forwardRef(() => AtLayoutComponent))
+                private _parent: AtLayoutComponent) {
+
+    }
+
+    ngOnInit(): void {
+        this._parent.layoutSideBarLeft = this;
+    }
+}
+
+@Component({
+    selector: 'at-layout-sidebar-right',
+    template: '<ng-content></ng-content>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutSideBarRightComponent',
+})
+export class AtLayoutSideBarRightComponent implements OnInit {
+    /**
+     * Sets sidebar width. Defaults to "200px"
+     * @type {string}
+     */
+    @Input() width?: string = '200px';
+
+    /**
+     * mode?: "side" | "cover"
+     * Sets sidebar mode. Defaults to ""
+     * @type {string}
+     */
+    @Input() mode?: string;
+
+    /**
+     * opened?:
+     * Sets the sidebar opened property. Defaults to true
+     * @type {boolean}
+     */
+    @Input() opened?: boolean;
+
+    /**
+     * mediaQuery?:
+     * A media query string. Defaults to "gt-sm"
+     * @type {string}
+     */
+    @Input() mediaQuery?: string = 'gt-sm';
+
+    /**
+     * mediaClasses?:
+     * A set of classes to apply based on mediaQuery. Defaults to ['at-sidenav-no-background']
+     * @type {string[]}
+     */
+    @Input() mediaClasses?: string[] = ['at-sidenav-no-background'];
+
+    /**
+     * showAtScrollbar?:
+     * Show AtScrollbar instead browser scrollbar. Defaults to true
+     * @type {boolean}
+     */
+    @Input() showAtScrollbar?: boolean = true;
+
+    constructor(@Inject(forwardRef(() => AtLayoutComponent))
+                private _parent: AtLayoutComponent) {
+
+    }
+
+    ngOnInit(): void {
+        this._parent.layoutSideBarRight = this;
+    }
+}
+
+@Component({
+    selector: 'at-layout-sidenav',
+    template: '<ng-content></ng-content>',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutSidenavComponent',
+})
+export class AtLayoutSideNavComponent implements OnInit {
+
+    private _elevation: string;
+    /**
+     * Sets sidebar width. Defaults to "200px"
+     * @type {string}
+     */
+    @Input() width?: string = '280px';
+
+    /**
+     * mode?: "side" | "cover"
+     * Sets sidebar mode. Defaults to ""
+     * @type {string}
+     */
+    @Input() mode?: string;
+
+    /**
+     * opened?:
+     * Sets the sidebar opened property. Defaults to true
+     * @type {boolean}
+     */
+    @Input() opened?: boolean;
+
+    /**
+     * mediaQuery?:
+     * A media query string. Defaults to "gt-sm"
+     * @type {string}
+     */
+    @Input() mediaQuery?: string = 'gt-sm';
+
+    /**
+     * mediaClasses?:
+     * A set of classes to apply based on mediaQuery. Defaults to ['at-sidenav-no-background']
+     * @type {string[]}
+     */
+    @Input() mediaClasses?: string[] = [];
+
+    @Input()
+    set elevation(e: string) {
+        const eNumber: number = parseInt(e, 10);
+        if (eNumber && (eNumber >= 0 && eNumber <= 24)) {
+            this._elevation = e;
+        } else {
+            throw new Error('AtLayoutSideNavComponent: Elevation index must be between 0 and 24');
+        }
+    }
+
+    get elevation(): string {
+        if (this._elevation) {
+            return 'mat-elevation-z' + this._elevation;
+        }
+
+        return '';
+    }
+
+    constructor(@Inject(forwardRef(() => AtLayoutComponent))
+                private _parent: AtLayoutComponent) {
+
+    }
+
+    ngOnInit(): void {
+        this._parent.layoutSideNav = this;
+    }
+}
+
+@Component({
+    selector: 'at-layout-footer',
+    template: `
+        <div [style.height]="height" [ngClass]="[color]"
+             [class.transparent]="position === 'cover' && _parent.scrollOn=='content'">
+            <ng-content></ng-content>
+        </div>`,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutFooterComponent',
+})
+export class AtLayoutFooterComponent implements AfterViewInit {
+
+    private _color: string;
+    private _height: string = 'auto';
+
+    /**
+     * @internal use only
+     */
+    _computedHeight: number;
+
+    @Input()
+    set color(c: string) {
+        this._color = c;
+    }
+
+    get color(): string {
+        if (this._color) {
+            return 'mat-bg-' + this._color;
+        }
+
+        return '';
+    }
+
+    @Input()
+    set height(h: string) {
+        this._height = h;
+    }
+
+    get height(): string {
+        return this._height;
+    }
+
+    @Input() position: 'inside' | 'cover' | 'outside' = 'inside';
+
+    constructor(@Inject(forwardRef(() => AtLayoutComponent))
+                private _parent: AtLayoutComponent,
+                public elRef: ElementRef) {
+        this._parent.layoutFooter = this;
+    }
+
+    ngAfterViewInit(): void {
+        setTimeout(() => {
+            this._computedHeight = this.elRef.nativeElement.parentNode.getBoundingClientRect().height;
+            // this.changeDetector.detectChanges();
+            this._parent.forceDetection();
+        });
+    }
+
 }

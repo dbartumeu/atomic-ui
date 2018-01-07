@@ -45,8 +45,6 @@
     "intl": "^1.2.5",
     "lodash": "^4.17.4",
     "rxjs": "^5.5.5",
-    "simplebar": "^2.5.1",
-    "smooth-scrollbar": "^8.2.5",
     "sortablejs": "^1.7.0",
     "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.18"

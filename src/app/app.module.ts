@@ -1,16 +1,16 @@
 import 'hammerjs';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {RoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {FeatureModule} from './pages/feature/feature.module';
-import {AtScrollbarModule} from '@atomic/core';
-import {CoreModule} from "./core/core.module";
-import {FrameworkModule} from './pages/framework/framework.module';
-import {ExampleModule} from './examples/example.module';
-import {HljsService} from './shared/hljs/hljs.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { FeatureModule } from './pages/feature/feature.module';
+import { AtScrollbarModule } from '@atomic/core';
+import { CoreModule } from './core/core.module';
+import { FrameworkModule } from './pages/framework/framework.module';
+import { ExampleModule } from './examples/example.module';
+import { HljsService } from './shared/hljs/hljs.service';
 
 
 @NgModule({
@@ -26,13 +26,13 @@ import {HljsService} from './shared/hljs/hljs.service';
         CoreModule,
         FeatureModule,
         FrameworkModule,
-        ExampleModule
+        ExampleModule,
     ],
     exports: [],
     providers: [
-        HljsService
+        HljsService,
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule {
 }

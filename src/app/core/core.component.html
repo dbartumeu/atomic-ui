@@ -1,4 +1,4 @@
-<at-layout-sidebar #layoutMain
+<at-layout #layoutMain
                    [layoutType]="'basic'"
                    scrollOn="content"
                    [showAtScrollbar]="false">
@@ -7,7 +7,7 @@
     </at-layout-header>
 
     <at-layout-content>
-        <at-layout-sidebar #layoutMain
+        <at-layout #layoutMain
                            [layoutType]="'main'"
                            scrollOn="content"
                            [showAtScrollbar]="false">
@@ -17,9 +17,9 @@
             <at-layout-content>
                 <router-outlet></router-outlet>
             </at-layout-content>
-        </at-layout-sidebar>
+        </at-layout>
     </at-layout-content>
-</at-layout-sidebar>
+</at-layout>
 
 
 

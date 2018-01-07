@@ -1,85 +1,52 @@
-import {NgModule} from '@angular/core';
-import {AtCommonModule} from '../at-common/at-common.module';
+import { NgModule } from '@angular/core';
+import { AtCommonModule } from '../at-common/at-common.module';
+import { AtMediaModule } from '../at-media/at-media.module';
+import { AtSidenavModule } from '../at-sidenav/at-sidenav.module';
+import { AtScrollbarModule } from '../at-scrollbar/at-scrollbar.module';
+import { CommonModule } from '@angular/common';
+import { AtUtilService } from '../at-common/services/util.service';
+import { MatSidenavModule, MatCardModule, MatIconModule, MatToolbarModule } from '@angular/material';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import {
     AtLayoutComponent,
-    AtLayoutContentDirective,
-    AtLayoutHeaderDirective,
-    AtLayoutSideBarLeftDirective,
-    AtLayoutSideBarRightDirective,
-    AtLayoutSideNavDirective,
-    AtLayoutSidePanelDirective,
-    AtLayoutToolbarDirective,
-} from './at-layout.component';
-import {AtMediaModule} from '../at-media/at-media.module';
-import {AtSidenavModule} from '../at-sidenav/at-sidenav.module';
-import {AtScrollbarModule} from '../at-scrollbar/at-scrollbar.module';
-import {CommonModule} from '@angular/common';
-import {AtUtilService} from '../at-common/services/util.service';
-import {PortalModule} from '@angular/cdk/portal';
-import {MatSidenavModule, MatCardModule, MatIconModule, MatToolbarModule} from '@angular/material';
-import {
-    AtLayoutSideBarComponent,
     AtLayoutHeaderComponent,
     AtLayoutSideNavComponent,
     AtLayoutSideBarLeftComponent,
     AtLayoutContentComponent,
     AtLayoutSideBarRightComponent,
     AtLayoutFooterComponent,
-} from "./at-layout-sidebar/at-layout-sidebar.component";
-import {ScrollDispatchModule} from '@angular/cdk/scrolling';
+} from './at-layout.component';
 
-export {AtLayoutComponent};
-
-// Todo Pending sizes.
 @NgModule({
     imports: [
         CommonModule,
+        ScrollDispatchModule,
         MatSidenavModule,
         MatToolbarModule,
         MatCardModule,
         MatIconModule,
         AtCommonModule,
         AtMediaModule,
-        PortalModule,
         AtScrollbarModule,
         AtSidenavModule,
-        ScrollDispatchModule
     ],
     declarations: [
         AtLayoutComponent,
-        AtLayoutToolbarDirective,
-        AtLayoutHeaderDirective,
-        AtLayoutSideNavDirective,
-        AtLayoutSidePanelDirective,
-        AtLayoutSideBarLeftDirective,
-        AtLayoutSideBarRightDirective,
-        AtLayoutContentDirective,
-
         AtLayoutHeaderComponent,
-        AtLayoutFooterComponent,
-        AtLayoutSideBarComponent,
         AtLayoutContentComponent,
+        AtLayoutFooterComponent,
         AtLayoutSideBarLeftComponent,
         AtLayoutSideBarRightComponent,
-        AtLayoutSideNavComponent
+        AtLayoutSideNavComponent,
     ],
     exports: [
         AtLayoutComponent,
-        AtLayoutToolbarDirective,
-        AtLayoutHeaderDirective,
-        AtLayoutSideNavDirective,
-        AtLayoutSidePanelDirective,
-        AtLayoutSideBarLeftDirective,
-        AtLayoutSideBarRightDirective,
-        AtLayoutContentDirective,
-
         AtLayoutHeaderComponent,
-        AtLayoutFooterComponent,
-        AtLayoutSideBarComponent,
         AtLayoutContentComponent,
+        AtLayoutFooterComponent,
         AtLayoutSideBarLeftComponent,
         AtLayoutSideBarRightComponent,
-        AtLayoutSideNavComponent
+        AtLayoutSideNavComponent,
     ],
     providers: [
         AtUtilService,

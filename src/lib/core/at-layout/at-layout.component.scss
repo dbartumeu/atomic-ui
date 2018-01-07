@@ -1,25 +1,10 @@
-@import "../at-styles/at_vars";
-
-:host {
-  display: block;
-  height: 100%;
+at-layout{
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
 }
 
-.at-main-container {
-  overflow: auto;
-  height: 100%;
-}
-
-/deep/ .at-layout-container {
-  overflow: auto;
-  height: 100%;
-}
-
-/deep/ [at-layout-content]{
-  overflow: auto;
-  height: 100%;
-}
-
-.at-sidepanel {
-  z-index: $avSidepanel_z-index !important;
+.transparent {
+  background-color: transparent !important;
+  background-image: none;
 }

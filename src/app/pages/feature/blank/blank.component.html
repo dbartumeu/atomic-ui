@@ -22,18 +22,6 @@
                    scrollOn="content"
                    [showAtScrollbar]="false">
 
-
-    <!--<at-layout-sidebar-right test="testing if its working">-->
-    <!--<div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">-->
-    <!--<div class="at-pv-20">-->
-    <!--header-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div>-->
-    <!--content-->
-    <!--</div>-->
-    <!--</at-layout-sidebar-right>-->
-
     <at-layout-header color="yellow-800"
                       height="200px"
                       pattern="1">
@@ -49,21 +37,21 @@
                            layoutType="cardOver"
                            scrollOn="content"
                            [showAtScrollbar]="true">
-            <at-layout-sidebar-left>
-                <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
-                    <div class="at-pv-20">
-                        header
-                    </div>
-                </div>
-                <div>
-                    content
-                </div>
-            </at-layout-sidebar-left>
+            <!--<at-layout-sidebar-left>-->
+                <!--<div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">-->
+                    <!--<div class="at-pv-20 at-h-180">-->
+                        <!--header-->
+                    <!--</div>-->
+                    <!--<div>-->
+                        <!--content-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            <!--</at-layout-sidebar-left>-->
 
             <at-layout-header color="red-800"
                               height="200px"
-                              pattern="1"
-                              position="cover">
+                              pattern="1">
                 <div class="at-ph-40 at-pt-40 at-pb-60 at-hp-100">
                     nesting header
                 </div>
@@ -101,8 +89,8 @@
                 </div>
             </at-layout-content>
 
-            <at-layout-footer color="blue-500" position="outside">
-                <div class="at-p-10"> the footer</div>
+            <at-layout-footer color="blue-500">
+                <div class="at-ph-20 at-pt-40 at-pb-40"> the footer</div>
             </at-layout-footer>
 
         </at-layout>

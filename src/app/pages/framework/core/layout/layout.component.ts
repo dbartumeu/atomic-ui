@@ -1,62 +1,54 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import {HttpClient} from '@angular/common/http';
-import {HljsService} from '../../../../shared/hljs/hljs.service';
-import {FormControl} from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { HljsService } from '../../../../shared/hljs/hljs.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-blank',
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
 export class LayoutComponent implements OnInit {
 
     overview: string;
     api: string;
 
-    coreUrl = 'https://raw.githubusercontent.com/dbartumeu/atomic/master/src/lib/core';
-    module = 'at-layout';
+    coreUrl: string = 'https://raw.githubusercontent.com/dbartumeu/atomic/master/src/lib/core';
+    module: string = 'at-layout';
 
-    overviewRendered = false;
-    apiRendered = false;
+    overviewRendered: boolean = false;
+    apiRendered: boolean = false;
 
     myControl: FormControl = new FormControl();
-
-    options = [
-        'One',
-        'Two',
-        'Three'
-    ];
 
     constructor(public http: HttpClient,
                 private hljs: HljsService) {
     }
 
-    ngOnInit() {
-        console.log('Oninit');
+    ngOnInit(): void {
         this.overviewRendered = false;
         this.apiRendered = false;
 
         this.getData('at-layout', 'README');
-        this.getData('at-layout', 'API');
+        this.getData('at-layout', 'REFERENCE');
 
     }
 
-    selectedTabChange(e) {
-        if (e.index == 1 && !this.apiRendered) {
+    selectedTabChange(e: any): void {
+        if (e.index === 1 && !this.apiRendered) {
             this.hljs.init(1000);
             this.apiRendered = true;
         }
     }
 
-    getData(module, doc) {
-        console.log(this.overviewRendered);
-        console.log(this.apiRendered);
-        const url = this.coreUrl + '/' + module + '/' + doc + '.md';
+    getData(module: string, doc: string): void {
+
+        const url: string = this.coreUrl + '/' + module + '/' + doc + '.md';
         this.http.get(url, {responseType: 'text'}).subscribe(
-            data => {
+            (data: string) => {
                 if (doc === 'README') {
                     this.overview = data;
                     if (!this.overviewRendered) {
@@ -65,14 +57,15 @@ export class LayoutComponent implements OnInit {
                     }
                 }
 
-                if (doc === 'API') {
+                if (doc === 'REFERENCE') {
                     this.api = data;
                 }
 
             },
-            err => console.error(err)
+            (err: string) => {
+                console.error(err);
+            },
         );
     }
-
 
 }

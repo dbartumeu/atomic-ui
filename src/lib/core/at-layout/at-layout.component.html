@@ -45,8 +45,8 @@
         </at-scrollbar>
 
         <mat-card *ngIf="layoutType == 'cardOver'" [style.width]="cardWidth"
-                  [style.margin-top]="cardOffsetTop + 'px'"
-                  [style.margin-bottom]="cardOffsetBottom + 'px'"
+                  [style.margin-top]="cardOverlapTop + 'px'"
+                  [style.margin-bottom]="cardOverlapBottom + 'px'"
                   [style.padding]="'0'"
                   [style.margin-right]="cardAlign == 'center' || cardAlign == 'left' ? 'auto' : ''"
                   [style.margin-left]="cardAlign == 'center' || cardAlign == 'right' ? 'auto' : ''"
@@ -60,7 +60,7 @@
         </mat-card>
 
         <div>
-            <ng-content select="at-layout-footer"></ng-content>
+            <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
         </div>
     </at-scrollbar>
 
@@ -138,8 +138,8 @@
             </at-scrollbar>
 
             <mat-card *ngIf="layoutType == 'cardOver'" [style.width]="cardWidth"
-                      [style.margin-top]="cardOffsetTop + 'px'"
-                      [style.margin-bottom]="cardOffsetBottom + 'px'"
+                      [style.margin-top]="cardOverlapTop + 'px'"
+                      [style.margin-bottom]="cardOverlapBottom + 'px'"
                       [style.padding]="'0'"
                       [style.margin-right]="cardAlign == 'center' || cardAlign == 'left' ? 'auto' : ''"
                       [style.margin-left]="cardAlign == 'center' || cardAlign == 'right' ? 'auto' : ''"

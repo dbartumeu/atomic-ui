@@ -1,6 +1,7 @@
-import {NgModule} from '@angular/core';
-import {LayoutBasicComponent} from './layout-basic/layout-basic.component';
-import {AtScrollbarModule, AtLayoutModule} from "@atomic/core";
+import { NgModule } from '@angular/core';
+import { AtScrollbarModule, AtLayoutModule } from '@atomic/core';
+import { LayoutBasicComponent } from './layout-basic/layout-basic.component';
+import { LayoutCardOverComponent } from './layout-card-over/layout-card-over.component';
 
 export interface LiveExample {
     title: string;
@@ -9,27 +10,34 @@ export interface LiveExample {
     selectorName?: string;
 }
 
-export const EXAMPLE_COMPONENTS = {
+export const EXAMPLE_COMPONENTS: any = {
     'layout-basic': {
         title: 'Basic Layout',
         component: LayoutBasicComponent,
         additionalFiles: null,
-        selectorName: 'layout-basic'
+        selectorName: 'layout-basic',
+    },
+    'layout-card-over': {
+        title: 'Card Over Layout',
+        component: LayoutCardOverComponent,
+        additionalFiles: null,
+        selectorName: 'layout-card-over',
     },
 };
 
-export const EXAMPLE_LIST = [
-    LayoutBasicComponent
+export const EXAMPLE_LIST: any[] = [
+    LayoutBasicComponent,
+    LayoutCardOverComponent,
 ];
 
 @NgModule({
     declarations: [
-        EXAMPLE_LIST
+        EXAMPLE_LIST,
     ],
     entryComponents: [EXAMPLE_LIST],
     imports: [
         AtScrollbarModule,
-        AtLayoutModule
+        AtLayoutModule,
     ],
     exports: [],
 })

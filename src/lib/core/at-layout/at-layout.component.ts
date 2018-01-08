@@ -27,8 +27,8 @@ export class AtLayoutComponent implements OnInit, OnDestroy {
 
     private querySubscription: Subscription;
 
-    private _cardOffsetTop: number = -60;
-    private _cardOffsetBottom: number = 20;
+    private _cardOverlapTop: number = -60;
+    private _cardOverlapBottom: number = -20;
 
     private wasSmallScreen: boolean;
 
@@ -130,35 +130,35 @@ export class AtLayoutComponent implements OnInit, OnDestroy {
     @Input() cardAlign: 'left' | 'center' | 'right' = 'center';
 
     /**
-     * cardOffsetTop?:
-     * The card aligment. Defaults to 60
+     * cardOverlapTop?:
+     * Sets the top overlap of the card in px . Defaults to 60
      * @type {number}
      */
     @Input()
-    set cardOffsetTop(cot: number) {
+    set cardOverlapTop(cot: number) {
         if (cot) {
-            this._cardOffsetTop = cot * -1;
+            this._cardOverlapTop = cot * -1;
         }
     }
 
-    get cardOffsetTop(): number {
-        return this._cardOffsetTop;
+    get cardOverlapTop(): number {
+        return this._cardOverlapTop;
     }
 
     /**
-     * cardOffsetBottom?:
-     * The card aligment. Defaults to 20
+     * cardOverlapBottom?:
+     * Sets the bottom overlap of the card in px. Defaults to 20
      * @type {number}
      */
     @Input()
-    set cardOffsetBottom(cob: number) {
+    set cardOverlapBottom(cob: number) {
         if (cob) {
-            this._cardOffsetBottom = cob * -1;
+            this._cardOverlapBottom = cob * -1;
         }
     }
 
-    get cardOffsetBottom(): number {
-        return this._cardOffsetBottom;
+    get cardOverlapBottom(): number {
+        return this._cardOverlapBottom;
     }
 
     /**

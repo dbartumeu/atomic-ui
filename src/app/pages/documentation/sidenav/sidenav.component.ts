@@ -1,8 +1,9 @@
-import {Subscription} from 'rxjs';
-import {Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit} from '@angular/core';
-import {Router, NavigationEnd} from '@angular/router';
-import {AtSidenavService, AtSidenavItem, AtPermissionsService} from '@atomic/core';
-import {HttpClient} from '@angular/common/http';
+import { Subscription } from 'rxjs';
+import { Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { AtSidenavService, AtSidenavItem, AtPermissionsService } from '@atomic/core';
+import { HttpClient } from '@angular/common/http';
+import { VERSIONS } from '../documentation-routing.module';
 
 @Component({
     selector: 'app-sidenav',
@@ -28,42 +29,16 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
                 public router: Router,
                 public http: HttpClient,
                 private atPermsService: AtPermissionsService) {
-        this.getVersions();
         if (this.avSidenavService.getAtSidenavItems().length === 0) {
-            avSidenavService.buildMenuByRoutes(router.config, {version: 2});
+            this.avSidenavService.buildMenuByRoutes(this.router.config, {version: VERSIONS[0]});
         }
-    }
-
-    getVersions(): void {
-
-        const url: string = this.coreUrl;
-        const versions: any[] = [];
-        versions.push('untagged');
-
-        this.http.get(url).subscribe(
-            (data: any[]) => {
-                data.forEach(tag => {
-                    versions.push(tag.name);
-                });
-                this.atPermsService.register(versions);
-
-                this.avSidenavService.buildMenuByRoutes(this.router.config, {version: versions[0]});
-
-                console.log(this.atPermsService.perms);
-            },
-            (err: string) => {
-                this.atPermsService.register(versions);
-            },
-        );
-
-
     }
 
     /**
      * Open AtSidenavItem based on the route
      * @param route
      */
-    private openAtsidenavItem(route: string) {
+    private openAtsidenavItem(route: string):void {
         this.avSidenavService.openAtSidenavItemByRoute(route);
         setTimeout(() => {
             window.dispatchEvent(new Event('resize'));

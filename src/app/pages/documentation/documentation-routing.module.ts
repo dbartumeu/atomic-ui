@@ -1,11 +1,30 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {LayoutComponent} from "./core/layout/layout.component";
-import {AtSidenavItem, AtPermissionsGuard} from '@atomic/core';
-import {DocNavigatorComponent} from './doc-navigator/doc-navigator.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LayoutComponent } from './core/layout/layout.component';
+import { AtSidenavItem, AtPermissionsGuard } from '@atomic/core';
+import { DocNavigatorComponent } from './doc-navigator/doc-navigator.component';
 
+export const VERSIONS: string[] = [
+    'untagged',
+    'v1.0.0',
+    'v1.0.1',
+    'v1.0.2',
+    'v1.1.0',
+];
 
-const FRAMEWORK_ROUTES: Routes = [
+export function getAllowedVersion(min?: string, max?: string): string[] {
+    const minIndex: number = min ? VERSIONS.indexOf(min) : 0;
+    const maxIndex: number = max ? VERSIONS.indexOf(max) + 1 : VERSIONS.length;
+
+    return VERSIONS.slice(minIndex, maxIndex);
+}
+
+export const DOCUMENTATION_COMPONENTS: any[] = [
+    DocNavigatorComponent,
+    LayoutComponent,
+];
+
+export const FRAMEWORK_ROUTES: Routes = [
     {
         path: 'framework',
         pathMatch: 'full',
@@ -16,8 +35,8 @@ const FRAMEWORK_ROUTES: Routes = [
                 pathPrefix: 'docs/:version',
                 position: 1,
                 customClass: '',
-                collapsible: false
-            }as AtSidenavItem
+                collapsible: false,
+            }as AtSidenavItem,
         },
     },
     {
@@ -29,8 +48,8 @@ const FRAMEWORK_ROUTES: Routes = [
                 name: 'Core',
                 pathPrefix: 'docs/:version',
                 position: 1,
-                customClass: ''
-            }as AtSidenavItem
+                customClass: '',
+            } as AtSidenavItem,
         },
     },
     {
@@ -46,9 +65,9 @@ const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: ['untagged'],
-                redirectTo: '/'
-            }
+                allow: getAllowedVersion('untagged'),
+                redirectTo: '/',
+            },
         },
     },
 ];
@@ -58,15 +77,9 @@ export const DOCUMENTATION_ROUTES: Routes = [
         path: 'docs/:version',
         component: DocNavigatorComponent,
         children: [
-            ...FRAMEWORK_ROUTES
-        ]
-    }
-];
-
-
-export const DOCUMENTATION_COMPONENTS = [
-    DocNavigatorComponent,
-    LayoutComponent
+            ...FRAMEWORK_ROUTES,
+        ],
+    },
 ];
 
 @NgModule({

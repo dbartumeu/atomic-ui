@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MatToolbarModule, MatIconModule, MatListModule, MatButtonModule} from '@angular/material';
+import {MatToolbarModule, MatIconModule, MatListModule, MatButtonModule, MatMenuModule } from '@angular/material';
 import {
     AtScrollbarModule,
     AtSidenavModule,
@@ -21,6 +21,7 @@ import {SidenavComponent} from './sidenav.component';
         MatIconModule,
         MatButtonModule,
         MatListModule,
+        MatMenuModule,
         AtScrollbarModule,
         AtPermissionsModule,
         AtSidenavModule.forRoot()

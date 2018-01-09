@@ -1,5 +1,14 @@
 <div fxLayout="column" class="at-hp-100"
      style="background-color: #fafafa">
+    <div fxLayout="row" fxLayoutAlign="start center" class="at-ph-20 at-pt-20 at-pb-10">
+        <label class="at-mr-15">Version:</label>
+        <button mat-button [matMenuTriggerFor]="menu">untagged</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>v1.00</button>
+            <button mat-menu-item>v1.02</button>
+        </mat-menu>
+    </div>
+
     <at-scrollbar fxFlex fxLayout="column">
         <mat-nav-list fxLayout="column" class="at-sidenav-list sidenav-toplevel">
             <at-sidenav-item *ngFor="let atSidenavItem of atSidenavItems" [item]="atSidenavItem"></at-sidenav-item>

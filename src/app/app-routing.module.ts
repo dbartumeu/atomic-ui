@@ -5,7 +5,7 @@ import {FEATURE_ROUTES} from './pages/feature/feature-routing.module';
 import {DOCUMENTATION_ROUTES} from './pages/documentation/documentation-routing.module';
 
 const routes: Routes = [
-    {path: '', redirectTo: 'docs/untagged/framework', pathMatch: 'full'},
+    // {path: '', redirectTo: 'docs/untagged/framework', pathMatch: 'full'},
     {
         path: '',
         component: CoreComponent,

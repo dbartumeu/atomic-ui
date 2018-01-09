@@ -6,6 +6,8 @@ import {MediaChange} from '@angular/flex-layout';
 import {Router, NavigationEnd} from '@angular/router';
 import {AtMediaReplayService} from 'lib/core/at-common/services/mediareplay/media-replay.service';
 import {AtSidenavService} from 'lib/core/at-sidenav/at-sidenav.service';
+import { VERSIONS } from "../pages/documentation/documentation-routing.module";
+import { AtPermissionsService } from "@atomic/core";
 
 @Component({
     selector: 'app-core',
@@ -28,7 +30,9 @@ export class CoreComponent implements OnInit, OnDestroy {
 
     constructor(private router: Router,
                 private atMediaReplayService: AtMediaReplayService,
-                private avSidenavService: AtSidenavService) {
+                private avSidenavService: AtSidenavService,
+                private atPermsService: AtPermissionsService) {
+        this.atPermsService.register(VERSIONS);
     }
 
     ngOnInit() {

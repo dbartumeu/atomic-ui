@@ -2,10 +2,11 @@
      style="background-color: #fafafa">
     <div fxLayout="row" fxLayoutAlign="start center" class="at-ph-20 at-pt-20 at-pb-10">
         <label class="at-mr-15">Version:</label>
-        <button mat-button [matMenuTriggerFor]="menu">untagged</button>
+        <button mat-button [matMenuTriggerFor]="menu">{{selectedVersion}}</button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item>v1.00</button>
-            <button mat-menu-item>v1.02</button>
+            <a *ngFor="let v of versions" mat-menu-item
+                    (click)="changeVersion(v)">{{v}}
+            </a>
         </mat-menu>
     </div>
 

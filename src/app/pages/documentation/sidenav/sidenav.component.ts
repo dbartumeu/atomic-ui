@@ -1,9 +1,10 @@
-import { Subscription } from 'rxjs';
-import { Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { AtSidenavService, AtSidenavItem, AtPermissionsService } from '@atomic/core';
-import { HttpClient } from '@angular/common/http';
-import { VERSIONS } from '../documentation-routing.module';
+import {Subscription} from 'rxjs';
+import {Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit} from '@angular/core';
+import {Router, NavigationEnd} from '@angular/router';
+import {AtSidenavService, AtSidenavItem, AtPermissionsService} from '@atomic/core';
+import {HttpClient} from '@angular/common/http';
+import {VERSIONS} from '../documentation-routing.module';
+import {AtEvents} from '../../../../lib/core';
 
 @Component({
     selector: 'app-sidenav',
@@ -13,14 +14,14 @@ import { VERSIONS } from '../documentation-routing.module';
 })
 export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
 
-    coreUrl: string = 'https://api.github.com/repos/dbartumeu/atomic/tags';
-
-    atSidenavItems: AtSidenavItem[] = [];
-
     private atSidenavItemsChange: Subscription;
     private routerEventsChange: Subscription;
     private avSidenavCurrentlyOpenChange: Subscription;
 
+    coreUrl: string = 'https://api.github.com/repos/dbartumeu/atomic/tags';
+    atSidenavItems: AtSidenavItem[] = [];
+    versions = VERSIONS;
+    selectedVersion = VERSIONS[0];
     backdrop: HTMLElement;
 
     // Todo Change all Setup to core component
@@ -28,9 +29,11 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(private avSidenavService: AtSidenavService,
                 public router: Router,
                 public http: HttpClient,
-                private atPermsService: AtPermissionsService) {
+                private atPermsService: AtPermissionsService,
+                private atEvents: AtEvents) {
+
         if (this.avSidenavService.getAtSidenavItems().length === 0) {
-            this.avSidenavService.buildMenuByRoutes(this.router.config, {version: VERSIONS[0]});
+            this.avSidenavService.buildMenuByRoutes(this.router.config, {version: this.selectedVersion});
         }
     }
 
@@ -38,7 +41,7 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
      * Open AtSidenavItem based on the route
      * @param route
      */
-    private openAtsidenavItem(route: string):void {
+    private openAtsidenavItem(route: string): void {
         this.avSidenavService.openAtSidenavItemByRoute(route);
         setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
@@ -63,6 +66,17 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
      */
     isSidenavCollapsed(): boolean {
         return this.avSidenavService.isSidenavCollapsed;
+    }
+
+    changeVersion(version) {
+        this.selectedVersion = version;
+        this.atEvents.publish('version:changed', this.selectedVersion);
+        this.avSidenavService.buildMenuByRoutes(this.router.config, {version: this.selectedVersion});
+        setTimeout(() => {
+            this.avSidenavService.applyPerms(this.atPermsService.perms);
+        }, 1000);
+
+        this.router.navigateByUrl('docs/' + this.selectedVersion + '/framework/core/layout');
     }
 
     ngOnInit() {

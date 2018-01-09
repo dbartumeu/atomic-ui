@@ -1,22 +1,24 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { HttpClient } from '@angular/common/http';
-import { HljsService } from '../../../../shared/hljs/hljs.service';
+import {HttpClient} from '@angular/common/http';
+import {HljsService} from '../../../shared/hljs/hljs.service';
 import {Router} from '@angular/router';
+import {AtEvents} from '../../../../lib/core';
 
 @Component({
-    selector: 'app-blank',
-    templateUrl: './layout.component.html',
-    styleUrls: ['./layout.component.scss'],
+    selector: 'doc-viewer',
+    templateUrl: './doc-viewer.component.html',
+    styleUrls: ['./doc-viewer.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class LayoutComponent implements OnInit {
+export class DocViewerComponent implements OnInit {
 
     overview: string;
     api: string;
 
     coreUrl: string = 'https://raw.githubusercontent.com/dbartumeu/atomic/master/src/lib/core';
+    section: string = 'core';
     module: string = 'at-layout';
 
     overviewRendered: boolean = false;
@@ -24,8 +26,11 @@ export class LayoutComponent implements OnInit {
 
     constructor(public http: HttpClient,
                 private hljs: HljsService,
-                router: Router) {
-        console.log(router.config);
+                router: Router, private atEvents: AtEvents) {
+
+        atEvents.subscribe('version:changed', (version) => {
+            console.log(version);
+        });
     }
 
     ngOnInit(): void {

@@ -1,15 +1,15 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './core/layout/layout.component';
-import { AtSidenavItem, AtPermissionsGuard } from '@atomic/core';
-import { DocNavigatorComponent } from './doc-navigator/doc-navigator.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AtSidenavItem, AtPermissionsGuard} from '@atomic/core';
+import {DocViewerComponent} from './doc-viewer/doc-viewer.component';
+import {DocNavigatorComponent} from './doc-navigator/doc-navigator.component';
 
 export const VERSIONS: string[] = [
     'untagged',
-    'v1.0.0',
-    'v1.0.1',
-    'v1.0.2',
     'v1.1.0',
+    'v1.0.2',
+    'v1.0.1',
+    'v1.0.0',
 ];
 
 export function getAllowedVersion(min?: string, max?: string): string[] {
@@ -21,7 +21,7 @@ export function getAllowedVersion(min?: string, max?: string): string[] {
 
 export const DOCUMENTATION_COMPONENTS: any[] = [
     DocNavigatorComponent,
-    LayoutComponent,
+    DocViewerComponent,
 ];
 
 export const FRAMEWORK_ROUTES: Routes = [
@@ -54,7 +54,7 @@ export const FRAMEWORK_ROUTES: Routes = [
     },
     {
         path: 'framework/core/layout',
-        component: LayoutComponent,
+        component: DocViewerComponent,
         // canActivate: [AtPermissionsGuard],
         data: {
             atSidenavItem: {

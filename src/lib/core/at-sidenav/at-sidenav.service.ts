@@ -105,11 +105,14 @@ export class AtSidenavService {
 
             this.atSidenavFlatItems.forEach(item => {
                 let count = 0;
+
                 item.children.forEach(child => {
                     if (child.renderItem) {
                         count++;
                     }
                 });
+
+                console.log(item.children.length,count )
                 if (item.children.length > 0 && count === 0) {
                     item.renderItem = false;
                 }

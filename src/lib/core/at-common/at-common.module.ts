@@ -41,8 +41,10 @@ import { AtMediaReplayService } from './services/mediareplay/media-replay.servic
 import { AtUtilService } from './services/util.service';
 import { AtIconService } from './services/at-icon.service';
 import { AtColorService } from './services/at-color.service';
+import {AtEvents} from './services/at-events';
 
 export { AtMediaReplayService };
+export { AtEvents };
 
 @NgModule({
     imports: [
@@ -66,6 +68,7 @@ export { AtMediaReplayService };
         AtUtilService,
         AtIconService,
         AtColorService,
+        AtEvents,
     ],
 })
 export class AtCommonModule {

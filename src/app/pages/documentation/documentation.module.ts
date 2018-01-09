@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {AtScrollbarModule, AtLayoutModule} from '@atomic/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
@@ -12,10 +11,11 @@ import {
     MatIconModule,
     MatButtonModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
 } from '@angular/material';
 import {CovalentMarkdownModule} from '@covalent/markdown';
 import {CovalentHighlightModule} from '@covalent/highlight';
+import {AtScrollbarModule, AtLayoutModule, AtEvents} from '@atomic/core';
 import {DOCUMENTATION_COMPONENTS, DocumentationRoutingModule} from './documentation-routing.module';
 import {ExampleViewerComponent} from '../../shared/example-viewer/example-viewer.component';
 import {PortalModule} from '@angular/cdk/portal';
@@ -53,7 +53,9 @@ import {SidenavModule} from './sidenav/sidenav.module';
     exports: [
         DOCUMENTATION_COMPONENTS,
     ],
-    providers: [],
+    providers: [
+        AtEvents
+    ],
 })
 export class DocumentationModule {
 }

@@ -4,7 +4,6 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Routes} from '@angular/router';
 import {AtSidenavItem} from './at-sidenav-item/at-sidenav-item.model';
-import {isBoolean} from 'util';
 import {AtPermissionsService} from '../at-permissions/at-permissions.service';
 
 @Injectable()
@@ -12,7 +11,7 @@ export class AtSidenavService {
 
     private _itemsSubject: BehaviorSubject<AtSidenavItem[]> = new BehaviorSubject<AtSidenavItem[]>([]);
     private atSidenavItems: AtSidenavItem[] = [];
-    private avSidenavFlatItems: AtSidenavItem[] = [];
+    private atSidenavFlatItems: AtSidenavItem[] = [];
 
     /**
      * Observable for AtSidenavItems changes
@@ -42,8 +41,9 @@ export class AtSidenavService {
     public sidenavCollapsedChange = this.isSidenavCollapsedSubject.asObservable();
 
     /**
-     * Service provided with methods that allows you to add, edit and remove items from the sidenav. Also provided a method to create all
-     * sidenav items based on app routes. Even provided you with utilities to find items, notify for changes and much more.
+     * Service provided with methods that allows you to add, edit and remove items from the sidenav.
+     * Also provided a method to create all sidenav items based on app routes. Even provided you with
+     * utilities to find items, notify for changes and much more.
      */
     constructor(private atPermsService: AtPermissionsService) {
         atPermsService.permsChanges.subscribe((perms) => {
@@ -73,8 +73,8 @@ export class AtSidenavService {
     }
 
     public applyPerms(perms: string[]) {
-        if (this.avSidenavFlatItems.length > 0 && perms) {
-            this.avSidenavFlatItems.forEach(item => {
+        if (this.atSidenavFlatItems.length > 0 && perms) {
+            this.atSidenavFlatItems.forEach(item => {
 
 
                 if (!item.routeData.atSidenavItem.renderItem && item.routeData.atPermissions) {
@@ -103,7 +103,7 @@ export class AtSidenavService {
             });
 
 
-            this.avSidenavFlatItems.forEach(item => {
+            this.atSidenavFlatItems.forEach(item => {
                 let count = 0;
                 item.children.forEach(child => {
                     if (child.renderItem) {
@@ -118,21 +118,37 @@ export class AtSidenavService {
         }
     }
 
+
+    public replaceUrlParams(url: string, params: any): string {
+        let out = url;
+        if (params) {
+            Object.keys(params).forEach(key => {
+                out = out.replace(':' + key, params[key]);
+            });
+        }
+        return out;
+    }
+
     /**
      * Build menu structure based on Route Data.
      * @param routes
      */
-    public buildMenuByRoutes(routes: Routes) {
+    public buildMenuByRoutes(routes: Routes, replaceParams?: any) {
+        this.atSidenavItems = [];
+        this.atSidenavFlatItems = [];
+
         routes.forEach(childRoute => {
             if (childRoute.data && childRoute.data.atSidenavItem) {
-                const path = childRoute.data.atSidenavItem.pathPrefix ?
+                let path = childRoute.data.atSidenavItem.pathPrefix ?
                     childRoute.data.atSidenavItem.pathPrefix + '/' + childRoute.path : childRoute.path;
+
+                path = this.replaceUrlParams(path, replaceParams);
 
                 const routeArr = path.split('/');
                 routeArr.splice(routeArr.length - 1, 1);
                 const parentRoute = routeArr.join('/');
 
-                const parent = this.findItemByRoute(this.fixRoutePath(parentRoute), this.avSidenavFlatItems);
+                const parent = this.findItemByRoute(this.fixRoutePath(parentRoute), this.atSidenavFlatItems);
 
                 if (parent) {
                     const newAtsidenavChild = new AtSidenavItem(
@@ -202,7 +218,7 @@ export class AtSidenavService {
         });
 
         this.atSidenavItems.push(newAtSidenavItem);
-        this.avSidenavFlatItems.push(newAtSidenavItem);
+        this.atSidenavFlatItems.push(newAtSidenavItem);
 
         if (notifyChange) {
             this._itemsSubject.next(this.atSidenavItems);
@@ -242,7 +258,7 @@ export class AtSidenavService {
         });
 
         parent.children.push(newAtSidenavChild);
-        this.avSidenavFlatItems.push(newAtSidenavChild);
+        this.atSidenavFlatItems.push(newAtSidenavChild);
 
         if (notifyChange) {
             this._itemsSubject.next(this.atSidenavItems);
@@ -298,7 +314,7 @@ export class AtSidenavService {
      * @internal use only
      */
     public flattenTree() {
-        return this.avSidenavFlatItems;
+        return this.atSidenavFlatItems;
     }
 
     /**
@@ -449,7 +465,7 @@ export class AtSidenavService {
     public openAtSidenavItemByRoute(route: string) {
         let currentlyOpen = [];
 
-        let item = this.findItemByRoute(route, this.avSidenavFlatItems, false);
+        let item = this.findItemByRoute(route, this.atSidenavFlatItems, false);
 
         if (item && item.hasParent()) {
             currentlyOpen = this.getAllParents(item);

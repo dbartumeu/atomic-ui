@@ -6,7 +6,8 @@ import {MatToolbarModule, MatIconModule, MatListModule, MatButtonModule} from '@
 import {
     AtScrollbarModule,
     AtSidenavModule,
-    AtSidenavCollapsibleDirective
+    AtSidenavCollapsibleDirective,
+    AtPermissionsModule
 } from '@atomic/core';
 
 import {SidenavComponent} from './sidenav.component';
@@ -21,6 +22,7 @@ import {SidenavComponent} from './sidenav.component';
         MatButtonModule,
         MatListModule,
         AtScrollbarModule,
+        AtPermissionsModule,
         AtSidenavModule.forRoot()
     ],
     declarations: [

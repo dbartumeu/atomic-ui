@@ -1,0 +1,11 @@
+<at-layout #layoutMain
+           [layoutType]="'main'"
+           scrollOn="content"
+           [showAtScrollbar]="false">
+    <at-layout-sidenav width="260px" elevation="10">
+        <app-sidenav class="at-wp-100"></app-sidenav>
+    </at-layout-sidenav>
+    <at-layout-content>
+        <router-outlet></router-outlet>
+    </at-layout-content>
+</at-layout>

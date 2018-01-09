@@ -1,7 +1,8 @@
 import {Subscription} from 'rxjs';
 import {Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit} from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
-import {AtSidenavService, AtSidenavItem} from '@atomic/core';
+import {AtSidenavService, AtSidenavItem, AtPermissionsService} from '@atomic/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
     selector: 'app-sidenav',
@@ -10,6 +11,8 @@ import {AtSidenavService, AtSidenavItem} from '@atomic/core';
     encapsulation: ViewEncapsulation.None
 })
 export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
+
+    coreUrl: string = 'https://api.github.com/repos/dbartumeu/atomic/tags';
 
     atSidenavItems: AtSidenavItem[] = [];
 
@@ -22,10 +25,38 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
     // Todo Change all Setup to core component
 
     constructor(private avSidenavService: AtSidenavService,
-                public router: Router) {
+                public router: Router,
+                public http: HttpClient,
+                private atPermsService: AtPermissionsService) {
+        this.getVersions();
         if (this.avSidenavService.getAtSidenavItems().length === 0) {
-            avSidenavService.buildMenuByRoutes(router.config);
+            avSidenavService.buildMenuByRoutes(router.config, {version: 2});
         }
+    }
+
+    getVersions(): void {
+
+        const url: string = this.coreUrl;
+        const versions: any[] = [];
+        versions.push('untagged');
+
+        this.http.get(url).subscribe(
+            (data: any[]) => {
+                data.forEach(tag => {
+                    versions.push(tag.name);
+                });
+                this.atPermsService.register(versions);
+
+                this.avSidenavService.buildMenuByRoutes(this.router.config, {version: versions[0]});
+
+                console.log(this.atPermsService.perms);
+            },
+            (err: string) => {
+                this.atPermsService.register(versions);
+            },
+        );
+
+
     }
 
     /**

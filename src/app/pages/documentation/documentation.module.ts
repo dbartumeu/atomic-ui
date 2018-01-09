@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
-import {AtScrollbarModule, AtLayoutModule} from "@atomic/core";
-import {CommonModule} from "@angular/common";
-import {RouterModule} from "@angular/router";
+import {AtScrollbarModule, AtLayoutModule} from '@atomic/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
-import {FlexLayoutModule} from "@angular/flex-layout";
+import {FlexLayoutModule} from '@angular/flex-layout';
 import {
     MatListModule,
     MatTabsModule,
@@ -13,13 +13,14 @@ import {
     MatButtonModule,
     MatAutocompleteModule,
     MatInputModule
-} from "@angular/material";
+} from '@angular/material';
 import {CovalentMarkdownModule} from '@covalent/markdown';
 import {CovalentHighlightModule} from '@covalent/highlight';
-import {FRAMEWORK_COMPONENTS, LayoutRoutingModule} from "./framework-routing.module";
+import {DOCUMENTATION_COMPONENTS, DocumentationRoutingModule} from './documentation-routing.module';
 import {ExampleViewerComponent} from '../../shared/example-viewer/example-viewer.component';
 import {PortalModule} from '@angular/cdk/portal';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SidenavModule} from './sidenav/sidenav.module';
 
 @NgModule({
     imports: [
@@ -39,19 +40,20 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MatToolbarModule,
         MatAutocompleteModule,
         MatInputModule,
+        SidenavModule,
         CovalentMarkdownModule,
         CovalentHighlightModule,
-        LayoutRoutingModule,
+        DocumentationRoutingModule,
         PortalModule
     ],
     declarations: [
-        FRAMEWORK_COMPONENTS,
+        DOCUMENTATION_COMPONENTS,
         ExampleViewerComponent
     ],
     exports: [
-        FRAMEWORK_COMPONENTS,
+        DOCUMENTATION_COMPONENTS,
     ],
     providers: [],
 })
-export class FrameworkModule {
+export class DocumentationModule {
 }

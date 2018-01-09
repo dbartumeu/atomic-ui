@@ -8,7 +8,7 @@ import { RoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FeatureModule } from './pages/feature/feature.module';
 import { CoreModule } from './core/core.module';
-import { FrameworkModule } from './pages/framework/framework.module';
+import { DocumentationModule } from './pages/documentation/documentation.module';
 import { ExampleModule } from './examples/example.module';
 import { HljsService } from './shared/hljs/hljs.service';
 
@@ -24,7 +24,7 @@ import { HljsService } from './shared/hljs/hljs.service';
         AtScrollbarModule,
         CoreModule,
         FeatureModule,
-        FrameworkModule,
+        DocumentationModule,
         ExampleModule,
     ],
     exports: [],

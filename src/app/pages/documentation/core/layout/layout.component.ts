@@ -3,7 +3,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { HttpClient } from '@angular/common/http';
 import { HljsService } from '../../../../shared/hljs/hljs.service';
-import { FormControl } from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-blank',
@@ -22,10 +22,10 @@ export class LayoutComponent implements OnInit {
     overviewRendered: boolean = false;
     apiRendered: boolean = false;
 
-    myControl: FormControl = new FormControl();
-
     constructor(public http: HttpClient,
-                private hljs: HljsService) {
+                private hljs: HljsService,
+                router: Router) {
+        console.log(router.config);
     }
 
     ngOnInit(): void {

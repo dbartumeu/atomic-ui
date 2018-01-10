@@ -18,22 +18,19 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
     private routerEventsChange: Subscription;
     private avSidenavCurrentlyOpenChange: Subscription;
 
-    coreUrl: string = 'https://api.github.com/repos/dbartumeu/atomic/tags';
     atSidenavItems: AtSidenavItem[] = [];
     versions = VERSIONS;
     selectedVersion = VERSIONS[0];
     backdrop: HTMLElement;
-
-    // Todo Change all Setup to core component
 
     constructor(private avSidenavService: AtSidenavService,
                 public router: Router,
                 public http: HttpClient,
                 private atPermsService: AtPermissionsService,
                 private atEvents: AtEvents) {
-
         if (this.avSidenavService.getAtSidenavItems().length === 0) {
             this.avSidenavService.buildMenuByRoutes(this.router.config, {version: this.selectedVersion});
+            this.atPermsService.register([this.selectedVersion]);
         }
     }
 
@@ -70,24 +67,22 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
 
     changeVersion(version) {
         this.selectedVersion = version;
+        this.atPermsService.register([this.selectedVersion]);
         this.atEvents.publish('version:changed', this.selectedVersion);
         this.avSidenavService.buildMenuByRoutes(this.router.config, {version: this.selectedVersion});
-        setTimeout(() => {
-            this.avSidenavService.applyPerms(this.atPermsService.perms);
-        }, 1000);
+
+        this.avSidenavService.applyPerms(this.atPermsService.perms);
 
         this.router.navigateByUrl('docs/' + this.selectedVersion + '/framework/core/layout');
     }
 
     ngOnInit() {
-
         this.openAtsidenavItem(this.router.url);
 
         this.atSidenavItemsChange = this.avSidenavService.atSidenavItemsChange
             .subscribe((atSidenavItems: AtSidenavItem[]) => {
                 this.atSidenavItems = this.avSidenavService.sortAtSidenavItems(atSidenavItems, 'position');
             });
-
 
         // Every time route changes it's necessary open the correct AtSidenavItem parent
         this.routerEventsChange = this.router.events.subscribe(event => {

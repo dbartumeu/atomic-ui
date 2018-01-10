@@ -5,11 +5,7 @@ import {DocViewerComponent} from './doc-viewer/doc-viewer.component';
 import {DocNavigatorComponent} from './doc-navigator/doc-navigator.component';
 
 export const VERSIONS: string[] = [
-    'untagged',
-    'v1.1.0',
-    'v1.0.2',
-    'v1.0.1',
-    'v1.0.0',
+    'master',
 ];
 
 export function getAllowedVersion(min?: string, max?: string): string[] {
@@ -65,9 +61,15 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('untagged'),
+                allow: getAllowedVersion('master'),
                 redirectTo: '/',
             },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/core',
+                module: 'at-layout',
+                examples:['layout-basic', 'layout-card-over']
+            }
         },
     },
 ];

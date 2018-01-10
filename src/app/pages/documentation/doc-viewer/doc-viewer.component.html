@@ -4,13 +4,14 @@
 
     <at-layout-header color="light-blue-600">
         <div class="at-p-40 at-hp-100">
-            <h2 class="at-no-m mat-display-1">Layout</h2>
+            <h2 class="at-no-m mat-display-1">{{data.atSidenavItem.name}}</h2>
         </div>
     </at-layout-header>
 
     <at-layout-content>
 
-        <mat-tab-group class="at-wp-75 at-p-40" style="margin-left: auto; margin-right: auto"
+        <mat-tab-group *ngIf="!data.docViewer.overviewOnly" class="at-wp-75 at-p-40"
+                       style="margin-left: auto; margin-right: auto"
                        (selectedTabChange)="selectedTabChange($event)">
             <mat-tab label="OVERVIEW">
 
@@ -23,14 +24,20 @@
                     <td-markdown [content]="api"></td-markdown>
                 </div>
             </mat-tab>
-            <mat-tab label="EXAMPLES">
+            <mat-tab *ngIf="data.docViewer.examples" label="EXAMPLES">
                 <div class="at-p-40">
-                    <example-viewer example="layout-basic"></example-viewer>
-                    <example-viewer example="layout-card-over"></example-viewer>
+                    <example-viewer *ngFor="let ex of data.docViewer.examples" [example]="ex"></example-viewer>
                 </div>
 
             </mat-tab>
         </mat-tab-group>
+
+        <div *ngIf="data.docViewer.overviewOnly" class="at-wp-75 at-p-40"
+             style="margin-left: auto; margin-right: auto">
+            <td-markdown [content]="overview"></td-markdown>
+        </div>
+
+
     </at-layout-content>
 
 </at-layout>

@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { AtPermissionsService } from "@atomic/core";
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Router} from '@angular/router';
+import {AtPermissionsService} from "@atomic/core";
 
 @Component({
     selector: 'doc-navigator',
@@ -12,9 +12,6 @@ export class DocNavigatorComponent implements OnInit {
 
 
     constructor(private router: Router) {
-        console.log('asdasd');
-        console.log(router.config);
-
     }
 
     ngOnInit(): void {

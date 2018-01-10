@@ -1,10 +1,9 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewEncapsulation} from '@angular/core';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import {HttpClient} from '@angular/common/http';
 import {HljsService} from '../../../shared/hljs/hljs.service';
-import {Router} from '@angular/router';
-import {AtEvents} from '../../../../lib/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'doc-viewer',
@@ -17,29 +16,37 @@ export class DocViewerComponent implements OnInit {
     overview: string;
     api: string;
 
-    coreUrl: string = 'https://raw.githubusercontent.com/dbartumeu/atomic/master/src/lib/core';
-    section: string = 'core';
-    module: string = 'at-layout';
+    coreUrl: string = 'https://raw.githubusercontent.com/dbartumeu/atomic';
 
     overviewRendered: boolean = false;
     apiRendered: boolean = false;
 
+    data: any;
+    version: string = 'master';
+    section: string = 'src/lib/core';
+    module: string = 'at-layout';
+
     constructor(public http: HttpClient,
                 private hljs: HljsService,
-                router: Router, private atEvents: AtEvents) {
-
-        atEvents.subscribe('version:changed', (version) => {
-            console.log(version);
-        });
+                private route: ActivatedRoute,
+                private chDetRef: ChangeDetectorRef) {
     }
 
     ngOnInit(): void {
-        this.overviewRendered = false;
-        this.apiRendered = false;
-
-        this.getData('at-layout', 'README');
-        this.getData('at-layout', 'REFERENCE');
-
+        this.route.parent.params.subscribe(params => {
+            this.version = params['version'];
+            this.overviewRendered = false;
+            this.apiRendered = false;
+            setTimeout(() => {
+                this.getData(this.data.docViewer.module, 'README');
+                if (!this.data.docViewer.overviewOnly) {
+                    this.getData(this.data.docViewer.module, 'REFERENCE');
+                }
+            }, 100);
+        });
+        this.route.data.subscribe(data => {
+            this.data = data;
+        });
     }
 
     selectedTabChange(e: any): void {
@@ -51,24 +58,31 @@ export class DocViewerComponent implements OnInit {
 
     getData(module: string, doc: string): void {
 
-        const url: string = this.coreUrl + '/' + module + '/' + doc + '.md';
+        const url: string = this.coreUrl + '/' + this.version + '/' + this.section + '/' + module + '/' + doc + '.md';
         this.http.get(url, {responseType: 'text'}).subscribe(
             (data: string) => {
+
                 if (doc === 'README') {
                     this.overview = data;
                     if (!this.overviewRendered) {
                         this.hljs.init(1000);
                         this.overviewRendered = true;
+                        this.chDetRef.detectChanges();
                     }
                 }
 
                 if (doc === 'REFERENCE') {
                     this.api = data;
+                    this.chDetRef.detectChanges();
                 }
 
             },
             (err: string) => {
-                console.error(err);
+                this.overview = null;
+                this.api = null;
+
+                this.chDetRef.detectChanges();
+                // console.error(err);
             },
         );
     }

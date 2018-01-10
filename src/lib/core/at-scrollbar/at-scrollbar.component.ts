@@ -10,14 +10,14 @@ import {
     ViewChild,
     Renderer2,
     ElementRef,
-    ViewEncapsulation
+    ViewEncapsulation,
+    NgZone, OnChanges, SimpleChanges
 } from '@angular/core';
 import {DOCUMENT} from '@angular/common';
 import {Subscription} from 'rxjs/Subscription';
 import {of} from 'rxjs/observable/of';
 import {fromEvent} from 'rxjs/observable/fromEvent';
 import {empty} from 'rxjs/observable/empty';
-
 import {tap, take, takeWhile, expand, delay} from 'rxjs/operators';
 
 @Component({
@@ -25,11 +25,10 @@ import {tap, take, takeWhile, expand, delay} from 'rxjs/operators';
     templateUrl: 'at-scrollbar.component.html',
     styleUrls: ['at-scrollbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    preserveWhitespaces: false
 })
-export class AtScrollbarComponent implements AfterViewInit, OnDestroy {
-
-    private SCROLLBAR_WIDTH = this.getScrollbarWidth();
+export class AtScrollbarComponent implements AfterViewInit, OnDestroy, OnChanges {
 
     private _thumbSizeY = 0;
     private _thumbSizeX = 0;
@@ -41,18 +40,15 @@ export class AtScrollbarComponent implements AfterViewInit, OnDestroy {
     private _naturalThumbSizeX = 0;
     private _prevPageY = 0;
     private _prevPageX = 0;
-
-    /** store current thumb position */
     private _currXPos = 0;
     private _currYPos = 0;
-
     private minThumbSize = 20;
+    private scrollSub$: Subscription;
+    private barXSub$: Subscription;
+    private barYSub$: Subscription;
+    private thumbXSub$: Subscription;
+    private thumbYSub$: Subscription;
     private observer: MutationObserver;
-    private viewScrollSub$: Subscription;
-    private barXClickSub$: Subscription;
-    private barYClickSub$: Subscription;
-    private thumbXDragSub$: Subscription;
-    private thumbYDragSub$: Subscription;
 
     barX: HTMLElement;
     barY: HTMLElement;
@@ -76,72 +72,25 @@ export class AtScrollbarComponent implements AfterViewInit, OnDestroy {
     @Input() thumbClass: string;
     @Output() scrollState = new EventEmitter<MouseEvent>();
 
-    constructor(private renderer: Renderer2, @Inject(DOCUMENT) private document: any) {
+    constructor(private zone: NgZone, private renderer: Renderer2, @Inject(DOCUMENT) private document: any) {
     }
 
     ngAfterViewInit() {
         if (this.render) {
-            this.barX = this.barXRef.nativeElement;
-            this.barY = this.barYRef.nativeElement;
-            this.thumbX = this.thumbXRef.nativeElement;
-            this.thumbY = this.thumbYRef.nativeElement;
-            this.view = this.viewRef.nativeElement;
-
-            this.viewScrollSub$ = fromEvent(this.view, 'scroll', (e) => this.scrollWorker(e)).subscribe();
-            if (this.trackX) {
-                this.barXClickSub$ = fromEvent(this.barX, 'mousedown', (e) => this.barXWorker(e)).subscribe();
-                this.thumbXDragSub$ = fromEvent(this.thumbX, 'mousedown', (e) => this.thumbXWorker(e)).subscribe();
-            }
-            if (this.trackY) {
-                this.barYClickSub$ = fromEvent(this.barY, 'mousedown', (e) => this.barYWorker(e)).subscribe();
-                this.thumbYDragSub$ = fromEvent(this.thumbY, 'mousedown', (e) => this.thumbYWorker(e)).subscribe();
-            }
-
-            if (this.barClass) {
-                this.renderer.addClass(this.barX, this.barClass);
-                this.renderer.addClass(this.barY, this.barClass);
-            }
-
-            if (this.thumbClass) {
-                this.renderer.addClass(this.thumbX, this.thumbClass);
-                this.renderer.addClass(this.thumbY, this.thumbClass);
-            }
-
-            if (this.viewClass) {
-                this.renderer.addClass(this.view, this.viewClass);
-            }
-
-            /** Hide native scrollbars */
-            this.hideNativeScrollbars(this.SCROLLBAR_WIDTH);
-
-            /** Initialize calculation variables */
-            this.scrollWorker(null);
-
-            if (this.autoUpdate) {
-                /** Observe content changes */
-                this.observer = new MutationObserver(() => this.update());
-
-                const config: MutationObserverInit = {
-                    subtree: true,
-                    childList: true
-                };
-
-                this.observer.observe(this.view, config);
-            }
+            this.init();
         }
-
     }
 
     ngOnDestroy() {
         if (this.render) {
-            this.viewScrollSub$.unsubscribe();
+            this.scrollSub$.unsubscribe();
             if (this.trackX) {
-                this.barXClickSub$.unsubscribe();
-                this.thumbXDragSub$.unsubscribe();
+                this.barXSub$.unsubscribe();
+                this.thumbXSub$.unsubscribe();
             }
             if (this.trackY) {
-                this.barYClickSub$.unsubscribe();
-                this.thumbYDragSub$.unsubscribe();
+                this.barYSub$.unsubscribe();
+                this.thumbYSub$.unsubscribe();
             }
             if (this.observer) {
                 this.observer.disconnect();
@@ -149,24 +98,109 @@ export class AtScrollbarComponent implements AfterViewInit, OnDestroy {
         }
     }
 
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.render && changes.render.firstChange === false && changes.render.currentValue === true) {
+            this.init();
+        }
+    }
+
+
+    init() {
+        console.log('Init was called');
+        this.zone.runOutsideAngular(() => {
+
+            this.barX = this.barXRef.nativeElement;
+            this.barY = this.barYRef.nativeElement;
+            this.thumbX = this.thumbXRef.nativeElement;
+            this.thumbY = this.thumbYRef.nativeElement;
+            this.view = this.viewRef.nativeElement;
+
+            this.hideNativeScrollbars();
+
+            /** Initialize scrollbars */
+            this.scrollWorker(null);
+
+            this.scrollSub$ = fromEvent(this.view, 'scroll', (e) => this.scrollWorker(e)).subscribe();
+            if (this.trackX) {
+                this.barXSub$ = fromEvent(this.barX, 'mousedown', (e) => this.barXWorker(e)).subscribe();
+                this.thumbXSub$ = fromEvent(this.thumbX, 'mousedown', (e) => this.thumbXWorker(e)).subscribe();
+            }
+            if (this.trackY) {
+                this.barYSub$ = fromEvent(this.barY, 'mousedown', (e) => this.barYWorker(e)).subscribe();
+                this.thumbYSub$ = fromEvent(this.thumbY, 'mousedown', (e) => this.thumbYWorker(e)).subscribe();
+            }
+
+            if (this.autoUpdate) {
+                /** Observe content changes */
+                this.observer = new MutationObserver(() => this.update());
+                this.observer.observe(this.view, {subtree: true, childList: true});
+            }
+
+        });
+    }
+
     /**
-     * Update when content changes
+     * Scroll horizontally
+     * @param to
+     * @param duration
+     */
+    scrollXTo(to: number, duration = 200) {
+
+        this.zone.runOutsideAngular(() => {
+            of(duration).pipe(
+                takeWhile(() => duration > 0),
+                expand(d => {
+                    if (d > 0) {
+                        const difference = to - this.view.scrollLeft;
+                        const perTick = difference / d * 10;
+                        this.renderer.setProperty(this.view, 'scrollLeft', this.view.scrollLeft + perTick);
+                        return of(d - 10).pipe(delay(10));
+                    } else {
+                        duration = d;
+                        return empty();
+                    }
+                })
+            ).subscribe();
+        });
+    }
+
+    /**
+     * Scroll vertically
+     * @param to
+     * @param duration
+     */
+    scrollYTo(to: number, duration = 200) {
+        this.zone.runOutsideAngular(() => {
+            of(duration).pipe(
+                takeWhile(() => duration > 0),
+                expand(d => {
+                    if (d > 0) {
+                        const difference = to - this.view.scrollTop;
+                        const perTick = difference / d * 10;
+                        this.renderer.setProperty(this.view, 'scrollTop', this.view.scrollTop + perTick);
+                        return of(d - 10).pipe(delay(10));
+                    } else {
+                        duration = d;
+                        return empty();
+                    }
+                })
+            ).subscribe();
+        });
+    }
+
+    /**
+     * Update thumbnails
      */
     update() {
-        of({}).pipe(
-            take(1),
-            tap(() => {
-                this.setThumbXPosition(this._currXPos, this.calculateThumbXSize());
-                this.setThumbYPosition(this._currYPos, this.calculateThumbYSize());
-            })
-        ).subscribe();
+        this.setThumbXPosition(this._currXPos, this.calculateThumbXSize());
+        this.setThumbYPosition(this._currYPos, this.calculateThumbYSize());
     }
 
     /**
      * Scroll Worker
-     * @param {MouseEvent} e
+     * @param e - Mouse Event
      */
-    scrollWorker(e: MouseEvent) {
+    private scrollWorker(e: any) {
         this._thumbSizeX = this.thumbX.clientWidth;
         this._thumbSizeY = this.thumbY.clientHeight;
 
@@ -184,68 +218,10 @@ export class AtScrollbarComponent implements AfterViewInit, OnDestroy {
     }
 
     /**
-     * Horizontal thumb worker
-     * @param {MouseEvent} e
-     */
-    thumbXWorker(e: MouseEvent) {
-
-        /** Start dragging scrollbar on mouseMove */
-        const startDrag = (event: MouseEvent) => {
-            this._prevPageX = this._thumbSizeX - e.offsetX;
-            const offset = event.clientX - this.barX.getBoundingClientRect().left;
-            const thumbClickPosition = this._thumbSizeX - this._prevPageX;
-            const scrollLeft = this._scrollLeftMax * (offset - thumbClickPosition) / this._trackLeftMax;
-            this.renderer.setProperty(this.view, 'scrollLeft', scrollLeft);
-        };
-
-        /** Reset and remove listeners on mouseUp */
-        const endDrag = () => {
-            disableSelection();
-            mouseMoveSub$.unsubscribe();
-            mouseUpSub$.unsubscribe();
-            this._prevPageX = 0;
-        };
-
-        /** Disable selection while dragging scrollbars */
-        const disableSelection = this.renderer.listen(this.document, 'selectstart', () => false);
-        const mouseMoveSub$ = fromEvent(this.document.body, 'mousemove', startDrag).subscribe();
-        const mouseUpSub$ = fromEvent(this.document.body, 'mouseup', endDrag).subscribe();
-    }
-
-    /**
-     * Vertical thumb worker
-     * @param {MouseEvent} e
-     */
-    thumbYWorker(e: MouseEvent) {
-
-        /** Start dragging scrollbar on mouseMove */
-        const startDrag = (event: MouseEvent) => {
-            this._prevPageY = this._thumbSizeY - e.offsetY;
-            const offset = event.clientY - this.barY.getBoundingClientRect().top;
-            const thumbClickPosition = this._thumbSizeY - this._prevPageY;
-            const scrollTop = this._scrollTopMax * (offset - thumbClickPosition) / this._trackTopMax;
-            this.renderer.setProperty(this.view, 'scrollTop', scrollTop);
-        };
-
-        /** Reset and remove listeners on mouseUp */
-        const endDrag = () => {
-            disableSelection();
-            mouseMoveSub$.unsubscribe();
-            mouseUpSub$.unsubscribe();
-            this._prevPageY = 0;
-        };
-
-        /** Disable selection while dragging scrollbars */
-        const disableSelection = this.renderer.listen(this.document, 'selectstart', () => false);
-        const mouseMoveSub$ = fromEvent(this.document.body, 'mousemove', startDrag).subscribe();
-        const mouseUpSub$ = fromEvent(this.document.body, 'mouseup', endDrag).subscribe();
-    }
-
-    /**
      * Horizontal scrollbar click worker
-     * @param {MouseEvent} e
+     * @param e - Mouse Event
      */
-    barXWorker(e: MouseEvent) {
+    private barXWorker(e: any) {
         if (e.target === e.currentTarget) {
             const offset = e.offsetX - this._naturalThumbSizeX * .5;
             const thumbPositionPercentage = offset * 100 / this.barX.clientWidth;
@@ -256,9 +232,9 @@ export class AtScrollbarComponent implements AfterViewInit, OnDestroy {
 
     /**
      * Vertical scrollbar click worker
-     * @param {MouseEvent} e
+     * @param e - Mouse Event
      */
-    barYWorker(e: MouseEvent) {
+    private barYWorker(e: any) {
         if (e.target === e.currentTarget) {
             const offset = e.offsetY - this._naturalThumbSizeY * .5;
             const thumbPositionPercentage = offset * 100 / this.barY.clientHeight;
@@ -268,54 +244,65 @@ export class AtScrollbarComponent implements AfterViewInit, OnDestroy {
     }
 
     /**
-     * Scroll horizontally
-     * @param {number} to
-     * @param {number} duration
+     * Horizontal thumb worker
+     * @param e - Mouse Event
      */
-    scrollXTo(to: number, duration = 200) {
+    private thumbXWorker(e: any) {
 
-        of(duration).pipe(
-            takeWhile(() => duration > 0),
-            expand(d => {
-                if (d > 0) {
-                    const difference = to - this.view.scrollLeft;
-                    const perTick = difference / d * 10;
-                    this.renderer.setProperty(this.view, 'scrollLeft', this.view.scrollLeft + perTick);
-                    return of(d - 10).pipe(delay(10));
-                } else {
-                    duration = d;
-                    return empty();
-                }
-            })
-        ).subscribe();
+        /** Start dragging scrollbar on mouseMove */
+        const startDrag = (event: any) => {
+            this._prevPageX = this._thumbSizeX - e.offsetX;
+            const offset = event.clientX - this.barX.getBoundingClientRect().left;
+            const thumbClickPosition = this._thumbSizeX - this._prevPageX;
+            const scrollLeft = this._scrollLeftMax * (offset - thumbClickPosition) / this._trackLeftMax;
+            this.renderer.setProperty(this.view, 'scrollLeft', scrollLeft);
+        };
+
+        /** Reset and remove listeners on mouseUp */
+        const endDrag = () => {
+            this.document.onselectstart = null;
+            mouseMoveSub$.unsubscribe();
+            mouseUpSub$.unsubscribe();
+            this._prevPageX = 0;
+        };
+
+        /** Disable selection while dragging scrollbars */
+        this.document.onselectstart = () => false;
+        const mouseMoveSub$ = fromEvent(this.document.body, 'mousemove', startDrag).subscribe();
+        const mouseUpSub$ = fromEvent(this.document.body, 'mouseup', endDrag).subscribe();
     }
 
     /**
-     * Scroll vertically
-     * @param {number} to
-     * @param {number} duration
+     * Vertical thumb worker
+     * @param e - Mouse Event
      */
-    scrollYTo(to: number, duration = 200) {
+    private thumbYWorker(e: any) {
 
-        of(duration).pipe(
-            takeWhile(() => duration > 0),
-            expand(d => {
-                if (d > 0) {
-                    const difference = to - this.view.scrollTop;
-                    const perTick = difference / d * 10;
-                    this.renderer.setProperty(this.view, 'scrollTop', this.view.scrollTop + perTick);
-                    return of(d - 10).pipe(delay(10));
-                } else {
-                    duration = d;
-                    return empty();
-                }
-            })
-        ).subscribe();
+        /** Start dragging scrollbar on mouseMove */
+        const startDrag = (event: any) => {
+            this._prevPageY = this._thumbSizeY - e.offsetY;
+            const offset = event.clientY - this.barY.getBoundingClientRect().top;
+            const thumbClickPosition = this._thumbSizeY - this._prevPageY;
+            const scrollTop = this._scrollTopMax * (offset - thumbClickPosition) / this._trackTopMax;
+            this.renderer.setProperty(this.view, 'scrollTop', scrollTop);
+        };
+
+        /** Reset and remove listeners on mouseUp */
+        const endDrag = () => {
+            this.document.onselectstart = null;
+            mouseMoveSub$.unsubscribe();
+            mouseUpSub$.unsubscribe();
+            this._prevPageY = 0;
+        };
+
+        /** Disable selection while dragging scrollbars */
+        this.document.onselectstart = () => false;
+        const mouseMoveSub$ = fromEvent(this.document.body, 'mousemove', startDrag).subscribe();
+        const mouseUpSub$ = fromEvent(this.document.body, 'mouseup', endDrag).subscribe();
     }
 
     /**
      * Calculate Thumb X Size
-     * @return {number}
      */
     private calculateThumbXSize(): number {
         this._naturalThumbSizeX = this.barX.clientWidth / this.view.scrollWidth * this.barX.clientWidth;
@@ -325,7 +312,6 @@ export class AtScrollbarComponent implements AfterViewInit, OnDestroy {
 
     /**
      * Calculate Thumb Y Size
-     * @return {number}
      */
     private calculateThumbYSize(): number {
         this._naturalThumbSizeY = this.barY.clientHeight / this.view.scrollHeight * this.barY.clientHeight;
@@ -335,72 +321,62 @@ export class AtScrollbarComponent implements AfterViewInit, OnDestroy {
 
     /**
      * Get scrollbar thumb size
-     * @param {number} naturalThumbSize
-     * @param {number} scrollMax
-     * @return {number}
+     * @param naturalThumbSize
+     * @param scrollMax
      */
     private scrollBoundaries(naturalThumbSize: number, scrollMax: number): number {
-        if (naturalThumbSize < this.minThumbSize) {
-            return this.minThumbSize;
-        } else if (scrollMax) {
-            return naturalThumbSize;
-        } else {
-            return 0;
-        }
+        return (naturalThumbSize < this.minThumbSize) ? this.minThumbSize : scrollMax ? naturalThumbSize : 0;
     }
 
     /**
      * Set horizontal scrollbar thumb style
-     * @param {number} x
-     * @param {number} width
-     * @return {any}
+     * @param x
+     * @param width
      */
-    private setThumbXPosition(x: number, width: number): any {
-        this.renderer.setStyle(this.thumbX, 'msTransform', `translate(${x}, 0)`);
-        this.renderer.setStyle(this.thumbX, 'webkitTransform', `translate3d(${x}px, 0, 0)`);
-        this.renderer.setStyle(this.thumbX, 'transform', `translate3d(${x}px, 0, 0)`);
+    private setThumbXPosition(x: number, width: number) {
+        const transform = `translate3d(${x}px, 0, 0)`;
+        this.renderer.setStyle(this.thumbX, 'webkitTransform', transform);
+        this.renderer.setStyle(this.thumbX, 'transform', transform);
         this.renderer.setStyle(this.thumbX, 'width', width + 'px');
         this._currXPos = x;
     }
 
     /**
      * Set vertical scrollbar thumb style
-     * @param {number} y
-     * @param {number} height
-     * @return {any}
+     * @param y
+     * @param height
      */
-    private setThumbYPosition(y: number, height: number): any {
-        this.renderer.setStyle(this.thumbY, 'msTransform', `translate(0, ${y})`);
-        this.renderer.setStyle(this.thumbY, 'webkitTransform', `translate3d(0, ${y}px, 0)`);
-        this.renderer.setStyle(this.thumbY, 'transform', `translate3d(0, ${y}px, 0)`);
+    private setThumbYPosition(y: number, height: number) {
+        const transform = `translate3d(0, ${y}px, 0)`;
+        this.renderer.setStyle(this.thumbY, 'webkitTransform', transform);
+        this.renderer.setStyle(this.thumbY, 'transform', transform);
         this.renderer.setStyle(this.thumbY, 'height', height + 'px');
         this._currYPos = y;
     }
 
     /**
      * Hide native scrollbars
-     * @param {number} size
      */
-    private hideNativeScrollbars(size: number) {
-        this.renderer.setStyle(this.view, 'width', `calc(100% + ${size}px)`);
-        this.renderer.setStyle(this.view, 'height', `calc(100% + ${size}px)`);
+    private hideNativeScrollbars() {
+        const size = `calc(100% + ${this.getNativeScrollbarWidth()}px)`;
+        this.renderer.setStyle(this.view, 'width', size);
+        this.renderer.setStyle(this.view, 'height', size);
     }
 
     /**
-     * Get the original scrollbar width
-     * @return {number}
+     * Get the native scrollbar width
      */
-    private getScrollbarWidth(): number {
-        const e = this.renderer.createElement('div');
-        e.style.position = 'absolute';
-        e.style.top = '-9999px';
-        e.style.width = '100px';
-        e.style.height = '100px';
-        e.style.overflow = 'scroll';
-        e.style.msOverflowStyle = 'scrollbar';
-        this.renderer.appendChild(this.document.body, e);
-        const sw = (e.offsetWidth - e.clientWidth);
-        this.renderer.removeChild(this.document.body, e);
+    private getNativeScrollbarWidth(): number {
+        const element = this.document.createElement('div');
+        element.style.position = 'absolute';
+        element.style.top = '-9999px';
+        element.style.width = '100px';
+        element.style.height = '100px';
+        element.style.overflow = 'scroll';
+        element.style.msOverflowStyle = 'scrollbar';
+        this.document.body.appendChild(element);
+        const sw = element.offsetWidth - element.clientWidth;
+        this.document.body.removeChild(element);
         return sw;
     }
 }

@@ -219,7 +219,8 @@ A set of classes to apply based on mediaQuery. Defaults to `['at-sidenav-no-back
 `showAtScrollbar?: boolean`<br>
 
 **Description:**<br>
-Show AtScrollbar instead browser scrollbar. Defaults to true
+Show AtScrollbar instead browser scrollbar. Defaults to `true`
+
 ---
 
 #### Atomic Layout Sidebar Right
@@ -275,7 +276,8 @@ A set of classes to apply based on mediaQuery. Defaults to `['at-sidenav-no-back
 `showAtScrollbar?: boolean`<br>
 
 **Description:**<br>
-Show AtScrollbar instead browser scrollbar. Defaults to true
+Show AtScrollbar instead browser scrollbar. Defaults to `true`
+
 ---
 
 #### Atomic Layout Sidebar Right
@@ -332,6 +334,7 @@ A set of classes to apply based on mediaQuery. Defaults to `['at-sidenav-no-back
 
 **Description:**<br>
 Renders a material elevation effect. Possible values: `1 to 24` Defaults to `null`.
+
 ---
 
 #### Atomic Layout Footer

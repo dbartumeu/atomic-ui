@@ -3,8 +3,7 @@
 `at-scrollbar` is a custom overlay-scrollbar component with native scrolling mechanism.
 
 ### Setup
-Import the `[AtScrollbarModule]` in your NgModule:
-
+Import the `[AtScrollbarModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
 import {AtScrollbarModule} from '@atomic/core';
@@ -18,7 +17,7 @@ import {AtScrollbarModule} from '@atomic/core';
 export class MyModule {}
 ```
 
-Then in your template
+Then in your template<br>
 **my.component.html:**
 ```html
 <at-scrollbar>
@@ -35,7 +34,7 @@ To use Scrollbar functions, you will need to get the component reference from th
 
 
 ### Dynamic scrolling example
-Scroll to top directly from the template
+Scroll to top directly from the template<br>
 **my.component.html:**
 ```html
 ...
@@ -46,7 +45,7 @@ Scroll to top directly from the template
 ...
 ```
 
-Or using the @ViewChild decorator
+Or using the @ViewChild decorator<br>
 **my.component.ts:**
 ```typescript
 ...

@@ -4,8 +4,7 @@
 both sidebars and 3 types of views: main, simple or carded.
 
 ### Setup
-Import the `[AtLayoutModule]` in your NgModule:
-
+Import the `[AtLayoutModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
 import {AtLayoutModule} from '@atomic/core';
@@ -19,7 +18,7 @@ import {AtLayoutModule} from '@atomic/core';
 export class MyModule {}
 ```
 
-Then in your template
+Then in your template<br>
 **my.component.html:**
 ```html
 <at-layout>
@@ -50,7 +49,7 @@ To use Layout functions, you will need to get the component reference from the t
 
 
 ### Toggling sidebars
-Toggle sidebars directly from the template
+Toggle sidebars directly from the template<br>
 **my.component.html:**
 ```html
 <at-layout #layoutRef>
@@ -76,7 +75,7 @@ Toggle sidebars directly from the template
 </at-layout>
 ```
 
-Or using the @ViewChild decorator
+Or using the @ViewChild decorator<br>
 **my.component.ts:**
 ```typescript
 ...

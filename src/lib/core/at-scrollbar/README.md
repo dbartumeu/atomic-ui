@@ -35,7 +35,6 @@ To use Scrollbar functions, you will need to get the component reference from th
 
 
 ### Dynamic scrolling example
-
 Scroll to top directly from the template
 **my.component.html:**
 ```html

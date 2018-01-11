@@ -1,18 +1,18 @@
 ## API reference for Atomic Scrollbar
 
-### Directives
-
-#### Atomic Scrollbar
+### Atomic Scrollbar
 Atomic Scrollbar Renders custom overlay-scrollbar component with native scrolling mechanism.<br>
 **Selector:** at-scrollbar<br>
 **Exported as:** AtomicScrollbarComponent<br>
 
-##### Properties
+#### Properties
 
 @Input()<br>
 `render?: boolean`<br>
 **Description:**<br>
 Sets if the custom scrollbar will be rendered. Defaults to `true`
+
+---
 
 @Input()<br>
 `trackX?: boolean`<br>
@@ -63,7 +63,7 @@ Add custom class to scrollbars' thumbnails. Defaults to `null`
 
 ---
 
-##### Methods
+#### Methods
 
 `update():void`<br>
 Update scrollbars manually.

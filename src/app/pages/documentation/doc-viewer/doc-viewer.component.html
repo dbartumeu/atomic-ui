@@ -15,12 +15,12 @@
                        (selectedTabChange)="selectedTabChange($event)">
             <mat-tab label="OVERVIEW">
 
-                <div class="at-p-40">
+                <div class="at-ph-40 at-pb-40">
                     <td-markdown [content]="overview"></td-markdown>
                 </div>
             </mat-tab>
             <mat-tab label="API">
-                <div class="at-p-40">
+                <div class="at-ph-40 at-pb-40">
                     <td-markdown [content]="api"></td-markdown>
                 </div>
             </mat-tab>
@@ -32,7 +32,7 @@
             </mat-tab>
         </mat-tab-group>
 
-        <div *ngIf="data.docViewer.overviewOnly" class="at-wp-75 at-p-40"
+        <div *ngIf="data.docViewer.overviewOnly" class="at-wp-75 at-ph-40 at-pb-40"
              style="margin-left: auto; margin-right: auto">
             <td-markdown [content]="overview"></td-markdown>
         </div>

@@ -61,7 +61,7 @@ Always unsubscribe from Observable objects when not using them anymore. A good w
 component life-cycle hook provided by the `OnDestroy` interface.
 
 
-then in your template you can do something like this:<br>
+And in your template you can do something like this:<br>
 **my.component.html:**
 ```html
 <div *ngIf="isSmallScreen"
@@ -69,6 +69,8 @@ then in your template you can do something like this:<br>
 </div>
 ```
 
+
+### Using the Directive
 Alternatively you can use the `atMediaToggle` directive with a `"media query"` value:<br>
 **my.component.html:**
 ```html

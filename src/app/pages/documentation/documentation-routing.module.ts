@@ -96,6 +96,29 @@ export const FRAMEWORK_ROUTES: Routes = [
             }
         },
     },
+    {
+        path: 'framework/core/media',
+        component: DocViewerComponent,
+        // canActivate: [AtPermissionsGuard],
+        data: {
+            atSidenavItem: {
+                name: 'Media Queries',
+                pathPrefix: 'docs/:version',
+                icon: 'crop_landscape',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/core',
+                module: 'at-media'
+            }
+        },
+    },
 ];
 
 export const DOCUMENTATION_ROUTES: Routes = [

@@ -2,7 +2,7 @@
 
 ### Services
 
-### AtMediaService
+#### AtMediaService
 This service is designed to provide basic media query evaluation for responsive applications. It has pre-programmed 
 support for media queries that match the layout breakpoints:
 
@@ -22,7 +22,7 @@ support for media queries that match the layout breakpoints:
 | print     | print                                   |
 
 
-#### Properties
+##### Properties
 
 `query(query: string):void`<br>
 **Description:**<br>
@@ -50,14 +50,14 @@ Deregisters a query so its stops being notified or used.
 ---
 
 
-### Directives
+#### Directives
 
-### AtMediaToggle
+#### AtMediaToggle
 Toggles attributes, classes and styles in an element depending on screen size<br>
 **Selector:** [atMediaToggle]<br>
 **Exported as:** AtMediaToggleDirective<br>
 
-##### Properties
+###### Properties
 
 `@Input()`<br>
 `atMediaToggle: string`<br>

@@ -50,7 +50,7 @@ Deregisters a query so its stops being notified or used.
 ---
 
 
-#### Directives
+### Directives
 
 #### AtMediaToggle
 Toggles attributes, classes and styles in an element depending on screen size<br>

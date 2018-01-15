@@ -25,7 +25,7 @@ import { Component, NgZone, OnInit, OnDestroy } from '@angular/core';
 import { AtMediaService } from '@atomic/core';
 import { Subscription } from 'rxjs/Subscription';
 ...
-})
+
 export class Demo implements OnInit, OnDestroy {
   isSmallScreen: boolean = false;
   private _querySubscription: Subscription;

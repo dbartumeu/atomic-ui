@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
-import {AtExceptPermissionDirective} from './directives/at-except-permissions-directive';
-import {AtHasPermissionDirective} from './directives/at-has-permissions-directive';
+import {AtExceptPermissionDirective} from './directives/at-permissions-denied-directive';
+import {AtHasPermissionDirective} from './directives/at-permissions-allowed-directive';
 import {AtPermissionsService} from './at-permissions.service';
 import {AtPermissionsGuard, IAtPermissionsGuard} from './at-permissions-guard.service';
 

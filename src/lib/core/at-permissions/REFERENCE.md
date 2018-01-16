@@ -36,6 +36,7 @@ Check if registered permissions has a defined `perm`<br>
 **Parameters:**<br>
 `perm`: A permission string.<br>
 **Return:** `true` if `perm` exist false otherwise.
+
 ---
 
 `hasOne(permsArr: Array<string>): boolean`<br>
@@ -44,6 +45,7 @@ Check if registered permissions has at least one of `permsArr`<br>
 **Parameters:**<br>
 `permsArr`:A permission list.<br>
 **Return:** `true` if `perm` exist false otherwise.
+
 ---
 
 #### AtPermissionsGuard
@@ -57,41 +59,84 @@ Check if registered permissions has at least one of `permsArr`<br>
 
 ### Directives
 
-#### AtMediaToggle
-Toggles attributes, classes and styles in an element depending on screen size<br>
-**Selector:** [atMediaToggle]<br>
-**Exported as:** AtMediaToggleDirective<br>
+#### Permissions Allowed Directive
+Shows dom elements on authorized permission and hides it otherwise<br>
+**Selector:** [atPermsAllowed]<br>
+**Exported as:** AtPermissionsAllowedDirective<br>
 
 ###### Properties
 
 `@Input()`<br>
-`atMediaToggle: string`<br>
+`atPermsAllowed: string[]`<br>
 
 **Description:**<br>
-Media query used to evaluate screen/window size. Toggles attributes, classes and styles if media query is matched.
+Permissions allowed to access content.
 
 ---
 
 `@Input()`<br>
-`mediaAttributes: {[key: string]: string}`<br>
+`atOnAuthPermission: string | function`<br>
 
 **Description:**<br>
-Attributes to be toggled when media query matches.
+`PermissionStrategy` or a Custom function to call on authorized permissions.
 
 ---
 
 `@Input()`<br>
-`mediaClasses: string[]`<br>
+`atOnUnauthPermission: string | function`<br>
 
 **Description:**<br>
-CSS Classes to be toggled when media query matches.
+`PermissionStrategy` or a Custom function to call on unauthorized permissions.
+
+---
+
+
+#### Permissions Denied Directive
+Hides dom elements on unauthorized permission and shows it otherwise<br>
+**Selector:** [atPermsAllowed]<br>
+**Exported as:** AtPermissionsAllowedDirective<br>
+
+###### Properties
+
+`@Input()`<br>
+`atPermsDenied: string[]`<br>
+
+**Description:**<br>
+Permissions denied  to access content.
 
 ---
 
 `@Input()`<br>
-`mediaStyles: {[key: string]: string}`<br>
+`atOnAuthPermission: PermissionStrategy | function`<br>
 
 **Description:**<br>
-CSS Styles to be toggled when media query matches.
+`PermissionStrategy` or a Custom function to call on authorized permissions.<br>
+**PermissionStrategy:**
+
+| Value       | Behavior                                |
+| :---------- | :-------------------------------------- |
+| `'enable'`  |	Removes disabled attribute from element |
+| `'disable'` |	Adds disabled attribute to element      |
+| `'show'`    |	Set display style to inherit            |
+| `'hide'`    |	Set display style to none               |
 
 ---
+
+`@Input()`<br>
+`atOnUnauthPermission: PermissionStrategy | function`<br>
+
+**Description:**<br>
+`PermissionStrategy` or a Custom function to call on unauthorized permissions.
+**PermissionStrategy:**
+
+| Value       | Behavior                                |
+| :---------- | :-------------------------------------- |
+| `'enable'`  |	Removes disabled attribute from element |
+| `'disable'` |	Adds disabled attribute to element      |
+| `'show'`    |	Set display style to inherit            |
+| `'hide'`    |	Set display style to none               |
+
+---
+
+
+### Additional Classes Interfaces

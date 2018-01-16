@@ -2,14 +2,14 @@ import {Directive, OnInit, ElementRef, Input} from '@angular/core';
 import {AtPermissionsService} from '../at-permissions.service';
 
 @Directive({
-    selector: '[atExceptPerms]'
+    selector: '[atPermsDenied]'
 })
-export class AtExceptPermissionDirective implements OnInit {
+export class AtPermissionsDeniedDirective implements OnInit {
 
     /**
-     * atPermsDe
+     * atPermsDenied
      */
-    @Input('atExceptPerms') atExceptPerms: Array<string>;
+    @Input('atPermsDenied') atExceptPerms: Array<string>;
 
     /**
      * onAuthPerms

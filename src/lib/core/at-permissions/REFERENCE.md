@@ -78,7 +78,15 @@ Permissions allowed to access content.
 `atOnAuthPermission: string | function`<br>
 
 **Description:**<br>
-`PermissionStrategy` or a Custom function to call on authorized permissions.
+`PermissionStrategy` or a Custom function to call on authorized permissions.<br>
+**PermissionStrategy:**
+
+| Value       | Behavior                                |
+| :---------- | :-------------------------------------- |
+| `'enable'`  |	Removes disabled attribute from element |
+| `'disable'` |	Adds disabled attribute to element      |
+| `'show'`    |	Set display style to inherit            |
+| `'hide'`    |	Set display style to none               |
 
 ---
 
@@ -86,7 +94,15 @@ Permissions allowed to access content.
 `atOnUnauthPermission: string | function`<br>
 
 **Description:**<br>
-`PermissionStrategy` or a Custom function to call on unauthorized permissions.
+`PermissionStrategy` or a Custom function to call on unauthorized permissions.<br>
+**PermissionStrategy:**
+
+| Value       | Behavior                                |
+| :---------- | :-------------------------------------- |
+| `'enable'`  |	Removes disabled attribute from element |
+| `'disable'` |	Adds disabled attribute to element      |
+| `'show'`    |	Set display style to inherit            |
+| `'hide'`    |	Set display style to none               |
 
 ---
 

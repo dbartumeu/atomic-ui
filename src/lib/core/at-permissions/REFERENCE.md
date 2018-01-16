@@ -8,10 +8,42 @@
 
 `register(permsArr: Array<string>):void`<br>
 **Description:**<br>
-Registers an array of permissions
+Registers an array of permissions.<br>
 **Parameters:**<br>
 `permsArr`: A permission array.
 
+---
+
+`add(perm: string): void`<br>
+**Description:**<br>
+Add a permission<br>
+**Parameters:**<br>
+`perm`: A permission string.
+
+---
+
+`remove(perm: string): void`<br>
+**Description:**<br>
+Remove a permission<br>
+**Parameters:**<br>
+`perm`: A permission string.
+
+---
+
+`has(perm: string): boolean`<br>
+**Description:**<br>
+Check if registered permissions has a defined `perm`<br>
+**Parameters:**<br>
+`perm`: A permission string.<br>
+**Return:** `true` if `perm` exist false otherwise.
+---
+
+`hasOne(permsArr: Array<string>): boolean`<br>
+**Description:**<br>
+Check if registered permissions has at least one of `permsArr`<br>
+**Parameters:**<br>
+`permsArr`:A permission list.<br>
+**Return:** `true` if `perm` exist false otherwise.
 ---
 
 #### AtPermissionsGuard

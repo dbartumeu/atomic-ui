@@ -153,6 +153,3 @@ Permissions denied  to access content.
 | `'hide'`    |	Set display style to none               |
 
 ---
-
-
-### Additional Classes Interfaces

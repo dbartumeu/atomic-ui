@@ -38,8 +38,8 @@ export class AppModule { }
 ## Step 4: Include the core, theme and typography:
 This is **required** to apply all of the core, theme and typography styles to your application.
 
-See the (material theming guide)[https://github.com/angular/material2/blob/master/guides/theming.md] and the 
-(material typography guide)[https://github.com/angular/material2/blob/master/guides/typography.md] for instructions.
+See the [material theming guide](https://github.com/angular/material2/blob/master/guides/theming.md) and the 
+[material typography guide](https://github.com/angular/material2/blob/master/guides/typography.md) for instructions.
 
 A theme file is a simple Sass file that defines your palettes and passes them to mixins that output the corresponding 
 styles. A typical theme file will look something like this:

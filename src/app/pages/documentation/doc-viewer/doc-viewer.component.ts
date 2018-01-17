@@ -58,7 +58,12 @@ export class DocViewerComponent implements OnInit {
 
     getData(module: string, doc: string): void {
 
-        const url: string = this.coreUrl + '/' + this.version + '/' + this.section + '/' + module + '/' + doc + '.md';
+        console.log(this.data);
+        const url: string =
+            this.data.docViewer.overviewOnly ?
+                (this.coreUrl + '/' + this.version + '/' + this.data.docViewer.section + '/' + module + '.md') :
+                (this.coreUrl + '/' + this.version + '/' + this.data.docViewer.section + '/' + module + '/' + doc + '.md');
+
         this.http.get(url, {responseType: 'text'}).subscribe(
             (data: string) => {
 

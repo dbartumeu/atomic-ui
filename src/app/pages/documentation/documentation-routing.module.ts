@@ -20,6 +20,31 @@ export const DOCUMENTATION_COMPONENTS: any[] = [
     DocViewerComponent,
 ];
 
+export const GENERAL_ROUTES: Routes = [
+    {
+        path: 'getting-started',
+        component: DocViewerComponent,
+        data: {
+            atSidenavItem: {
+                name: 'Getting Started',
+                pathPrefix: 'docs/:version',
+                icon: 'input',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: true,
+                section: 'src/docs',
+                module: 'getting-started'
+            }
+        },
+    }
+];
+
 export const FRAMEWORK_ROUTES: Routes = [
     {
         path: 'framework',
@@ -149,6 +174,7 @@ export const DOCUMENTATION_ROUTES: Routes = [
         path: 'docs/:version',
         component: DocNavigatorComponent,
         children: [
+            ...GENERAL_ROUTES,
             ...FRAMEWORK_ROUTES,
         ],
     },
@@ -156,6 +182,7 @@ export const DOCUMENTATION_ROUTES: Routes = [
 
 @NgModule({
     imports: [
+        RouterModule.forChild(GENERAL_ROUTES),
         RouterModule.forChild(FRAMEWORK_ROUTES),
         RouterModule.forChild(DOCUMENTATION_ROUTES),
     ],

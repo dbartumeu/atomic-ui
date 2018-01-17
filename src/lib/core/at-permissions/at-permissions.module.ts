@@ -1,15 +1,15 @@
 import {NgModule} from '@angular/core';
-import {AtExceptPermissionDirective} from './directives/at-permissions-denied-directive';
-import {AtHasPermissionDirective} from './directives/at-permissions-allowed-directive';
+import {AtPermissionsDeniedDirective} from './directives/at-permissions-denied-directive';
+import {AtPermissionsAllowedDirective} from './directives/at-permissions-allowed-directive';
 import {AtPermissionsService} from './at-permissions.service';
 import {AtPermissionsGuard, IAtPermissionsGuard} from './at-permissions-guard.service';
 
 export {IAtPermissionsGuard, AtPermissionsGuard, AtPermissionsService};
 
 @NgModule({
-    declarations: [AtExceptPermissionDirective, AtHasPermissionDirective],
+    declarations: [AtPermissionsDeniedDirective, AtPermissionsAllowedDirective],
     imports: [],
-    exports: [AtExceptPermissionDirective, AtHasPermissionDirective],
+    exports: [AtPermissionsDeniedDirective, AtPermissionsAllowedDirective],
     providers: [AtPermissionsService, AtPermissionsGuard],
 })
 export class AtPermissionsModule {

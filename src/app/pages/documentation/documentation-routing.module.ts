@@ -167,6 +167,43 @@ export const FRAMEWORK_ROUTES: Routes = [
             }
         },
     },
+    {
+        path: 'framework/forms',
+        pathMatch: 'full',
+        redirectTo: 'framework/forms/chips',
+        data: {
+            atSidenavItem: {
+                name: 'Forms',
+                pathPrefix: 'docs/:version',
+                position: 1,
+                customClass: '',
+            } as AtSidenavItem,
+        },
+    },
+    {
+        path: 'framework/forms/chips',
+        component: DocViewerComponent,
+        // canActivate: [AtPermissionsGuard],
+        data: {
+            atSidenavItem: {
+                name: 'Chips',
+                pathPrefix: 'docs/:version',
+                icon: 'crop_landscape',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/forms',
+                module: 'at-chips',
+                examples: ['chips']
+            }
+        },
+    },
 ];
 
 export const DOCUMENTATION_ROUTES: Routes = [

@@ -5,6 +5,7 @@ import {LayoutBasicComponent} from './layout-basic/layout-basic.component';
 import {LayoutCardOverComponent} from './layout-card-over/layout-card-over.component';
 import {ScrollbarComponent} from './scrollbar/scrollbar.component';
 import {MatCardModule} from '@angular/material';
+import {ChipsComponent} from './chips/chips.component';
 
 
 export interface LiveExample {
@@ -33,12 +34,19 @@ export const EXAMPLE_COMPONENTS: any = {
         additionalFiles: null,
         selectorName: 'scrollbar',
     },
+    'chips': {
+        title: 'Atomic Chips',
+        component: ChipsComponent,
+        additionalFiles: null,
+        selectorName: 'chips',
+    },
 };
 
 export const EXAMPLE_LIST: any[] = [
     LayoutBasicComponent,
     LayoutCardOverComponent,
-    ScrollbarComponent
+    ScrollbarComponent,
+    ChipsComponent
 ];
 
 @NgModule({

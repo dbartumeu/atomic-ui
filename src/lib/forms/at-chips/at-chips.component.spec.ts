@@ -13,7 +13,7 @@ import { DELETE, BACKSPACE, ENTER, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { MatChip } from '@angular/material/chips';
 import { By } from '@angular/platform-browser';
-import { CovalentChipsModule, AtChipsComponent } from './chips.module';
+import { CovalentChipsModule, AtChipsComponent } from './at-chips.module';
 
 function createFakeKeyboardEvent(keyCode: number): any {
   return {

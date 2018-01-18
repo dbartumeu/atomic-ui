@@ -57,8 +57,8 @@ export const _AtChipsMixinBase = mixinControlValueAccessor(mixinDisabled(AtChips
   }],
   selector: 'at-chips',
   inputs: ['disabled', 'value'],
-  styleUrls: ['./chips.component.scss' ],
-  templateUrl: './chips.component.html',
+  styleUrls: ['./at-chips.component.scss' ],
+  templateUrl: './at-chips.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AtChipsComponent extends _AtChipsMixinBase implements IControlValueAccessor, DoCheck, OnInit, AfterViewInit, OnDestroy, ICanDisable {

@@ -8,8 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 
-import { AtChipsComponent, AtChipDirective, AtAutocompleteOptionDirective } from './chips.component';
-export { AtChipsComponent, AtChipDirective, AtAutocompleteOptionDirective } from './chips.component';
+import { AtChipsComponent, AtChipDirective, AtAutocompleteOptionDirective } from './at-chips.component';
+export { AtChipsComponent, AtChipDirective, AtAutocompleteOptionDirective } from './at-chips.component';
 
 @NgModule({
   imports: [

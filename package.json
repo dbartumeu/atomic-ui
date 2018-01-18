@@ -1,6 +1,6 @@
 {
   "name": "atomic",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -22,7 +22,6 @@
     "last 2 versions"
   ],
   "dependencies": {
-    "@agm/core": "^1.0.0-beta.2",
     "@angular/animations": "^5.1.2",
     "@angular/cdk": "^5.0.2",
     "@angular/common": "^5.1.2",

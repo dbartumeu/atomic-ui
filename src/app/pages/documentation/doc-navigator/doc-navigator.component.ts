@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {AtPermissionsService} from "@atomic/core";
+import {AtPermissionsService} from "ngx-atomic/core";
 
 @Component({
     selector: 'doc-navigator',

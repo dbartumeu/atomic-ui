@@ -24,7 +24,7 @@ import {fromEvent} from 'rxjs/observable/fromEvent';
 import {filter} from 'rxjs/operators/filter';
 import {debounceTime} from 'rxjs/operators/debounceTime';
 
-import {ICanDisable, mixinDisabled, IControlValueAccessor, mixinControlValueAccessor} from '../at-common/at-common.module';
+import {ICanDisable, mixinDisabled, IControlValueAccessor, mixinControlValueAccessor} from '../../core/at-common/at-common.module';
 
 @Directive({
     selector: '[at-chip]ng-template',

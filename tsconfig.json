@@ -16,10 +16,10 @@
       "./node_modules/@types"
     ],
     "paths": {
-      "@atomic/core": [
+      "ngx-atomic/core": [
         "./lib/core"
       ],
-      "@atomic/forms": [
+      "ngx-atomic/forms": [
         "./lib/forms"
       ]
     },

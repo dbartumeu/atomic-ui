@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AtSidenavItem, AtPermissionsGuard} from '@atomic/core';
+import {AtSidenavItem, AtPermissionsGuard} from 'ngx-atomic/core';
 import {DocViewerComponent} from './doc-viewer/doc-viewer.component';
 import {DocNavigatorComponent} from './doc-navigator/doc-navigator.component';
 

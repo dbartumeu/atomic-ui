@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {ComponentPortal} from '@angular/cdk/portal';
 import {EXAMPLE_COMPONENTS, LiveExample} from '../../examples/example.module';
-import {AtCollapseAnimation} from '@atomic/core';
+import {AtCollapseAnimation} from 'ngx-atomic/core';
 import {HttpClient} from '@angular/common/http';
 
 @Component({

@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
-import {AtScrollbarModule, AtLayoutModule} from '@atomic/core';
-import {AtChipsModule} from '@atomic/forms';
+import {AtScrollbarModule, AtLayoutModule} from 'ngx-atomic/core';
 import {LayoutBasicComponent} from './layout-basic/layout-basic.component';
 import {LayoutCardOverComponent} from './layout-card-over/layout-card-over.component';
 import {ScrollbarComponent} from './scrollbar/scrollbar.component';
 import {MatCardModule} from '@angular/material';
 import {ChipsComponent} from './chips/chips.component';
+import {AtChipsModule} from '../../lib/forms';
 
 
 export interface LiveExample {

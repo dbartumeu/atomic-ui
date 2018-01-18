@@ -15,12 +15,13 @@ import {
 } from '@angular/material';
 import {CovalentMarkdownModule} from '@covalent/markdown';
 import {CovalentHighlightModule} from '@covalent/highlight';
-import {AtScrollbarModule, AtLayoutModule, AtEvents} from '@atomic/core';
+import {AtScrollbarModule, AtLayoutModule, AtEvents} from 'ngx-atomic/core';
 import {DOCUMENTATION_COMPONENTS, DocumentationRoutingModule} from './documentation-routing.module';
 import {ExampleViewerComponent} from '../../shared/example-viewer/example-viewer.component';
 import {PortalModule} from '@angular/cdk/portal';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SidenavModule} from './sidenav/sidenav.module';
+
 
 @NgModule({
     imports: [

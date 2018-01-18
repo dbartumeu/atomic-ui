@@ -16,7 +16,7 @@ export class DocViewerComponent implements OnInit {
     overview: string;
     api: string;
 
-    coreUrl: string = 'https://raw.githubusercontent.com/dbartumeu/atomic';
+    coreUrl: string = 'https://raw.githubusercontent.com/dbartumeu/ngx-atomic';
 
     overviewRendered: boolean = false;
     apiRendered: boolean = false;

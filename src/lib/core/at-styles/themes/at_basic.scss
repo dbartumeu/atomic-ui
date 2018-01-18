@@ -45,9 +45,14 @@
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
 
   .at-sidenav {
     overflow-x: hidden;
+    //background-color: map_get($background, card);
+
     &.at-sidenav-primary {
       background-color: map-get($primary, 400);
 

@@ -1,0 +1,37 @@
+{
+  "name": "ngx-atomic",
+  "version": "0.0.1",
+  "description": "An UI framework built on Angular Material",
+  "keywords": [
+    "angular",
+    "material",
+    "material design",
+    "components",
+    "atomic",
+    "reusable"
+  ],
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbartumeu/atomic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dbartumeu/atomic/issues"
+  },
+  "license": "MIT",
+  "author": "Damian Bartumeu",
+  "dependencies": {
+    "tslib": "^1.7.1"
+  },
+  "peerDependencies": {
+    "@angular/common": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/router": "^5.0.0",
+    "@angular/cdk": "^5.0.0",
+    "@angular/material": "^5.0.0",
+    "@angular/flex-layout": "^2.0.0",
+    "lodash": "^4.17.4"
+  }
+}

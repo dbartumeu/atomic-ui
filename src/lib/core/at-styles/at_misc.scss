@@ -129,15 +129,6 @@ p {
     max-height: 500px;
     overflow: hidden;
   }
-
-  /deep/ at-scrollbar {
-    max-height: 500px;
-    &:hover {
-      .scrollbar-track {
-        opacity: 1;
-      }
-    }
-  }
 }
 
 .at-pattern-1 {

@@ -1,0 +1,85 @@
+@import "../common/functions";
+
+@mixin at-markdown-theme($theme) {
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  td-markdown {
+    a {
+      color: mat-color($accent);
+    }
+    h1, h2 {
+      border-bottom: none;
+    }
+    h3, h4, h5, h6 {
+      font-weight: 400;
+      color: mat-color($foreground, secondary-text);
+    }
+    h2 {
+      font-size: 2.4rem;
+      font-weight: 400;
+    }
+    h3 {
+      font-size: 2.1rem;
+      border-bottom: 1px solid;
+      border-bottom-color: mat-color($foreground, divider);
+    }
+    h4 {
+      font-size: 1.7rem;
+    }
+    h5 {
+      font-size: 1.5rem;
+      margin-top: 1.2em;
+    }
+    h6 {
+      font-size: 1.2rem;
+    }
+    hr {
+      border-color: mat-color($foreground, divider);
+    }
+    blockquote {
+      color: mat-color($foreground, secondary-text);
+      border-left-color: mat-color($foreground, divider);
+    }
+    table {
+      width: 100%;
+      th {
+        text-align: left;
+        padding: 15px 15px;
+        font-size: 110%;
+        font-weight: 400;
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+      td {
+        padding: 10px 15px;
+      }
+      th,
+      td {
+        border-color: mat-color($foreground, dividers);
+      }
+      tr {
+        border-top-color: mat-color($foreground, dividers);
+        &:nth-child(2n) {
+          //background-color: mat-color($foreground, dividers);
+        }
+      }
+    }
+    img {
+      background-color: mat-color($background, card);
+    }
+    code {
+      background-color: mat-color($background, hover);
+    }
+    .highlight pre,
+    pre {
+      background-color: mat-color($background, app-bar);
+    }
+    kbd {
+      color: mat-color($foreground, secondary-text);
+      background-color: mat-color($background, app-bar);
+      border-color: mat-color($foreground, divider);
+      border-bottom-color: mat-color($foreground, disabled);
+    }
+  }
+}

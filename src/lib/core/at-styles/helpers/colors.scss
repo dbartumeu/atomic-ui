@@ -1,3 +1,5 @@
+@import "../common/variables";
+
 // Black text
 .black-fg,
 .black-text {
@@ -53,7 +55,7 @@
 }
 
 // Material colors with all available hue values
-@each $colorName, $colorMap in $materialColorsMap {
+@each $colorName, $colorMap in $material-colors-map {
 
   @each $hue, $hexValue in map-get($colorMap, 'hues') {
 
@@ -63,7 +65,7 @@
 
     .mat-bg-#{$colorName}-#{$hue} {
       background-color: $hexValue !important;
-      color: map-get($contrastsMap, map-get(map-get($colorMap, 'contrasts'), $hue));
+      color: map-get($contrasts-map, map-get(map-get($colorMap, 'contrasts'), $hue));
     }
 
     .mat-fg-#{$colorName}-#{$hue} {
@@ -94,7 +96,7 @@
 
       .mat-bg-#{$colorName} {
         background-color: $hexValue !important;
-        color: map-get($contrastsMap, map-get(map-get($colorMap, 'contrasts'), $hue));
+        color: map-get($contrasts-map, map-get(map-get($colorMap, 'contrasts'), $hue));
       }
 
       .#{$colorName}-bg {
@@ -131,9 +133,9 @@
 // Function for getting material color and their hue values in scss
 @function material-color($color, $hue: '500') {
 
-  @if (map-has-key($materialColorsMap, $color)) {
+  @if (map-has-key($material-colors-map, $color)) {
 
-    $availableHues: map-get(map-get($materialColorsMap, $color), 'hues');
+    $availableHues: map-get(map-get($material-colors-map, $color), 'hues');
 
     @if (map-has-key($availableHues, $hue)) {
       @return map-get($availableHues, $hue);

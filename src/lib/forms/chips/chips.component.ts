@@ -22,46 +22,46 @@ import { fromEvent } from 'rxjs/observable/fromEvent';
 import { filter } from 'rxjs/operators/filter';
 import { debounceTime } from 'rxjs/operators/debounceTime';
 
-import { ICanDisable, mixinDisabled, IControlValueAccessor, mixinControlValueAccessor } from '../common/common.module';
+import { ICanDisable, mixinDisabled, IControlValueAccessor, mixinControlValueAccessor } from '../../core/at-common/at-common.module';
 
 @Directive({
-  selector: '[td-chip]ng-template',
+  selector: '[at-chip]ng-template',
 })
-export class TdChipDirective extends TemplatePortalDirective {
+export class AtChipDirective extends TemplatePortalDirective {
   constructor(templateRef: TemplateRef<any>, viewContainerRef: ViewContainerRef) {
     super(templateRef, viewContainerRef);
   }
 }
 
 @Directive({
-  selector: '[td-autocomplete-option]ng-template',
+  selector: '[at-autocomplete-option]ng-template',
 })
-export class TdAutocompleteOptionDirective extends TemplatePortalDirective {
+export class AtAutocompleteOptionDirective extends TemplatePortalDirective {
   constructor(templateRef: TemplateRef<any>, viewContainerRef: ViewContainerRef) {
     super(templateRef, viewContainerRef);
   }
 }
 
-export class TdChipsBase {
+export class AtChipsBase {
   constructor(public _changeDetectorRef: ChangeDetectorRef) {}
 }
 
 /* tslint:disable-next-line */
-export const _TdChipsMixinBase = mixinControlValueAccessor(mixinDisabled(TdChipsBase), []);
+export const _AtChipsMixinBase = mixinControlValueAccessor(mixinDisabled(AtChipsBase), []);
 
 @Component({
   providers: [{
     provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => TdChipsComponent),
+    useExisting: forwardRef(() => AtChipsComponent),
     multi: true,
   }],
-  selector: 'td-chips',
+  selector: 'at-chips',
   inputs: ['disabled', 'value'],
   styleUrls: ['./chips.component.scss' ],
   templateUrl: './chips.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TdChipsComponent extends _TdChipsMixinBase implements IControlValueAccessor, DoCheck, OnInit, AfterViewInit, OnDestroy, ICanDisable {
+export class AtChipsComponent extends _AtChipsMixinBase implements IControlValueAccessor, DoCheck, OnInit, AfterViewInit, OnDestroy, ICanDisable {
 
   private _outsideClickSubs: Subscription;
 
@@ -85,8 +85,8 @@ export class TdChipsComponent extends _TdChipsMixinBase implements IControlValue
   @ViewChild(MatAutocompleteTrigger) _autocompleteTrigger: MatAutocompleteTrigger;
   @ViewChildren(MatChip) _chipsChildren: QueryList<MatChip>;
 
-  @ContentChild(TdChipDirective) _chipTemplate: TdChipDirective;
-  @ContentChild(TdAutocompleteOptionDirective) _autocompleteOptionTemplate: TdAutocompleteOptionDirective;
+  @ContentChild(AtChipDirective) _chipTemplate: AtChipDirective;
+  @ContentChild(AtAutocompleteOptionDirective) _autocompleteOptionTemplate: AtAutocompleteOptionDirective;
 
   @ViewChildren(MatOption) _options: QueryList<MatOption>;
 
@@ -262,7 +262,7 @@ export class TdChipsComponent extends _TdChipsMixinBase implements IControlValue
   @Output('chipBlur') onChipBlur: EventEmitter<any> = new EventEmitter<any>();
 
   /**
-   * Hostbinding to set the a11y of the TdChipsComponent depending on its state
+   * Hostbinding to set the a11y of the AtChipsComponent depending on its state
    */
   @HostBinding('attr.tabindex')
   get tabIndex(): number {
@@ -302,14 +302,14 @@ export class TdChipsComponent extends _TdChipsMixinBase implements IControlValue
   }
 
   /**
-   * If clicking on :host or `td-chips-wrapper`, then we stop the click propagation so the autocomplete
+   * If clicking on :host or `at-chips-wrapper`, then we stop the click propagation so the autocomplete
    * doesnt close automatically.
    */
   @HostListener('click', ['$event'])
   clickListener(event: Event): void {
     const clickTarget: HTMLElement = <HTMLElement>event.target;
     if (clickTarget === this._elementRef.nativeElement || 
-        clickTarget.className.indexOf('td-chips-wrapper') > -1) {
+        clickTarget.className.indexOf('at-chips-wrapper') > -1) {
       this.focus();
       event.preventDefault();
       event.stopPropagation();

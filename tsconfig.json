@@ -18,6 +18,9 @@
     "paths": {
       "@atomic/core": [
         "./lib/core"
+      ],
+      "@atomic/forms": [
+        "./lib/forms"
       ]
     },
     "noUnusedParameters": false,

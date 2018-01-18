@@ -1,13 +1,7 @@
-@import "at_vars";
+@import "common/variables";
 
 .at-sidenav {
   overflow-x: hidden;
-
-  //.simplebar-scroll-content{
-  //  flex: 1 1 auto;
-  //  flex-direction: column;
-  //  display: flex;
-  //}
 
   .simplebar-scroll-content {
     overflow-x: hidden;

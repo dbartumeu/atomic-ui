@@ -13,7 +13,7 @@ For more information about how to get started with Angular Material, check out t
 ## Step 2: Install Atomic.
 Atomic  is available as an npm package.
 ```
-npm install --save @atomic/core
+npm install --save @atomic
 ```
 
 You can add the whole framework.
@@ -48,7 +48,8 @@ styles. A typical theme file will look something like this:
 @import '~@angular/material/_theming';
 @include mat-core();
 
-@import "@atomic/at-styles/at_theming";
+@import "@atomic/at-styles/helpers";
+@import "@atomic/at-styles/theming";
 
 // Define the default theme.
 $default-primary: mat-palette($mat-indigo);

@@ -1,0 +1,34 @@
+@import 'themes/at-chips';
+
+@function at-typography-config(
+  $font-family:   'Roboto, "Helvetica Neue", sans-serif',
+  $headline:      at-typography-level(24px, 32px, 400),
+  $title:         at-typography-level(20px, 32px, 500),
+  $subheading-2:  at-typography-level(16px, 28px, 400),
+  $subheading-1:  at-typography-level(15px, 24px, 400),
+  $body-2:        at-typography-level(14px, 24px, 500),
+  $body-1:        at-typography-level(14px, 20px, 400),
+  $caption:       at-typography-level(12px, 20px, 400)
+) {
+  @return (
+          font-family:    $font-family,
+          headline:       $headline,
+          title:          $title,
+          subheading-2:   $subheading-2,
+          subheading-1:   $subheading-1,
+          body-2:         $body-2,
+          body-1:         $body-1,
+          caption:        $caption
+  );
+}
+
+@mixin at-typography($config: null) {
+  @if $config == null {
+    $config: at-typography-config();
+  }
+
+  body {
+    font-family: at-font-family($config);
+  }
+  @include at-chips-typography($config);
+}

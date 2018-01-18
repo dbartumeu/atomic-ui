@@ -1,9 +1,11 @@
 import {NgModule} from '@angular/core';
 import {AtScrollbarModule, AtLayoutModule} from '@atomic/core';
+import {AtChipsModule} from '@atomic/forms';
 import {LayoutBasicComponent} from './layout-basic/layout-basic.component';
 import {LayoutCardOverComponent} from './layout-card-over/layout-card-over.component';
 import {ScrollbarComponent} from './scrollbar/scrollbar.component';
 import {MatCardModule} from '@angular/material';
+
 
 export interface LiveExample {
     title: string;
@@ -47,7 +49,8 @@ export const EXAMPLE_LIST: any[] = [
     imports: [
         AtScrollbarModule,
         AtLayoutModule,
-        MatCardModule
+        AtChipsModule,
+        MatCardModule,
     ],
     exports: [],
 })

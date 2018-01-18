@@ -13,7 +13,7 @@ import { DELETE, BACKSPACE, ENTER, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { MatChip } from '@angular/material/chips';
 import { By } from '@angular/platform-browser';
-import { CovalentChipsModule, TdChipsComponent } from './chips.module';
+import { CovalentChipsModule, AtChipsComponent } from './chips.module';
 
 function createFakeKeyboardEvent(keyCode: number): any {
   return {
@@ -39,14 +39,14 @@ describe('Component: Chips', () => {
         NoopAnimationsModule,
       ],
       declarations: [
-        TdChipsTestComponent,
-        TdChipsA11yTestComponent,
-        TdChipsBasicTestComponent,
-        TdChipsObjectsRequireMatchTestComponent,
-        TdChipsStackedTestComponent,
-        TdChipsBeforeAfterTestComponent,
-        TdChipRemovalTestComponent,
-        TdChipsEventsTestComponent,
+        AtChipsTestComponent,
+        AtChipsA11yTestComponent,
+        AtChipsBasicTestComponent,
+        AtChipsObjectsRequireMatchTestComponent,
+        AtChipsStackedTestComponent,
+        AtChipsBeforeAfterTestComponent,
+        AtChipRemovalTestComponent,
+        AtChipsEventsTestComponent,
       ],
       providers: [
         {provide: OverlayContainer, useFactory: () => {
@@ -67,15 +67,15 @@ describe('Component: Chips', () => {
   }));
 
   describe('should test general features: ', () => {
-    let fixture: ComponentFixture<TdChipsTestComponent>;
+    let fixture: ComponentFixture<AtChipsTestComponent>;
     let input: DebugElement;
     let chips: DebugElement;
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(TdChipsTestComponent);
+      fixture = TestBed.createComponent(AtChipsTestComponent);
       fixture.detectChanges();
 
-      chips = fixture.debugElement.query(By.directive(TdChipsComponent));
+      chips = fixture.debugElement.query(By.directive(AtChipsComponent));
       input = chips.query(By.css('input'));
     });
 
@@ -113,15 +113,15 @@ describe('Component: Chips', () => {
   });
 
   describe('a11y keyboard in chips and input: ', () => {
-    let fixture: ComponentFixture<TdChipsA11yTestComponent>;
+    let fixture: ComponentFixture<AtChipsA11yTestComponent>;
     let input: DebugElement;
     let chips: DebugElement;
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(TdChipsA11yTestComponent);
+      fixture = TestBed.createComponent(AtChipsA11yTestComponent);
       fixture.detectChanges();
 
-      chips = fixture.debugElement.query(By.directive(TdChipsComponent));
+      chips = fixture.debugElement.query(By.directive(AtChipsComponent));
       input = chips.query(By.css('input'));
     });
 
@@ -133,7 +133,7 @@ describe('Component: Chips', () => {
         chips.triggerEventHandler('focus', new Event('focus'));
         fixture.detectChanges();
         fixture.whenStable().then(() => {
-          expect((<TdChipsComponent>chips.componentInstance)._inputChild.focused).toBeTruthy();
+          expect((<AtChipsComponent>chips.componentInstance)._inputChild.focused).toBeTruthy();
           done();
         });
       });
@@ -238,15 +238,15 @@ describe('Component: Chips', () => {
   });
 
   describe('panel usage and add/removal: ', () => {
-    let fixture: ComponentFixture<TdChipsBasicTestComponent>;
+    let fixture: ComponentFixture<AtChipsBasicTestComponent>;
     let input: DebugElement;
     let chips: DebugElement;
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(TdChipsBasicTestComponent);
+      fixture = TestBed.createComponent(AtChipsBasicTestComponent);
       fixture.detectChanges();
 
-      chips = fixture.debugElement.query(By.directive(TdChipsComponent));
+      chips = fixture.debugElement.query(By.directive(AtChipsComponent));
       input = chips.query(By.css('input'));
     });
 
@@ -254,7 +254,7 @@ describe('Component: Chips', () => {
       chips.triggerEventHandler('focus', new Event('focus'));
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        (<TdChipsComponent>chips.componentInstance)._inputChild.value = 'test';
+        (<AtChipsComponent>chips.componentInstance)._inputChild.value = 'test';
         fixture.detectChanges();
         fixture.whenStable().then(() => {
           input.triggerEventHandler('keyup.enter', createFakeKeyboardEvent(ENTER));
@@ -321,7 +321,7 @@ describe('Component: Chips', () => {
         fixture.whenStable().then(() => {
           expect(chips.componentInstance.value.length).toBe(1);
           expect(fixture.debugElement.queryAll(By.directive(MatChip)).length).toBe(1);
-          fixture.debugElement.queryAll(By.css('.td-chip-removal'))[0].triggerEventHandler('click', new Event('click'));
+          fixture.debugElement.queryAll(By.css('.at-chip-removal'))[0].triggerEventHandler('click', new Event('click'));
           fixture.detectChanges();
           fixture.whenStable().then(() => {
             expect(chips.componentInstance.value.length).toBe(0);
@@ -335,15 +335,15 @@ describe('Component: Chips', () => {
   });
 
   describe('panel usage and filtering: ', () => {
-    let fixture: ComponentFixture<TdChipsBasicTestComponent>;
+    let fixture: ComponentFixture<AtChipsBasicTestComponent>;
     let input: DebugElement;
     let chips: DebugElement;
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(TdChipsBasicTestComponent);
+      fixture = TestBed.createComponent(AtChipsBasicTestComponent);
       fixture.detectChanges();
 
-      chips = fixture.debugElement.query(By.directive(TdChipsComponent));
+      chips = fixture.debugElement.query(By.directive(AtChipsComponent));
     });
 
     it('should open the panel chips are focused', (done: DoneFn) => {
@@ -388,7 +388,7 @@ describe('Component: Chips', () => {
         expect(overlayContainerElement.textContent).toContain('chips');
         expect(overlayContainerElement.textContent).toContain('pasta');
         expect(overlayContainerElement.textContent).toContain('sushi');
-        (<TdChipsComponent>chips.componentInstance).inputControl.setValue('a');
+        (<AtChipsComponent>chips.componentInstance).inputControl.setValue('a');
         fixture.detectChanges();
         fixture.whenStable().then(() => {
           // mimic debounce
@@ -411,15 +411,15 @@ describe('Component: Chips', () => {
   });
 
   describe('panel usage and requireMatch usage: ', () => {
-    let fixture: ComponentFixture<TdChipsObjectsRequireMatchTestComponent>;
+    let fixture: ComponentFixture<AtChipsObjectsRequireMatchTestComponent>;
     let input: DebugElement;
     let chips: DebugElement;
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(TdChipsObjectsRequireMatchTestComponent);
+      fixture = TestBed.createComponent(AtChipsObjectsRequireMatchTestComponent);
       fixture.detectChanges();
 
-      chips = fixture.debugElement.query(By.directive(TdChipsComponent));
+      chips = fixture.debugElement.query(By.directive(AtChipsComponent));
     });
 
     it('should open the panel, click on an option to add it as chip', (done: DoneFn) => {
@@ -448,26 +448,26 @@ describe('Component: Chips', () => {
   });
 
   describe('stacked usage: ', () => {
-    let fixture: ComponentFixture<TdChipsStackedTestComponent>;
+    let fixture: ComponentFixture<AtChipsStackedTestComponent>;
     let input: DebugElement;
     let chips: DebugElement;
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(TdChipsStackedTestComponent);
+      fixture = TestBed.createComponent(AtChipsStackedTestComponent);
       fixture.detectChanges();
 
-      chips = fixture.debugElement.query(By.directive(TdChipsComponent));
+      chips = fixture.debugElement.query(By.directive(AtChipsComponent));
     });
 
     it('should rendered chips stacked', (done: DoneFn) => {
       fixture.detectChanges();
       fixture.whenStable().then(() => {
-        expect((<HTMLElement>chips.query(By.css('.td-chips-wrapper')).nativeElement).classList.contains('td-chips-stacked'))
+        expect((<HTMLElement>chips.query(By.css('.at-chips-wrapper')).nativeElement).classList.contains('at-chips-stacked'))
           .toBeFalsy();
         fixture.componentInstance.stacked = true;
         fixture.detectChanges();
         fixture.whenStable().then(() => {
-          expect((<HTMLElement>chips.query(By.css('.td-chips-wrapper')).nativeElement).classList.contains('td-chips-stacked'))
+          expect((<HTMLElement>chips.query(By.css('.at-chips-wrapper')).nativeElement).classList.contains('at-chips-stacked'))
             .toBeTruthy();
           done();
         });
@@ -477,27 +477,27 @@ describe('Component: Chips', () => {
   });
 
   describe('position usage: ', () => {
-    let fixture: ComponentFixture<TdChipsBeforeAfterTestComponent>;
+    let fixture: ComponentFixture<AtChipsBeforeAfterTestComponent>;
     let input: DebugElement;
     let chips: DebugElement;
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(TdChipsBeforeAfterTestComponent);
+      fixture = TestBed.createComponent(AtChipsBeforeAfterTestComponent);
       fixture.detectChanges();
 
-      chips = fixture.debugElement.query(By.directive(TdChipsComponent));
+      chips = fixture.debugElement.query(By.directive(AtChipsComponent));
     });
 
     it('should rendered input before the list of chips at all times', (done: DoneFn) => {
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         
-        expect((<HTMLElement>chips.query(By.css('.td-chips-wrapper')).nativeElement).classList.contains('td-chips-input-before-position'))
+        expect((<HTMLElement>chips.query(By.css('.at-chips-wrapper')).nativeElement).classList.contains('at-chips-input-before-position'))
           .toBeFalsy();
         fixture.componentInstance.position = 'before';
         fixture.detectChanges();
         fixture.whenStable().then(() => {
-          expect((<HTMLElement>chips.query(By.css('.td-chips-wrapper')).nativeElement).classList.contains('td-chips-input-before-position'))
+          expect((<HTMLElement>chips.query(By.css('.at-chips-wrapper')).nativeElement).classList.contains('at-chips-input-before-position'))
             .toBeTruthy();
           done();
         });
@@ -506,14 +506,14 @@ describe('Component: Chips', () => {
   });
 
   describe('events: ', () => {
-    let fixture: ComponentFixture<TdChipsEventsTestComponent>;
+    let fixture: ComponentFixture<AtChipsEventsTestComponent>;
     let chips: DebugElement;
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(TdChipsEventsTestComponent);
+      fixture = TestBed.createComponent(AtChipsEventsTestComponent);
       fixture.detectChanges();
 
-      chips = fixture.debugElement.query(By.directive(TdChipsComponent));
+      chips = fixture.debugElement.query(By.directive(AtChipsComponent));
     });
 
     it('should right arrow on a chip and see the chipFocus event', (done: DoneFn) => {
@@ -572,15 +572,15 @@ describe('Component: Chips', () => {
   });
 
   describe('chip removal usage, requires disabled to be false: ', () => {
-    let fixture: ComponentFixture<TdChipRemovalTestComponent>;
+    let fixture: ComponentFixture<AtChipRemovalTestComponent>;
     let input: DebugElement;
     let chips: DebugElement;
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(TdChipRemovalTestComponent);
+      fixture = TestBed.createComponent(AtChipRemovalTestComponent);
       fixture.detectChanges();
 
-      chips = fixture.debugElement.query(By.directive(TdChipsComponent));
+      chips = fixture.debugElement.query(By.directive(AtChipsComponent));
       input = chips.query(By.css('input'));
     });
 
@@ -593,7 +593,7 @@ describe('Component: Chips', () => {
         chips.triggerEventHandler('focus', new Event('focus'));
         fixture.detectChanges();
         fixture.whenStable().then(() => {
-          expect((<TdChipsComponent>chips.componentInstance)._inputChild.focused).toBeFalsy();
+          expect((<AtChipsComponent>chips.componentInstance)._inputChild.focused).toBeFalsy();
           done();
         });
       });
@@ -608,7 +608,7 @@ describe('Component: Chips', () => {
         chips.triggerEventHandler('focus', new Event('focus'));
         fixture.detectChanges();
         fixture.whenStable().then(() => {
-          expect(fixture.debugElement.queryAll(By.css('.td-chip-removal')).length).toBe(0);
+          expect(fixture.debugElement.queryAll(By.css('.at-chip-removal')).length).toBe(0);
           done();
         });
       });
@@ -622,12 +622,12 @@ describe('Component: Chips', () => {
         chips.triggerEventHandler('focus', new Event('focus'));
         fixture.detectChanges();
         fixture.whenStable().then(() => {
-          expect((<TdChipsComponent>chips.componentInstance)._inputChild.focused).toBeTruthy();
+          expect((<AtChipsComponent>chips.componentInstance)._inputChild.focused).toBeTruthy();
           fixture.detectChanges();
           fixture.whenStable().then(() => {
             expect(chips.componentInstance.value.length).toBe(3);
             expect(fixture.debugElement.queryAll(By.directive(MatChip)).length).toBe(3);
-            fixture.debugElement.queryAll(By.css('.td-chip-removal'))[0]
+            fixture.debugElement.queryAll(By.css('.at-chip-removal'))[0]
               .triggerEventHandler('click', new Event('click'));
             fixture.detectChanges();
             fixture.whenStable().then(() => {
@@ -782,10 +782,10 @@ describe('Component: Chips', () => {
 
 @Component({
   template: `
-      <td-chips [items]="items" [(ngModel)]="selectedItems" [color]="color">
-      </td-chips>`,
+      <at-chips [items]="items" [(ngModel)]="selectedItems" [color]="color">
+      </at-chips>`,
 })
-class TdChipsTestComponent {
+class AtChipsTestComponent {
   color: string;
   items: string[] = [
     'steak',
@@ -797,10 +797,10 @@ class TdChipsTestComponent {
 
 @Component({
   template: `
-      <td-chips [items]="items" [(ngModel)]="selectedItems" [chipAddition]="chipAddition">
-      </td-chips>`,
+      <at-chips [items]="items" [(ngModel)]="selectedItems" [chipAddition]="chipAddition">
+      </at-chips>`,
 })
-class TdChipsA11yTestComponent {
+class AtChipsA11yTestComponent {
   chipAddition: boolean = true;
   items: string[] = [
     'steak',
@@ -816,10 +816,10 @@ class TdChipsA11yTestComponent {
 
 @Component({
   template: `
-      <td-chips [placeholder]="placeholder" [items]="filteredItems" [(ngModel)]="selectedItems" (inputChange)="filter($event)">
-      </td-chips>`,
+      <at-chips [placeholder]="placeholder" [items]="filteredItems" [(ngModel)]="selectedItems" (inputChange)="filter($event)">
+      </at-chips>`,
 })
-class TdChipsBasicTestComponent {
+class AtChipsBasicTestComponent {
   placeholder: string;
   filteredItems: string[];
   selectedItems: string[] = [];
@@ -843,26 +843,26 @@ class TdChipsBasicTestComponent {
 
 @Component({
   template: `
-      <td-chips [items]="objects" [(ngModel)]="selectedObjects" requireMatch>
-        <ng-template td-chip let-chip="chip">
+      <at-chips [items]="objects" [(ngModel)]="selectedObjects" requireMatch>
+        <ng-template at-chip let-chip="chip">
           {{chip.name}}
         </ng-template>
-        <ng-template td-autocomplete-option let-option="option">
+        <ng-template at-autocomplete-option let-option="option">
           {{option.name}}
         </ng-template>
-      </td-chips>`,
+      </at-chips>`,
 })
-class TdChipsObjectsRequireMatchTestComponent {
+class AtChipsObjectsRequireMatchTestComponent {
   selectedObjects: any[] = [];
   objects: any[];
 }
 
 @Component({
   template: `
-      <td-chips [items]="items" [(ngModel)]="selectedItems" [stacked]="stacked">
-      </td-chips>`,
+      <at-chips [items]="items" [(ngModel)]="selectedItems" [stacked]="stacked">
+      </at-chips>`,
 })
-class TdChipsStackedTestComponent {
+class AtChipsStackedTestComponent {
   stacked: boolean = false;
   items: string[] = [
     'steak',
@@ -878,10 +878,10 @@ class TdChipsStackedTestComponent {
 
 @Component({
   template: `
-      <td-chips [items]="items" [(ngModel)]="selectedItems" [stacked]="stacked" [inputPosition]="position">
-      </td-chips>`,
+      <at-chips [items]="items" [(ngModel)]="selectedItems" [stacked]="stacked" [inputPosition]="position">
+      </at-chips>`,
 })
-class TdChipsBeforeAfterTestComponent {
+class AtChipsBeforeAfterTestComponent {
   position: string = 'after';
   stacked: boolean = false;
   items: string[] = [
@@ -898,11 +898,11 @@ class TdChipsBeforeAfterTestComponent {
 
 @Component({
   template: `
-      <td-chips [items]="items" [(ngModel)]="selectedItems" [chipRemoval]="chipRemoval"
+      <at-chips [items]="items" [(ngModel)]="selectedItems" [chipRemoval]="chipRemoval"
       [chipAddition]="chipAddition">
-      </td-chips>`,
+      </at-chips>`,
 })
-class TdChipRemovalTestComponent {
+class AtChipRemovalTestComponent {
   chipRemoval: boolean = true;
   chipAddition: boolean = true;
   items: string[] = [
@@ -919,10 +919,10 @@ class TdChipRemovalTestComponent {
 
 @Component({
   template: `
-      <td-chips [items]="items" [(ngModel)]="selectedItems" (chipFocus)="chipFocusEvent()" (chipBlur)="chipBlurEvent()">
-      </td-chips>`,
+      <at-chips [items]="items" [(ngModel)]="selectedItems" (chipFocus)="chipFocusEvent()" (chipBlur)="chipBlurEvent()">
+      </at-chips>`,
 })
-class TdChipsEventsTestComponent {
+class AtChipsEventsTestComponent {
   items: string[] = [
     'steak',
     'pizza',

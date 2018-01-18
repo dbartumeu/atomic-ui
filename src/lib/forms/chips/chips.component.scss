@@ -1,27 +1,27 @@
-@import '../common/styles/rtl';
+@import '../../core/at-styles/common/rtl';
 
 :host {
   display: block;
   padding: 0 5px;
   min-height: 48px;
-  .td-chips-wrapper {
+  .at-chips-wrapper {
     min-height: 42px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
-    &.td-chips-stacked .mat-basic-chip,
-    &.td-chips-stacked .td-chips-form-field {
+    &.at-chips-stacked .mat-basic-chip,
+    &.at-chips-stacked .at-chips-form-field {
       width: 100%;
     }
-    &.td-chips-input-before-position {
-      .td-chips-form-field {
+    &.at-chips-input-before-position {
+      .at-chips-form-field {
         order: -1;
       }
     }
   }
-  .td-chip {
-    &, > .td-chip-content {
+  .at-chip {
+    &, > .at-chip-content {
       // layout
       box-sizing: border-box;
       display: flex;
@@ -32,7 +32,7 @@
       align-items: center;
       align-content: center;
       justify-content: start;
-      &.td-chip-stacked {
+      &.at-chip-stacked {
         // layout-align space-between center
         justify-content: space-between;
       }
@@ -48,12 +48,12 @@
       cursor: default;
       border-radius: 16px;
       @include rtl(margin, 8px 8px 0 0, 8px 0 0 8px);
-      .td-chip {
+      .at-chip {
         min-height: 32px;
         line-height: 32px;
         font-size: 13px;
         @include rtl(padding, 0 0 0 12px, 0 12px 0 0);
-        [td-chip-avatar] {
+        [at-chip-avatar] {
           display: inline-block;
           order: -20;
           justify-content: center;
@@ -68,10 +68,10 @@
       box-sizing: border-box;
       max-width: 100%;
       position: relative;
-      &.td-chip-after-pad {
+      &.at-chip-after-pad {
         @include rtl(padding, 0 12px 0 0, 0 0 0 12px);
       }
-      mat-icon.td-chip-removal {
+      mat-icon.at-chip-removal {
         margin: 0 4px;
         font-size: 21px;
         line-height: 22px;
@@ -80,7 +80,7 @@
         }
       }
     }
-    .td-chips-stacked {
+    .at-chips-stacked {
       .mat-basic-chip {
         margin: 4px 0;
         &:first-of-type {

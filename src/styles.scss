@@ -1,12 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
 @import '~@angular/material/_theming';
+@import 'lib/core/at-styles/helpers';
+@import "lib/core/at-styles/theming";
 
 @include mat-core();
-@import 'lib/core/at-styles/at_index';
-@import "lib/core/at-styles/at_theming";
-
-//@import '~@covalent/markdown/markdown-theme';
 
 // Define the default theme.
 $default-primary: mat-palette($mat-indigo);
@@ -16,63 +15,33 @@ $default-theme: mat-light-theme($default-primary, $default-accent);
 // Include the default theme styles.
 @include angular-material-theme($default-theme);
 
+// Define a generic light theme.
+$at-light-primary: mat-palette($mat-light-blue,700);
+$at-light-accent: mat-palette($mat-pink, A200, A100, A400);
+$at-light-theme: mat-light-theme($at-light-primary, $at-light-accent);
+
+// Define a generic dark theme.
+$at-dark-primary: mat-palette($mat-pink);
+$at-dark-accent: mat-palette($mat-amber, A200, A100, A400);
+$at-dark-warn: mat-palette($mat-deep-orange);
+$at-dark-theme: mat-dark-theme($at-dark-primary, $at-dark-accent, $at-dark-warn);
+
+
 // This design depends on the selection of the material colors palette
 .at-sidenat-button.active {
   color: map-get($default-primary, 400) !important;
 }
 
 // Define Atomic's light theme.
-$at-light-primary: mat-palette($mat-light-blue,700);
-$at-light-accent: mat-palette($mat-pink, A200, A100, A400);
-$at-light-theme: mat-light-theme($at-light-primary, $at-light-accent);
-
-// Define Atomic's dark theme.
-$at-dark-primary: mat-palette($mat-pink);
-$at-dark-accent: mat-palette($mat-amber, A200, A100, A400);
-$at-dark-warn: mat-palette($mat-deep-orange);
-$at-dark-theme: mat-dark-theme($at-dark-primary, $at-dark-accent, $at-dark-warn);
-
-// Define theme Classes
 .at-theme-light {
   @include angular-material-theme($at-light-theme);
-  @include at-theme-backgrounds($at-light-theme);
-  @include at-sidenav-theme($at-light-theme); //theming sidenat
-  @include at-sidenav-item-theme($at-light-theme);
-  @include at-loading-theme($at-light-theme);
-  @include at-notification-count-theme($at-light-theme);
-  @include at-colors-theme($at-light-theme);
-  @include at-chips-theme($at-light-theme);
-  @include at-steps-theme($at-light-theme);
-  @include at-data-table-theme($at-light-theme);
-  @include at-border-theme($at-light-theme);
-
-  //Supported 3rd party
-  @include at-ngx-charts-theme($at-light-theme);
-  @include at-calendar-theme($at-light-theme);
-  @include at-ngx-datatable-theme($at-light-theme);
-  @include at-highlight-theme($at-light-theme);
-  @include at-markdown-theme($at-light-theme);
+  @include atomic-theme($at-light-theme);
 }
 
+// Define Atomic's dark theme.
 .at-theme-dark {
   @include angular-material-theme($at-dark-theme);
-  @include at-theme-backgrounds($at-dark-theme);
-  @include at-sidenav-theme($at-dark-theme); //theming sidenat
-  @include at-sidenav-item-theme($at-dark-theme);
-  @include at-loading-theme($at-dark-theme);
-  @include at-notification-count-theme($at-dark-theme);
-  @include at-colors-theme($at-dark-theme);
-  @include at-chips-theme($at-dark-theme);
-  @include at-steps-theme($at-dark-theme);
-  @include at-data-table-theme($at-dark-theme);
-  @include at-border-theme($at-dark-theme);
-
-
-  //Supported 3rd party
-  @include at-ngx-charts-theme($at-dark-theme);
-  @include at-calendar-theme($at-dark-theme);
-  @include at-ngx-datatable-theme($at-dark-theme);
-  @include at-highlight-theme($at-dark-theme);
+  @include atomic-theme($at-dark-theme);
 }
 
 

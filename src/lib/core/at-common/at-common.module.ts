@@ -31,6 +31,7 @@ export { AtFadeInOutAnimation } from './animations/fade/fadeInOut.animation';
 /**
  * BEHAVIORS
  */
+export { IControlValueAccessor, mixinControlValueAccessor } from './behaviors/control-value-accesor.mixin';
 export { ICanDisable, mixinDisabled } from './behaviors/disabled.mixin';
 export { ICanDisableRipple, mixinDisableRipple } from './behaviors/disable-ripple.mixin';
 

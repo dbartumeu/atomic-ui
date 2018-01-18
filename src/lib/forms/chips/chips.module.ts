@@ -8,8 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
 
-import { TdChipsComponent, TdChipDirective, TdAutocompleteOptionDirective } from './chips.component';
-export { TdChipsComponent, TdChipDirective, TdAutocompleteOptionDirective } from './chips.component';
+import { AtChipsComponent, AtChipDirective, AtAutocompleteOptionDirective } from './chips.component';
+export { AtChipsComponent, AtChipDirective, AtAutocompleteOptionDirective } from './chips.component';
 
 @NgModule({
   imports: [
@@ -21,16 +21,16 @@ export { TdChipsComponent, TdChipDirective, TdAutocompleteOptionDirective } from
     MatAutocompleteModule,
   ],
   declarations: [
-    TdChipsComponent,
-    TdChipDirective,
-    TdAutocompleteOptionDirective,
+    AtChipsComponent,
+    AtChipDirective,
+    AtAutocompleteOptionDirective,
   ],
   exports: [
-    TdChipsComponent,
-    TdChipDirective,
-    TdAutocompleteOptionDirective,
+    AtChipsComponent,
+    AtChipDirective,
+    AtAutocompleteOptionDirective,
   ],
 })
-export class CovalentChipsModule {
+export class AtChipsModule {
 
 }

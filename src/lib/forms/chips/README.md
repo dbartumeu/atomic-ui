@@ -1,6 +1,6 @@
-# td-chips
+# at-chips
 
-`td-chips` element generates a list of strings or objects as chips.
+`at-chips` element generates a list of strings or objects as chips.
 
 Add the [items] attribute to enable the autocomplete with a list, and [requireMatch] to not allow custom values.
 
@@ -49,7 +49,7 @@ export class MyModule {}
 Example for HTML usage:
 
 ```html
-<td-chips placeholder="placeholder"
+<at-chips placeholder="placeholder"
           color="primary"
           [items]="items"
           [inputPosition]="'before'"
@@ -64,12 +64,12 @@ Example for HTML usage:
           (inputChange)="inputChange($event)"
           requireMatch
           stacked>
-  <ng-template td-chip let-chip="chip">
-    <div td-chip-avatar>A</div> {{chip}}
+  <ng-template at-chip let-chip="chip">
+    <div at-chip-avatar>A</div> {{chip}}
   </ng-template>
-  <ng-template td-autocomplete-option let-option="option">
+  <ng-template at-autocomplete-option let-option="option">
     {{option}}
   </ng-template>
   // anything below it
-</td-chips>  
+</at-chips>  
 ```

@@ -1,16 +1,15 @@
-@import '../common/styles/theme-functions';
-@import '../common/styles/typography-functions';
+@import '../common/functions';
 
-@mixin td-chips-typography($config) {
-  .td-chip-content {
+@mixin at-chips-typography($config) {
+  .at-chip-content {
     font: {
-      family: td-font-family($config);
-      size: td-font-size($config, caption);
+      family: at-font-family($config);
+      size: at-font-size($config, caption);
     }
   }
 }
 
-@mixin td-chips-theme($theme) {
+@mixin at-chips-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
@@ -18,12 +17,12 @@
   $foreground: map-get($theme, foreground);
 
   // chips
-  td-chips {
+  at-chips {
     // chip
     .mat-basic-chip {
       background: mat-color($background, status-bar);
       color: mat-color($foreground, text);
-      &:focus:not(.td-chip-disabled) {
+      &:focus:not(.at-chip-disabled) {
         mat-icon:hover {
           color: mat-color($foreground, icon);
         }
@@ -46,7 +45,7 @@
           }
         }
       }
-      mat-icon.td-chip-removal {
+      mat-icon.at-chip-removal {
         color: mat-color($foreground, hint-text);
         &:hover {
           color: mat-color($foreground, icon);

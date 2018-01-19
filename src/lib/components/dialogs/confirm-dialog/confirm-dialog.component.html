@@ -1,0 +1,19 @@
+<at-dialog>
+  <at-dialog-title *ngIf="title">
+    {{title}}
+  </at-dialog-title>
+  <at-dialog-content>
+    <span class="at-dialog-message">{{message}}</span>
+  </at-dialog-content>
+  <at-dialog-actions>
+    <button mat-button
+            #closeBtn 
+            (keydown.arrowright)="acceptBtn.focus()"
+            (click)="cancel()">{{cancelButton}}</button>
+    <button mat-button
+            color="accent"
+            #acceptBtn
+            (keydown.arrowleft)="closeBtn.focus()"
+            (click)="accept()">{{acceptButton}}</button>
+  </at-dialog-actions>
+</at-dialog>

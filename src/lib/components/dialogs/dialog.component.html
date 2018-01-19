@@ -1,0 +1,12 @@
+<div class="at-dialog-wrapper">
+  <h3 class="at-dialog-title" *ngIf="dialogTitle.length > 0">
+    <ng-content select="at-dialog-title"></ng-content>
+  </h3>
+  <div class="at-dialog-content" *ngIf="dialogContent.length > 0">
+    <ng-content select="at-dialog-content"></ng-content>
+  </div>
+  <div class="at-dialog-actions" *ngIf="dialogActions.length > 0">
+    <span class="at-dialog-spacer"></span>
+    <ng-content select="at-dialog-actions"></ng-content>
+  </div>
+</div>

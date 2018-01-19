@@ -4,8 +4,8 @@ import {
 } from '@angular/core';
 import {MediaChange} from '@angular/flex-layout';
 import {Router, NavigationEnd} from '@angular/router';
-import {AtMediaReplayService} from 'lib/core/at-common/services/mediareplay/media-replay.service';
-import {AtSidenavService} from 'lib/core/at-sidenav/at-sidenav.service';
+import {AtMediaReplayService} from 'lib/core/common/services/mediareplay/media-replay.service';
+import {AtSidenavService} from 'lib/core/sidenav/sidenav.service';
 import { VERSIONS } from "../pages/documentation/documentation-routing.module";
 import { AtPermissionsService } from "ngx-atomic/core";
 

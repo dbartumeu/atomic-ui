@@ -1,0 +1,21 @@
+<mat-card>
+    <div fxLayout="row" fxLayoutWrap>
+        <div fxFlex="100" fxFlex.gt-sm="50" ngClass="at-ph-10" ngClass.gt-sm="at-ph-30"
+             fxLayout="column">
+            <h2 class="at-tw-400">Enter</h2>
+            <at-search-input [showUnderline]="true" placeholder="Search here"
+                             (search)="eSearchInputTerm = $event"
+                             (clear)="eSearchInputTerm = ''"></at-search-input>
+            <pre>debounce: false; value: {{eSearchInputTerm || 'Empty'}}</pre>
+        </div>
+        <div fxFlex="100" fxFlex.gt-sm="50" class="at-mt-30" ngClass="at-ph-10" ngClass.gt-sm="at-ph-30"
+             fxLayout="column">
+            <h2 class="at-tw-400">Debounce</h2>
+            <at-search-input [showUnderline]="true"
+                             placeholder="Search here"
+                             (searchDebounce)="dSearchInputTerm = $event"></at-search-input>
+
+            <pre>debounce: 400ms; value: {{dSearchInputTerm || 'Empty'}}</pre>
+        </div>
+    </div>
+</mat-card>

@@ -1,0 +1,33 @@
+<at-dialog>
+  <at-dialog-title *ngIf="title">
+    {{title}}
+  </at-dialog-title>
+  <at-dialog-content>
+    <span class="at-dialog-message">{{message}}</span>
+    <form #form="ngForm" novalidate>
+      <div class="at-dialog-input-wrapper">
+        <mat-form-field class="at-dialog-input">
+          <input matInput
+                #input
+                (focus)="handleInputFocus()"
+                (keydown.enter)="$event.preventDefault(); form.valid && accept()"
+                [(ngModel)]="value"
+                name="value"
+                required/>
+        </mat-form-field>
+      </div>
+    </form>
+  </at-dialog-content>
+  <at-dialog-actions>
+    <button mat-button
+            #closeBtn 
+            (keydown.arrowright)="acceptBtn.focus()"
+            (click)="cancel()">{{cancelButton}}</button>
+    <button mat-button
+            color="accent"
+            #acceptBtn
+            (keydown.arrowleft)="closeBtn.focus()"
+            [disabled]="!form.valid"
+            (click)="accept()">{{acceptButton}}</button>
+  </at-dialog-actions>
+</at-dialog>

@@ -6,6 +6,8 @@ import {ScrollbarComponent} from './scrollbar/scrollbar.component';
 import {MatCardModule} from '@angular/material';
 import {ChipsComponent} from './chips/chips.component';
 import {AtChipsModule} from '../../lib/forms';
+import {AtSearchModule} from '../../lib/forms/search/search.module';
+import {SearchComponent} from './search/search.component';
 
 
 export interface LiveExample {
@@ -40,13 +42,20 @@ export const EXAMPLE_COMPONENTS: any = {
         additionalFiles: null,
         selectorName: 'chips',
     },
+    'search': {
+        title: 'Atomic Search',
+        component: SearchComponent,
+        additionalFiles: null,
+        selectorName: 'search',
+    },
 };
 
 export const EXAMPLE_LIST: any[] = [
     LayoutBasicComponent,
     LayoutCardOverComponent,
     ScrollbarComponent,
-    ChipsComponent
+    ChipsComponent,
+    SearchComponent
 ];
 
 @NgModule({
@@ -58,6 +67,7 @@ export const EXAMPLE_LIST: any[] = [
         AtScrollbarModule,
         AtLayoutModule,
         AtChipsModule,
+        AtSearchModule,
         MatCardModule,
     ],
     exports: [],

@@ -1,0 +1,42 @@
+.at-loading-wrapper {
+  position: relative;
+  display: block;
+  &.at-fullscreen {
+    position: inherit;
+  }
+  .at-loading {
+    // layout
+    box-sizing: border-box;
+    display: flex;
+    // [layout="row"]
+    flex-direction: row;
+    // [layout-align="center center"]
+    align-items: center;
+    align-content: center;
+    max-width: 100%;
+    justify-content: center;
+    // flex
+    flex: 1;
+  }
+  &.at-overlay {
+    .at-loading {
+      position: absolute;
+      margin: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      mat-progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+  &.at-overlay-circular {
+    .at-loading {
+      bottom: 0;
+    }
+  }
+}

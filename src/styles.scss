@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
 
 @import '~@angular/material/_theming';
-@import 'lib/core/at-styles/helpers';
-@import "lib/core/at-styles/theming";
+@import 'lib/core/styles/helpers';
+@import "lib/core/styles/theming";
 
 @include mat-core();
 

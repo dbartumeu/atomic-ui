@@ -1,0 +1,14 @@
+<div #content class="at-notification-content">
+  <ng-content></ng-content>
+</div>
+<div *ngIf="show"
+     class="at-notification-count mat-{{color}}"
+     [class.at-notification-top]="positionY === 'top'"
+     [class.at-notification-bottom]="positionY === 'bottom'"
+     [class.at-notification-before]="positionX === 'before'"
+     [class.at-notification-after]="positionX === 'after'"
+     [class.at-notification-center-y]="positionY === 'center'"
+     [class.at-notification-center-x]="positionX === 'center'"
+     [class.at-notification-no-count]="noCount">
+  {{noCount ? '' : notificationsDisplay}}
+</div>

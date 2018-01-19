@@ -1,0 +1,30 @@
+@import '../common/functions';
+
+@mixin at-dialog-typography($config) {
+  .at-dialog-title {
+    font: {
+      family: at-font-family($config);
+      size: at-font-size($config, title);
+      weight: at-font-weight($config, title);
+    }
+  }
+  .at-dialog-message {
+    font: {
+      family: at-font-family($config);
+      size: at-font-size($config, subheading-2);
+      weight: at-font-weight($config, subheading-2);
+    }
+    line-height: at-line-height($config, subheading-2);
+  }
+}
+
+@mixin at-dialog-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  .at-dialog-message {
+    color: mat-color($foreground, secondary-text);
+  }
+}

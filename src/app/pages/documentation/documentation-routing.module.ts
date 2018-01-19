@@ -92,7 +92,7 @@ export const FRAMEWORK_ROUTES: Routes = [
             docViewer: {
                 overviewOnly: false,
                 section: 'src/lib/core',
-                module: 'at-layout',
+                module: 'layout',
                 examples: ['layout-basic', 'layout-card-over']
             }
         },
@@ -116,7 +116,7 @@ export const FRAMEWORK_ROUTES: Routes = [
             docViewer: {
                 overviewOnly: false,
                 section: 'src/lib/core',
-                module: 'at-scrollbar',
+                module: 'scrollbar',
                 examples: ['scrollbar']
             }
         },
@@ -140,7 +140,7 @@ export const FRAMEWORK_ROUTES: Routes = [
             docViewer: {
                 overviewOnly: false,
                 section: 'src/lib/core',
-                module: 'at-media'
+                module: 'media'
             }
         },
     },
@@ -163,7 +163,7 @@ export const FRAMEWORK_ROUTES: Routes = [
             docViewer: {
                 overviewOnly: false,
                 section: 'src/lib/core',
-                module: 'at-permissions'
+                module: 'permissions'
             }
         },
     },
@@ -199,8 +199,32 @@ export const FRAMEWORK_ROUTES: Routes = [
             docViewer: {
                 overviewOnly: false,
                 section: 'src/lib/forms',
-                module: 'at-chips',
+                module: 'chips',
                 examples: ['chips']
+            }
+        },
+    },
+    {
+        path: 'framework/forms/search',
+        component: DocViewerComponent,
+        // canActivate: [AtPermissionsGuard],
+        data: {
+            atSidenavItem: {
+                name: 'Search',
+                pathPrefix: 'docs/:version',
+                icon: 'crop_landscape',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/forms',
+                module: 'search',
+                examples: ['search']
             }
         },
     },

@@ -13,17 +13,12 @@ For more information about how to get started with Angular Material, check out t
 ## Step 2: Install Atomic.
 Atomic  is available as an npm package.
 ```
-npm install --save @atomic
-```
-
-You can add the whole framework.
-```
-npm install --save @atomic/core @atomic/component @atomic/forms
+npm install --save ngx-atomic
 ```
 
 ## Step 3: Import the Atomic Core NgModule.
 ```typescript
-import { AtomicLayoutModule, AtomicScrollbarModule /*, any other modules */ } from '@atomic/core';
+import { AtomicLayoutModule, AtomicScrollbarModule /*, any other modules */ } from 'ngx-atomic/core';
 
 @NgModule({
   imports: [
@@ -48,8 +43,8 @@ styles. A typical theme file will look something like this:
 @import '~@angular/material/_theming';
 @include mat-core();
 
-@import "@atomic/at-styles/helpers";
-@import "@atomic/at-styles/theming";
+@import "~ngx-atomic/core/at-styles/helpers";
+@import "~ngx-atomic/core/at-styles/theming";
 
 // Define the default theme.
 $default-primary: mat-palette($mat-indigo);

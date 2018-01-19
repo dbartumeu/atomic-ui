@@ -1,0 +1,17 @@
+<div class="at-search-box">
+  <button mat-icon-button type="button" class="at-search-icon" (click)="searchClicked()">
+    <mat-icon *ngIf="searchVisible && !alwaysVisible">{{backIcon}}</mat-icon>
+    <mat-icon *ngIf="!searchVisible || alwaysVisible">{{searchIcon}}</mat-icon>
+  </button>
+  <at-search-input #searchInput
+                   [@inputState]="alwaysVisible || searchVisible"
+                   [debounce]="debounce"
+                   [(ngModel)]="value"
+                   [showUnderline]="showUnderline"
+                   [placeholder]="placeholder"
+                   [clearIcon]="clearIcon"
+                   (searchDebounce)="handleSearchDebounce($event)"
+                   (search)="handleSearch($event)"
+                   (clear)="handleClear(); toggleVisibility()">
+  </at-search-input>
+</div>

@@ -1,0 +1,24 @@
+@import '../common/functions';
+
+@mixin at-paging-bar-typography($config) {
+  .at-paging-bar {
+    font: {
+      family: at-font-family($config);
+      size: at-font-size($config, caption);
+    }
+  }
+}
+
+@mixin at-paging-bar-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  at-paging-bar {
+    &, & mat-select .mat-select-value {
+      color: mat-color($foreground, secondary-text);
+    }
+  }
+}

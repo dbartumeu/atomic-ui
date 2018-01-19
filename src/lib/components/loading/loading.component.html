@@ -1,0 +1,24 @@
+<div class="at-loading-wrapper"
+    [style.min-height]="getHeight()"
+    [class.at-overlay-circular]="(isOverlay() || isFullScreen()) && !isLinear()"
+    [class.at-overlay]="isOverlay() || isFullScreen()"
+    [class.at-fullscreen]="isFullScreen()">
+  <div [@atFadeInOut]="animation"
+     (@atFadeInOut.done)="animationComplete($event)"
+     [style.min-height]="getHeight()"
+     class="at-loading">
+    <mat-progress-spinner *ngIf="isCircular()" 
+                        [mode]="mode"
+                        [value]="value" 
+                        [color]="color" 
+                        [diameter]="getCircleDiameter()"
+                        [strokeWidth]="getCircleStrokeWidth()">
+    </mat-progress-spinner>
+    <mat-progress-bar *ngIf="isLinear()" 
+                     [mode]="mode"
+                     [value]="value"
+                     [color]="color">
+    </mat-progress-bar>
+  </div>
+  <ng-template [cdkPortalHost]="content"></ng-template>
+</div>

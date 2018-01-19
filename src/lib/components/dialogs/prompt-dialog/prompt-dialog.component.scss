@@ -1,0 +1,15 @@
+.at-dialog-input-wrapper {
+  // layout row
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  .at-dialog-input {
+    // flex
+    flex: 1;
+    box-sizing: border-box;
+  }
+}
+
+.at-dialog-message {
+  word-break: break-word;
+}

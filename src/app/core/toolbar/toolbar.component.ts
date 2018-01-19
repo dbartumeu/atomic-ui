@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {Router} from '@angular/router';
-import {AtLayoutComponent} from "../../../lib/core/at-layout/at-layout.component";
+import {AtLayoutComponent} from "../../../lib/core/layout/layout.component";
 
 @Component({
     selector: 'app-toolbar',

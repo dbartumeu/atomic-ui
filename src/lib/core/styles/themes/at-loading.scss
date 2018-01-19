@@ -1,0 +1,10 @@
+@import '../common/functions';
+
+@mixin at-loading-theme($theme) {
+  $background: map-get($theme, background);
+  .at-loading-wrapper {
+    &.at-overlay .at-loading {
+      background: rgba(mat-color($background, dialog), 0.8);
+    }
+  }
+}

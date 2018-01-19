@@ -1,1 +1,2 @@
-export * from './at-chips/at-chips.module';
+export * from './chips/chips.module';
+export * from './file/at-file.module';

@@ -1,0 +1,24 @@
+@import '../common/variables';
+@import '../common/functions';
+
+@mixin at-file-theme($theme) {
+  $background: map-get($theme, background);
+
+  at-file-upload {
+    .at-file-upload-cancel {
+      mat-icon {
+        background-color: mat-color($background, background);
+      }
+    }
+  }
+  at-file-input {
+    /**
+    * Class that is added ondragenter by the [TdFileDrop] directive.
+    */
+    .drop-zone {
+      transition: background $swift-ease-out-duration $swift-ease-out-timing-function,
+        mat-elevation-transition-property-value();
+      @include mat-elevation(8);
+    }
+  }
+}

@@ -1,51 +1,28 @@
-# at-chips
+## Atomic Chips
 
-`at-chips` element generates a list of strings or objects as chips.
+`at-chips` element generates a list of strings or objects as chips. You can use this component as a tag, name or even 
+a city selector.
+
+### Setup
+Import the `[AtChipsModule]` in your NgModule:<br>
+**my.module.ts:**
+```typescript
+import {AtChipsModule} from 'ngx-atomic/core';
+@NgModule({
+    imports: [
+        AtChipsModule,
+        ...
+    ],
+    ...
+})
+export class MyModule {}
+```
 
 Add the [items] attribute to enable the autocomplete with a list, and [requireMatch] to not allow custom values.
 
 Leverage the templates to create your own chip or contact chip.
 
-## API Summary
-
-Properties:
-
-| Name | Type | Description |
-| --- | --- | 650--- |
-| `color?` | `'primary', 'accent' or 'warn'` | color for the input and focus state of the chips. Defaults to 'primary'
-| `items?` | `any[]` | Renders the `mat-autocomplete` with the provided list to display as options.
-| `requireMatch?` | `boolean` | Blocks custom inputs and only allows selections from the autocomplete list.
-| `stacked?` | `boolean` | Set stacked or horizontal chips depending on value. Defaults to false.
-| `inputPosition?` | 'before' or 'after' | Set input position before or after the chips. Defaults to 'after'.
-| `placeholder?` | `string` | Placeholder for the autocomplete input.
-| `disabled?` | `boolean` | Sets disabled state and disabled addition/removal of chips.
-| `chipAddition` | `boolean` | Disables the ability to add chips. When setting disabled as true, this will be overriden. Defaults to true.
-| `chipRemoval` | `boolean` | Disables the ability to remove chips. When setting disabled as true, this will be overriden. Defaults to true.
-| `debounce` | `string` | Debounce timeout between keypresses. Defaults to 200.
-| `add?` | `function` | Method to be executed when a chip is added. Sends chip value as event.
-| `remove?` | `function` | Method to be executed when a chip is removed. Sends chip value as event.
-| `chipBlur?` | `function` | Method to be executed when a chip is blurred. Sends chip value as event.
-| `chipFocus?` | `function` | Method to be executed when a chip is focused. Sends chip value as event.
-| `inputChange?` | `function` | Method to be executed when the value in the autocomplete input changes. Sends string value as event.
-
-## Setup
-
-Import the [CovalentChipsModule] in your NgModule:
-
-```typescript
-import { CovalentChipsModule } from '@covalent/core';
-@NgModule({
-  imports: [
-    CovalentChipsModule,
-    ...
-  ],
-  ...
-})
-export class MyModule {}
-```
-
-## Usage
-
+### Usage
 Example for HTML usage:
 
 ```html

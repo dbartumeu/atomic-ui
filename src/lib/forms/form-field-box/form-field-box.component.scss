@@ -1,0 +1,35 @@
+.mat-select-placeholder.mat-floating-placeholder {
+  width: 100% !important;
+}
+
+.mat-select {
+  margin-top: 12px;
+  margin-bottom: 17px;
+  width: 100%;
+}
+
+.mat-select-arrow {
+  position: absolute;
+  right: 0;
+}
+
+.mat-card-content {
+  .mat-select-value-text {
+    font-size: 14px;
+  }
+
+  .mat-select-trigger {
+    font-size: 14px;
+  }
+
+  .mat-select-placeholder.mat-floating-placeholder {
+    top: -16px !important;
+  }
+}
+
+at-chips{
+  margin-bottom: 15px;
+  padding-left: 0 !important;
+}
+
+

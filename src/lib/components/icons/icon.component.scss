@@ -1,0 +1,212 @@
+/deep/ at-icon {
+  span {
+    display: inline-block;
+    font-size: 24px;
+    line-height: 1.7;
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: nowrap;
+    word-wrap: normal;
+    height: 24px;
+    width: 24px;
+    font-weight: 300;
+    text-align: center;
+  }
+
+  .at-icon-red {
+    color: #E53935;
+  }
+  .at-icon-pink {
+    color: #EC407A;
+  }
+  .at-icon-purple {
+    color: #AB47BC;
+  }
+  .at-icon-yellow {
+    color: #FDD835;
+  }
+  .at-icon-indigo {
+    color: #7986CB;
+  }
+  .at-icon-blue {
+    color: #1E88E5;
+  }
+  .at-icon-light-blue {
+    color: #4FC3F7;
+  }
+  .at-icon-cyan {
+    color: #0097A7;
+  }
+  .at-icon-teal {
+    color: #009688;
+  }
+  .at-icon-green {
+    color: #43A047;
+  }
+  .at-icon-light-green {
+    color: #AED581;
+  }
+  .at-icon-orange {
+    color: #FB8C00;
+  }
+  .at-icon-blue-grey {
+    color: #78909C;
+  }
+
+  .at-icon-background-solid {
+    display: inline-block;
+    width: 30px;
+    border: 1px solid #333;
+    border-radius: 50%;
+    text-align: center;
+    margin-left: 0;
+    height: 30px;
+    line-height: 1.4;
+    font-size: 20px;
+
+    &.at-icon-red {
+      border-color: #E53935;
+      background-color: #E53935;
+      color: #fff !important;
+    }
+    &.at-icon-pink {
+      border-color: #EC407A;
+      background-color: #EC407A;
+      color: #fff !important;
+    }
+    &.at-icon-purple {
+      border-color: #AB47BC;
+      background-color: #AB47BC;
+      color: #fff !important;
+    }
+    &.at-icon-yellow {
+      border-color: #FDD835;
+      background-color: #FDD835;
+      color: #fff !important;
+    }
+    &.at-icon-indigo {
+      border-color: #7986CB;
+      background-color: #7986CB;
+      color: #fff !important;
+    }
+    &.at-icon-blue {
+      border-color: #1E88E5;
+      background-color: #1E88E5;
+      color: #fff !important;
+    }
+    &.at-icon-light-blue {
+      border-color: #4FC3F7;
+      background-color: #4FC3F7;
+      color: #fff !important;
+    }
+    &.at-icon-cyan {
+      border-color: #0097A7;
+      background-color: #0097A7;
+      color: #fff !important;
+    }
+    &.at-icon-teal {
+      border-color: #009688;
+      background-color: #009688;
+      color: #fff !important;
+    }
+    &.at-icon-green {
+      border-color: #43A047;
+      background-color: #43A047;
+      color: #fff !important;
+    }
+    &.at-icon-light-green {
+      border-color: #AED581;
+      background-color: #AED581;
+      color: #fff !important;
+    }
+    &.at-icon-orange {
+      border-color: #FB8C00;
+      background-color: #FB8C00;
+      color: #fff !important;
+    }
+    &.at-icon-blue-grey {
+      border-color: #78909C;
+      background-color: #78909C;
+      color: #fff !important;
+    }
+  }
+
+  .at-icon-background-border {
+    display: inline-block;
+    width: 30px;
+    border: 1px solid #333;
+    border-radius: 50%;
+    text-align: center;
+    margin-left: 0;
+    height: 30px;
+    line-height: 1.4;
+    font-size: 20px;
+
+    &.at-icon-red {
+      border-color: #E53935;
+    }
+    &.at-icon-pink {
+      border-color: #EC407A;
+    }
+    &.at-icon-purple {
+      border-color: #AB47BC;
+    }
+    &.at-icon-yellow {
+      border-color: #FDD835;
+    }
+    &.at-icon-indigo {
+      border-color: #7986CB;
+    }
+    &.at-icon-blue {
+      border-color: #1E88E5;
+    }
+    &.at-icon-light-blue {
+      border-color: #4FC3F7;
+    }
+    &.at-icon-cyan {
+      border-color: #0097A7;
+    }
+    &.at-icon-teal {
+      border-color: #009688;
+    }
+    &.at-icon-green {
+      border-color: #43A047;
+    }
+    &.at-icon-light-green {
+      border-color: #AED581;
+    }
+    &.at-icon-orange {
+      border-color: #FB8C00;
+    }
+    &.at-icon-blue-grey {
+      border-color: #78909C;
+    }
+  }
+}
+
+//Override styles if theme is dark
+/deep/ .at-theme-dark at-icon {
+  .at-icon-red {
+    color: #E57373;
+  }
+  .at-icon-pink {
+    color: #F06292;
+  }
+  .at-icon-purple {
+    color: #BA68C8;
+  }
+
+  .at-icon-background-bordered {
+    &.at-icon-red {
+      border-color: #E57373;
+    }
+    &.at-icon-pink {
+      border-color: #F06292;
+    }
+    &.at-icon-purple {
+      border-color: #BA68C8;
+    }
+  }
+}
+
+

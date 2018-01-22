@@ -1,0 +1,18 @@
+<span hidden #AtIconContent>
+    <ng-content></ng-content>
+</span>
+<div fxLayout="center center" class="at-inline">
+    <span *ngIf="type=='letter'"
+          class="{{atIcon.iconClass}} {{atIcon.backgroundClass}}"
+          [ngStyle]="{'font-size': fontSize, width: size ,  height: size, 'line-height':size}">
+        {{atIcon.name}}
+    </span>
+
+    <span *ngIf="type=='mdicon'"
+          class="{{atIcon.iconClass}} {{atIcon.backgroundClass}}"
+          [ngStyle]="{'font-size': fontSize, width: size,  height: size, 'line-height':size}">
+        <mat-icon [ngStyle]="{'font-size': fontSize,'line-height':size, width: size, height: size} ">
+            {{atIcon.name}}
+        </mat-icon>
+    </span>
+</div>

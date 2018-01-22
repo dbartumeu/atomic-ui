@@ -1,8 +1,16 @@
-For help getting started with a new Angular app, check out the [Angular CLI.]( https://cli.angular.io/)
+## Step 1: Install the CLI.
+```
+npm install -g @angular/cli@latest
+```
 
-For existing apps, follow these steps to begin using Atomic.
+### Create a new project
+```
+ng new my-project
+```
 
-## Step 1: Install Atomic dependencies.
+The new command creates a project with a build system for your Angular app.
+
+## Step 2: Install Atomic dependencies.
 Install Angular Material, Angular CDK, Angular Flexbox and Lodash 
 ```
 npm install --save @angular/material @angular/cdk @angular/flex-layout lodash @types/lodash
@@ -10,13 +18,13 @@ npm install --save @angular/material @angular/cdk @angular/flex-layout lodash @t
 
 For more information about how to get started with Angular Material, check out the [Angular Material getting started guide](https://material.angular.io/guide/getting-started)
 
-## Step 2: Install Atomic.
+## Step 3: Install Atomic.
 Atomic  is available as an npm package.
 ```
 npm install --save ngx-atomic
 ```
 
-## Step 3: Import the Atomic Core NgModule.
+## Step 4: Import the Atomic Core NgModule.
 ```typescript
 import { AtomicLayoutModule, AtomicScrollbarModule /*, any other modules */ } from 'ngx-atomic/core';
 
@@ -30,7 +38,7 @@ import { AtomicLayoutModule, AtomicScrollbarModule /*, any other modules */ } fr
 export class AppModule { }
 ```
 
-## Step 4: Include the core, theme and typography:
+## Step 5: Include the core, theme and typography:
 This is **required** to apply all of the core, theme and typography styles to your application.
 
 See the [material theming guide](https://github.com/angular/material2/blob/master/guides/theming.md) and the 

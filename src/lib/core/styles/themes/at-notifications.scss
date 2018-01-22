@@ -1,14 +1,14 @@
 @import '../common/variables';
 @import '../common/functions';
 
-@mixin td-notification-count-theme($theme) {
+@mixin at-notifications-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
   $warn: map-get($theme, warn);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  .td-notification-count {
+  .at-notification-count {
     @include mat-elevation(1);
     &.mat-warn {
       background-color: mat-color($warn);

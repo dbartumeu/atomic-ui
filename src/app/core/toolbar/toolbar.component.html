@@ -10,28 +10,4 @@
     <h1 class="at-ml-15">Atomic Framework</h1>
     <div fxFlex></div>
 
-    <div class="user-button-container" #userButton>
-        <button class="user-button" mat-button [matMenuTriggerFor]="menu">
-            <div fxLayout="row" fxLayoutAlign="start center">
-                <img src="https://randomuser.me/api/portraits/thumb/women/40.jpg" class="avatar-flex">
-                <span class="name" fxHide="true" fxHide.gt-sm="false">Wilma Arndt</span>
-                <mat-icon fxHide="true" fxHide.gt-sm="false">keyboard_arrow_down</mat-icon>
-            </div>
-        </button>
-    </div>
-
 </mat-toolbar>
-
-<mat-menu class="user-menu" yPosition="below" [overlapTrigger]="false" #menu="matMenu">
-    <div class="user-menu-inner" [style.min-width]="userButtonWidth">
-        <button mat-menu-item [routerLink]="['/profile']">
-            <mat-icon>account_circle</mat-icon>
-            <span>Profile</span>
-        </button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item>
-            <mat-icon>exit_to_app</mat-icon>
-            <span>Logout</span>
-        </button>
-    </div>
-</mat-menu>

@@ -1,0 +1,59 @@
+<mat-card fxLayout="row" fxLayoutAlign="center center">
+    <mat-toolbar>
+        <button mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Toolbar</span>
+        <span fxFlex></span>
+        <at-notification-count color="primary" positionX="before" [notifications]="true">
+            <mat-icon>person</mat-icon>
+        </at-notification-count>
+        <at-notification-count color="primary" [notifications]="false">
+            <mat-icon>messages</mat-icon>
+        </at-notification-count>
+        <button mat-icon-button [matMenuTriggerFor]="notificationsMenu">
+            <at-notification-count [notifications]="101">
+                <mat-icon>notifications</mat-icon>
+            </at-notification-count>
+        </button>
+        <mat-menu #notificationsMenu="matMenu" [overlapTrigger]="false">
+            <div>
+                <div fxLayout="row" fxLayoutAlign="center center"
+                     class="at-bb mat-bb-grey-300 at-pt-10 at-pb-15"><strong>Notifications</strong>
+                </div>
+                <mat-nav-list dense>
+                    <ng-template let-last="last" ngFor [ngForOf]="[0,1,2,3,4]">
+                        <a mat-list-item>
+                            <!--<at-icon mat-list-avatar name="today" backgroundType="solid"></at-icon>-->
+                            <mat-icon mat-list-avatar>today</mat-icon>
+                            <h4 mat-line><span class="text-wrap">A user did an activity on an item that you've subscribed to follow actions on.</span>
+                            </h4>
+                            <p mat-line>22 minutes ago</p>
+                        </a>
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </ng-template>
+                </mat-nav-list>
+                <div fxLayout="row" fxLayoutAlign="center center"
+                     class="at-bt mat-bt-grey-300 at-pb-10 at-pt-15">
+                    <button mat-button color="accent">
+                        See All Notifications
+                    </button>
+                </div>
+
+            </div>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="toolbarMenu1">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #toolbarMenu1="matMenu">
+            <button mat-menu-item>
+                <mat-icon>settings</mat-icon>
+                <span>Settings</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Sign out</span>
+            </button>
+        </mat-menu>
+    </mat-toolbar>
+</mat-card>

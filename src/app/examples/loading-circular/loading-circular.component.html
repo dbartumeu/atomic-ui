@@ -1,0 +1,18 @@
+<mat-card>
+    <div *atLoading="'overlayStarSyntax'; mode:'indeterminate'; type:'circle'; strategy:'overlay'; color:'accent'">
+        <div fxLayout="column">
+            <mat-input-container fxFlex>
+                <input matInput placeholder="Name"/>
+            </mat-input-container>
+            <mat-input-container fxFlex>
+                <textarea matInput placeholder="Description" rows="4"></textarea>
+            </mat-input-container>
+        </div>
+    </div>
+    <div class="at-mt-20">
+        <button mat-button color="primary"
+                (click)="toggleOverlayStarSyntax()"
+                class="text-upper">Toggle Loader
+        </button>
+    </div>
+</mat-card>

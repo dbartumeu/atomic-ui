@@ -5,9 +5,16 @@
 
 // import core mixins
 @import 'typography';
-
-// import theme mixins
 @import 'themes/at-basic';
+
+// import components theme mixins
+
+@import 'themes/at-dialogs';
+@import 'themes/at-loading';
+@import 'themes/at-notifications';
+@import 'themes/at-paging';
+
+// import forms theme mixins
 @import 'themes/at-chips';
 
 // import 3rd party mixins
@@ -18,22 +25,26 @@
 // Create Atomic theme.
 @mixin atomic-theme($theme, $typography: null) {
   @include at-typography($typography);
-  @include at-chips-theme($theme);
+
 
   @include at-theme-backgrounds($theme);
   @include at-sidenav-theme($theme); //theming sidenat
   @include at-sidenav-item-theme($theme);
   @include at-loading-theme($theme);
-  @include at-notification-count-theme($theme);
+
+  // Components
+  @include at-notifications-theme($theme);
+
+  // Forms
+  @include at-chips-theme($theme);
+
+  // Helpers
   @include at-colors-theme($theme);
-  @include at-steps-theme($theme);
-  @include at-data-table-theme($theme);
   @include at-border-theme($theme);
 
-  //Supported 3rd party
+  // Supported 3rd party
   @include at-ngx-charts-theme($theme);
   @include at-calendar-theme($theme);
-
   @include at-ngx-datatable-theme($theme);
   @include at-highlight-theme($theme);
   @include at-markdown-theme($theme);

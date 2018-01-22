@@ -205,6 +205,54 @@ export const FRAMEWORK_ROUTES: Routes = [
         },
     },
     {
+        path: 'framework/components/loading',
+        component: DocViewerComponent,
+        // canActivate: [AtPermissionsGuard],
+        data: {
+            atSidenavItem: {
+                name: 'Loading',
+                pathPrefix: 'docs/:version',
+                icon: 'crop_landscape',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/components',
+                module: 'loading',
+                examples: ['loading-circular', 'loading-linear'],
+            },
+        },
+    },
+    {
+        path: 'framework/components/notifications',
+        component: DocViewerComponent,
+        // canActivate: [AtPermissionsGuard],
+        data: {
+            atSidenavItem: {
+                name: 'Notifications',
+                pathPrefix: 'docs/:version',
+                icon: 'crop_landscape',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/components',
+                module: 'notifications',
+                examples: ['notifications'],
+            },
+        },
+    },
+    {
         path: 'framework/forms',
         pathMatch: 'full',
         redirectTo: 'framework/forms/chips',

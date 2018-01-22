@@ -1,0 +1,28 @@
+<mat-card>
+    <div fxLayout="column">
+        <ng-template atLoading="replaceTemplateSyntax"
+                     atLoadingMode="determinate"
+                     atLoadingType="linear"
+                     atLoadingStrategy="replace"
+                     atLoadingColor="warn">
+            <mat-input-container>
+                <input matInput [(ngModel)]="replaceDemo.name" placeholder="Name"/>
+            </mat-input-container>
+            <mat-select placeholder="Type" [(ngModel)]="replaceDemo.type">
+                <mat-option [value]="1">Some type</mat-option>
+                <mat-option [value]="2">Another type</mat-option>
+            </mat-select>
+            <mat-input-container>
+                <textarea matInput
+                          [(ngModel)]="replaceDemo.description"
+                          placeholder="Description"
+                          rows="4"></textarea>
+            </mat-input-container>
+        </ng-template>
+
+        <button mat-button color="primary"
+                (click)="toggleReplaceTemplateSyntax()"
+                class="text-upper">Toggle Loader
+        </button>
+    </div>
+</mat-card>

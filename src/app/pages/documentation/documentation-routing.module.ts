@@ -1,8 +1,8 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {AtSidenavItem, AtPermissionsGuard} from 'ngx-atomic/core';
-import {DocViewerComponent} from './doc-viewer/doc-viewer.component';
-import {DocNavigatorComponent} from './doc-navigator/doc-navigator.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AtSidenavItem, AtPermissionsGuard } from 'ngx-atomic/core';
+import { DocViewerComponent } from './doc-viewer/doc-viewer.component';
+import { DocNavigatorComponent } from './doc-navigator/doc-navigator.component';
 
 export const VERSIONS: string[] = [
     'master',
@@ -165,6 +165,43 @@ export const FRAMEWORK_ROUTES: Routes = [
                 section: 'src/lib/core',
                 module: 'permissions'
             }
+        },
+    },
+    {
+        path: 'framework/components',
+        pathMatch: 'full',
+        redirectTo: 'framework/components/dialogs',
+        data: {
+            atSidenavItem: {
+                name: 'Components',
+                pathPrefix: 'docs/:version',
+                position: 1,
+                customClass: '',
+            } as AtSidenavItem,
+        },
+    },
+    {
+        path: 'framework/components/dialogs',
+        component: DocViewerComponent,
+        // canActivate: [AtPermissionsGuard],
+        data: {
+            atSidenavItem: {
+                name: 'Dialogs',
+                pathPrefix: 'docs/:version',
+                icon: 'crop_landscape',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/components',
+                module: 'dialogs',
+                examples: ['dialogs'],
+            },
         },
     },
     {

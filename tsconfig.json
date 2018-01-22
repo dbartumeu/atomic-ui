@@ -21,6 +21,9 @@
       ],
       "ngx-atomic/forms": [
         "./lib/forms"
+      ],
+      "ngx-atomic/components": [
+        "./lib/components"
       ]
     },
     "noUnusedParameters": false,

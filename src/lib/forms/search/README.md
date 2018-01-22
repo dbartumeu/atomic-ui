@@ -21,7 +21,7 @@ export class MyModule {}
 Just put `at-search-input` directive in your component template and provide the options:
 
 **my.component.html**
- ```html
+```html
 <at-search-input placeholder="Search here" 
                  [showUnderline]="true" 
                  [debounce]="500" 
@@ -29,13 +29,14 @@ Just put `at-search-input` directive in your component template and provide the 
                  (search)="searchInputTerm = $event" 
                  (clear)="searchInputTerm = ''">
 </at-search-input>
- ```
+```
 
 ## Search Box Usage
 
 Just put `at-search-box` directive in your component template and provide the options:
 
- ```html
+**my.component.html**
+```html
 <at-search-box placeholder="Search here" 
                [showUnderline]="true" 
                [debounce]="500" 
@@ -44,4 +45,4 @@ Just put `at-search-box` directive in your component template and provide the op
                (search)="searchInputTerm = $event" 
                (clear)="searchInputTerm = ''">
 </at-search-box>
- ```
+```

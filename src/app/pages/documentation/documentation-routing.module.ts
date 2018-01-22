@@ -42,6 +42,28 @@ export const GENERAL_ROUTES: Routes = [
                 module: 'getting-started'
             }
         },
+    },
+    {
+        path: 'change-log',
+        component: DocViewerComponent,
+        data: {
+            atSidenavItem: {
+                name: 'Change Log',
+                pathPrefix: 'docs/:version',
+                icon: 'low_priority',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: true,
+                section: 'src/docs',
+                module: 'change-log'
+            }
+        },
     }
 ];
 

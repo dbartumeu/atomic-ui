@@ -1,7 +1,8 @@
 # Atomic notifications
 
 `at-notification-count` element renders a number of notifications.
-s
+
+
 ## API Summary
 
 Properties:

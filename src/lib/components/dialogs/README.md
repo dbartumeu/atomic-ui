@@ -1,7 +1,9 @@
+## Atomic Dialogs
+
 AtDialogsModule exports the `AtDialogService` provided with methods that wrap the `@angular/material MdDialog` service
 and give you an easier experience for simple dialogs.
 
-## Setup
+### Setup
 Import the `[AtDialogsModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
@@ -30,7 +32,7 @@ export class MyComponent {
 }
 ```
 
-## Alerts
+### Alerts
 **my.component.ts:**
 ```typescript
 // ...
@@ -48,7 +50,7 @@ openAlert(): void {
 // ...
 ```
 
-## Confirms
+### Confirms
 **my.component.ts:**
 ```typescript
 // ...
@@ -73,7 +75,7 @@ openConfirm(): void {
 // ...
 ```
 
-## Prompts
+### Prompts
 **my.component.ts:**
 ```typescript
 // ...

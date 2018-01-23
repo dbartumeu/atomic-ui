@@ -1,13 +1,13 @@
-import { NgModule, Type } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import {NgModule, Type} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 /**
  * PIPES
  */
-import { AtTruncatePipe } from './pipes/truncate/truncate.pipe';
-import { AtKeysPipe } from './pipes/object/keys.pipe';
+import {AtTruncatePipe} from './pipes/truncate/truncate.pipe';
+import {AtKeysPipe} from './pipes/object/keys.pipe';
 
 const AT_PIPES: Type<any>[] = [
     AtTruncatePipe,
@@ -18,36 +18,35 @@ const AT_PIPES: Type<any>[] = [
  * ANIMATIONS
  */
 
-import { AtToggleDirective } from './animations/toggle/toggle.directive';
-import { AtFadeDirective } from './animations/fade/fade.directive';
+import {AtToggleDirective} from './animations/toggle/toggle.directive';
+import {AtFadeDirective} from './animations/fade/fade.directive';
 
 const AT_ANIMATIONS: Type<any>[] = [
     AtToggleDirective,
     AtFadeDirective,
 ];
 
-export { AtToggleDirective, AtFadeDirective };
-export { AtCollapseAnimation } from './animations/collapse/collapse.animation';
-export { AtFadeInOutAnimation } from './animations/fade/fadeInOut.animation';
+export {AtToggleDirective, AtFadeDirective};
+export {AtCollapseAnimation} from './animations/collapse/collapse.animation';
+export {AtFadeInOutAnimation} from './animations/fade/fadeInOut.animation';
 
 /**
  * BEHAVIORS
  */
-export { IControlValueAccessor, mixinControlValueAccessor } from './behaviors/control-value-accesor.mixin';
-export { ICanDisable, mixinDisabled } from './behaviors/disabled.mixin';
-export { ICanDisableRipple, mixinDisableRipple } from './behaviors/disable-ripple.mixin';
+export {IControlValueAccessor, mixinControlValueAccessor} from './behaviors/control-value-accesor.mixin';
+export {ICanDisable, mixinDisabled} from './behaviors/disabled.mixin';
+export {ICanDisableRipple, mixinDisableRipple} from './behaviors/disable-ripple.mixin';
 
 /**
  * SERVICES
  */
-import { AtMediaReplayService } from './services/mediareplay/media-replay.service';
-import { AtUtilService } from './services/util.service';
-import { AtIconService } from './services/icon.service';
-import { AtColorService } from './services/color.service';
+import {AtMediaReplayService} from './services/mediareplay/media-replay.service';
+import {AtUtilService} from './services/util.service';
+import {AtIconService, ICON_PROVIDER} from './services/icon.service';
+import {AtColorService} from './services/color.service';
 import {AtEvents} from './services/events.service';
 
-export { AtMediaReplayService };
-export { AtEvents };
+export {AtMediaReplayService, AtIconService, AtEvents};
 
 @NgModule({
     imports: [
@@ -69,7 +68,7 @@ export { AtEvents };
     providers: [
         AtMediaReplayService,
         AtUtilService,
-        AtIconService,
+        ICON_PROVIDER,
         AtColorService,
         AtEvents,
     ],

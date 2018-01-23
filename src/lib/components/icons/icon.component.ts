@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import * as _ from 'lodash';
+import {AtColorService, AtColor} from '../../core/common/services/color.service';
 
 @Component({
     selector: 'at-icon',
@@ -10,49 +11,45 @@ import * as _ from 'lodash';
 export class AtIconComponent implements OnInit, OnChanges {
 
     /**
-     * type?: "mdicon" | "letter"
-     * "mdicon" renders a md-icon, "letter" renders the first letter of the name property
+     * display?: "mat-icon" | "mat-letter"
+     * "mat-icon" renders a mat-icon, "mat-letter" renders the first letter of the property name
      */
-    @Input() type: 'mdicon' | 'letter' = 'mdicon';
+    @Input() display: 'mat-icon' | 'mat-letter' = 'mat-icon';
 
     /**
      * name: string
      *
-     * The AtIcon name. It will be a md-icon | string. Defaults to ''
-     *
-     * Note: If you choose [type]="mdicon" and pass a random string no Icon will be displayed.
-     * Instead if you choose [type]="letter" and you pass a valid md-icon string the output will be the first letter.
+     * The AtIcon name. It will be a mat-icon | string. Defaults to ''
      */
     @Input() name: string = '';
 
     /**
-     * backgroundType?: 'none' | 'solid' | 'border'
+     * color: 'auto' | AtColor
      *
-     * backgroundType = "none": Icon or Letter will have a color determined by backgroundColor property.
-     *
-     * backgroundType = "solid": Icon or Letter will have a white font color with a circular background color
-     * determined by backgroundColor property.
-     *
-     * backgroundType = "border": Icon or Letter will have a border, icon and border colors will be determined
-     * by backgroundColor property.
-     *
-     * Defaults to "none"
+     * The AtIcon color. Defaults to 'auto'
      */
-    @Input() backgroundType: 'none' | 'solid' | 'border' = 'none';
+    @Input() color: 'auto' | AtColor = 'auto';
 
     /**
-     * backgroundColor?: 'none' | 'auto' | 'red' | 'pink' | 'purple' | 'yellow' | 'indigo' | 'blue' | 'light-blue' |
-     *                   'cyan' | 'teal' | 'green' | 'light-green' | 'orange' | 'blue-grey'
+     * background: 'none' | 'auto' | AtColor
      *
-     * backgroundColor = "none": Letter or md-icon color is inherited from his parent
-     *
-     * backgroundColor = "auto": If type property is 'letter' one color is assigned to each letter.
-     * If type is 'mdicon' a random color is assigned to each icon.
-     *
-     * Defaults to "auto"
+     * The AtIcon background color. Defaults to 'none'
      */
-    @Input() backgroundColor: 'none' | 'auto' | 'red' | 'pink' | 'purple' | 'yellow' | 'indigo' | 'blue' |
-        'light-blue' | 'cyan' | 'teal' | 'green' | 'light-green' | 'orange' | 'blue-grey' = 'auto';
+    @Input() background: 'none' | 'auto' | AtColor = 'none';
+
+    /**
+     * border: string | null
+     *
+     * Sets the border width. Use any valid border width string ex: '10px'. Defaults to null
+     */
+    @Input() border: string;
+
+    /**
+     * radius: string | null
+     *
+     * Sets the border radius. Use any valid border radius string ex: '10px'. Defaults to '30px'
+     */
+    @Input() radius: string = '30px';
 
     /**
      * size?: string
@@ -66,25 +63,9 @@ export class AtIconComponent implements OnInit, OnChanges {
      */
     @Input() fontSize: string = '24px';
 
-    private materialColors = [
-        'at-icon-red',
-        'at-icon-pink',
-        'at-icon-purple',
-        'at-icon-yellow',
-        'at-icon-indigo',
-        'at-icon-blue',
-        'at-icon-light-blue',
-        'at-icon-cyan',
-        'at-icon-teal',
-        'at-icon-green',
-        'at-icon-light-green',
-        'at-icon-orange',
-        'at-icon-blue-grey'
-    ];
-
     /**
      * @internal use only
-     * @type {{name: string; iconClass: string; backgroundClass: string}}
+     * @display {{name: string; iconClass: string; backgroundClass: string}}
      */
     atIcon = {
         name: '',
@@ -97,62 +78,60 @@ export class AtIconComponent implements OnInit, OnChanges {
      */
     @ViewChild('AtIconContent') atIconContent;
 
-    constructor() {
+    constructor(private atColor: AtColorService) {
     }
 
     private getIconColor(iconText) {
-        let iconColor = '';
+        let iconClass;
+        let bgColorClass = '';
+        let fgColorClass = '';
+        let bColorClass = '';
 
-        if (this.type == 'letter') {
+        if (this.display === 'mat-letter') {
             if (iconText) {
                 const letterId = iconText.toUpperCase().charCodeAt(0);
                 this.atIcon.name = String.fromCharCode(letterId);
-                if (this.backgroundColor == 'auto') {
-                    if (letterId >= 65 && letterId <= 90) {
-                        let i = letterId - 65;
-                        if (i <= 25) {
-                            if (i <= 12) {
-                                iconColor = this.materialColors[i]
-                            } else {
-                                iconColor = this.materialColors[i - 13]
-                            }
-                        } else {
-                            iconColor = this.materialColors[12]
-                        }
-                    } else if (letterId >= 48 && letterId <= 61) {
-                        let i = letterId - 48;
-                        iconColor = this.materialColors[i]
-                    } else {
-                        iconColor = this.materialColors[12]
-                    }
-                } else {
-                    iconColor = 'at-icon-' + this.backgroundColor;
-                }
             }
         } else {
             if (iconText) {
                 this.atIcon.name = iconText;
-                if (this.backgroundColor == 'auto') {
-                    iconColor = this.materialColors[_.random(1, this.materialColors.length) - 1]
-                } else {
-                    iconColor = 'at-icon-' + this.backgroundColor;
-                }
             }
         }
 
-        this.atIcon.iconClass = iconColor;
-        return iconColor;
+        if (this.background !== 'none') {
+            if (this.background === 'auto') {
+                const c = this.atColor.getUniqueColor(iconText);
+                bgColorClass = 'mat-bg-' + c;
+                if (this.border) {
+                    bColorClass = 'mat-b-' + c;
+                }
+            } else {
+                bgColorClass = 'mat-bg-' + this.background;
+                if (this.border) {
+                    bColorClass = 'mat-b-' + this.background;
+                }
+            }
 
-    }
+            if (this.color !== 'auto') {
+                fgColorClass = 'mat-fg-' + this.color;
+            }
 
-    private getBackgroundType() {
-        this.atIcon.backgroundClass =
-            (!this.backgroundType || this.backgroundType == 'none') ? '' : 'at-icon-background-' + this.backgroundType;
-        return this.atIcon.backgroundClass;
+        } else {
+            if (this.color !== 'auto') {
+                fgColorClass = 'mat-fg-' + this.color;
+            } else {
+                fgColorClass = 'mat-fg-' + this.atColor.getUniqueColor(iconText);
+            }
+        }
+
+        iconClass = (bgColorClass + ' ' + fgColorClass + ' ' + bColorClass).trim();
+
+        this.atIcon.iconClass = iconClass;
+        return iconClass;
+
     }
 
     private render(iconText) {
-        this.getBackgroundType();
         this.getIconColor(iconText);
     }
 
@@ -161,12 +140,12 @@ export class AtIconComponent implements OnInit, OnChanges {
             throw Error('Invalid Property: AtIcon name is required');
         }
         let iconText = this.name || this.atIconContent.nativeElement.innerText;
-        this.render(iconText);
+        this.render(iconText.trim());
     }
 
     ngOnChanges(changes: SimpleChanges) {
         let iconText = this.name || this.atIconContent.nativeElement.innerText;
-        this.render(iconText);
+        this.render(iconText.trim());
     }
 
 }

@@ -251,6 +251,30 @@ export const FRAMEWORK_ROUTES: Routes = [
         },
     },
     {
+        path: 'framework/components/icons',
+        component: DocViewerComponent,
+        // canActivate: [AtPermissionsGuard],
+        data: {
+            atSidenavItem: {
+                name: 'Icons',
+                pathPrefix: 'docs/:version',
+                icon: 'crop_landscape',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/components',
+                module: 'icons',
+                examples: ['icons'],
+            },
+        },
+    },
+    {
         path: 'framework/components/notifications',
         component: DocViewerComponent,
         // canActivate: [AtPermissionsGuard],

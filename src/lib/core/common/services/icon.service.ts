@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, NgZone, Optional, Provider, SkipSelf} from '@angular/core';
 
 @Injectable()
 export class AtIconService {
@@ -791,3 +791,14 @@ export class AtIconService {
         });
     }
 }
+
+export function ICON_PROVIDER_FACTORY(parent: AtIconService): AtIconService {
+    return parent || new AtIconService();
+}
+
+export const ICON_PROVIDER: Provider = {
+    // If there is already a service available, use that. Otherwise, provide a new one.
+    provide: AtIconService,
+    deps: [[new Optional(), new SkipSelf(), AtIconService]],
+    useFactory: ICON_PROVIDER_FACTORY,
+};

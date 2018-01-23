@@ -107,7 +107,7 @@
         color: $hexValue !important;
       }
 
-      .#{$colorName}-border {
+      .#{$colorName}-border, .mat-b-#{$colorName} {
         border-color: $hexValue !important;
       }
 

@@ -1,0 +1,66 @@
+<mat-card fxLayout="row" fxLayoutWrap fxLayoutAlign="center center">
+    <at-icon class="at-m-5"
+             display="mat-icon"
+             [background]="'red-800'"
+             [border]="'2px'"
+             [radius]="'6px'"
+             [color]="'auto'"
+             [size]="'80px'"
+             [fontSize]="'30px'">dashboard
+    </at-icon>
+    <at-icon class="at-m-5"
+             display="mat-icon"
+             [background]="'none'"
+             [border]="'2px'"
+             [radius]="'80px'"
+             [color]="'blue-800'"
+             [size]="'80px'"
+             [fontSize]="'30px'">edit
+    </at-icon>
+    <at-icon class="at-m-5"
+             display="mat-letter"
+             [background]="'orange-800'"
+             [border]="'2px'"
+             [radius]="'6px'"
+             [color]="'grey-200'"
+             [size]="'80px'"
+             [fontSize]="'30px'">Test this
+    </at-icon>
+    <at-icon class="at-m-5"
+             display="mat-letter"
+             [background]="'none'"
+             [border]="'2px'"
+             [radius]="'80px'"
+             [color]="'green-800'"
+             [size]="'80px'"
+             [fontSize]="'30px'">Name LastName
+    </at-icon>
+</mat-card>
+
+
+
+<mat-card fxLayout="row" fxLayoutWrap fxLayoutAlign="center center" class="at-mt-20">
+    <at-icon *ngFor="let letter of alphabet" class="at-m-5"
+             display="mat-letter"
+             [name]="letter"
+             [background]="'auto'"
+             [border]="'2px'"
+             [radius]="'80px'"
+             [color]="'auto'"
+             [size]="'80px'"
+             [fontSize]="'30px'">
+    </at-icon>
+</mat-card>
+
+<mat-card fxLayout="row" fxLayoutWrap fxLayoutAlign="center center" class="at-mt-20">
+    <at-icon *ngFor="let icon of randomIcons" class="at-m-5"
+             display="mat-icon"
+             [name]="icon"
+             [background]="'none'"
+             [border]="'2px'"
+             [radius]="'6px'"
+             [color]="'auto'"
+             [size]="'80px'"
+             [fontSize]="'30px'"></at-icon>
+</mat-card>
+

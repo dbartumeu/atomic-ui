@@ -13,8 +13,8 @@ import {
     MatToolbarModule
 } from '@angular/material';
 
-import {AtScrollbarModule, AtLayoutModule} from 'ngx-atomic/core';
-import {AtDialogsModule, AtLoadingModule, AtNotificationsModule} from "ngx-atomic/components";
+import {AtCommonModule, AtScrollbarModule, AtLayoutModule} from 'ngx-atomic/core';
+import {AtDialogsModule, AtLoadingModule, AtNotificationsModule, AtIconModule} from "ngx-atomic/components";
 import {AtChipsModule, AtSearchModule, AtFormFieldBoxModule} from 'ngx-atomic/forms';
 
 import {LayoutBasicComponent} from './layout-basic/layout-basic.component';
@@ -28,6 +28,7 @@ import {LoadingCircularComponent} from './loading-circular/loading-circular.comp
 import {LoadingLinearComponent} from './loading-linear/loading-linear.component';
 import {NotificationsComponent} from './notifications/notifications.component';
 import {FormFieldComponent} from './form-field/form-field.component';
+import {IconComponent} from './icon/icon.component';
 
 export interface LiveExample {
     title: string;
@@ -97,6 +98,12 @@ export const EXAMPLE_COMPONENTS: any = {
         additionalFiles: null,
         selectorName: 'form-field',
     },
+    'icons': {
+        title: 'Atomic Icons',
+        component: IconComponent,
+        additionalFiles: null,
+        selectorName: 'icon',
+    },
 };
 
 export const EXAMPLE_LIST: any[] = [
@@ -109,7 +116,8 @@ export const EXAMPLE_LIST: any[] = [
     LoadingCircularComponent,
     LoadingLinearComponent,
     NotificationsComponent,
-    FormFieldComponent
+    FormFieldComponent,
+    IconComponent
 ];
 
 @NgModule({
@@ -130,6 +138,7 @@ export const EXAMPLE_LIST: any[] = [
         MatIconModule,
         MatListModule,
         MatToolbarModule,
+        AtCommonModule,
         AtScrollbarModule,
         AtLayoutModule,
         AtChipsModule,
@@ -137,7 +146,8 @@ export const EXAMPLE_LIST: any[] = [
         AtDialogsModule,
         AtLoadingModule,
         AtNotificationsModule,
-        AtFormFieldBoxModule
+        AtFormFieldBoxModule,
+        AtIconModule
     ],
     exports: [],
 })

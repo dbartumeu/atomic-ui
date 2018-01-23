@@ -11,6 +11,7 @@ export class LoadingLinearComponent {
         name: '',
         select: '',
         description: '',
+        type: null,
     };
 
     constructor(private _loadingService: AtLoadingService) {

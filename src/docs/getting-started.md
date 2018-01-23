@@ -3,8 +3,7 @@
 npm install -g @angular/cli@latest
 ```
 
-## Step 2: Install the CLI.
-### Create a new project
+## Step 2: Create a new project.
 ```
 ng new my-project
 ```

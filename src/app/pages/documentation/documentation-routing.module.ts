@@ -335,6 +335,29 @@ export const FRAMEWORK_ROUTES: Routes = [
             }
         },
     },
+    {
+        path: 'framework/forms/validators',
+        component: DocViewerComponent,
+        // canActivate: [AtPermissionsGuard],
+        data: {
+            atSidenavItem: {
+                name: 'Validators',
+                pathPrefix: 'docs/:version',
+                icon: 'crop_landscape',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/forms',
+                module: 'validators',
+            }
+        },
+    },
 ];
 
 export const DOCUMENTATION_ROUTES: Routes = [

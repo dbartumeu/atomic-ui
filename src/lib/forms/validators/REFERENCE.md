@@ -100,3 +100,14 @@ if `formCtrl` is invalid and null otherwise.
 
 ---
 
+## Additional classes
+
+### IAtValidatorError
+An interface that defines the error structure.
+
+| Name             | Description                   |
+| :--------------- | :---------------------------- |
+| `type: string`   | The error type                |
+| `valid: boolean` | If the field is valid or not. |
+| `value: any`     | The field value               |
+| `msg: string`    | The Error message             |

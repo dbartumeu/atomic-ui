@@ -28,7 +28,7 @@ import {LoadingCircularComponent} from './loading-circular/loading-circular.comp
 import {LoadingLinearComponent} from './loading-linear/loading-linear.component';
 import {NotificationsComponent} from './notifications/notifications.component';
 import {FormFieldComponent} from './form-field/form-field.component';
-import {IconComponent} from './icon/icon.component';
+import {IconsComponent} from './icons/icons.component';
 
 export interface LiveExample {
     title: string;
@@ -100,9 +100,9 @@ export const EXAMPLE_COMPONENTS: any = {
     },
     'icons': {
         title: 'Atomic Icons',
-        component: IconComponent,
+        component: IconsComponent,
         additionalFiles: null,
-        selectorName: 'icon',
+        selectorName: 'icons',
     },
 };
 
@@ -117,7 +117,7 @@ export const EXAMPLE_LIST: any[] = [
     LoadingLinearComponent,
     NotificationsComponent,
     FormFieldComponent,
-    IconComponent
+    IconsComponent
 ];
 
 @NgModule({

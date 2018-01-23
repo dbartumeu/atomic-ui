@@ -3,10 +3,10 @@ import {AtIconService} from 'ngx-atomic/core';
 import * as _ from 'lodash';
 
 @Component({
-    selector: 'icon',
-    templateUrl: './icon.component.html'
+    selector: 'icons',
+    templateUrl: './icons.component.html'
 })
-export class IconComponent {
+export class IconsComponent {
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
     randomIcons: string[] = [];

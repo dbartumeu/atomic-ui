@@ -1,0 +1,69 @@
+<form [formGroup]="formFieldEx" novalidate
+      fxLayot="column">
+
+
+    <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="column" fxFlex>
+            <at-form-field-box class="at-mh-15 at-mt-10" label="Code"
+                           [showLabel]="true"
+                           [field]="formFieldEx.get('code')"
+                           [required]="true">
+                <mat-form-field>
+                    <input matInput
+                           [formControl]="formFieldEx.get('code')"
+                           maxlength="3">
+                </mat-form-field>
+            </at-form-field-box>
+
+            <at-form-field-box class="at-mh-15 at-mt-10" label="Phone Number"
+                           [showLabel]="true"
+                           [field]="formFieldEx.get('officePhone')"
+                           [required]="true">
+                <mat-form-field>
+                    <input matInput
+                           [formControl]="formFieldEx.get('officePhone')"
+                           placeholder="Phone Number"
+                           maxlength="10">
+                </mat-form-field>
+            </at-form-field-box>
+
+            <at-form-field-box class="at-mh-15 at-mt-10" label="Website Url"
+                           [showLabel]="true"
+                           [field]="formFieldEx.get('websiteUrl')">
+                <mat-form-field>
+                    <input matInput
+                           [formControl]="formFieldEx.get('websiteUrl')"
+                           maxlength="70">
+                </mat-form-field>
+            </at-form-field-box>
+        </div>
+
+        <div fxLayout="column" fxFlex>
+            <at-form-field-box class="at-mh-15 at-mt-10" label="Name"
+                           [showLabel]="true"
+                           [field]="formFieldEx.get('name')"
+                           [required]="true">
+                <mat-form-field>
+                    <input matInput
+                           [formControl]="formFieldEx.get('name')"
+                           maxlength="100">
+                </mat-form-field>
+            </at-form-field-box>
+
+            <at-form-field-box class="at-mh-15 at-mt-10" label="Email"
+                           [showLabel]="true"
+                           [field]="formFieldEx.get('emailAddress')">
+                <mat-form-field>
+                    <input matInput
+                           [formControl]="formFieldEx.get('emailAddress')"
+                           maxlength="45">
+                </mat-form-field>
+            </at-form-field-box>
+        </div>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!formFieldEx.valid">
+        Submit
+    </button>
+
+</form>

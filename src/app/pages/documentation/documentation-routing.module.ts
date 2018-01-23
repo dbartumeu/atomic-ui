@@ -336,6 +336,30 @@ export const FRAMEWORK_ROUTES: Routes = [
         },
     },
     {
+        path: 'framework/forms/form-field-box',
+        component: DocViewerComponent,
+        // canActivate: [AtPermissionsGuard],
+        data: {
+            atSidenavItem: {
+                name: 'Form Field Box',
+                pathPrefix: 'docs/:version',
+                icon: 'crop_landscape',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/forms',
+                module: 'form-field-box',
+                examples:['form-field']
+            }
+        },
+    },
+    {
         path: 'framework/forms/validators',
         component: DocViewerComponent,
         // canActivate: [AtPermissionsGuard],
@@ -358,6 +382,7 @@ export const FRAMEWORK_ROUTES: Routes = [
             }
         },
     },
+
 ];
 
 export const DOCUMENTATION_ROUTES: Routes = [

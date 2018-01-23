@@ -6,20 +6,20 @@
             <ng-content></ng-content>
         </div>
         <label *ngIf="status ? status == 'required' : ((!(field.touched || field.dirty) && !field.value) ? required : false )"
-               md-tooltip="This field is required"
+               matTooltip="This field is required"
                class="at-ml-10 mat-fg-grey-700 at-tz-30" style="cursor: default">*</label>
         <ng-container *ngIf="showStatusIndicator">
-            <md-icon *ngIf="status ? status == 'valid' :  field.valid"
-                     class="at-ml-10 mat-fg-green-500" md-tooltip="This field is valid" style="cursor: default">done
-            </md-icon>
-            <md-icon
+            <mat-icon *ngIf="status ? status == 'valid' :  field.valid"
+                     class="at-ml-10 mat-fg-green-500" matTooltip="This field is valid" style="cursor: default">done
+            </mat-icon>
+            <mat-icon
                     *ngIf="status ? status == 'invalid' : ((field.errors?.atValidatorsRequired || field.value) && (field.touched || field.dirty) ? !field.valid : false ) "
-                    md-tooltip="This field has invalid content"
+                    matTooltip="This field has invalid content"
                     class="at-ml-10 mat-fg-red-500" style="cursor: default">error_outline
-            </md-icon>
+            </mat-icon>
         </ng-container>
     </div>
-    <div class="mat-fg-red-600 at-tz-md at-pr-35"
+    <div class="mat-fg-red-600 at-tz-mat at-pr-35"
          *ngIf="(field.errors?.atValidatorsRequired || field.value)  && (field.touched || field.dirty) && !field.valid"
          style="margin-top: -15px" fxLayout="column">
         <div *ngIf="field.errors.required" [class.text-right]="showLabel">{{ label }} is required</div>
@@ -30,9 +30,9 @@
         <div *ngIf="field.errors.maxlength" [class.text-right]="showLabel">
             {{ label }} can't be more than {{ field.errors.maxlength?.requiredLength }} characters
         </div>
-        <div *ngIf="field.hasError('mdDatepickerMin')" [class.text-right]="showLabel">{{ label }} Too early!</div>
-        <div *ngIf="field.hasError('mdDatepickerMax')" [class.text-right]="showLabel">{{ label }} Too late!</div>
-        <div *ngIf="field.hasError('mdDatepickerFilter')" [class.text-right]="showLabel">{{ label }} unavailable!</div>
+        <div *ngIf="field.hasError('matDatepickerMin')" [class.text-right]="showLabel">{{ label }} Too early!</div>
+        <div *ngIf="field.hasError('matDatepickerMax')" [class.text-right]="showLabel">{{ label }} Too late!</div>
+        <div *ngIf="field.hasError('matDatepickerFilter')" [class.text-right]="showLabel">{{ label }} unavailable!</div>
 
         <ng-container *ngIf="field.errors">
             <ng-container *ngFor="let errKey of field.errors | keys ">

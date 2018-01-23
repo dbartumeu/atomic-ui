@@ -7,9 +7,11 @@ import { FlexLayoutModule } from '@angular/flex-layout';
  * PIPES
  */
 import { AtTruncatePipe } from './pipes/truncate/truncate.pipe';
+import { AtKeysPipe } from './pipes/object/keys.pipe';
 
 const AT_PIPES: Type<any>[] = [
     AtTruncatePipe,
+    AtKeysPipe,
 ];
 
 /**

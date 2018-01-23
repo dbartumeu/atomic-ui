@@ -15,7 +15,7 @@ import {
 
 import {AtScrollbarModule, AtLayoutModule} from 'ngx-atomic/core';
 import {AtDialogsModule, AtLoadingModule, AtNotificationsModule} from "ngx-atomic/components";
-import {AtChipsModule, AtSearchModule} from 'ngx-atomic/forms';
+import {AtChipsModule, AtSearchModule, AtFormFieldBoxModule} from 'ngx-atomic/forms';
 
 import {LayoutBasicComponent} from './layout-basic/layout-basic.component';
 import {LayoutCardOverComponent} from './layout-card-over/layout-card-over.component';
@@ -27,6 +27,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {LoadingCircularComponent} from './loading-circular/loading-circular.component';
 import {LoadingLinearComponent} from './loading-linear/loading-linear.component';
 import {NotificationsComponent} from './notifications/notifications.component';
+import {FormFieldComponent} from './form-field/form-field.component';
 
 export interface LiveExample {
     title: string;
@@ -90,6 +91,12 @@ export const EXAMPLE_COMPONENTS: any = {
         additionalFiles: null,
         selectorName: 'notifications',
     },
+    'form-field': {
+        title: 'Atomic Form Field Box',
+        component: FormFieldComponent,
+        additionalFiles: null,
+        selectorName: 'form-field',
+    },
 };
 
 export const EXAMPLE_LIST: any[] = [
@@ -102,6 +109,7 @@ export const EXAMPLE_LIST: any[] = [
     LoadingCircularComponent,
     LoadingLinearComponent,
     NotificationsComponent,
+    FormFieldComponent
 ];
 
 @NgModule({
@@ -128,7 +136,8 @@ export const EXAMPLE_LIST: any[] = [
         AtSearchModule,
         AtDialogsModule,
         AtLoadingModule,
-        AtNotificationsModule
+        AtNotificationsModule,
+        AtFormFieldBoxModule
     ],
     exports: [],
 })

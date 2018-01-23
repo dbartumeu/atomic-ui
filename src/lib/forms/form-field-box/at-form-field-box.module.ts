@@ -21,5 +21,5 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         AtFormFieldBoxComponent,
     ],
 })
-export class AtFormModule {
+export class AtFormFieldBoxModule {
 }

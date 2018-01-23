@@ -165,7 +165,6 @@ export class AtIconComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-
         let iconText = this.name || this.atIconContent.nativeElement.innerText;
         this.render(iconText);
     }

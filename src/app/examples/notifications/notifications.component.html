@@ -5,14 +5,15 @@
         </button>
         <span>Toolbar</span>
         <span fxFlex></span>
-        <at-notification-count color="primary" positionX="before" [notifications]="true">
+        <at-notification-count color="green-400" positionX="before" [notifications]="true">
             <mat-icon>person</mat-icon>
         </at-notification-count>
         <at-notification-count color="primary" [notifications]="false">
             <mat-icon>messages</mat-icon>
         </at-notification-count>
+
         <button mat-icon-button [matMenuTriggerFor]="notificationsMenu">
-            <at-notification-count [notifications]="101">
+            <at-notification-count color="yellow" [notifications]="101">
                 <mat-icon>notifications</mat-icon>
             </at-notification-count>
         </button>

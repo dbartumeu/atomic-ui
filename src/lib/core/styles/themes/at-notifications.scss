@@ -9,6 +9,7 @@
   $background: map-get($theme, background);
 
   .at-notification-count {
+    //color: inherit;
     @include mat-elevation(1);
     &.mat-warn {
       background-color: mat-color($warn);

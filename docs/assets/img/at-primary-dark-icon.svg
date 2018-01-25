@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="at-icon"
+   width="80"
+   height="80"
+   viewBox="0 0 433.33334 346.66666"
+   sodipodi:docname="at-light-icon.svg"
+   inkscape:version="0.92.1 r15371">
+  <metadata
+     id="metadata4491">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4489" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview4487"
+     showgrid="false"
+     inkscape:zoom="5.6568542"
+     inkscape:cx="37.357656"
+     inkscape:cy="40.12765"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="at-icon" />
+  <circle
+     style="fill:none;fill-opacity:1;stroke:#e91e63;stroke-width:5.41666698;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="orbit-1"
+     cx="216.66667"
+     cy="173.33333"
+     r="159.87886" />
+  <circle
+     style="fill:none;fill-opacity:1;stroke:#e91e63;stroke-width:5.41666698;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="orbit-2"
+     cx="216.66667"
+     cy="173.33333"
+     r="106.17488" />
+  <circle
+     style="fill:#e91e63;fill-opacity:1;stroke:#e91e63;stroke-width:1.07922733;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="nucleus"
+     cx="216.66667"
+     cy="173.33333"
+     r="26.54372" />
+  <circle
+     style="fill:#e91e63;fill-opacity:1;stroke:#424242;stroke-width:5.41666698;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="electron-1"
+     cx="355.11142"
+     cy="94.256088"
+     r="13.27186" />
+  <circle
+     style="fill:#e91e63;fill-opacity:1;stroke:#424242;stroke-width:5.41666698;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="electron-2"
+     cx="301.4892"
+     cy="237.58676"
+     r="13.27186" />
+</svg>

@@ -1,7 +1,7 @@
-Atomic Angular 5+ Material Design Admin Framework
-=================================================
+Angular Atomic UI - An Angular 5+ Material Design Admin Platform
+================================================================
 
-Atomic is a creative material design admin framework built with Angular 5+ and the Angular-CLI. 
+Atomic is a creative material design admin platform built with Angular 5+ and the Angular-CLI. 
 It combines proven design language with a comprehensive web framework, built on Angular & Angular-Material (Design). 
 Atomic gives you a quickstart to build a modern web application UI and ensure consistency across your enterprise products.
 

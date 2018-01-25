@@ -5,7 +5,7 @@ Atomic is a creative material design admin platform built with Angular 5+ and th
 It combines proven design language with a comprehensive web framework, built on Angular & Angular-Material (Design). 
 Atomic gives you a quickstart to build a modern web application UI and ensure consistency across your enterprise products.
 
-##Features
+## Features
 * Clean, Intuitive and Fully Responsive Unique Design (works on all major browsers, tablets and phones)
 * Developer Friendly Code
 * Based on angular 5 Framework

@@ -16,7 +16,7 @@ Atomic gives you a quickstart to build a modern web application UI and ensure co
 
 
 ## Documentation
-You can find atomic documentation [here](https://dbartumeu.github.io/ngx-atomic/docs).
+You can find atomic documentation [here](https://dbartumeu.github.io/ngx-atomic).
 
 
 ## Blank Project

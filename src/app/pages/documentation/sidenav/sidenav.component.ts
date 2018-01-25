@@ -72,7 +72,7 @@ export class SidenavComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.avSidenavService.applyPerms(this.atPermsService.perms);
 
-        this.router.navigateByUrl('docs/' + this.selectedVersion + '/framework/core/layout');
+        this.router.navigateByUrl('docs/' + this.selectedVersion + '/getting-started');
     }
 
     ngOnInit() {

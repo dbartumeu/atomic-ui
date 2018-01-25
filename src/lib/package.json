@@ -1,6 +1,6 @@
 {
   "name": "ngx-atomic",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "An UI framework built on Angular Material",
   "keywords": [
     "angular",
@@ -32,6 +32,7 @@
     "@angular/cdk": "^5.1.0",
     "@angular/material": "^5.1.0",
     "@angular/flex-layout": "^2.0.0-beta.12",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "@types/lodash": "^4.14.96"
   }
 }

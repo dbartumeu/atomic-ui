@@ -15,11 +15,11 @@
     "typeRoots": [
       "./node_modules/@types"
     ],
-//    "paths": {
-//      "ngx-atomic": [
-//        "./lib"
-//      ]
-//    },
+    "paths": {
+      "ngx-atomic": [
+        "./lib"
+      ]
+    },
     "noUnusedParameters": false,
     "noUnusedLocals": false,
     "allowUnreachableCode": false,

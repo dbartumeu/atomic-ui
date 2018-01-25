@@ -1,11 +1,13 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { AtSidenavItem, AtPermissionsGuard } from 'ngx-atomic';
-import { DocViewerComponent } from './doc-viewer/doc-viewer.component';
-import { DocNavigatorComponent } from './doc-navigator/doc-navigator.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {AtSidenavItem, AtPermissionsGuard} from 'ngx-atomic';
+import {DocViewerComponent} from './doc-viewer/doc-viewer.component';
+import {DocNavigatorComponent} from './doc-navigator/doc-navigator.component';
 
 export const VERSIONS: string[] = [
     'master',
+    'v1.0.0',
+    'v0.1.0',
 ];
 
 export function getAllowedVersion(min?: string, max?: string): string[] {
@@ -66,6 +68,7 @@ export const GENERAL_ROUTES: Routes = [
         },
     }
 ];
+
 
 export const FRAMEWORK_ROUTES: Routes = [
     {
@@ -186,6 +189,29 @@ export const FRAMEWORK_ROUTES: Routes = [
                 overviewOnly: false,
                 section: 'src/lib/core',
                 module: 'permissions'
+            }
+        },
+    },
+    {
+        path: 'framework/core/sidenav',
+        component: DocViewerComponent,
+        // canActivate: [AtPermissionsGuard],
+        data: {
+            atSidenavItem: {
+                name: 'Sidenav',
+                pathPrefix: 'docs/:version',
+                icon: 'crop_landscape',
+                position: 1,
+                customClass: '',
+            },
+            atPermissions: {
+                allow: getAllowedVersion('master','v1.0.0'),
+                redirectTo: '/',
+            },
+            docViewer: {
+                overviewOnly: false,
+                section: 'src/lib/core',
+                module: 'sidenav'
             }
         },
     },
@@ -379,7 +405,7 @@ export const FRAMEWORK_ROUTES: Routes = [
                 overviewOnly: false,
                 section: 'src/lib/forms',
                 module: 'form-field-box',
-                examples:['form-field']
+                examples: ['form-field']
             }
         },
     },
@@ -406,7 +432,6 @@ export const FRAMEWORK_ROUTES: Routes = [
             }
         },
     },
-
 ];
 
 export const DOCUMENTATION_ROUTES: Routes = [

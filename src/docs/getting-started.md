@@ -16,6 +16,28 @@ Install Angular Material, Angular CDK, Angular Flexbox and Lodash
 npm install --save @angular/material @angular/cdk @angular/flex-layout lodash @types/lodash
 ```
 
+**package.json**
+```json
+...
+
+"dependencies": {
+  ...
+    "@angular/animations": "^5.1.2",
+    "@angular/common": "^5.2.1",
+    "@angular/core": "^5.2.1",
+    "@angular/forms": "^5.2.1",
+    "@angular/router": "^5.2.1",
+    "@angular/cdk": "^5.1.0",
+    "@angular/material": "^5.1.0",
+    "@angular/flex-layout": "^2.0.0-beta.12",
+    "lodash": "^4.17.4",
+    "@types/lodash": "^4.14.96"
+  ...
+}
+
+...
+```
+
 For more information about how to get started with Angular Material, check out the [Angular Material getting started guide](https://material.angular.io/guide/getting-started)
 
 ## Step 4: Install Atomic.
@@ -26,7 +48,7 @@ npm install --save ngx-atomic
 
 ## Step 5: Import the Atomic Core NgModule.
 ```typescript
-import { AtomicLayoutModule, AtomicScrollbarModule /*, any other modules */ } from 'ngx-atomic/core';
+import { AtomicLayoutModule, AtomicScrollbarModule /*, any other modules */ } from 'ngx-atomic';
 
 @NgModule({
   imports: [

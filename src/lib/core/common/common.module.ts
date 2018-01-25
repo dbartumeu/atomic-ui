@@ -6,10 +6,18 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 /**
  * PIPES
  */
+import {AtBytesPipe} from './pipes/bytes/bytes.pipe';
+import {AtDigitsPipe} from './pipes/digits/digits.pipe';
+import {AtTimeAgoPipe} from './pipes/time-ago/time-ago.pipe';
+import {AtTimeDifferencePipe} from './pipes/time-difference/time-difference.pipe';
 import {AtTruncatePipe} from './pipes/truncate/truncate.pipe';
 import {AtKeysPipe} from './pipes/object/keys.pipe';
 
 const AT_PIPES: Type<any>[] = [
+    AtBytesPipe,
+    AtDigitsPipe,
+    AtTimeAgoPipe,
+    AtTimeDifferencePipe,
     AtTruncatePipe,
     AtKeysPipe,
 ];

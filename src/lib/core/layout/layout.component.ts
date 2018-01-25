@@ -359,7 +359,7 @@ export class AtLayoutHeaderComponent implements AfterViewInit {
     @Input() position: 'inside' | 'cover' | 'outside' = 'inside';
 
     constructor(@Inject(forwardRef(() => AtLayoutComponent))
-                private _parent: AtLayoutComponent,
+                public _parent: AtLayoutComponent,
                 public elRef: ElementRef) {
         this._parent.layoutHeader = this;
     }
@@ -623,7 +623,7 @@ export class AtLayoutFooterComponent implements AfterViewInit {
     @Input() position: 'inside' | 'cover' | 'outside' = 'inside';
 
     constructor(@Inject(forwardRef(() => AtLayoutComponent))
-                private _parent: AtLayoutComponent,
+                public _parent: AtLayoutComponent,
                 public elRef: ElementRef) {
         this._parent.layoutFooter = this;
     }

@@ -1,3 +1,6 @@
+## v1.0.1
+1. Fixed a release issue related with published package.json.
+
 ## v1.0.0
 ### Breaking Changes 
 1. Fixed Production release issues.

@@ -6,6 +6,7 @@ import {DocNavigatorComponent} from './doc-navigator/doc-navigator.component';
 
 export const VERSIONS: string[] = [
     'master',
+    'v1.0.1',
     'v1.0.0',
     'v0.1.0',
 ];
@@ -35,7 +36,12 @@ export const GENERAL_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -57,7 +63,12 @@ export const GENERAL_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -111,7 +122,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -135,7 +151,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -159,7 +180,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -182,7 +208,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -205,7 +236,11 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master','v1.0.0'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -241,7 +276,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -265,7 +305,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -289,7 +334,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -313,7 +363,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -350,7 +405,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -374,7 +434,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -398,7 +463,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {
@@ -422,7 +492,12 @@ export const FRAMEWORK_ROUTES: Routes = [
                 customClass: '',
             },
             atPermissions: {
-                allow: getAllowedVersion('master'),
+                allow: [
+                    'master',
+                    'v1.0.1',
+                    'v1.0.0',
+                    'v0.1.0',
+                ],
                 redirectTo: '/',
             },
             docViewer: {

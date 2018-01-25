@@ -7,7 +7,7 @@ And automatically display Atomic Error messages.
 Import the `[AtFormFieldBoxModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
-import {AtFormFieldBoxModule} from 'ngx-atomic/forms';
+import {AtFormFieldBoxModule} from 'ngx-atomic';
 @NgModule({
     imports: [
         AtFormFieldBoxModule,

@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { CoreComponent } from './core.component';
-import { AtCommonModule, AtLayoutModule } from 'ngx-atomic/core';
+import { AtCommonModule, AtLayoutModule } from 'ngx-atomic';
 
 @NgModule({
     imports: [

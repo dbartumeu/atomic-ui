@@ -6,7 +6,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatListModule} from '@angular/material';
 
 // Atomic
-import {AtSidenavModule} from 'ngx-atomic/core';
+import {AtSidenavModule} from 'ngx-atomic';
 
 // App
 import {ToolbarComponent} from './toolbar.component';

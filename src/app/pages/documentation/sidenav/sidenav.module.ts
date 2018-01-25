@@ -9,7 +9,7 @@ import {
     AtSidenavCollapsibleDirective,
     AtPermissionsModule,
     AtEvents
-} from 'ngx-atomic/core';
+} from 'ngx-atomic';
 
 import {SidenavComponent} from './sidenav.component';
 

@@ -22,6 +22,7 @@ import { AtMediaService } from '../media/media.service';
     styleUrls: ['./layout.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    exportAs: 'AtLayoutComponent',
 })
 export class AtLayoutComponent implements OnInit, OnDestroy {
 

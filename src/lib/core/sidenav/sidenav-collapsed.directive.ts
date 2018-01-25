@@ -1,10 +1,9 @@
 import {Subscription} from 'rxjs';
 import {DOCUMENT} from '@angular/common';
-import {Directive, HostBinding, HostListener, Inject, OnInit, OnDestroy} from '@angular/core';
-import {MediaChange} from '@angular/flex-layout';
-import {AtMediaReplayService} from '../common/services/mediareplay/media-replay.service';
+import {Directive, HostBinding, HostListener, Inject, OnInit, OnDestroy, NgZone} from '@angular/core';
 import {AtSidenavService} from './sidenav.service';
 import {AtSidenavItem} from './sidenav-item/sidenav-item.model';
+import {AtMediaService} from '../media/media.module';
 
 @Directive({
     selector: '[atSidenavCollapsible]',
@@ -48,15 +47,18 @@ export class AtSidenavCollapsibleDirective implements OnInit, OnDestroy {
     }
 
     constructor(private avSidenavService: AtSidenavService,
-                private atMediaReplayService: AtMediaReplayService,
+                private _mediaService: AtMediaService, private _ngZone: NgZone,
                 @Inject(DOCUMENT) private document: Document) {
 
     }
 
     ngOnInit(): void {
-        this.atMediaChange = this.atMediaReplayService.atMediaChange.subscribe((change: MediaChange) => {
-            this.isMobile = (change.mqAlias === 'xs') || (change.mqAlias === 'sm');
-        });
+        this.atMediaChange =
+            this._mediaService.registerQuery('gt-sm').subscribe((matches: boolean) => {
+                this._ngZone.run(() => {
+                    this.isMobile = !matches;
+                });
+            });
     }
 
     ngOnDestroy(): void {

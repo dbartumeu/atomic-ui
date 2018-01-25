@@ -6,7 +6,7 @@ map means that validation has passed.
 
 ## Usage
 ```typescript
-import { AtValidators } from 'ngx-atomic/forms';
+import { AtValidators } from 'ngx-atomic';
 
 // ...
 

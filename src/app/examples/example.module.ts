@@ -13,9 +13,9 @@ import {
     MatToolbarModule
 } from '@angular/material';
 
-import {AtCommonModule, AtScrollbarModule, AtLayoutModule} from 'ngx-atomic/core';
-import {AtDialogsModule, AtLoadingModule, AtNotificationsModule, AtIconModule} from "ngx-atomic/components";
-import {AtChipsModule, AtSearchModule, AtFormFieldBoxModule} from 'ngx-atomic/forms';
+import {AtCommonModule, AtScrollbarModule, AtLayoutModule} from 'ngx-atomic';
+import {AtDialogsModule, AtLoadingModule, AtNotificationsModule, AtIconModule} from "ngx-atomic";
+import {AtChipsModule, AtSearchModule, AtFormFieldBoxModule} from 'ngx-atomic';
 
 import {LayoutBasicComponent} from './layout-basic/layout-basic.component';
 import {LayoutCardOverComponent} from './layout-card-over/layout-card-over.component';

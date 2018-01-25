@@ -1,13 +1,8 @@
 import {Subscription} from 'rxjs';
-import {
-    Component, OnInit, ViewChild, ViewEncapsulation, OnDestroy, ChangeDetectionStrategy
-} from '@angular/core';
-import {MediaChange} from '@angular/flex-layout';
+import {Component, OnInit, ViewChild, ViewEncapsulation, OnDestroy, ChangeDetectionStrategy, NgZone} from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
-import {AtMediaReplayService} from 'lib/core/common/services/mediareplay/media-replay.service';
-import {AtSidenavService} from 'lib/core/sidenav/sidenav.service';
-import { VERSIONS } from "../pages/documentation/documentation-routing.module";
-import { AtPermissionsService } from "ngx-atomic/core";
+import {AtSidenavService, AtPermissionsService, AtMediaService} from 'ngx-atomic';
+import {VERSIONS} from "../pages/documentation/documentation-routing.module";
 
 @Component({
     selector: 'app-core',
@@ -18,7 +13,6 @@ import { AtPermissionsService } from "ngx-atomic/core";
 })
 export class CoreComponent implements OnInit, OnDestroy {
 
-    //
     @ViewChild('layoutMain') layoutMain;
 
     private _mediaSubscription: Subscription;
@@ -28,8 +22,9 @@ export class CoreComponent implements OnInit, OnDestroy {
     sidenavMode: string = 'side';
     isMobile: boolean = false;
 
-    constructor(private router: Router,
-                private atMediaReplayService: AtMediaReplayService,
+    constructor(private _ngZone: NgZone,
+                private router: Router,
+                private atMediaService: AtMediaService,
                 private avSidenavService: AtSidenavService,
                 private atPermsService: AtPermissionsService) {
         this.atPermsService.register(VERSIONS);
@@ -37,34 +32,30 @@ export class CoreComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        this._mediaSubscription = this.atMediaReplayService.atMediaChange
-            .subscribe((change: MediaChange) => {
-                let isMobile = (change.mqAlias == 'xs') || (change.mqAlias == 'sm');
-
-                this.isMobile = isMobile;
-                this.sidenavMode = (isMobile) ? 'over' : 'side';
-                this.sidenavOpen = !isMobile;
+        this._mediaSubscription = this.atMediaService.registerQuery('gt-sm')
+            .subscribe((matches: boolean) => {
+                this._ngZone.run(() => {
+                    this.isMobile = !matches;
+                    this.sidenavMode = (this.isMobile) ? 'over' : 'side';
+                    this.sidenavOpen = !this.isMobile;
+                });
             });
 
-        this.avSidenavService.sidenavCollapsedChange.subscribe(collapsed => {
-            this.sidenavMode = !this.isMobile && !collapsed ? 'over' : 'side';
-        });
+        this.avSidenavService.sidenavCollapsedChange
+            .subscribe(collapsed => {
+                this.sidenavMode = !this.isMobile && !collapsed ? 'over' : 'side';
+            });
 
-        this._routerEventsSubscription = this.router.events.subscribe((event) => {
-            if (event instanceof NavigationEnd && this.isMobile) {
-                this.layoutMain.toggleSideNav();
-            }
-        });
-        // if (this.router.url == '/') {
-        //     this.router.navigateByUrl('/dashboards/dashboard1')
-        // }
+        this._routerEventsSubscription = this.router.events
+            .subscribe((event) => {
+                if (event instanceof NavigationEnd && this.isMobile) {
+                    this.layoutMain.toggleSideNav();
+                }
+            });
     }
 
     ngOnDestroy() {
         this._mediaSubscription.unsubscribe();
-    }
-
-    onActivate(e, scrollContainer) {
-        scrollContainer.scrollTop = 0;
+        this._routerEventsSubscription.unsubscribe();
     }
 }

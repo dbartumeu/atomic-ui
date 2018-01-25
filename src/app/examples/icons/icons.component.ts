@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AtIconService} from 'ngx-atomic/core';
+import {AtIconService} from 'ngx-atomic';
 import * as _ from 'lodash';
 
 @Component({

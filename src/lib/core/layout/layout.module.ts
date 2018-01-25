@@ -17,6 +17,8 @@ import {
     AtLayoutFooterComponent,
 } from './layout.component';
 
+export {AtLayoutComponent}
+
 @NgModule({
     imports: [
         CommonModule,

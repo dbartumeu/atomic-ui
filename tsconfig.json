@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "declaration": false,
+    "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": [
@@ -15,17 +15,11 @@
     "typeRoots": [
       "./node_modules/@types"
     ],
-    "paths": {
-      "ngx-atomic/core": [
-        "./lib/core"
-      ],
-      "ngx-atomic/forms": [
-        "./lib/forms"
-      ],
-      "ngx-atomic/components": [
-        "./lib/components"
-      ]
-    },
+//    "paths": {
+//      "ngx-atomic": [
+//        "./lib"
+//      ]
+//    },
     "noUnusedParameters": false,
     "noUnusedLocals": false,
     "allowUnreachableCode": false,

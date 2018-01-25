@@ -40,13 +40,12 @@ export {ICanDisableRipple, mixinDisableRipple} from './behaviors/disable-ripple.
 /**
  * SERVICES
  */
-import {AtMediaReplayService} from './services/mediareplay/media-replay.service';
 import {AtUtilService} from './services/util.service';
 import {AtIconService, ICON_PROVIDER} from './services/icon.service';
 import {AtColorService} from './services/color.service';
 import {AtEvents} from './services/events.service';
 
-export {AtMediaReplayService, AtIconService, AtEvents};
+export {AtIconService, AtEvents};
 
 @NgModule({
     imports: [
@@ -66,7 +65,6 @@ export {AtMediaReplayService, AtIconService, AtEvents};
         AT_ANIMATIONS,
     ],
     providers: [
-        AtMediaReplayService,
         AtUtilService,
         ICON_PROVIDER,
         AtColorService,

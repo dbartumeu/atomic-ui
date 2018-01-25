@@ -7,7 +7,7 @@ elements depending on screen size.
 Import the `[AtMediaModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
-import {AtMediaModule} from '@atomic/core';
+import {AtMediaModule} from 'ngx-atomic';
 @NgModule({
   imports: [
     AtMediaModule,

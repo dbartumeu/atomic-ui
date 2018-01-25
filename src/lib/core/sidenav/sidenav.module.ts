@@ -1,6 +1,5 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {AtCommonModule} from '../common/common.module';
-import {AtMediaReplayService} from '../common/services/mediareplay/media-replay.service';
 import {AtSidenavItemComponent} from './sidenav-item/sidenav-item.component';
 import {AtSidenavCollapsibleDirective} from './sidenav-collapsed.directive';
 import {AtSidenavService} from './sidenav.service';
@@ -32,7 +31,6 @@ export class AtSidenavModule {
         return {
             ngModule: AtSidenavModule,
             providers: [
-                AtMediaReplayService,
                 AtSidenavService
             ],
         };

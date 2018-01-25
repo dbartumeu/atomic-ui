@@ -1,5 +1,5 @@
 import { Component, ViewContainerRef } from '@angular/core';
-import { AtLoadingService } from 'ngx-atomic/components';
+import { AtLoadingService } from 'ngx-atomic';
 
 @Component({
     selector: 'loading-circular',

@@ -7,7 +7,7 @@ a city selector.
 Import the `[AtChipsModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
-import {AtChipsModule} from 'ngx-atomic/core';
+import {AtChipsModule} from 'ngx-atomic';
 @NgModule({
     imports: [
         AtChipsModule,

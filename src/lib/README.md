@@ -15,8 +15,8 @@ npm i -save ngx-atomic
 Import the modules from ngx-atomic/core, ngx-atomic/forms or ngx-atomic/components as needed in your NgModule:
 
 ```typescript
-import { AtLayoutModule } from 'ngx-atomic/core';
-import { AtChips } from 'ngx-atomic/forms';
+import { AtLayoutModule } from 'ngx-atomic';
+import { AtChips } from 'ngx-atomic';
 
 @NgModule({
   imports: [

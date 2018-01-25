@@ -5,9 +5,6 @@ Atomic is a creative material design admin framework built with Angular 5+ and t
 It combines proven design language with a comprehensive web framework, built on Angular & Angular-Material (Design). 
 Atomic gives you a quickstart to build a modern web application UI and ensure consistency across your enterprise products.
 
-## Documentation
-You can found atomic documentation (here)[https://dbartumeu.github.io/ngx-atomic/docs].
-
 ##Features
 * Clean, Intuitive and Fully Responsive Unique Design (works on all major browsers, tablets and phones)
 * Developer Friendly Code
@@ -16,3 +13,11 @@ You can found atomic documentation (here)[https://dbartumeu.github.io/ngx-atomic
 * 2 Color schemas (light and dark)
 * Full SASS Support
 * Full RTL Support
+
+
+## Documentation
+You can find atomic documentation [here](https://dbartumeu.github.io/ngx-atomic/docs).
+
+
+## Blank Project
+You can find a quick start project [here](https://github.com/dbartumeu/ngx-atomic-blank).

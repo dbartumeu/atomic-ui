@@ -31,7 +31,6 @@ export const GENERAL_ROUTES: Routes = [
             atSidenavItem: {
                 name: 'Getting Started',
                 pathPrefix: 'docs/:version',
-                icon: 'input',
                 position: 1,
                 customClass: '',
             },
@@ -58,7 +57,6 @@ export const GENERAL_ROUTES: Routes = [
             atSidenavItem: {
                 name: 'Change Log',
                 pathPrefix: 'docs/:version',
-                icon: 'low_priority',
                 position: 1,
                 customClass: '',
             },

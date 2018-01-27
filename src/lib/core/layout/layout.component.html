@@ -64,13 +64,13 @@
         </div>
     </at-scrollbar>
 
-    <div *ngIf="(layoutSideBarLeft || layoutSideBarRight)
+    <div *ngIf="layoutHeader && (layoutSideBarLeft || layoutSideBarRight)
                     && layoutHeader.position == 'cover' && scrollOn == 'content'"
          class="at-absolute"
          [style.height]="layoutHeader._computedHeight +'px'"
          [ngClass]="[layoutHeader.color, layoutHeader.pattern, 'at-absolute', 'at-z-0', 'at-wp-100']"></div>
 
-    <div *ngIf="(layoutSideBarLeft || layoutSideBarRight)
+    <div *ngIf="layoutHeader && (layoutSideBarLeft || layoutSideBarRight)
                     && layoutHeader.position == 'outside'">
         <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
     </div>
@@ -126,7 +126,7 @@
                       [class.at-hp-100]="scrollOn ==='container'"
                       fxLayout="column" fxFlexFill>
 
-            <div *ngIf="layoutHeader.position !== 'outside'">
+            <div *ngIf="layoutHeader && layoutHeader.position !== 'outside'">
                 <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
             </div>
 
@@ -152,7 +152,7 @@
                 </at-scrollbar>
             </mat-card>
 
-            <div *ngIf="layoutFooter.position !== 'outside'">
+            <div *ngIf="layoutFooter && layoutFooter.position !== 'outside'">
                 <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
             </div>
 
@@ -160,14 +160,14 @@
 
     </mat-sidenav-container>
 
-    <div *ngIf="(layoutSideBarLeft || layoutSideBarRight)
+    <div *ngIf="layoutFooter && (layoutSideBarLeft || layoutSideBarRight)
                     && layoutFooter.position == 'cover' && scrollOn == 'content'"
          class="at-absolute"
          style="bottom: 0"
          [style.height]="layoutFooter._computedHeight +'px'"
          [ngClass]="[layoutFooter.color, 'at-absolute', 'at-z-0', 'at-wp-100']"></div>
 
-    <div *ngIf="(layoutSideBarLeft || layoutSideBarRight)
+    <div *ngIf="layoutFooter && (layoutSideBarLeft || layoutSideBarRight)
                     && layoutFooter.position == 'outside'">
         <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
     </div>

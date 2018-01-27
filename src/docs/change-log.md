@@ -1,3 +1,6 @@
+## v1.0.2
+1. Fixed a minor bug in atomic layout.
+
 ## v1.0.1
 1. Fixed a release issue related with published package.json.
 

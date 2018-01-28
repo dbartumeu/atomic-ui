@@ -106,7 +106,6 @@ export class AtScrollbarComponent implements AfterViewInit, OnDestroy, OnChanges
 
 
     init() {
-        console.log('Init was called');
         this.zone.runOutsideAngular(() => {
 
             this.barX = this.barXRef.nativeElement;

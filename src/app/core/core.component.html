@@ -1,12 +1,11 @@
 <at-layout [layoutType]="'basic'"
-           scrollOn="content"
-           [showAtScrollbar]="false">
+           [scrollOn]="'content'" [showAtScrollbar]="true">
 
     <at-layout-header position="outside" color="light-blue-500">
         <app-toolbar></app-toolbar>
     </at-layout-header>
 
-    <at-layout-content>
+    <at-layout-content class="at-hp-100">
         <router-outlet></router-outlet>
     </at-layout-content>
 </at-layout>

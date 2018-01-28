@@ -1,3 +1,4 @@
+<!--External Templates-->
 <ng-template #headerTpl>
     <ng-content select="at-layout-header"></ng-content>
 </ng-template>
@@ -26,43 +27,97 @@
     <ng-content select="at-layout-footer"></ng-content>
 </ng-template>
 
+<!--Internal Templates-->
+<ng-template #_contentWithScroll>
+    <at-scrollbar class="at-oa">
+        <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+    </at-scrollbar>
+</ng-template>
+
+<ng-template #_insideContent>
+    <!--Basic layout-->
+    <ng-container *ngIf="layoutType === 'basic'">
+        <ng-container *ngIf="showAtScrollbar; else contentTpl">
+            <ng-container *ngIf="scrollOn !== 'content'; else _contentWithScroll">
+                <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+
+    <!--CardOver layout-->
+    <mat-card *ngIf="layoutType == 'cardOver'" [style.width]="cardWidth"
+              [style.margin-top]="cardOverlapTop + 'px'"
+              [style.margin-bottom]="cardOverlapBottom + 'px'"
+              [style.padding]="'0'"
+              [style.margin-right]="cardAlign == 'center' || cardAlign == 'left' ? 'auto' : ''"
+              [style.margin-left]="cardAlign == 'center' || cardAlign == 'right' ? 'auto' : ''"
+              [class.at-oa]="scrollOn === 'content'"
+              [class.at-hp-100]="scrollOn ==='content'">
+
+        <ng-container *ngIf="showAtScrollbar; else contentTpl">
+            <ng-container *ngIf="scrollOn !== 'content'; else _contentWithScroll">
+                <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+            </ng-container>
+        </ng-container>
+
+    </mat-card>
+</ng-template>
+
+<ng-template #_contentWithoutSidebar>
+    <div *ngIf="layoutHeader">
+        <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+    </div>
+
+    <ng-container *ngTemplateOutlet="_insideContent"></ng-container>
+
+    <div *ngIf="layoutFooter">
+        <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
+    </div>
+</ng-template>
+
+<ng-template #_contentWithSidebar>
+    <div *ngIf="layoutHeader && layoutHeader.position !== 'outside'">
+        <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+    </div>
+
+    <ng-container *ngTemplateOutlet="_insideContent"></ng-container>
+
+    <div *ngIf="layoutFooter && layoutFooter.position !== 'outside'">
+        <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
+    </div>
+</ng-template>
+
+<ng-template #_mainContent>
+    <div *ngIf="layoutHeader && layoutHeader.position !== 'outside'">
+        <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
+    </div>
+
+
+    <ng-container *ngIf="showAtScrollbar; else contentTpl">
+        <ng-container *ngIf="scrollOn !== 'content'; else _contentWithScroll">
+            <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+        </ng-container>
+    </ng-container>
+
+
+    <div *ngIf="layoutFooter && layoutFooter.position !== 'outside'">
+        <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
+    </div>
+
+</ng-template>
+
+<!--Basic and CardOver Layout-->
 <ng-container *ngIf="layoutType == 'basic' || layoutType == 'cardOver'">
 
-    <at-scrollbar *ngIf="!layoutSideBarLeft && !layoutSideBarRight"
-                  [render]="showAtScrollbar && scrollOn === 'container'"
-                  [class.at-oa]="scrollOn === 'container'"
-                  [class.at-hp-100]="scrollOn ==='container'"
-                  fxLayout="column" fxFlexFill>
-        <div>
-            <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
-        </div>
-
-        <at-scrollbar *ngIf="layoutType == 'basic'"
-                      [render]="showAtScrollbar && scrollOn === 'content'"
-                      [class.at-oa]="scrollOn === 'content'"
-                      [class.at-hp-100]="scrollOn ==='content'">
-            <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+    <ng-container *ngIf="showAtScrollbar; else _contentWithoutSidebar">
+        <at-scrollbar *ngIf="!layoutSideBarLeft && !layoutSideBarRight"
+                      [render]="scrollOn === 'container'"
+                      [class.at-oa]="scrollOn === 'container'"
+                      [class.at-hp-100]="scrollOn ==='container'"
+                      fxLayout="column">
+            <ng-container *ngTemplateOutlet="_contentWithoutSidebar"></ng-container>
         </at-scrollbar>
-
-        <mat-card *ngIf="layoutType == 'cardOver'" [style.width]="cardWidth"
-                  [style.margin-top]="cardOverlapTop + 'px'"
-                  [style.margin-bottom]="cardOverlapBottom + 'px'"
-                  [style.padding]="'0'"
-                  [style.margin-right]="cardAlign == 'center' || cardAlign == 'left' ? 'auto' : ''"
-                  [style.margin-left]="cardAlign == 'center' || cardAlign == 'right' ? 'auto' : ''"
-                  [class.at-oa]="scrollOn === 'content'"
-                  [class.at-hp-100]="scrollOn ==='content'">
-            <at-scrollbar [render]="showAtScrollbar && scrollOn === 'content'"
-                          [class.at-oa]="scrollOn === 'content'"
-                          [class.at-hp-100]="scrollOn ==='content'">
-                <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
-            </at-scrollbar>
-        </mat-card>
-
-        <div>
-            <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
-        </div>
-    </at-scrollbar>
+    </ng-container>
 
     <div *ngIf="layoutHeader && (layoutSideBarLeft || layoutSideBarRight)
                     && layoutHeader.position == 'cover' && scrollOn == 'content'"
@@ -121,42 +176,14 @@
             </at-scrollbar>
         </mat-sidenav>
 
-        <at-scrollbar [render]="showAtScrollbar && scrollOn === 'container'"
-                      [class.at-oa]="scrollOn === 'container'"
-                      [class.at-hp-100]="scrollOn ==='container'"
-                      fxLayout="column" fxFlexFill>
-
-            <div *ngIf="layoutHeader && layoutHeader.position !== 'outside'">
-                <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
-            </div>
-
-            <at-scrollbar *ngIf="layoutType == 'basic'"
-                          [render]="showAtScrollbar && scrollOn === 'content'"
-                          [class.at-oa]="scrollOn === 'content'"
-                          [class.at-hp-100]="scrollOn ==='content'">
-                <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+        <ng-container *ngIf="showAtScrollbar; else _contentWithSidebar">
+            <at-scrollbar [render]="scrollOn === 'container'"
+                          [class.at-oa]="scrollOn === 'container'"
+                          [class.at-hp-100]="scrollOn ==='container'"
+                          fxLayout="column">
+                <ng-container *ngTemplateOutlet="_contentWithSidebar"></ng-container>
             </at-scrollbar>
-
-            <mat-card *ngIf="layoutType == 'cardOver'" [style.width]="cardWidth"
-                      [style.margin-top]="cardOverlapTop + 'px'"
-                      [style.margin-bottom]="cardOverlapBottom + 'px'"
-                      [style.padding]="'0'"
-                      [style.margin-right]="cardAlign == 'center' || cardAlign == 'left' ? 'auto' : ''"
-                      [style.margin-left]="cardAlign == 'center' || cardAlign == 'right' ? 'auto' : ''"
-                      [class.at-oa]="scrollOn === 'content'"
-                      [class.at-hp-100]="scrollOn ==='content'">
-                <at-scrollbar [render]="showAtScrollbar && scrollOn === 'content'"
-                              [class.at-oa]="scrollOn === 'content'"
-                              [class.at-hp-100]="scrollOn ==='content'">
-                    <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
-                </at-scrollbar>
-            </mat-card>
-
-            <div *ngIf="layoutFooter && layoutFooter.position !== 'outside'">
-                <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
-            </div>
-
-        </at-scrollbar>
+        </ng-container>
 
     </mat-sidenav-container>
 
@@ -173,6 +200,7 @@
     </div>
 </ng-container>
 
+<!--Main Layout-->
 <ng-container *ngIf="layoutType == 'main'">
     <div *ngIf="layoutHeader && layoutHeader.position == 'outside'">
         <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
@@ -208,26 +236,13 @@
             <ng-container *ngTemplateOutlet="sidePanelTpl"></ng-container>
         </mat-sidenav>
 
-        <at-scrollbar [render]="showAtScrollbar && scrollOn === 'container'"
-                      [class.at-oa]="scrollOn === 'container'"
-                      [class.at-hp-100]="scrollOn ==='container'"
-                      fxLayout="column" fxFlexFill>
-
-            <div *ngIf="layoutHeader && layoutHeader.position !== 'outside'">
-                <ng-container *ngTemplateOutlet="headerTpl"></ng-container>
-            </div>
-
-            <at-scrollbar [render]="showAtScrollbar && scrollOn === 'content'"
-                          [class.at-oa]="scrollOn === 'content'"
-                          [class.at-hp-100]="scrollOn ==='content'">
-                <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
+        <ng-container *ngIf="showAtScrollbar; else _mainContent">
+            <at-scrollbar [render]="scrollOn === 'container'"
+                          [class.at-oa]="scrollOn === 'container'"
+                          fxLayout="column">
+                <ng-container *ngTemplateOutlet="_mainContent"></ng-container>
             </at-scrollbar>
-
-            <div *ngIf="layoutFooter && layoutFooter.position !== 'outside'">
-                <ng-container *ngTemplateOutlet="footerTpl"></ng-container>
-            </div>
-
-        </at-scrollbar>
+        </ng-container>
 
     </mat-sidenav-container>
 

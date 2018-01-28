@@ -1,6 +1,5 @@
 <at-layout [layoutType]="'basic'"
-           scrollOn="content"
-           [showAtScrollbar]="true">
+           scrollOn="content" [showAtScrollbar]="true">
 
     <at-layout-header color="light-blue-600">
         <div class="at-p-40 at-hp-100">
@@ -9,7 +8,6 @@
     </at-layout-header>
 
     <at-layout-content>
-
         <mat-tab-group *ngIf="!data.docViewer.overviewOnly" class="at-wp-75 at-p-40"
                        style="margin-left: auto; margin-right: auto"
                        (selectedTabChange)="selectedTabChange($event)">
@@ -27,7 +25,6 @@
                 <div class="at-p-40">
                     <example-viewer *ngFor="let ex of data.docViewer.examples" [example]="ex"></example-viewer>
                 </div>
-
             </mat-tab>
         </mat-tab-group>
 
@@ -36,7 +33,5 @@
             <td-markdown [content]="overview"></td-markdown>
         </div>
 
-
     </at-layout-content>
-
 </at-layout>

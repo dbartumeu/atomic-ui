@@ -1,3 +1,6 @@
+## v1.0.3
+1. Refactored Layout component Templates due to a bug related to atomic scroll.
+
 ## v1.0.2
 1. Fixed a minor bug in atomic layout.
 

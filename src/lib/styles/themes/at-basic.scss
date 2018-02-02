@@ -1,4 +1,3 @@
-
 // Loading support for light and dark colors
 @mixin at-theme-backgrounds($theme) {
   $background: map-get($theme, background);
@@ -35,7 +34,6 @@
     color: map-get($foreground, base) !important;
   }
 }
-
 
 // Sidenav support for primary, accent and warn colors
 @mixin at-sidenav-theme($theme) {
@@ -80,17 +78,15 @@
 
   .at-sidenav {
     .at-sidenav-button.active {
-      color: map-get($accent, 400) !important;
+      color: map-get($accent, 400);
     }
     &.at-sidenav-primary {
       .at-sidenav-button.active {
-        color: #fefefe !important;
+        color: #fefefe;
       }
     }
-
   }
 }
-
 
 // Ngx-charts support for light and dark colors
 @mixin at-ngx-charts-theme($theme) {

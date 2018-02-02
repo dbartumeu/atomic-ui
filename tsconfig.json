@@ -16,7 +16,7 @@
       "./node_modules/@types"
     ],
     "paths": {
-      "ngx-atomic": [
+      "atomic-ui": [
         "./lib"
       ]
     },

@@ -5,7 +5,7 @@ A module that provides a search input and a search box for search and filter ite
 Import the `[AtSearch]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
-import {AtSearch} from 'ngx-atomic';
+import {AtSearch} from 'atomic-ui';
 @NgModule({
     imports: [
         AtSearch,

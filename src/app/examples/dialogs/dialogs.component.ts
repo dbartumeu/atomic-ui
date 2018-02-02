@@ -1,5 +1,5 @@
 import { Component, ViewContainerRef } from '@angular/core';
-import { AtDialogService } from 'ngx-atomic';
+import { AtDialogService } from 'atomic-ui';
 
 @Component({
     selector: 'dialogs',

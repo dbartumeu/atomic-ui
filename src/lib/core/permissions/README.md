@@ -6,7 +6,7 @@ permissions. Also provide a permission guard service to allow or restrict the ac
 Import the `[AtPermissionsModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
-import {AtPermissionsModule} from 'ngx-atomic';
+import {AtPermissionsModule} from 'atomic-ui';
 @NgModule({
   imports: [
     AtPermissionsModule,

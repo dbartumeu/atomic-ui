@@ -1,5 +1,5 @@
 {
-  "name": "atomic",
+  "name": "atomic-ui",
   "version": "1.0.3",
   "license": "MIT",
   "scripts": {
@@ -11,7 +11,7 @@
     "e2e": "ng e2e",
     "bundle": "rimraf dist && ng-packagr -p ng-package.json",
     "copy-styles": "node ./scripts/copy.styles",
-    "publish-local": "rimraf node_modules/ngx-atomic && node ./scripts/publish.local",
+    "publish-local": "rimraf node_modules/atomic-ui && node ./scripts/publish.local",
     "build": "npm run bundle && npm run copy-styles",
     "build-local": "npm run bundle && npm run copy-styles && npm run publish-local"
   },
@@ -66,6 +66,7 @@
     "ng-packagr": "^1.6.0",
     "node-sass": "^4.7.2",
     "protractor": "^5.2.2",
+    "rollup-plugin-node-builtins": "^2.1.2",
     "ts-node": "^4.0.2",
     "tslint": "^5.8.0",
     "typescript": "^2.6.2"

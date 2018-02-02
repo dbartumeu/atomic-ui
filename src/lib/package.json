@@ -1,6 +1,6 @@
 {
-  "name": "ngx-atomic",
-  "version": "1.0.3",
+  "name": "atomic-ui",
+  "version": "1.0.0",
   "description": "An UI framework built on Angular Material",
   "keywords": [
     "angular",
@@ -32,12 +32,11 @@
     "@angular/cdk": "^5.1.0",
     "@angular/material": "^5.1.0",
     "@angular/flex-layout": "^2.0.0-beta.12",
-    "lodash": "^4.17.4",
-    "@types/lodash": "^4.14.96"
+    "lodash": "^4.17.4"
   },
-  "main": "bundles/atomic.umd.js",
-  "module": "atomic.es5.js",
-  "es2015": "atomic.js",
-  "typings": "atomic.d.ts",
-  "metadata": "atomic.metadata.json"
+  "main": "bundles/atomic-ui.umd.js",
+  "module": "atomic-ui.es5.js",
+  "es2015": "atomic-ui.js",
+  "typings": "atomic-ui.d.ts",
+  "metadata": "atomic-ui.metadata.json"
 }

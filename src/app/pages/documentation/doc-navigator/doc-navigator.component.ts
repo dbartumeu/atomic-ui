@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
-import {AtEvents} from "ngx-atomic";
+import {AtEvents} from "atomic-ui";
 import {GlobalService} from '../../../shared/global/golbal.service';
 
 @Component({

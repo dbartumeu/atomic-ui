@@ -1,7 +1,7 @@
 import {Subscription} from 'rxjs';
 import {Component, OnInit, ViewEncapsulation, OnDestroy, AfterViewInit} from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
-import {AtSidenavService, AtSidenavItem, AtPermissionsService, AtEvents} from 'ngx-atomic';
+import {AtSidenavService, AtSidenavItem, AtPermissionsService, AtEvents} from 'atomic-ui';
 import {HttpClient} from '@angular/common/http';
 import {VERSIONS} from '../documentation-routing.module';
 

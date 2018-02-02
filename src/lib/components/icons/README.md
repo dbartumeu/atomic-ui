@@ -6,7 +6,7 @@ A directive for render a md-icon or a letter with a border or colored background
 Import the `[AtIconModule ]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
-import {AtIconModule } from 'ngx-atomic/components';
+import {AtIconModule } from 'atomic-ui/components';
 @NgModule({
     imports: [
         AtIconModule ,

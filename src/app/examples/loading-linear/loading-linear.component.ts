@@ -1,5 +1,5 @@
 import { Component, ViewContainerRef } from '@angular/core';
-import { AtLoadingService } from 'ngx-atomic';
+import { AtLoadingService } from 'atomic-ui';
 
 @Component({
     selector: 'loading-linear',

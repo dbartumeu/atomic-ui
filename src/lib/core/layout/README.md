@@ -7,7 +7,7 @@ both sidebars and 3 types of views: main, simple or carded.
 Import the `[AtLayoutModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
-import {AtLayoutModule} from 'ngx-atomic';
+import {AtLayoutModule} from 'atomic-ui';
 @NgModule({
     imports: [
         AtLayoutModule,

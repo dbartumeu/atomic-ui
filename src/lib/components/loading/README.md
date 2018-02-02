@@ -5,7 +5,7 @@ Import the [AtLoadingModule] in your NgModule:
 
 **my.module.ts:**
 ```typescript
-import {AtLoadingModule} from 'ngx-atomic/components';
+import {AtLoadingModule} from 'atomic-ui/components';
 @NgModule({
   imports: [
     AtLoadingModule,
@@ -31,7 +31,7 @@ Then in your component:
 
 **my.component.ts:**
 ```typescript
-import { AtLoadingService } from 'ngx-atomic/components';
+import { AtLoadingService } from 'atomic-ui/components';
 // ...
 
 export class MyComponent {

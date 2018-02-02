@@ -8,7 +8,7 @@ import {AtPermissionsModule} from '../permissions/permissions.module';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 
-export {AtSidenavItem, AtSidenavService};
+export {AtSidenavItem, AtSidenavService, AtSidenavCollapsibleDirective};
 
 @NgModule({
     imports: [
@@ -37,4 +37,3 @@ export class AtSidenavModule {
     }
 }
 
-export {AtSidenavCollapsibleDirective};

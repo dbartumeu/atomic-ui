@@ -1,7 +1,7 @@
 import {Subscription} from 'rxjs';
 import {Component, OnInit, ViewChild, ViewEncapsulation, OnDestroy, ChangeDetectionStrategy, NgZone} from '@angular/core';
 import {Router, NavigationEnd} from '@angular/router';
-import {AtSidenavService, AtPermissionsService, AtMediaService} from 'ngx-atomic';
+import {AtSidenavService, AtPermissionsService, AtMediaService} from 'atomic-ui';
 import {VERSIONS} from "../pages/documentation/documentation-routing.module";
 
 @Component({

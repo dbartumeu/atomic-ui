@@ -293,7 +293,9 @@ export class AtLayoutComponent implements OnInit, OnDestroy {
      * @internal use only
      */
     ngOnDestroy(): void {
-        this.querySubscription.unsubscribe();
+        if(this.querySubscription){
+            this.querySubscription.unsubscribe();
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {AtValidators} from 'ngx-atomic';
+import {AtValidators} from 'atomic-ui';
 
 @Component({
     selector: 'form-field',

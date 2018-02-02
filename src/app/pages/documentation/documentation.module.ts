@@ -15,7 +15,7 @@ import {
 } from '@angular/material';
 import {CovalentMarkdownModule} from '@covalent/markdown';
 import {CovalentHighlightModule} from '@covalent/highlight';
-import {AtScrollbarModule, AtLayoutModule, AtEvents} from 'ngx-atomic';
+import {AtScrollbarModule, AtLayoutModule, AtEvents} from 'atomic-ui';
 import {DOCUMENTATION_COMPONENTS, DocumentationRoutingModule} from './documentation-routing.module';
 import {ExampleViewerComponent} from '../../shared/example-viewer/example-viewer.component';
 import {PortalModule} from '@angular/cdk/portal';

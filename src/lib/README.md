@@ -7,16 +7,16 @@ that wants to use layouts, icons and themes for Angular Material.
 ## Installation
 This component can be installed as npm package.
 ```
-npm i -save ngx-atomic
+npm i -save atomic-ui
 ```
 
 
 ##  Setup
-Import the modules from ngx-atomic/core, ngx-atomic/forms or ngx-atomic/components as needed in your NgModule:
+Import the modules from atomic-ui/core, atomic-ui/forms or atomic-ui/components as needed in your NgModule:
 
 ```typescript
-import { AtLayoutModule } from 'ngx-atomic';
-import { AtChips } from 'ngx-atomic';
+import { AtLayoutModule } from 'atomic-ui';
+import { AtChips } from 'atomic-ui';
 
 @NgModule({
   imports: [

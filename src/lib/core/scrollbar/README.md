@@ -6,7 +6,7 @@
 Import the `[AtScrollbarModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
-import {AtScrollbarModule} from 'ngx-atomic';
+import {AtScrollbarModule} from 'atomic-ui';
 @NgModule({
     imports: [
         AtScrollbarModule,

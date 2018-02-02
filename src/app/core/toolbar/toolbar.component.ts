@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {GlobalService} from '../../shared/global/golbal.service';
-import {AtEvents} from 'ngx-atomic';
+import {AtEvents} from 'atomic-ui';
 
 @Component({
     selector: 'app-toolbar',

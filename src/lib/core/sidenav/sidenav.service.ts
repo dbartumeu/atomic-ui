@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import {Subject} from 'rxjs/Subject';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {Observable} from 'rxjs/Observable';
 import {Injectable} from '@angular/core';
 import {Routes} from '@angular/router';
 import {AtSidenavItem} from './sidenav-item/sidenav-item.model';

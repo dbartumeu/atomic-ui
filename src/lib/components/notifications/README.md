@@ -5,7 +5,7 @@
 Import the [AtNotificationsModule] in your NgModule:
 
 ```typescript
-import { AtNotificationsModule } from 'ngx-atomic/components';
+import { AtNotificationsModule } from 'atomic-ui/components';
 @NgModule({
   imports: [
     AtNotificationsModule,

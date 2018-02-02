@@ -6,7 +6,7 @@ Export a Service and a component to allow you to render teh main sidenav of your
 Import the `[AtSidenavModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
-import {AtSidenavModule} from 'ngx-atomic';
+import {AtSidenavModule} from 'atomic-ui';
 @NgModule({
     imports: [
         AtSidenavModule,

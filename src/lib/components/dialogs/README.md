@@ -7,7 +7,7 @@ and give you an easier experience for simple dialogs.
 Import the `[AtDialogsModule]` in your NgModule:<br>
 **my.module.ts:**
 ```typescript
-import {AtDialogsModule} from 'ngx-atomic/components';
+import {AtDialogsModule} from 'atomic-ui/components';
 @NgModule({
     imports: [
         AtDialogsModule,
@@ -22,7 +22,7 @@ After that, inject `AtDialogService` in your component and use it for your dialo
 **my.component.ts:**
 ```typescript
 import { ViewContainerRef } from '@angular/core';
-import { AtDialogService } from 'ngx-atomic/components';
+import { AtDialogService } from 'atomic-ui/components';
 // ...
 
 export class MyComponent {

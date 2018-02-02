@@ -13,7 +13,7 @@ The new command creates a project with a build system for your Angular app.
 ## Step 3: Install Atomic dependencies.
 Install Angular Material, Angular CDK, Angular Flexbox and Lodash 
 ```
-npm install --save @angular/material @angular/cdk @angular/flex-layout lodash @types/lodash
+npm install --save @angular/material @angular/cdk @angular/flex-layout lodash
 ```
 
 **package.json**
@@ -30,8 +30,7 @@ npm install --save @angular/material @angular/cdk @angular/flex-layout lodash @t
     "@angular/cdk": "^5.1.0",
     "@angular/material": "^5.1.0",
     "@angular/flex-layout": "^2.0.0-beta.12",
-    "lodash": "^4.17.4",
-    "@types/lodash": "^4.14.96"
+    "lodash": "^4.17.4"
   ...
 }
 

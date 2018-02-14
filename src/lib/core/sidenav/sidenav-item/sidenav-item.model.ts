@@ -1,3 +1,5 @@
+
+// TODO add Fontawesome support
 export class AtSidenavItem {
     name: string;
     icon: string;

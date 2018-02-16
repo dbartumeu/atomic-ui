@@ -12,9 +12,9 @@ import {
     Output,
     ViewEncapsulation,
 } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
-import { isBoolean } from 'util';
-import { AtMediaService } from '../media/media.service';
+import {Subscription} from 'rxjs/Subscription';
+import {isBoolean} from 'util';
+import {AtMediaService} from '../media/media.service';
 
 @Component({
     selector: 'at-layout',
@@ -24,7 +24,7 @@ import { AtMediaService } from '../media/media.service';
     encapsulation: ViewEncapsulation.None,
     exportAs: 'AtLayoutComponent',
 })
-export class AtLayoutComponent implements OnInit, OnDestroy {
+export class AtLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private querySubscription: Subscription;
 
@@ -131,6 +131,13 @@ export class AtLayoutComponent implements OnInit, OnDestroy {
     @Input() cardAlign: 'left' | 'center' | 'right' = 'center';
 
     /**
+     * cardClass?:
+     * Custom class to assign to the card. Defaults to null
+     * @type string
+     */
+    @Input() cardClass;
+
+    /**
      * cardOverlapTop?:
      * Sets the top overlap of the card in px . Defaults to 60
      * @type {number}
@@ -200,14 +207,27 @@ export class AtLayoutComponent implements OnInit, OnDestroy {
                     if (this.isSmallScreen !== this.wasSmallScreen) {
                         this.wasSmallScreen = this.isSmallScreen;
 
-                        this.lsOpened = !this.isSmallScreen;
-                        this.rsOpened = !this.isSmallScreen;
-                        this.snOpened = !this.isSmallScreen;
+                        if (this.layoutSideBarLeft && !this.isDefined(this.layoutSideBarLeft.opened)) {
+                            this.lsOpened = !this.isSmallScreen;
+                        }
+
+                        if (this.layoutSideBarRight && !this.isDefined(this.layoutSideBarRight.opened)) {
+                            this.rsOpened = !this.isSmallScreen;
+                        }
+
+                        if (this.layoutSideNav && !this.isDefined(this.layoutSideNav.opened)) {
+                            this.snOpened = !this.isSmallScreen;
+                        }
 
                         this.changeDetectorRef.markForCheck();
                     }
                 });
             });
+    }
+
+    public isDefined(val) {
+        console.log(val);
+        return typeof val !== 'undefined';
     }
 
     /**
@@ -293,7 +313,7 @@ export class AtLayoutComponent implements OnInit, OnDestroy {
      * @internal use only
      */
     ngOnDestroy(): void {
-        if(this.querySubscription){
+        if (this.querySubscription) {
             this.querySubscription.unsubscribe();
         }
     }
@@ -445,6 +465,7 @@ export class AtLayoutSideBarLeftComponent implements OnInit {
 
     ngOnInit(): void {
         this._parent.layoutSideBarLeft = this;
+        console.log(this.width);
     }
 }
 

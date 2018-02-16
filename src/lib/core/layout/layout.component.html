@@ -45,7 +45,9 @@
     </ng-container>
 
     <!--CardOver layout-->
-    <mat-card *ngIf="layoutType == 'cardOver'" [style.width]="cardWidth"
+    <mat-card *ngIf="layoutType == 'cardOver'"
+              [ngClass]="cardClass"
+              [style.width]="cardWidth"
               [style.margin-top]="cardOverlapTop + 'px'"
               [style.margin-bottom]="cardOverlapBottom + 'px'"
               [style.padding]="'0'"
@@ -134,9 +136,9 @@
                            style="background-color:transparent;">
 
         <mat-sidenav *ngIf="layoutSideBarLeft"
-                     [mode]="layoutSideBarLeft.mode ?
+                     [mode]="isDefined(layoutSideBarLeft.mode) ?
                             layoutSideBarLeft.mode : (isSmallScreen ? 'over' : 'side')"
-                     [opened]="layoutSideBarLeft.opened ? layoutSideBarLeft.opened : lsOpened"
+                     [opened]="isDefined(layoutSideBarLeft.opened) ? layoutSideBarLeft.opened : lsOpened"
                      [style.max-width]="layoutSideBarLeft.width"
                      [style.min-width]="layoutSideBarLeft.width"
                      [atMediaToggle]="layoutSideBarLeft.mediaQuery"
@@ -156,9 +158,9 @@
 
         <mat-sidenav *ngIf="layoutSideBarRight"
                      align="end"
-                     [mode]="layoutSideBarRight.mode ?
+                     [mode]="isDefined(layoutSideBarRight.mode) ?
                             layoutSideBarRight.mode : (isSmallScreen ? 'over' : 'side')"
-                     [opened]="layoutSideBarRight.opened ? layoutSideBarLeft.opened : rsOpened"
+                     [opened]="isDefined(layoutSideBarRight.opened) ? layoutSideBarLeft.opened : rsOpened"
                      [style.max-width]="layoutSideBarRight.width"
                      [style.min-width]="layoutSideBarRight.width"
                      [atMediaToggle]="layoutSideBarRight.mediaQuery"
@@ -208,11 +210,11 @@
 
     <mat-sidenav-container>
         <mat-sidenav *ngIf="layoutSideNav"
-                     [mode]="layoutSideNav.mode ? layoutSideNav.mode : (isSmallScreen ? 'over' : 'side')"
+                     [mode]="isDefined(layoutSideNav.mode) ? layoutSideNav.mode : (isSmallScreen ? 'over' : 'side')"
                      [ngClass]="['at-sidenav', layoutSideNav.elevation]"
                      align="start"
                      atSidenavCollapsible
-                     [opened]="layoutSideNav.opened ? layoutSideNav.opened : snOpened"
+                     [opened]="isDefined(layoutSideNav.opened) ? layoutSideNav.opened : snOpened"
                      [style.max-width]="layoutSideNav.width"
                      [style.min-width]="layoutSideNav.width"
                      [atMediaToggle]="layoutSideNav.mediaQuery"

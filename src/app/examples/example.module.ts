@@ -13,9 +13,18 @@ import {
     MatToolbarModule
 } from '@angular/material';
 
-import {AtCommonModule, AtScrollbarModule, AtLayoutModule} from 'atomic-ui';
-import {AtDialogsModule, AtLoadingModule, AtNotificationsModule, AtIconModule} from "atomic-ui";
-import {AtChipsModule, AtSearchModule, AtFormFieldBoxModule} from 'atomic-ui';
+import {
+    AtCommonModule,
+    AtScrollbarModule,
+    AtLayoutModule,
+    AtDialogsModule,
+    AtLoadingModule,
+    AtNotificationsModule,
+    AtIconModule,
+    AtChipsModule,
+    AtSearchModule,
+    AtFormFieldBoxModule
+} from 'atomic-ui';
 
 import {LayoutBasicComponent} from './layout-basic/layout-basic.component';
 import {LayoutCardOverComponent} from './layout-card-over/layout-card-over.component';

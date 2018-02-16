@@ -42,6 +42,7 @@ export {AtLayoutComponent}
         AtLayoutSideNavComponent,
     ],
     exports: [
+        MatSidenavModule,
         AtLayoutComponent,
         AtLayoutHeaderComponent,
         AtLayoutContentComponent,

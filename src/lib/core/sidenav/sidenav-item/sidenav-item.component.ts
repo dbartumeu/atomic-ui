@@ -37,7 +37,7 @@ export class AtSidenavItemComponent implements OnInit {
     /**
      * Draw SubNavItems
      * @param items
-     * @returns {boolean}
+     * @returns boolean
      */
     renderSubNav(items: AtSidenavItem[]): boolean {
         for (let item of items) {
@@ -52,7 +52,7 @@ export class AtSidenavItemComponent implements OnInit {
     /**
      * Returns true if the item can be rendered
      * @param item
-     * @returns {boolean}
+     * @returns boolean
      */
     renderItem(item: AtSidenavItem) {
         if (!item.parent) {
@@ -76,7 +76,7 @@ export class AtSidenavItemComponent implements OnInit {
     /**
      * Get the amount of Open Children
      * @param item
-     * @returns {number}
+     * @returns number
      */
     protected getOpenChildrenCount(item: AtSidenavItem): number {
         let count = 0;

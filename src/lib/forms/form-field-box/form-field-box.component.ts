@@ -1,11 +1,10 @@
-import {Component, Input, ViewEncapsulation} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {AbstractControl} from '@angular/forms';
 
 @Component({
     selector: 'at-form-field-box',
     templateUrl: './form-field-box.component.html',
-    styleUrls: ['./form-field-box.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    styleUrls: ['./form-field-box.component.scss']
 })
 export class AtFormFieldBoxComponent {
 

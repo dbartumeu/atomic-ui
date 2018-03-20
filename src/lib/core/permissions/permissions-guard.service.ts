@@ -45,7 +45,7 @@ export class AtPermissionsGuard implements CanActivate {
             }
 
             if (data.redirectTo && data.redirectTo !== undefined) {
-                console.log('navigating')
+                // console.log('navigating')
                 this.router.navigate([data.redirectTo]);
             }
 

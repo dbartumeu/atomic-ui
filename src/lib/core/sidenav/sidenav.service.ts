@@ -16,7 +16,6 @@ export class AtSidenavService {
 
     /**
      * Observable for AtSidenavItems changes
-     * @type Observable<AtSidenavItem[]>
      */
     atSidenavItemsChange: Observable<AtSidenavItem[]> = this._itemsSubject.asObservable();
 
@@ -25,7 +24,6 @@ export class AtSidenavService {
 
     /**
      * Observable for AtSidenavItem currently open
-     * @type Observable<AtSidenavItem[]>
      */
     avSidenavCurrentlyOpenChange: Observable<AtSidenavItem[]> = this._currentlyOpenSubject.asObservable();
 
@@ -37,7 +35,6 @@ export class AtSidenavService {
 
     /**
      * Observable for AtSidenav collapsible mode
-     * @type Observable<boolean>
      */
     public sidenavCollapsedChange = this.isSidenavCollapsedSubject.asObservable();
 
@@ -55,7 +52,7 @@ export class AtSidenavService {
     /**
      * Fix path route adding '/' character
      * @param path
-     * @returns {any}
+     * @returns any
      */
     private fixRoutePath(path) {
         if (!path) {
@@ -122,7 +119,7 @@ export class AtSidenavService {
 
     public replaceUrlParams(url: string, params: any): string {
         let out = url;
-        if(params){
+        if (params) {
             Object.keys(params).forEach(key => {
                 out = out.replace(':' + key, params[key]);
             });
@@ -194,7 +191,7 @@ export class AtSidenavService {
     /**
      * Add new Menu Item
      * @param       atSidenavItem
-     * @returns     {AtSidenavItem} The Item added
+     * @returns     The Item added
      * @throws      Will throw an error if the route exist on AtSidenavItems collection.
      */
     public addItem(atSidenavItem: AtSidenavItem, notifyChange: boolean = true): AtSidenavItem {
@@ -231,9 +228,9 @@ export class AtSidenavService {
 
     /**
      * Add new Child Item
-     * @param       parent {AtSidenavItem} Parent Item
-     * @param       child {AtSidenavItem} Child Item
-     * @returns     {AtSidenavItem} The Item added
+     * @param       parent: Parent Item
+     * @param       child: Child Item
+     * @returns     The Item added
      */
     public addChild(parent: AtSidenavItem, child: AtSidenavItem, notifyChange: boolean = true) {
         const fixedRoute = this.fixRoutePath(child.route);
@@ -242,8 +239,6 @@ export class AtSidenavService {
             throw new Error('addChild(): AtSidenavItem.route must be unique. \'' +
                 fixedRoute + '\' already exist on AtSidenavItems collection');
         }
-
-        // console.log(typeof child.renderItem)
 
         const newAtSidenavChild = new AtSidenavItem({
             name: child.name,
@@ -276,7 +271,7 @@ export class AtSidenavService {
      * @param name          Optional, Item display text
      * @param badge         Optional, Item Badge text
      * @param badgeColor    Optional, Item Badge Color
-     * @returns             {AtSidenavItem} The Item added
+     * @returns             The Item added
      */
     public updateItem(route: string, name?: string, badge?: string, badgeColor?: string): AtSidenavItem {
         let item = this.findItemByRoute(route, this.atSidenavItems);
@@ -303,7 +298,7 @@ export class AtSidenavService {
 
     /**
      * Get all Sidenav Items on the collection
-     * @returns {AtSidenavItem[]}
+     * @returns AtSidenavItem[]
      */
     public getAtSidenavItems(): AtSidenavItem[] {
         return this.atSidenavItems;
@@ -312,7 +307,7 @@ export class AtSidenavService {
     /**
      * Return an array based on AtSidenavItems Tree
      * @param       treeObj AtSidenavItems Tree
-     * @returns     {Array} AtSidenavItems
+     * @returns     AtSidenavItem[]
      * @internal use only
      */
     public flattenTree() {
@@ -322,7 +317,7 @@ export class AtSidenavService {
     /**
      * True if Sidenav Item is open
      * @param item
-     * @returns {boolean}
+     * @returns boolean
      * @internal use only
      */
     public isOpen(item: AtSidenavItem) {
@@ -355,7 +350,7 @@ export class AtSidenavService {
      * Returns all Sidenav Item Parents
      * @param item
      * @param currentlyOpen
-     * @returns {any}
+     * @returns any
      *
      */
     getAllParents(item: AtSidenavItem, currentlyOpen: AtSidenavItem[] = []) {
@@ -372,7 +367,7 @@ export class AtSidenavService {
      * Find a Sidenav Item
      * @param       value           The search value
      * @param       compareValue    AtSidenavItem property to compare for
-     * @returns     {T}
+     * @returns     AtSidenavItem
      */
     findItem(value: string, compareValue: string = 'route') {
         if (compareValue == 'route') {
@@ -388,7 +383,7 @@ export class AtSidenavService {
      * Find a Sidenav Item by route
      * @param route
      * @param collection
-     * @returns {T}
+     * @returns AtSidenavItem
      */
     findItemByRoute(route: string, collection: AtSidenavItem[], exact = true) {
         let result: any;
@@ -418,7 +413,7 @@ export class AtSidenavService {
      * Find a Sidenav Item by name
      * @param name
      * @param collection
-     * @returns {T}
+     * @returns AtSidenavItem
      */
     findItemByName(name: string, collection: AtSidenavItem[]) {
         let result = _.find(collection, function (o) {
@@ -430,9 +425,9 @@ export class AtSidenavService {
 
     /**
      * Sort AtSidenavItems recursively by property
-     * @param array     AtSidenavItem[] Sidenav Items Collection
-     * @param string    propertyName Property to sort
-     * @returns {T[]}
+     * @param AtSidenavItem[] Sidenav Items Collection
+     * @param propertyName Property to sort
+     * @returns AtSidenavItem[]
      */
     sortAtSidenavItems(array: AtSidenavItem[], propertyName: string) {
         let that = this;
@@ -480,8 +475,8 @@ export class AtSidenavService {
 
     /**
      * Return currently Sidenav Item open
-     * @returns {AtSidenavItem}
-     *  @internal use only
+     * @returns  AtSidenavItem
+     * @internal use only
      */
     get currentlyOpen() {
         return this._currentlyOpen;

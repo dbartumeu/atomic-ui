@@ -24,7 +24,7 @@ import {AtMediaService} from '../media/media.service';
     encapsulation: ViewEncapsulation.None,
     exportAs: 'AtLayoutComponent',
 })
-export class AtLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AtLayoutComponent implements OnInit, OnDestroy {
 
     private querySubscription: Subscription;
 
@@ -35,68 +35,57 @@ export class AtLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /**
      * @internal use Only
-     * @type {boolean}
      */
     isSmallScreen: boolean = false;
 
     /**
      * @internal use Only
-     * @type {boolean}
      */
     rsOpened: boolean = true;
 
     /**
      * @internal use Only
-     * @type {boolean}
      */
     lsOpened: boolean = true;
 
     /**
      * @internal use Only
-     * @type {boolean}
      */
     snOpened: boolean = true;
 
     /**
      * @internal use Only
-     * @type {boolean}
      */
     spOpened: boolean = false;
 
     /**
      * @internal use Only
-     * @type {boolean}
      */
     layoutSideBarLeft: AtLayoutSideBarLeftComponent;
 
     /**
      * @internal use Only
-     * @type {boolean}
      */
     layoutSideBarRight: AtLayoutSideBarRightComponent;
 
     /**
      * @internal use Only
-     * @type {boolean}
      */
     layoutSideNav: AtLayoutSideNavComponent;
 
     /**
      * @internal use Only
-     * @type {boolean}
      */
     layoutHeader: AtLayoutHeaderComponent;
 
     /**
      * @internal use Only
-     * @type {boolean}
      */
     layoutFooter: AtLayoutFooterComponent;
 
     /**
      * layoutType?: "basic" | "cardOver"
      * Sets the type of the Layout component. Defaults to "basic"
-     * @type {string}
      */
     @Input() layoutType: 'main' | 'basic' | 'cardOver' = 'basic';
 
@@ -105,42 +94,36 @@ export class AtLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
      * Sets where the scroll will be positioned inside the Layout component.
      * If scrollOn = "content" the header is fixed
      * and the scroll is placed above the header. Defaults to "container" header and content can be scrolled.
-     * @type {string}
      */
     @Input() scrollOn: 'content' | 'container' = 'container';
 
     /**
      * showAtScrollbar?:
      * Show AtScrollbar instead browser scrollbar. Defaults to true
-     * @type {boolean}
      */
     @Input() showAtScrollbar: boolean = true;
 
     /**
      * cardWidth?:
      * The width of the card. Defaults to 75%
-     * @type {string}
      */
     @Input() cardWidth: string = '75%';
 
     /**
      * cardAlign?:
      * The card alignment. Defaults to 'center'
-     * @type {'left' | 'center' | 'right'}
      */
     @Input() cardAlign: 'left' | 'center' | 'right' = 'center';
 
     /**
      * cardClass?:
      * Custom class to assign to the card. Defaults to null
-     * @type string
      */
     @Input() cardClass;
 
     /**
      * cardOverlapTop?:
      * Sets the top overlap of the card in px . Defaults to 60
-     * @type {number}
      */
     @Input()
     set cardOverlapTop(cot: number) {
@@ -156,7 +139,6 @@ export class AtLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     /**
      * cardOverlapBottom?:
      * Sets the bottom overlap of the card in px. Defaults to 20
-     * @type {number}
      */
     @Input()
     set cardOverlapBottom(cob: number) {
@@ -171,19 +153,16 @@ export class AtLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
 
     /**
      * Emit false when sidebar left is closed
-     * @type {EventEmitter<any>}
      */
     @Output() onCloseSideBarLeft: EventEmitter<boolean> = new EventEmitter();
 
     /**
      * Emit false when sidebar right is closed
-     * @type {EventEmitter<any>}
      */
     @Output() onCloseSideBarRight: EventEmitter<boolean> = new EventEmitter();
 
     /**
      * Emit false when sideNav is closed
-     * @type {EventEmitter<any>}
      */
     @Output() onCloseSideNav: EventEmitter<boolean> = new EventEmitter();
 
@@ -196,7 +175,6 @@ export class AtLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        // console.log(this.sideNav)
         // this.scrollOnContent = this.scrollOn === 'content';
 
         this.querySubscription =
@@ -226,7 +204,6 @@ export class AtLayoutComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     public isDefined(val) {
-        console.log(val);
         return typeof val !== 'undefined';
     }
 
@@ -419,42 +396,36 @@ export class AtLayoutContentComponent {
 export class AtLayoutSideBarLeftComponent implements OnInit {
     /**
      * Sets sidebar width. Defaults to "200px"
-     * @type {string}
      */
     @Input() width?: string = '200px';
 
     /**
      * mode?: "side" | "cover"
      * Sets sidebar mode. Defaults to ""
-     * @type {string}
      */
     @Input() mode?: string;
 
     /**
      * opened?:
      * Sets the sidebar opened property. Defaults to true
-     * @type {boolean}
      */
     @Input() opened?: boolean;
 
     /**
      * mediaQuery?:
      * A media query string. Defaults to "gt-sm"
-     * @type {string}
      */
     @Input() mediaQuery?: string = 'gt-sm';
 
     /**
      * mediaClasses?:
      * A set of classes to apply based on mediaQuery. Defaults to ['at-sidenav-no-background']
-     * @type {string[]}
      */
     @Input() mediaClasses?: string[] = ['at-sidenav-no-background'];
 
     /**
      * showAtScrollbar?:
      * Show AtScrollbar instead browser scrollbar. Defaults to true
-     * @type {boolean}
      */
     @Input() showAtScrollbar?: boolean = true;
 
@@ -465,7 +436,6 @@ export class AtLayoutSideBarLeftComponent implements OnInit {
 
     ngOnInit(): void {
         this._parent.layoutSideBarLeft = this;
-        console.log(this.width);
     }
 }
 
@@ -479,42 +449,36 @@ export class AtLayoutSideBarLeftComponent implements OnInit {
 export class AtLayoutSideBarRightComponent implements OnInit {
     /**
      * Sets sidebar width. Defaults to "200px"
-     * @type {string}
      */
     @Input() width?: string = '200px';
 
     /**
      * mode?: "side" | "cover"
      * Sets sidebar mode. Defaults to ""
-     * @type {string}
      */
     @Input() mode?: string;
 
     /**
      * opened?:
      * Sets the sidebar opened property. Defaults to true
-     * @type {boolean}
      */
     @Input() opened?: boolean;
 
     /**
      * mediaQuery?:
      * A media query string. Defaults to "gt-sm"
-     * @type {string}
      */
     @Input() mediaQuery?: string = 'gt-sm';
 
     /**
      * mediaClasses?:
      * A set of classes to apply based on mediaQuery. Defaults to ['at-sidenav-no-background']
-     * @type {string[]}
      */
     @Input() mediaClasses?: string[] = ['at-sidenav-no-background'];
 
     /**
      * showAtScrollbar?:
      * Show AtScrollbar instead browser scrollbar. Defaults to true
-     * @type {boolean}
      */
     @Input() showAtScrollbar?: boolean = true;
 
@@ -540,35 +504,30 @@ export class AtLayoutSideNavComponent implements OnInit {
     private _elevation: string;
     /**
      * Sets sidebar width. Defaults to "200px"
-     * @type {string}
      */
     @Input() width?: string = '280px';
 
     /**
      * mode?: "side" | "cover"
      * Sets sidebar mode. Defaults to ""
-     * @type {string}
      */
     @Input() mode?: string;
 
     /**
      * opened?:
      * Sets the sidebar opened property. Defaults to true
-     * @type {boolean}
      */
     @Input() opened?: boolean;
 
     /**
      * mediaQuery?:
      * A media query string. Defaults to "gt-sm"
-     * @type {string}
      */
     @Input() mediaQuery?: string = 'gt-sm';
 
     /**
      * mediaClasses?:
      * A set of classes to apply based on mediaQuery. Defaults to ['at-sidenav-no-background']
-     * @type {string[]}
      */
     @Input() mediaClasses?: string[] = [];
 

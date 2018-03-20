@@ -1,6 +1,6 @@
 {
   "name": "atomic-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An UI framework built on Angular Material",
   "keywords": [
     "angular",
@@ -24,15 +24,15 @@
     "tslib": "^1.7.1"
   },
   "peerDependencies": {
-    "@angular/animations": "^5.1.2",
-    "@angular/common": "^5.2.1",
-    "@angular/core": "^5.2.1",
-    "@angular/forms": "^5.2.1",
-    "@angular/router": "^5.2.1",
-    "@angular/cdk": "^5.1.0",
-    "@angular/material": "^5.1.0",
-    "@angular/flex-layout": "^2.0.0-beta.12",
-    "lodash": "^4.17.4"
+    "@angular/animations": "^5.2.9",
+    "@angular/common": "^5.2.9",
+    "@angular/core": "^5.2.9",
+    "@angular/forms": "^5.2.9",
+    "@angular/router": "^5.2.9",
+    "@angular/cdk": "^5.2.4",
+    "@angular/material": "^5.2.4",
+    "@angular/flex-layout": "^5.0.0-beta.13",
+    "lodash": "^4.17.5"
   },
   "main": "bundles/atomic-ui.umd.js",
   "module": "atomic-ui.es5.js",

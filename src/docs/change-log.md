@@ -1,5 +1,9 @@
 ## v1.0.3
 1. Refactored Layout component Templates due to a bug related to atomic scroll.
+2. Fix an issue that shows sidenav error.
+3. Several sidenav improvements.
+4. Fix form field box select style issue.
+5. Refactoring Validators.  
 
 ## v1.0.2
 1. Fixed a minor bug in atomic layout.

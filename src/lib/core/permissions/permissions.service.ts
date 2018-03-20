@@ -59,7 +59,7 @@ export class AtPermissionsService {
     /**
      * Check if registered permissions has a defined `perm`
      * @param perm: string
-     * @returns {boolean}
+     * @returns true if permissions has a perm
      */
     public has(perm: string): boolean {
         if (typeof perm !== 'string') {
@@ -72,7 +72,7 @@ export class AtPermissionsService {
     /**
      * Check if registered permissions has at least one of `permsArr`
      * @param permsArr: string[]
-     * @returns {boolean}
+     * @returns true if permissions has at least one of `permsArr`
      */
     public hasOne(permsArr: Array<string>): boolean {
         if (!Array.isArray(permsArr)) {
@@ -95,10 +95,8 @@ export class AtPermissionsService {
     }
 
     /**
-     *
      * @param strategy: string
      * @param element: ElementRef
-     * @constructor
      */
     public applyStrategy(strategy: string, element: ElementRef) {
         switch (strategy) {
@@ -123,7 +121,7 @@ export class AtPermissionsService {
 
     /**
      * Return all registered permissions
-     * @returns {Array<string>}
+     * @returns Array<string>
      */
     get perms(): Array<string> {
         return this._perms;
@@ -131,7 +129,7 @@ export class AtPermissionsService {
 
     /**
      * Observable to permissions changes
-     * @returns {EventEmitter<any>}
+     * @returns EventEmitter<any>
      */
     get permsChanges(): EventEmitter<any> {
         return this._permsChange;

@@ -48,7 +48,7 @@ export class AtSidenavCollapsibleDirective implements OnInit, OnDestroy {
 
     constructor(private avSidenavService: AtSidenavService,
                 private _mediaService: AtMediaService, private _ngZone: NgZone,
-                @Inject(DOCUMENT) private document: Document) {
+                @Inject(DOCUMENT) private document: any) {
 
     }
 

@@ -10,7 +10,7 @@ export class AtUtilService {
 
     /**
      * Return a unique id
-     * @returns {string}
+     * @returns string
      */
     uid(): string {
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -21,7 +21,7 @@ export class AtUtilService {
 
     /**
      * Return true if device is a Mobile device
-     * @returns {boolean}
+     * @returns boolean
      * @deprecated
      */
     isMobile(): boolean {

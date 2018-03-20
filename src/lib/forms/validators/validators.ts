@@ -41,7 +41,7 @@ export class AtValidators {
      * @returns  null|{atValidatorsRequired: IAtValidatorError}
      */
     static required(msg: string = '%fieldLabel% is required') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             const err = {
                 atValidatorsRequired: {
                     type: 'AtValidatorsErr',
@@ -63,7 +63,9 @@ export class AtValidators {
             } else {
                 return err;
             }
-        }
+        };
+
+        return res;
     }
 
     /**
@@ -73,9 +75,9 @@ export class AtValidators {
      * @returns null|{atValidatorsRequired: IAtValidatorError}
      */
     static minLength(length: number, msg = '%fieldLabel% field must be greater than %length% characters length') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             if (control.value && control.value.toString().length >= length) {
                 return null;
@@ -89,7 +91,9 @@ export class AtValidators {
                     }as IAtValidatorError
                 };
             }
-        }
+        };
+
+        return res;
     }
 
     /**
@@ -99,9 +103,9 @@ export class AtValidators {
      * @returns null|{atValidatorsRequired: IAtValidatorError}
      */
     static maxLength(length: number, msg = '%fieldLabel% field must be less than %length% characters length') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             if (control.value && control.value.toString().length <= length) {
                 return null;
@@ -115,7 +119,9 @@ export class AtValidators {
                     } as IAtValidatorError
                 };
             }
-        }
+        };
+
+        return res;
     }
 
     /**
@@ -125,9 +131,9 @@ export class AtValidators {
      * @returns null|{atValidatorsRequired: IAtValidatorError}
      */
     static exactLength(length: number, msg = '%fieldLabel% field must be %length% characters length') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             if (control.value && control.value.toString().length === length) {
                 return null;
@@ -141,7 +147,9 @@ export class AtValidators {
                     }as IAtValidatorError
                 };
             }
-        }
+        };
+
+        return res;
     }
 
     /**
@@ -152,9 +160,9 @@ export class AtValidators {
      * @returns null|{atValidatorsRequired: IAtValidatorError}
      */
     static rangeLength(min: number, max: number, msg = '%fieldLabel% field must be between %min% and %max% characters length') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             if (control.value && control.value.toString().length <= max && control.value.toString().length >= min) {
                 return null;
@@ -168,7 +176,9 @@ export class AtValidators {
                     }as IAtValidatorError
                 };
             }
-        }
+        };
+
+        return res;
     }
 
     /**
@@ -178,9 +188,9 @@ export class AtValidators {
      * @returns null|{atValidatorsRequired: IAtValidatorError}
      */
     static number(type: 'int' | 'unsignedInt' | 'float' = 'float', msg: string | null = null) {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             let REGEXP: RegExp;
 
@@ -207,7 +217,9 @@ export class AtValidators {
                     msg: msg.replace('%type%', type)
                 }as IAtValidatorError
             };
-        }
+        };
+
+        return res;
     }
 
     /**
@@ -217,12 +229,12 @@ export class AtValidators {
      * @returns null|{atValidatorsRequired: IAtValidatorError}
      */
     static min(value: number, msg = '%fieldLabel% field must be greater than or equal to %value%') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             if (parseFloat(control.value) >= value) {
-                return null
+                return null;
             } else {
                 return {
                     atValidatorsMin: {
@@ -233,7 +245,9 @@ export class AtValidators {
                     }as IAtValidatorError
                 };
             }
-        }
+        };
+
+        return res;
     }
 
     /**
@@ -241,14 +255,15 @@ export class AtValidators {
      * @param value The value to compare
      * @param msg Error message. Use %fieldLabel%, %fieldValue% and %length% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static max(value: number, msg = '%fieldLabel% field must be less than or equal to %value%') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             if (parseFloat(control.value) <= value) {
-                return null
+                return null;
             } else {
                 return {
                     atValidatorsMax: {
@@ -259,7 +274,9 @@ export class AtValidators {
                     }as IAtValidatorError
                 };
             }
-        }
+        };
+
+        return res;
     }
 
     /**
@@ -268,14 +285,15 @@ export class AtValidators {
      * @param max The maximum value
      * @param msg Error message. Use %fieldLabel%, %fieldValue% and %min% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static range(min: number, max: number, msg = '%fieldLabel%  field must be between %min% and %max%') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             if (parseFloat(control.value) <= max && parseFloat(control.value) >= min) {
-                return null
+                return null;
             } else {
                 return {
                     atValidatorsRange: {
@@ -286,7 +304,9 @@ export class AtValidators {
                     }
                 };
             }
-        }
+        };
+
+        return res;
     }
 
     /**
@@ -294,11 +314,12 @@ export class AtValidators {
      * @param allow By default this validator only allows numbers and letters. Use this parameter to allow more characters.
      * @param msg Error message. Use %fieldLabel%, %fieldValue% and %allow% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static alphanumeric(allow: string | null = null, msg = '%fieldLabel% field only allows alphanumeric characters') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             const REGEXP = new RegExp('^[A-Za-z0-9' + allow + ']*$');
 
@@ -310,19 +331,22 @@ export class AtValidators {
                     msg: msg.replace('%allow%', allow)
                 }
             };
-        }
+        };
+
+        return res;
     }
 
     /**
      * Validator that requires controls to have a correct date value.
-     * @param {IAtValidatorDate} restrict Restrict field value to a specific format min and max date
-     * @param {IAtValidatorErrMsg} msg Use %fieldLabel%, %fieldValue% %min% and %max% as replacement pattern in error message.
+     * @param restrict Restrict field value to a specific format min and max date
+     * @param msg Use %fieldLabel%, %fieldValue% %min% and %max% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static date(restrict: IAtValidatorDate, msg?: IAtValidatorErrMsg) {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
 
             const dateEndReg = /^\d{2}[./-]\d{2}[./-]\d{4}$/;
@@ -396,15 +420,15 @@ export class AtValidators {
                 let separator = '';
 
                 if (format.includes('.')) {
-                    separator = '.'
+                    separator = '.';
                 }
 
                 if (format.includes('/')) {
-                    separator = '/'
+                    separator = '/';
                 }
 
                 if (format.includes('-')) {
-                    separator = '-'
+                    separator = '-';
                 }
 
                 const parms = format.split(/[.\-\/]/);
@@ -503,19 +527,21 @@ export class AtValidators {
                     throw new Error('AtValidators.date(): Please insert a valid max date format');
                 }
             }
-        }
+        };
+
+        return res;
     }
 
     /**
      * Validator that requires controls to have a correct time value.
-     * @param {IAtValidatorTime} restrict Restrict field value to a specific format min and max time
-     * @param {IAtValidatorErrMsg} msg Use %fieldLabel%, %fieldValue% %min% and %max% as replacement pattern in error message.
-     * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @param restrict Restrict field value to a specific format min and max time
+     * @param msg Use %fieldLabel%, %fieldValue% %min% and %max% as replacement pattern in error message.
+     * @returns null if is valid, IAtValidatorError otherwise
      */
     static time(restrict: IAtValidatorTime, msg?: IAtValidatorErrMsg) {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
 
             const _value = control.value.replace(/ /g, '');
@@ -655,7 +681,7 @@ export class AtValidators {
 
                         const _minNum = (parseInt(_minParams[0], 10) * 60) + parseInt(_minParams[1], 10);
                         const _valueNum = (parseInt(_valueParams[0], 10) * 60) + parseInt(_valueParams[1], 10);
-                        console.log(_minNum, _valueNum);
+                        // console.log(_minNum, _valueNum);
                         return (_valueNum >= _minNum);
                     } else {
                         throw new Error('AtValidators.time(): Please insert a min value in a HH:MM time format');
@@ -699,7 +725,7 @@ export class AtValidators {
 
                         const _maxNum = (parseInt(_maxParams[0], 10) * 60) + parseInt(_maxParams[1], 10);
                         const _valueNum = (parseInt(_valueParams[0], 10) * 60) + parseInt(_valueParams[1], 10);
-                        console.log(_maxNum, _valueNum);
+                        // console.log(_maxNum, _valueNum);
                         return (_valueNum <= _maxNum);
                     } else {
                         throw new Error('AtValidators.time(): Please insert a max value in a HH:MM time format');
@@ -707,18 +733,21 @@ export class AtValidators {
                 }
             }
 
-        }
+        };
+
+        return res;
     }
 
     /**
      * Validator that performs URL validation.
      * @param msg Error message. Use %fieldLabel% and %fieldValue% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static url(msg = '%fieldLabel% field is invalid') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             const REGEXP = new RegExp(
                 "^" +
@@ -765,18 +794,22 @@ export class AtValidators {
                     msg: msg
                 }
             };
-        }
+        };
+
+        return res;
+
     }
 
     /**
      * Validator that performs Email validation.
      * @param msg Error message. Use %fieldLabel% and %fieldValue% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static email(msg = '%fieldLabel% field is invalid') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             const EMAIL_REGEXP = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -788,8 +821,9 @@ export class AtValidators {
                     msg: msg
                 }
             };
-        }
+        };
 
+        return res;
     }
 
     /**
@@ -797,13 +831,14 @@ export class AtValidators {
      * @param otherFieldName the name of the other field inside the form group.
      * @param msg Error message. Use %fieldLabel%, %fieldValue%, %otherFieldName% and %otherFieldLabel% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static matchOtherField(otherFieldName: string, otherFieldLabel: string, msg = '%fieldLabel% field doesn\'t match with %otherFieldLabel% field') {
 
         let thisControl: FormControl;
         let otherControl: FormControl;
 
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
 
             if (!control.parent) {
                 return null;
@@ -839,7 +874,9 @@ export class AtValidators {
 
             return null;
 
-        }
+        };
+
+        return res;
 
     }
 
@@ -847,11 +884,12 @@ export class AtValidators {
      * Validator that requires controls to exclude certain characters.
      * @param msg Error message. Use %fieldLabel%, %fieldValue% and %characters% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static exclude(characters: string | null = null, msg = '%fieldLabel% field doesn\'t allow any of this character(s): "%characters%" ') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
             const REGEXP = new RegExp('[' + characters + ']');
 
@@ -863,19 +901,22 @@ export class AtValidators {
                     msg: msg.replace('%characters%', characters)
                 }
             } : null;
-        }
+        };
+
+        return res;
     }
 
     /**
      * Validator that requires controls to include at least one characters.
      * @param msg Error message. Use %fieldLabel%, %fieldValue% and %characters% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static include(characters: string | null = null, msg = '%fieldLabel% field must include "%characters%" character(s)') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             const REGEXP = new RegExp('.*[' + characters + '].*');
             if (!control.value) {
-                return null
+                return null;
             }
             return REGEXP.test(control.value) ? null : {
                 atValidatorsRejectOnly: {
@@ -885,18 +926,21 @@ export class AtValidators {
                     msg: msg.replace('%characters%', characters)
                 }
             };
-        }
+        };
+
+        return res;
     }
 
     /**
      * Validator that requires a control to match a regex to its value.
      * @param msg Error message. Use %fieldLabel% and %fieldValue% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static regExp(regexp: RegExp, msg = '%fieldLabel% is invalid') {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
 
             return regexp.test(control.value) ? null : {
@@ -907,19 +951,22 @@ export class AtValidators {
                     msg: msg
                 }
             };
-        }
+        };
+
+        return res;
     }
 
     /**
      * Validator that uses a custom function to check if FormControl is valid.
-     * @param {(formCtrl: FormControl) => string} fn Function that returns an string if formCtrl is invalid and null otherwise.
+     * @param (formCtrl: FormControl) => string fn Function that returns an string if formCtrl is invalid and null otherwise.
      * The returned string will be used as an error message, you can use %fieldLabel% and %fieldValue% as replacement pattern in error message.
      * @returns null|{atValidatorsRequired: IAtValidatorError}
+     * @dynamic
      */
     static custom(fn: (formCtrl: FormControl) => (string | null)) {
-        return function validate(control: FormControl) {
+        const res = (control: FormControl) => {
             if (!control.value) {
-                return null
+                return null;
             }
 
             const res = fn(control);
@@ -931,6 +978,8 @@ export class AtValidators {
                     msg: res
                 }
             };
-        }
+        };
+
+        return res;
     }
 }

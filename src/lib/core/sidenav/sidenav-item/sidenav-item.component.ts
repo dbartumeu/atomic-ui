@@ -20,7 +20,7 @@ export class AtSidenavItemComponent implements OnInit {
 
     @HostBinding('class.at-sidenav-item') AtSidenavService: boolean = true;
 
-    constructor(private sidenavService: AtSidenavService) {
+    constructor(public sidenavService: AtSidenavService) {
     }
 
     ngOnInit() {

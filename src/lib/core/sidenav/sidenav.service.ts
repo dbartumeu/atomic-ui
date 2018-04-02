@@ -38,15 +38,18 @@ export class AtSidenavService {
      */
     public sidenavCollapsedChange = this.isSidenavCollapsedSubject.asObservable();
 
+    public permsApplied = false;
+
     /**
      * Service provided with methods that allows you to add, edit and remove items from the sidenav.
-     * Also provided a method to create all sidenav items based on app routes. Even provided you with
-     * utilities to find items, notify for changes and much more.
+     * A method to create all sidenav items based on app routes.
+     * And utilities to find items, notify for changes and much more.
      */
     constructor(private atPermsService: AtPermissionsService) {
-        atPermsService.permsChanges.subscribe((perms) => {
-            this.applyPerms(perms);
-        });
+        atPermsService.permsChanges
+            .subscribe((perms) => {
+                this.applyPerms(perms);
+            });
     }
 
     /**
@@ -73,7 +76,6 @@ export class AtSidenavService {
     public applyPerms(perms: string[]) {
         if (this.atSidenavFlatItems.length > 0 && perms) {
             this.atSidenavFlatItems.forEach(item => {
-
 
                 if (!item.routeData.atSidenavItem.renderItem && item.routeData.atPermissions) {
 
@@ -114,8 +116,8 @@ export class AtSidenavService {
             });
             this._itemsSubject.next(this.atSidenavItems);
         }
+        this.permsApplied = true;
     }
-
 
     public replaceUrlParams(url: string, params: any): string {
         let out = url;
@@ -242,6 +244,7 @@ export class AtSidenavService {
 
         const newAtSidenavChild = new AtSidenavItem({
             name: child.name,
+            icon: child.icon,
             route: fixedRoute,
             routeData: child.routeData,
             parent: parent,

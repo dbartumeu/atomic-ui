@@ -78,7 +78,6 @@ export const GENERAL_ROUTES: Routes = [
     }
 ];
 
-
 export const FRAMEWORK_ROUTES: Routes = [
     {
         path: 'framework',
@@ -89,8 +88,8 @@ export const FRAMEWORK_ROUTES: Routes = [
                 name: 'Framework',
                 pathPrefix: 'docs/:version',
                 position: 1,
-                customClass: '',
                 collapsible: false,
+                customClass: 'at-tuc at-tw-600',
             }as AtSidenavItem,
         },
     },
@@ -115,7 +114,6 @@ export const FRAMEWORK_ROUTES: Routes = [
             atSidenavItem: {
                 name: 'Layout',
                 pathPrefix: 'docs/:version',
-                icon: 'crop_landscape',
                 position: 1,
                 customClass: '',
             },

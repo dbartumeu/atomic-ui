@@ -1,6 +1,6 @@
 {
   "name": "atomic-ui",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

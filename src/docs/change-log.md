@@ -1,3 +1,13 @@
+## v1.0.6
+1. Change Icons behavior print two letters if content has spaces.
+2. Fix AtPermissions service issue with lowercase keys.
+
+## v1.0.5
+1. Fixed a sidebar right issue.
+
+## v1.0.4
+1. Fixed a sidenav Item issue
+
 ## v1.0.3
 1. Refactored Layout component Templates due to a bug related to atomic scroll.
 2. Fix an issue that shows sidenav error.

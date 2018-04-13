@@ -89,8 +89,13 @@ export class AtIconComponent implements OnInit, OnChanges {
 
         if (this.display === 'mat-letter') {
             if (iconText) {
-                const letterId = iconText.toUpperCase().charCodeAt(0);
-                this.atIcon.name = String.fromCharCode(letterId);
+                let iconArr = iconText.trim().split(' ');
+                iconArr = iconArr.lenght > 2 ? iconArr.slice(1) : iconArr;
+                this.atIcon.name = '';
+                iconArr.forEach(iText => {
+                    const letterId = iText.toUpperCase().charCodeAt(0);
+                    this.atIcon.name += String.fromCharCode(letterId);
+                });
             }
         } else {
             if (iconText) {

@@ -20,8 +20,8 @@ export class AtPermissionsService {
 
         this.removeAll();
         for (const perm of permsArr) {
-            if (typeof perm === 'string' && !this.has(perm.toLocaleLowerCase())) {
-                this._perms.push(perm.toLocaleLowerCase());
+            if (typeof perm === 'string' && !this.has(perm)) {
+                this._perms.push(perm);
             }
         }
         this._permsChange.emit(this._perms);
@@ -32,8 +32,8 @@ export class AtPermissionsService {
      * @param permission
      */
     public add(perm: string): void {
-        if (typeof perm === 'string' && !this.has(perm.toLocaleLowerCase())) {
-            this._perms.push(perm.toLocaleLowerCase());
+        if (typeof perm === 'string' && !this.has(perm)) {
+            this._perms.push(perm);
             this._permsChange.emit(this._perms);
         }
     }
@@ -47,7 +47,7 @@ export class AtPermissionsService {
             return;
         }
 
-        const i = this._perms.indexOf(perm.toLowerCase());
+        const i = this._perms.indexOf(perm);
         if (i < 0) {
             return;
         }
@@ -66,7 +66,7 @@ export class AtPermissionsService {
             return false;
         }
 
-        return this._perms.indexOf(perm.toLowerCase()) > -1;
+        return this._perms.indexOf(perm) > -1;
     }
 
     /**
@@ -81,7 +81,7 @@ export class AtPermissionsService {
 
         return permsArr.some(v => {
             if (typeof v === 'string') {
-                return this._perms.indexOf(v.toLowerCase()) >= 0;
+                return this._perms.indexOf(v) >= 0;
             }
         });
     }

@@ -1,4 +1,4 @@
-<mat-card fxLayout="row" fxLayoutWrap fxLayoutAlign="center center">
+<mat-card fxLayout="row wrap" fxLayoutAlign="center center">
     <at-icon class="at-m-5"
              display="mat-icon"
              [background]="'red-800'"
@@ -39,7 +39,7 @@
 
 
 
-<mat-card fxLayout="row" fxLayoutWrap fxLayoutAlign="center center" class="at-mt-20">
+<mat-card fxLayout="row wrap" fxLayoutAlign="center center" class="at-mt-20">
     <at-icon *ngFor="let letter of alphabet" class="at-m-5"
              display="mat-letter"
              [name]="letter"
@@ -50,9 +50,27 @@
              [size]="'80px'"
              [fontSize]="'30px'">
     </at-icon>
+
+    <at-icon class="at-m-5"
+             display="mat-letter"
+             [background]="'auto'"
+             [border]="'2px'"
+             [radius]="'80px'"
+             [color]="'auto'"
+             [size]="'80px'"
+             [fontSize]="'28px'">Alberto Perez</at-icon>
+
+    <at-icon class="at-m-5"
+             display="mat-letter"
+             [background]="'auto'"
+             [border]="'2px'"
+             [radius]="'80px'"
+             [color]="'auto'"
+             [size]="'80px'"
+             [fontSize]="'28px'">Alberto asd</at-icon>
 </mat-card>
 
-<mat-card fxLayout="row" fxLayoutWrap fxLayoutAlign="center center" class="at-mt-20">
+<mat-card fxLayout="row wrap" fxLayoutAlign="center center" class="at-mt-20">
     <at-icon *ngFor="let icon of randomIcons" class="at-m-5"
              display="mat-icon"
              [name]="icon"

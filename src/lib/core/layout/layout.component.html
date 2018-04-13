@@ -156,11 +156,13 @@
             </at-scrollbar>
         </mat-sidenav>
 
+
+
         <mat-sidenav *ngIf="layoutSideBarRight"
                      align="end"
                      [mode]="isDefined(layoutSideBarRight.mode) ?
                             layoutSideBarRight.mode : (isSmallScreen ? 'over' : 'side')"
-                     [opened]="isDefined(layoutSideBarRight.opened) ? layoutSideBarLeft.opened : rsOpened"
+                     [opened]="isDefined(layoutSideBarRight.opened) ? layoutSideBarRight.opened : rsOpened"
                      [style.max-width]="layoutSideBarRight.width"
                      [style.min-width]="layoutSideBarRight.width"
                      [atMediaToggle]="layoutSideBarRight.mediaQuery"

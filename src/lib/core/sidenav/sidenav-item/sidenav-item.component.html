@@ -1,4 +1,5 @@
 <ng-container *ngIf="sidenavService.permsApplied">
+
     <div *ngIf="item.isRouteString(); then routeNavItem else functionNavItem"></div>
 
     <ng-template #functionNavItem>
@@ -60,9 +61,12 @@
                   class="at-sidenav-list sidenav-list-nested"
                   fxLayout="column">
         <ng-container *ngFor="let child of item.children">
+
             <at-sidenav-item [class.at-sidenav-list-non-collapsible]="item.collapsible === false"
                              *ngIf="renderItem(child)" [item]="child"></at-sidenav-item>
         </ng-container>
     </mat-nav-list>
+
+
 </ng-container>
 
